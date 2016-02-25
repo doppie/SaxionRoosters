@@ -17,13 +17,14 @@ Contributions we would love to see:
 We will use GitHub to track issues and feature requests. So please share your ideas with us or contribute your code :)
 
 ## GitHub Managers
-* Jelle ten Brinke(@doppie)
-* Hugo Olthof(@HugoOltHof)
+* Jelle ten Brinke([@doppie](https://github.com/doppie/))
+* Hugo Olthof([@HugoOltHof](https://github.com/hugoolthof/))
 
-Want to join us as a GitHub manager? Contact Jelle ten Brinke(@doppie)
+Want to join us as a GitHub manager? Contact Jelle ten Brinke([@doppie](https://github.com/doppie/))
 
 ## Contributing
-We would love to add your contributions to this app. To do so:
+We would love to add your contributions to this app.
+
 1. Fork the repo and create your branch from master.
 2. Add your own feature or bugfix.
 3. Share it with us :).
