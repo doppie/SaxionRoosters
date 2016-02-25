@@ -2,18 +2,31 @@
 Saxion Roosters is an unofficial Android App for Students and employees.
 The goal is to create a better overall user experience by adding extra features.
 
-Feature examples we would love to see: 
-* Notifications 
+Contributions we would love to see:
+* Notifications
 * Favourites for groups and/or teachers
+* Android Wear support
+* Implementation improvements
+* UI/UX improvements
+* Error handling
+* Search functionality
+* etc..
+
 
 ## Issues
-We will use GitHub to track issues and feature requests. So please share your ideas with us or contribute yourself :)
+We will use GitHub to track issues and feature requests. So please share your ideas with us or contribute your code :)
+
+## GitHub Managers
+* Jelle ten Brinke(@doppie)
+* Hugo Olthof(@HugoOltHof)
+
+Want to join us as a GitHub manager? Contact Jelle ten Brinke(@doppie)
 
 ## Contributing
 We would love to add your contributions to this app. To do so:
 1. Fork the repo and create your branch from master.
-2. Add your own feature or bugfix
-3. Share it with us :)
+2. Add your own feature or bugfix.
+3. Share it with us :).
 
 By contributing to Saxion Roosters, you agree that your contributions will be licensed under its BSD license.
 
