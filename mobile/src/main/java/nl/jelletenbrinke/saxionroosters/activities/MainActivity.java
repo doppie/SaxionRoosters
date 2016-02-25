@@ -1,13 +1,20 @@
 package nl.jelletenbrinke.saxionroosters.activities;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
+import com.quinny898.library.persistentsearch.SearchBox;
+import com.quinny898.library.persistentsearch.SearchResult;
 
 import java.util.ArrayList;
 
@@ -16,6 +23,7 @@ import nl.jelletenbrinke.saxionroosters.adapters.WeekPagerAdapter;
 import nl.jelletenbrinke.saxionroosters.extras.NetworkAsyncTask;
 import nl.jelletenbrinke.saxionroosters.extras.S;
 import nl.jelletenbrinke.saxionroosters.interfaces.OnAsyncTaskCompleted;
+import nl.jelletenbrinke.saxionroosters.model.Result;
 import nl.jelletenbrinke.saxionroosters.model.Week;
 
 
@@ -27,45 +35,83 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
     private WeekPagerAdapter pagerAdapter;
     private ViewPager pager;
     private TabLayout tabLayout;
+    private SearchBox search;
+    private Toolbar toolbar;
 
-    private String group = "EIN2Va";
+    private String group = "";
     private ArrayList<Week> weeks;
+    private ArrayList<Result> searchResults;
 
+    private NetworkAsyncTask getSearchResultsTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        NetworkAsyncTask getWeekPager = new NetworkAsyncTask(this);
-        String url = S.URL + S.SCHEDULE + "/" + S.GROUP + ":" + group + "/" + S.WEEK + ":" + "0";
-        getWeekPager.execute(url, S.PARSE_WEEK_PAGER);
 
+//        getWeekPager(group);
 
         initUI();
     }
 
     /* Initializes the UI, called from @onCreate */
     private void initUI() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        search = (SearchBox) findViewById(R.id.searchbox);
+        search.enableVoiceRecognition(this);
+//        search.setMenuVisibility(View.GONE);
+
         pager = (ViewPager) findViewById(R.id.container);
+        pager.setOffscreenPageLimit(1);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
     }
 
     /* When called this updates all UI items that contain data.  */
     private void updateUI() {
-        pagerAdapter = new WeekPagerAdapter(getSupportFragmentManager(), weeks, "EIN2Va");
-        pager.setAdapter(pagerAdapter);
-        tabLayout.setupWithViewPager(pager);
+        if(weeks != null) {
+            pager.setAdapter(null);
+            pagerAdapter = new WeekPagerAdapter(getSupportFragmentManager(), weeks, group);
+            pager.setAdapter(pagerAdapter);
+            tabLayout.setupWithViewPager(pager);
+        }
+        search.clearSearchable();
+        //Adding our results
+        if(searchResults != null) {
+            for(Result result : searchResults) {
+                Log.e("debug", "adding results: " + result.getAbbrevation() + result.getName() + result.getType());
+                SearchResult option = new SearchResult(result.getAbbrevation() + " (" + result.getName() + ")", getResources().getDrawable(R.drawable.magnify_grey));
+                search.addSearchable(option);
+
+            }
+        }
+        search.updateResults();
+    }
+
+    private void getWeekPager(String group) {
+        this.group = group;
+        NetworkAsyncTask getWeekPagerTask = new NetworkAsyncTask(this, this);
+        String url = S.URL + S.QUERY + group;
+        getWeekPagerTask.execute(url, S.PARSE_WEEK_PAGER);
+    }
+
+    private void getSearchResults(String query) {
+        //First cancel if necessary.
+        if(getSearchResultsTask != null) getSearchResultsTask.cancel(true);
+
+        getSearchResultsTask = new NetworkAsyncTask(this, this);
+        String url = S.URL + S.QUERY + query;
+        getSearchResultsTask.execute(url, S.PARSE_SEARCH_RESULTS, query);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main2, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -79,6 +125,8 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if(id == R.id.action_search) {
+            openSearch();
         }
 
         return super.onOptionsItemSelected(item);
@@ -87,10 +135,113 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
     @Override
     public void onAsyncTaskCompleted(Object obj) {
 
-        //We received the empty weeks for the pager!
-        ArrayList<Week> newWeeks = (ArrayList<Week>) obj;
-        this.weeks = newWeeks;
+        if(obj == null) {
+            Intent i = new Intent(MainActivity.this, SearchActivity.class);
+            startActivity(i);
+        } else if(obj instanceof ArrayList) {
+            ArrayList<Object> arrayList = (ArrayList<Object>) obj;
+
+            //an empty arraylist this means the result is bad.
+            if(arrayList.isEmpty()) {
+                return;
+            }
+
+            if(arrayList.get(0) instanceof Week) {
+                //We received the empty weeks for the pager!
+                ArrayList<Week> newWeeks = (ArrayList<Week>) obj;
+                this.weeks = newWeeks;
+            } else if(arrayList.get(0) instanceof Result) {
+                ArrayList<Result> results = (ArrayList<Result>) obj;
+                //for now remove all courses, because we cannot handle them yet.
+                for(int i = 0; i < results.size(); i++) {
+                    Result r = results.get(i);
+                    if(r.getType() == null || r.getType().equals(S.COURSE)) {
+                        results.remove(r);
+                    }
+                }
+                this.searchResults = results;
+            }
+        }
+
 
         updateUI();
+    }
+
+    public void openSearch() {
+//        toolbar.setTitle("");
+        search.revealFromMenuItem(R.id.action_search, this);
+
+
+        //First add the search options from history.
+//        SearchResult option1 = new SearchResult("EIN2Va", getResources().getDrawable(R.drawable.history));
+//        search.addSearchable(option1);
+//        SearchResult option2 = new SearchResult("EIN2Vb", getResources().getDrawable(R.drawable.history));
+//        search.addSearchable(option2);
+//        SearchResult option3 = new SearchResult("EIN2Vc", getResources().getDrawable(R.drawable.history));
+//        search.addSearchable(option3);
+
+        search.setMenuListener(new SearchBox.MenuListener() {
+
+            @Override
+            public void onMenuClick() {
+                // Hamburger has been clicked
+                Toast.makeText(MainActivity.this, "Menu click",
+                        Toast.LENGTH_LONG).show();
+            }
+
+        });
+        search.setSearchListener(new SearchBox.SearchListener() {
+
+            @Override
+            public void onSearchOpened() {
+                // Use this to tint the screen
+
+            }
+
+            @Override
+            public void onSearchClosed() {
+                // Use this to un-tint the screen
+                closeSearch();
+            }
+
+            @Override
+            public void onSearchTermChanged(String term) {
+                // React to the search term changing
+                // Called after it has updated results
+                Log.e("debug", "searching.. " + term);
+                getSearchResults(term);
+            }
+
+            @Override
+            public void onSearch(String searchTerm) {
+                Toast.makeText(MainActivity.this, searchTerm + " Searched",
+                        Toast.LENGTH_LONG).show();
+                toolbar.setTitle(searchTerm);
+                getWeekPager(searchTerm);
+            }
+
+            @Override
+            public void onResultClick(SearchResult result) {
+                //React to result being clicked
+                Log.e("debug", "onResultClick: " + result.title);
+                String title = result.title.substring(0, result.title.indexOf(" ("));
+                toolbar.setTitle(title);
+//                search.setSearchString(title);
+
+                getWeekPager(title);
+            }
+
+            @Override
+            public void onSearchCleared() {
+
+            }
+
+        });
+
+    }
+
+    protected void closeSearch() {
+        search.hideCircularly(this);
+        if(search.getSearchText().isEmpty())toolbar.setTitle("");
     }
 }

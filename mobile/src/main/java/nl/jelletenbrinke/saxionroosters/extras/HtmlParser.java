@@ -2,6 +2,8 @@ package nl.jelletenbrinke.saxionroosters.extras;
 
 import android.util.Log;
 
+import com.quinny898.library.persistentsearch.SearchResult;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -10,8 +12,10 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import nl.jelletenbrinke.saxionroosters.R;
 import nl.jelletenbrinke.saxionroosters.model.College;
 import nl.jelletenbrinke.saxionroosters.model.Day;
+import nl.jelletenbrinke.saxionroosters.model.Result;
 import nl.jelletenbrinke.saxionroosters.model.Teacher;
 import nl.jelletenbrinke.saxionroosters.model.Week;
 
@@ -153,8 +157,12 @@ public class HtmlParser {
             String href = a.attr("href");
 
             //Week href looks like: "/schedule/week:0/group:EIN2Va"
-            String weekId = href.substring(href.indexOf("/week:") + 6, href.indexOf("/group:"));
-
+            String weekId = "0";
+            if(href.contains("/group:")) {
+                 weekId = href.substring(href.indexOf("/week:") + 6, href.indexOf("/group:"));
+            } else if(href.contains("/teacher:")) {
+                weekId = href.substring(href.indexOf("/week:") + 6, href.indexOf("/teacher:"));
+            }
             String weekName;
             //Week 0 is the current week, so tell this to the user.
             if (weekId.equals("0")) {
@@ -168,5 +176,63 @@ public class HtmlParser {
             weeks.add(week);
         }
         return weeks;
+    }
+
+    public static ArrayList<Result> parseSearchResults(Document doc) {
+
+        ArrayList<Result> results = new ArrayList<>();
+
+        //First select all tables
+        //Every table contains different kind of results like: groups or teachers
+        Elements tables = doc.select("table");
+
+        for(Element table : tables) {
+            Elements tableRows = table.select("tr");
+            for(Element row : tableRows) {
+                Elements tableData = row.select("td");
+
+                String name = null;
+                String abbreviation = null;
+                String type = null;
+                for(Element data : tableData) {
+                    Elements as = data.select("a");
+                    for(int i = 0; i < as.size(); i++) {
+                        Element a = as.get(i);
+
+                        //first item is abbreviation
+                        if(i == 0 && abbreviation == null && type == null) {
+                            abbreviation = a.text();
+                            String href = a.attr("href");
+                            if(href.contains("group:")) {
+                                type = S.GROUP;
+                            } else if(href.contains("teacher:")) {
+                                type = S.TEACHER;
+                            } else if(href.contains("course:")) {
+                                type = S.COURSE;
+                            }
+                        } else if(type != null) {
+                            if(type.equals(S.GROUP)) {
+                                //ok second line is the course name.
+                                name = a.text();
+                            } else if(type.equals(S.TEACHER) && i == 1) {
+                                //teacher contains three lines. second line is fullname, third line is academy.
+                                name = a.text();
+                            } else if(type.equals(S.COURSE)) {
+                                //no second line here, so name will stay empty.
+                            }
+                        }
+                    }
+
+                }
+                //Jup we're done parsing this result, save it and move on.
+                Result result = new Result(abbreviation, name, type);
+                results.add(result);
+                abbreviation = null;
+                name = null;
+                type = null;
+            }
+        }
+
+        return results;
     }
 }

@@ -1,10 +1,6 @@
 <resources>
     <string name="app_name">Saxion Roosters</string>
 
-    <!-- Dialog -->
-    <string name="dialog_title_new_item">Add new item</string>
-    <string name="dialog_title_remove_item">Remove item</string>
-    <string name="dialog_message_remove_item">Are you sure you want to remove this item? This action cannot be undone.</string>
 
     <!-- items -->
     <string name="item_removed">Removed item.</string>
@@ -12,20 +8,11 @@
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
     <string name="dismiss">Dismiss</string>
-    <string name="value">Value(total)</string>
-    <string name="product">Product</string>
-    <string name="category">Category</string>
-    <string name="today">Today</string>
-    <string name="multiplier">Multiplier</string>
-    <string name="mandatory">Mandatory</string>
-    <string name="optional">Optional</string>
-    <string name="uncategorised">Uncategorised</string>
+    <string name="this_week">This week</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+
 
     <string name="action_settings">Settings</string>
-    <string name="title_activity_main2">Main2Activity</string>
-    <string name="section_format">Hello World from section: %1$d</string>
-    <string name="title_activity_main22">Main22Activity</string>
+    <string name="action_search">Search</string>
+    <string name="title_activity_search">SearchActivity</string>
 </resources>

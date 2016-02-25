@@ -1,5 +1,7 @@
 package nl.jelletenbrinke.saxionroosters.extras;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -10,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import nl.jelletenbrinke.saxionroosters.interfaces.OnAsyncTaskCompleted;
+import nl.jelletenbrinke.saxionroosters.model.Result;
 import nl.jelletenbrinke.saxionroosters.model.Week;
 
 /**
@@ -19,8 +22,11 @@ public class NetworkAsyncTask extends AsyncTask<String, Void, Object> {
 
     private OnAsyncTaskCompleted listener;
 
-    public NetworkAsyncTask(OnAsyncTaskCompleted listener) {
+    private ProgressDialog dialog;
+
+    public NetworkAsyncTask(OnAsyncTaskCompleted listener, Activity activity) {
         this.listener = listener;
+        dialog = new ProgressDialog(activity);
     }
 
     @Override
@@ -36,8 +42,27 @@ public class NetworkAsyncTask extends AsyncTask<String, Void, Object> {
                 Week week = HtmlParser.parseWeek(doc, url[2], url[3]);
                 return week;
             } else if(url[1] == S.PARSE_WEEK_PAGER) {
-                ArrayList weeks = HtmlParser.parseWeekPager(doc);
-                return weeks;
+                //If there is no pagination div, we know this is a list of results.
+                //Else this is our final result.
+                if(doc.select("div.pagination").isEmpty()) {
+                    return null;
+                } else {
+                    ArrayList weeks = HtmlParser.parseWeekPager(doc);
+                    return weeks;
+                }
+            } else if(url[1] == S.PARSE_SEARCH_RESULTS) {
+                //If there is no pagination div, we know this is a list of results.
+                //Else this is our final result.
+                ArrayList<Result> results = new ArrayList<>();
+                if(doc.select("div.pagination").isEmpty()) {
+                    results.addAll(HtmlParser.parseSearchResults(doc));
+                } else {
+                    //url[2] contains our query string.
+                    //TODO: this should be a full result object.
+                    results.add(new Result(url[2], "", ""));
+                }
+
+                return results;
             }
 
         } catch (IOException e) {
@@ -50,11 +75,16 @@ public class NetworkAsyncTask extends AsyncTask<String, Void, Object> {
     @Override
     protected void onPostExecute(Object object) {
         //Send the object to the attached listener.
+        dialog.dismiss();
         listener.onAsyncTaskCompleted(object);
+
     }
 
     @Override
-    protected void onPreExecute() {}
+    protected void onPreExecute() {
+        this.dialog.setMessage("Debug..");
+        this.dialog.show();
+    }
 
     @Override
     protected void onProgressUpdate(Void... values) {}

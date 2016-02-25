@@ -39,6 +39,13 @@ public class WeekFragment extends Fragment implements ClickListener, OnAsyncTask
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_week, container, false);
+
+        initUI(v);
 
         //Reads the arguments to know which week should be loaded :)
         Bundle args = getArguments();
@@ -50,15 +57,10 @@ public class WeekFragment extends Fragment implements ClickListener, OnAsyncTask
 
         //Run the task :)
         String url = S.URL + S.SCHEDULE + "/" + S.GROUP + ":" + group + "/" + S.WEEK + ":" + weekId;
-        NetworkAsyncTask task = new NetworkAsyncTask(this);
+        NetworkAsyncTask task = new NetworkAsyncTask(this, getActivity());
         task.execute(url, S.PARSE_WEEK, group, weekId);
-    }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_week, container, false);
 
-        initUI(v);
 
         return v;
     }
