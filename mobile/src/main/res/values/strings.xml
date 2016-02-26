@@ -9,6 +9,7 @@
     <string name="cancel">Cancel</string>
     <string name="dismiss">Dismiss</string>
     <string name="this_week">This week</string>
+    <string name="free_day">Nothing planned today.</string>
 
     <!-- Dialog texts -->
     <string name="error_title_no_internet">No internet connection</string>

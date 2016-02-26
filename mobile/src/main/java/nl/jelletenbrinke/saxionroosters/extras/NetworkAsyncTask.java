@@ -7,6 +7,7 @@ import android.util.Log;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class NetworkAsyncTask extends AsyncTask<String, Void, Object> {
 
     @Override
     protected Object doInBackground(String... url) {
-
+        Log.e("debug", "Request: " + url[0]);
 
         try {
             //Get the document from the internet
@@ -41,7 +42,7 @@ public class NetworkAsyncTask extends AsyncTask<String, Void, Object> {
 
             //parse the html to a schedule object
             if(url[1] == S.PARSE_WEEK) {
-                Week week = HtmlParser.parseWeek(doc, url[2], url[3]);
+                Week week = HtmlParser.parseWeek(doc, url[2], url[3], url[4], url[5]);
                 return week;
             } else if(url[1] == S.PARSE_WEEK_PAGER) {
                 //If there is no pagination div, we know this is a list of results.
@@ -61,7 +62,12 @@ public class NetworkAsyncTask extends AsyncTask<String, Void, Object> {
                 } else {
                     //url[2] contains our query string.
                     //TODO: this should be a full result object.
-                    results.add(new Result(url[2], "", ""));
+                    ArrayList<Week> weeks = HtmlParser.parseWeekPager(doc);
+                    String owner = url[2];
+                    if(!weeks.isEmpty()) {
+                        owner = weeks.get(0).getOwner();
+                    }
+                    results.add(new Result(owner, "", ""));
                 }
 
                 return results;

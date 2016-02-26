@@ -12,7 +12,8 @@ public class S {
     public static final String GROUP = "group";
     public static final String COURSE = "course";
     public static final String TEACHER = "teacher";
-    public static final String WEEK = "week";
+    public static final String WEEK_ID = "week";
+    public static final String WEEK_NAME = "week_name";
     public static final String TIMES = "times";
     public static final String NAMEROW = "namerow";
     public static final String DATACELL_LEFT = "datacell_left";

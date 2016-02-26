@@ -2,17 +2,14 @@ package nl.jelletenbrinke.saxionroosters.activities;
 
 import android.content.Intent;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.quinny898.library.persistentsearch.SearchBox;
@@ -46,7 +43,8 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
     private WeekPagerAdapter pagerAdapter;
 
     //data
-    private String group = "";
+    private String owner = "";
+    private String ownerType = "";
     private ArrayList<Week> weeks;
     private ArrayList<Result> searchResults;
 
@@ -58,8 +56,6 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
         setContentView(R.layout.activity_main);
 
 
-
-//        getWeekPager(group);
 
         initUI();
     }
@@ -75,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
 //        search.setMenuVisibility(View.GONE);
 
         pager = (ViewPager) findViewById(R.id.container);
+        //Don't load all pages at once, only load one extra left and right of the current view.
         pager.setOffscreenPageLimit(1);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
     }
@@ -83,26 +80,40 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
     private void updateUI() {
         if(weeks != null) {
             pager.setAdapter(null);
-            pagerAdapter = new WeekPagerAdapter(getSupportFragmentManager(), weeks, group);
+            pagerAdapter = new WeekPagerAdapter(this, getSupportFragmentManager(), weeks, owner, ownerType);
             pager.setAdapter(pagerAdapter);
             tabLayout.setupWithViewPager(pager);
+
+            //get the current week:
+            Week currentWeek = null;
+            for(Week week : weeks) {
+                if(week.getId().equals("0")) currentWeek = week;
+            }
+            //select the current week
+            if(currentWeek != null) pager.setCurrentItem(pagerAdapter.getItemPosition(currentWeek));
         }
         search.clearSearchable();
         //Adding our results
         if(searchResults != null) {
             for(Result result : searchResults) {
-                SearchResult option = new SearchResult(result.getAbbrevation() + " (" + result.getName() + ")", getResources().getDrawable(R.drawable.magnify_grey));
-                search.addSearchable(option);
+                SearchResult option = null;
+                if(result.getName() != null && !result.getName().isEmpty()) {
+                    option = new SearchResult(result.getAbbrevation() + " (" + result.getName() + ")", getResources().getDrawable(R.drawable.magnify_grey));
+                } else if(result.getAbbrevation() != null) {
+                    option = new SearchResult(result.getAbbrevation(), getResources().getDrawable(R.drawable.magnify_grey));
+                }
+
+               if(option != null) search.addSearchable(option);
 
             }
         }
         search.updateResults();
     }
 
-    private void getWeekPager(String group) {
-        this.group = group;
+    private void getWeekPager(String owner) {
+        this.owner = owner;
         NetworkAsyncTask getWeekPagerTask = new NetworkAsyncTask(this, this, true);
-        String url = S.URL + S.QUERY + group;
+        String url = S.URL + S.QUERY + owner;
         getWeekPagerTask.execute(url, S.PARSE_WEEK_PAGER);
     }
 
@@ -144,6 +155,8 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
     public void onAsyncTaskCompleted(Object obj) {
 
         if(obj == null) {
+            toolbar.setTitle(getString(R.string.app_name));
+            pager.setAdapter(null);
             Intent i = new Intent(MainActivity.this, SearchActivity.class);
             startActivity(i);
         } else if(obj instanceof ArrayList) {
@@ -158,6 +171,7 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
                 //We received the empty weeks for the pager!
                 ArrayList<Week> newWeeks = (ArrayList<Week>) obj;
                 this.weeks = newWeeks;
+                if(!weeks.isEmpty()) ownerType = weeks.get(0).getOwnerType();
             } else if(arrayList.get(0) instanceof Result) {
                 ArrayList<Result> results = (ArrayList<Result>) obj;
                 //for now remove all courses, because we cannot handle them yet.
@@ -187,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
         search.revealFromMenuItem(R.id.action_search, this);
 
 
-        //First add the search options from history.
+        //TODO: First add the search options from history.
 //        SearchResult option1 = new SearchResult("EIN2Va", getResources().getDrawable(R.drawable.history));
 //        search.addSearchable(option1);
 //        SearchResult option2 = new SearchResult("EIN2Vb", getResources().getDrawable(R.drawable.history));
@@ -236,7 +250,10 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
             @Override
             public void onResultClick(SearchResult result) {
                 //React to result being clicked
-                String title = result.title.substring(0, result.title.indexOf(" ("));
+                String title = result.title;
+                if(result.title.contains(" (")) {
+                    title = result.title.substring(0, result.title.indexOf(" ("));
+                }
                 toolbar.setTitle(title);
 //                search.setSearchString(title);
 
@@ -254,6 +271,6 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
 
     protected void closeSearch() {
         search.hideCircularly(this);
-        if(search.getSearchText().isEmpty())toolbar.setTitle("");
+        if(search.getSearchText().isEmpty())toolbar.setTitle(getString(R.string.app_name));
     }
 }

@@ -2,7 +2,6 @@ package nl.jelletenbrinke.saxionroosters.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -40,7 +39,7 @@ public class WeekFragment extends Fragment implements ClickListener, OnAsyncTask
     private RelativeLayout loadingLayout, retryLayout;
 
     //data
-    private String group, weekId;
+    private String owner, weekName, weekId, ownerType;
     private Week week;
 
     @Override
@@ -56,18 +55,23 @@ public class WeekFragment extends Fragment implements ClickListener, OnAsyncTask
 
         //Reads the arguments to know which week should be loaded :)
         Bundle args = getArguments();
-        group = args.getString(S.GROUP);
-        weekId = args.getString(S.WEEK);
+        if(args.getString(S.GROUP) != null) {
+            owner = args.getString(S.GROUP);
+            ownerType = S.GROUP;
+        } else if(args.getString(S.TEACHER) != null) {
+            owner = args.getString(S.TEACHER);
+            ownerType = S.TEACHER;
+        }
+        weekId = args.getString(S.WEEK_ID);
+        weekName = args.getString(S.WEEK_NAME);
 
-        if (group == null || weekId == null) Log.e("debug", "oh noes, this can never be null :O");
+        if (owner == null || weekId == null) Log.e("debug", "oh noes, this can never be null :O");
 
 
         //Run the task :)
-        String url = S.URL + S.SCHEDULE + "/" + S.GROUP + ":" + group + "/" + S.WEEK + ":" + weekId;
-        NetworkAsyncTask task = new NetworkAsyncTask(this, getActivity(), false);
-        task.execute(url, S.PARSE_WEEK, group, weekId);
+        getWeekTask();
         //also show loading dialog :)
-        showLoading();
+
 
 
         return v;
@@ -102,11 +106,7 @@ public class WeekFragment extends Fragment implements ClickListener, OnAsyncTask
             @Override
             public void onClick(View v) {
                 //Run the task :)
-                String url = S.URL + S.SCHEDULE + "/" + S.GROUP + ":" + group + "/" + S.WEEK + ":" + weekId;
-                NetworkAsyncTask task = new NetworkAsyncTask(WeekFragment.this, getActivity(), false);
-                task.execute(url, S.PARSE_WEEK, group, weekId);
-                //also show loading dialog :)
-                showLoading();
+                getWeekTask();
             }
         });
 
@@ -125,12 +125,25 @@ public class WeekFragment extends Fragment implements ClickListener, OnAsyncTask
         final ArrayList<College> colleges = new ArrayList<>();
         for (Day day : week.getDays()) {
             //For every day add a "divider date" college object
-            College dividerDate = new College(day.getName());
+            boolean showFreeDay = false;
+            if(day.getColleges().isEmpty()) {
+                showFreeDay = true;
+            }
+            College dividerDate = new College(day.getName(), showFreeDay);
             colleges.add(dividerDate);
+
             colleges.addAll(day.getColleges());
         }
         listAdapter.setData(colleges);
         showList();
+    }
+
+    private void getWeekTask() {
+        String url = S.URL + S.SCHEDULE + "/" + ownerType + ":" + owner + "/" + S.WEEK_ID + ":" + weekId;
+        NetworkAsyncTask task = new NetworkAsyncTask(WeekFragment.this, getActivity(), false);
+        task.execute(url, S.PARSE_WEEK, weekName, weekId, owner, ownerType);
+        //also show loading dialog :)
+        showLoading();
     }
 
     @Override

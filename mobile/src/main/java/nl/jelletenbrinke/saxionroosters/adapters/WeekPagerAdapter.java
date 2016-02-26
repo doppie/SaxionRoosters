@@ -1,13 +1,14 @@
 package nl.jelletenbrinke.saxionroosters.adapters;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.ArrayList;
 
+import nl.jelletenbrinke.saxionroosters.R;
 import nl.jelletenbrinke.saxionroosters.extras.S;
 import nl.jelletenbrinke.saxionroosters.fragments.WeekFragment;
 import nl.jelletenbrinke.saxionroosters.model.Week;
@@ -18,13 +19,16 @@ import nl.jelletenbrinke.saxionroosters.model.Week;
  */
 public class WeekPagerAdapter extends FragmentStatePagerAdapter {
 
+    private Activity a;
     private ArrayList<Week> weeks;
-    private String group;
+    private String owner, ownerType;
 
-    public WeekPagerAdapter(FragmentManager fm, ArrayList<Week> weeks, String group) {
+    public WeekPagerAdapter(Activity a, FragmentManager fm, ArrayList<Week> weeks, String owner, String ownerType) {
         super(fm);
         this.weeks = weeks;
-        this.group = group;
+        this.owner = owner;
+        this.a = a;
+        this.ownerType = ownerType;
     }
 
     @Override
@@ -33,8 +37,8 @@ public class WeekPagerAdapter extends FragmentStatePagerAdapter {
 
         WeekFragment fragment = new WeekFragment();
         Bundle args = new Bundle();
-        args.putString(S.GROUP, group);
-        args.putString(S.WEEK, week.getId());
+        args.putString(ownerType, owner);
+        args.putString(S.WEEK_ID, week.getId());
         fragment.setArguments(args);
 
         return fragment;
@@ -57,6 +61,15 @@ public class WeekPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public String getPageTitle(int pos) {
+        Week week = weeks.get(pos);
+        if(week.getId().equals("0")) {
+            return a.getString(R.string.this_week) + "(" + week.getName() + ")";
+        }
         return weeks.get(pos).getName();
+    }
+
+    @Override
+    public int getItemPosition(Object week) {
+        return weeks.indexOf(week);
     }
 }

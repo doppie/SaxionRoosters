@@ -2,7 +2,6 @@ package nl.jelletenbrinke.saxionroosters.adapters;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,12 +61,13 @@ public class CollegeAdapter extends RecyclerView.Adapter<CollegeAdapter.ViewHold
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         //initialize the view
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.college_layout, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.college_item_layout, parent, false);
         ViewHolder h = new ViewHolder(v, clickListener);
         h.cardView = (CardView) v.findViewById(R.id.card_view);
         h.nameText = (TextView) v.findViewById(R.id.nameText);
         h.timeText = (TextView) v.findViewById(R.id.timeText);
         h.dateText = (TextView) v.findViewById(R.id.dateText);
+        h.freeDayView = (TextView) v.findViewById(R.id.freeDayView);
         h.categoryColor = (View) v.findViewById(R.id.categoryColor);
         h.locationText = (TextView) v.findViewById(R.id.locationText);
         h.line = (View) v.findViewById(R.id.line);
@@ -88,6 +88,7 @@ public class CollegeAdapter extends RecyclerView.Adapter<CollegeAdapter.ViewHold
             //Disable unnecesary view(date divider)
             holder.line.setVisibility(View.GONE);
             holder.dateText.setVisibility(View.GONE);
+            holder.freeDayView.setVisibility(View.GONE);
 
             //Enable the cardView that displays a college item.
             holder.cardView.setVisibility(View.VISIBLE);
@@ -95,8 +96,15 @@ public class CollegeAdapter extends RecyclerView.Adapter<CollegeAdapter.ViewHold
             holder.nameText.setText(college.getName());
             holder.timeText.setText(college.getTime());
             holder.locationText.setText(college.getLocation());
+
+
         } else {
 
+            if(college.isFreeDay()) {
+                holder.freeDayView.setVisibility(View.VISIBLE);
+            } else {
+                holder.freeDayView.setVisibility(View.GONE);
+            }
             //Disable the college item view
             holder.cardView.setVisibility(View.GONE);
 
@@ -117,7 +125,7 @@ public class CollegeAdapter extends RecyclerView.Adapter<CollegeAdapter.ViewHold
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         public View v, categoryColor, line;
         public CardView cardView;
-        public TextView nameText, timeText, dateText, locationText;
+        public TextView nameText, timeText, dateText, locationText, freeDayView;
         public ClickListener clickListener;
 
         public ViewHolder(View v, ClickListener clickListener) {

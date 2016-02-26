@@ -33,7 +33,7 @@ public class HtmlParser {
      * @param weekId    The weekId corresponding to this page.
      * @return full week object.
      */
-    public static Week parseWeek(Document doc, String weekName, String weekId) {
+    public static Week parseWeek(Document doc, String weekName, String weekId, String owner, String ownerType) {
         ArrayList<Day> days = new ArrayList<>();
         Day currentDay = null;
 
@@ -135,7 +135,7 @@ public class HtmlParser {
             days.add(currentDay);
         }
 
-        return new Week(weekName, weekId, days);
+        return new Week(weekName, weekId, owner, ownerType, days);
     }
 
     /**
@@ -158,21 +158,21 @@ public class HtmlParser {
 
             //Week href looks like: "/schedule/week:0/group:EIN2Va"
             String weekId = "0";
+            String owner = "";
+            String ownerType = "";
             if(href.contains("/group:")) {
                  weekId = href.substring(href.indexOf("/week:") + 6, href.indexOf("/group:"));
+                owner = href.substring(href.indexOf("/group:") + 7);
+                ownerType = S.GROUP;
             } else if(href.contains("/teacher:")) {
                 weekId = href.substring(href.indexOf("/week:") + 6, href.indexOf("/teacher:"));
+                owner = href.substring(href.indexOf("/teacher:") + 9);
+                ownerType = S.TEACHER;
             }
-            String weekName;
-            //Week 0 is the current week, so tell this to the user.
-            if (weekId.equals("0")) {
-                weekName = "Deze week(" + a.text() + ")";
-            } else {
-                weekName = a.text();
-            }
+            String weekName = a.text();
 
 
-            Week week = new Week(weekName, weekId);
+            Week week = new Week(weekName, weekId, owner, ownerType);
             weeks.add(week);
         }
         return weeks;
