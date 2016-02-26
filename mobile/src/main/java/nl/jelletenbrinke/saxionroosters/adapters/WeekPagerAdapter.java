@@ -21,14 +21,11 @@ public class WeekPagerAdapter extends FragmentStatePagerAdapter {
 
     private Activity a;
     private ArrayList<Week> weeks;
-    private String owner, ownerType;
 
-    public WeekPagerAdapter(Activity a, FragmentManager fm, ArrayList<Week> weeks, String owner, String ownerType) {
+    public WeekPagerAdapter(Activity a, FragmentManager fm, ArrayList<Week> weeks) {
         super(fm);
-        this.weeks = weeks;
-        this.owner = owner;
         this.a = a;
-        this.ownerType = ownerType;
+        this.weeks = weeks;
     }
 
     @Override
@@ -37,7 +34,7 @@ public class WeekPagerAdapter extends FragmentStatePagerAdapter {
 
         WeekFragment fragment = new WeekFragment();
         Bundle args = new Bundle();
-        args.putString(ownerType, owner);
+        args.putString(week.getOwner().getTypeName(), week.getOwner().getName());
         args.putString(S.WEEK_ID, week.getId());
         fragment.setArguments(args);
 
@@ -62,6 +59,8 @@ public class WeekPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public String getPageTitle(int pos) {
         Week week = weeks.get(pos);
+
+        //If current week add this to the page title.
         if(week.getId().equals("0")) {
             return a.getString(R.string.this_week) + "(" + week.getName() + ")";
         }

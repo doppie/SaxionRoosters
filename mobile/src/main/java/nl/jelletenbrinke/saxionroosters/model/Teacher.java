@@ -3,18 +3,11 @@ package nl.jelletenbrinke.saxionroosters.model;
 /**
  * Created by Doppie on 22-2-2016.
  */
-public class Teacher {
+public class Teacher extends Owner {
 
-    private String name;
 
     public Teacher(String name) {
-        this.name = name;
+        super(name, OwnerType.TEACHER);
     }
-
-    public String getName() {
-        return name;
-    }
-
-
-
+    
 }

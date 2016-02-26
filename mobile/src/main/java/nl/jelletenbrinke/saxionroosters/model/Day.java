@@ -7,24 +7,27 @@ import java.util.ArrayList;
  */
 public class Day {
 
+    private String date;
     private ArrayList<College> colleges;
-    private String name;
 
-    public Day(String name, ArrayList<College> colleges) {
-        this.name = name;
+
+    public Day(String date, ArrayList<College> colleges) {
+        this.date = date;
         this.colleges = colleges;
     }
 
-    public Day(String name) {
-        this.name = name;
+    public Day(String date) {
+        this.date = date;
         this.colleges = new ArrayList<>();
+    }
+
+    public String getDate() {
+        return date;
     }
 
     public ArrayList<College> getColleges() {
         return colleges;
     }
 
-    public String getName() {
-        return name;
-    }
+
 }

@@ -8,6 +8,7 @@ public class S {
     //used for html parse
     public static final String URL = "http://roosters.saxion.nl/";
     public static final String QUERY = "?q=";
+    public static final String OWNER_ID = "owner_id";
     public static final String SCHEDULE = "schedule";
     public static final String GROUP = "group";
     public static final String COURSE = "course";
@@ -27,4 +28,6 @@ public class S {
     public static final String PARSE_WEEK_PAGER = "parse_week_pager";
     public static final String PARSE_WEEK = "parse_week";
     public static final String PARSE_SEARCH_RESULTS = "parse_search_results";
+
+
 }

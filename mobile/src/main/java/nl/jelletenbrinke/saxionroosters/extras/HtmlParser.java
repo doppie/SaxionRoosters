@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import nl.jelletenbrinke.saxionroosters.R;
 import nl.jelletenbrinke.saxionroosters.model.College;
 import nl.jelletenbrinke.saxionroosters.model.Day;
+import nl.jelletenbrinke.saxionroosters.model.Group;
+import nl.jelletenbrinke.saxionroosters.model.Owner;
 import nl.jelletenbrinke.saxionroosters.model.Result;
 import nl.jelletenbrinke.saxionroosters.model.Teacher;
 import nl.jelletenbrinke.saxionroosters.model.Week;
@@ -29,11 +31,10 @@ public class HtmlParser {
     /**
      * This method parses html to get a single week with its days and colleges.
      * @param doc The html page that should be parsed.
-     * @param weekName The weekName corresponding to this page.
-     * @param weekId    The weekId corresponding to this page.
+     * @param week the simple week object without the days.
      * @return full week object.
      */
-    public static Week parseWeek(Document doc, String weekName, String weekId, String owner, String ownerType) {
+    public static Week parseWeek(Document doc, Week week) {
         ArrayList<Day> days = new ArrayList<>();
         Day currentDay = null;
 
@@ -135,7 +136,8 @@ public class HtmlParser {
             days.add(currentDay);
         }
 
-        return new Week(weekName, weekId, owner, ownerType, days);
+        // returns the same object except for that the days are filled now.
+        return new Week(week.getOwner(), week.getName(), week.getId(), days);
     }
 
     /**
@@ -158,21 +160,20 @@ public class HtmlParser {
 
             //Week href looks like: "/schedule/week:0/group:EIN2Va"
             String weekId = "0";
-            String owner = "";
-            String ownerType = "";
+            Owner owner = null;
             if(href.contains("/group:")) {
-                 weekId = href.substring(href.indexOf("/week:") + 6, href.indexOf("/group:"));
-                owner = href.substring(href.indexOf("/group:") + 7);
-                ownerType = S.GROUP;
+                weekId = href.substring(href.indexOf("/week:") + 6, href.indexOf("/group:"));
+
+                String ownerName = href.substring(href.indexOf("/group:") + 7);
+                owner = new Group(ownerName);
             } else if(href.contains("/teacher:")) {
                 weekId = href.substring(href.indexOf("/week:") + 6, href.indexOf("/teacher:"));
-                owner = href.substring(href.indexOf("/teacher:") + 9);
-                ownerType = S.TEACHER;
+                String ownerName = href.substring(href.indexOf("/teacher:") + 9);
+                owner = new Teacher(ownerName);
             }
             String weekName = a.text();
 
-
-            Week week = new Week(weekName, weekId, owner, ownerType);
+            Week week = new Week(owner, weekName, weekId);
             weeks.add(week);
         }
         return weeks;

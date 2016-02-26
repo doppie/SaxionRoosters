@@ -7,38 +7,27 @@ import java.util.ArrayList;
  */
 public class Week {
 
+    private ArrayList<Day> days;
     private String name;
     private String id;
-    private ArrayList<Day> days;
-    private String owner;
-    private String ownerType;
+    private Owner owner;
 
-    public Week(String name, String id, String owner, String ownerType) {
+    public Week(Owner owner, String name, String id, ArrayList<Day> days) {
+        this.owner = owner;
         this.name = name;
         this.id = id;
-        this.owner = owner;
-        this.ownerType = ownerType;
-        this.days = new ArrayList<>();
-    }
-
-    public String getOwnerType() {
-        return ownerType;
-    }
-
-    public Week(String name, String id, String owner, String ownerType, ArrayList<Day> days) {
-        this.name = name;
-        this.id = id;
-        this.owner = owner;
-        this.ownerType = ownerType;
         this.days = days;
     }
 
-    public String getOwner() {
-        return owner;
+    public Week(Owner owner, String name, String id) {
+        this.owner = owner;
+        this.name = name;
+        this.id = id;
+        this.days = new ArrayList<>();
     }
 
-    public ArrayList<Day> getDays() {
-        return days;
+    public Owner getOwner() {
+        return owner;
     }
 
     public String getName() {
@@ -49,4 +38,7 @@ public class Week {
         return id;
     }
 
+    public ArrayList<Day> getDays() {
+        return days;
+    }
 }

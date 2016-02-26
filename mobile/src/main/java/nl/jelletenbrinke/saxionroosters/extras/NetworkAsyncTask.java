@@ -25,11 +25,19 @@ public class NetworkAsyncTask extends AsyncTask<String, Void, Object> {
 
     private boolean showProgressDialog = false;
     private ProgressDialog dialog;
+    private Week week;
 
     public NetworkAsyncTask(OnAsyncTaskCompleted listener, Activity activity, boolean showProgressDialog) {
         this.listener = listener;
         this.showProgressDialog = showProgressDialog;
         if(showProgressDialog) dialog = new ProgressDialog(activity);
+    }
+
+    public NetworkAsyncTask(OnAsyncTaskCompleted listener, Activity activity, boolean showProgressDialog, Week week) {
+        this.listener = listener;
+        this.showProgressDialog = showProgressDialog;
+        if(showProgressDialog) dialog = new ProgressDialog(activity);
+        this.week = week;
     }
 
     @Override
@@ -42,8 +50,8 @@ public class NetworkAsyncTask extends AsyncTask<String, Void, Object> {
 
             //parse the html to a schedule object
             if(url[1] == S.PARSE_WEEK) {
-                Week week = HtmlParser.parseWeek(doc, url[2], url[3], url[4], url[5]);
-                return week;
+                Week parsedWeek = HtmlParser.parseWeek(doc, week);
+                return parsedWeek;
             } else if(url[1] == S.PARSE_WEEK_PAGER) {
                 //If there is no pagination div, we know this is a list of results.
                 //Else this is our final result.
@@ -65,7 +73,7 @@ public class NetworkAsyncTask extends AsyncTask<String, Void, Object> {
                     ArrayList<Week> weeks = HtmlParser.parseWeekPager(doc);
                     String owner = url[2];
                     if(!weeks.isEmpty()) {
-                        owner = weeks.get(0).getOwner();
+                        owner = weeks.get(0).getOwner().getName();
                     }
                     results.add(new Result(owner, "", ""));
                 }
@@ -92,7 +100,7 @@ public class NetworkAsyncTask extends AsyncTask<String, Void, Object> {
     @Override
     protected void onPreExecute() {
         if(showProgressDialog) {
-            this.dialog.setMessage("Debug..");
+            this.dialog.setMessage("Loading..");
             this.dialog.show();
         }
     }

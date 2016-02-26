@@ -24,6 +24,8 @@ import nl.jelletenbrinke.saxionroosters.dialogs.ErrorDialog;
 import nl.jelletenbrinke.saxionroosters.extras.NetworkAsyncTask;
 import nl.jelletenbrinke.saxionroosters.extras.S;
 import nl.jelletenbrinke.saxionroosters.interfaces.OnAsyncTaskCompleted;
+import nl.jelletenbrinke.saxionroosters.model.Dataset;
+import nl.jelletenbrinke.saxionroosters.model.Owner;
 import nl.jelletenbrinke.saxionroosters.model.Result;
 import nl.jelletenbrinke.saxionroosters.model.Week;
 
@@ -44,10 +46,11 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
     private WeekPagerAdapter pagerAdapter;
 
     //data
-    private String owner = "";
-    private String ownerType = "";
-    private ArrayList<Week> weeks;
-    private ArrayList<Result> searchResults;
+    private Dataset dataset;
+//    private String owner = "";
+//    private String ownerType = "";
+//    private ArrayList<Week> weeks;
+//    private ArrayList<Result> searchResults;
 
     private NetworkAsyncTask getSearchResultsTask;
 
@@ -56,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        dataset = (Dataset) getApplication();
 
         initUI();
     }
@@ -79,15 +82,21 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
 
     /* When called this updates all UI items that contain data.  */
     private void updateUI() {
-        if(weeks != null) {
+        if(!dataset.getCurrentWeeks().isEmpty()) {
+            toolbar.setTitle(dataset.getCurrentWeeks().get(0).getOwner().getName());
+        } else {
+            toolbar.setTitle(getString(R.string.app_name));
+        }
+
+        if(dataset.getCurrentWeeks() != null) {
             pager.setAdapter(null);
-            pagerAdapter = new WeekPagerAdapter(this, getSupportFragmentManager(), weeks, owner, ownerType);
+            pagerAdapter = new WeekPagerAdapter(this, getSupportFragmentManager(), dataset.getCurrentWeeks());
             pager.setAdapter(pagerAdapter);
             tabLayout.setupWithViewPager(pager);
 
             //get the current week:
             Week currentWeek = null;
-            for(Week week : weeks) {
+            for(Week week : dataset.getCurrentWeeks()) {
                 if(week.getId().equals("0")) currentWeek = week;
             }
             //select the current week
@@ -95,8 +104,8 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
         }
         search.clearSearchable();
         //Adding our results
-        if(searchResults != null) {
-            for(Result result : searchResults) {
+        if(dataset.getSearchResults() != null) {
+            for(Result result : dataset.getSearchResults()) {
                 SearchResult option = null;
                 if(result.getName() != null && !result.getName().isEmpty()) {
                     option = new SearchResult(result.getAbbrevation() + " (" + result.getName() + ")", getResources().getDrawable(R.drawable.magnify_grey));
@@ -111,10 +120,9 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
         search.updateResults();
     }
 
-    private void getWeekPager(String owner) {
-        this.owner = owner;
+    private void getWeekPager(String name) {
         NetworkAsyncTask getWeekPagerTask = new NetworkAsyncTask(this, this, true);
-        String url = S.URL + S.QUERY + owner;
+        String url = S.URL + S.QUERY + name;
         getWeekPagerTask.execute(url, S.PARSE_WEEK_PAGER);
     }
 
@@ -169,7 +177,11 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
     public void onAsyncTaskCompleted(Object obj) {
 
         if(obj == null) {
-            toolbar.setTitle(getString(R.string.app_name));
+            if(!dataset.getCurrentWeeks().isEmpty()) {
+                toolbar.setTitle(dataset.getCurrentWeeks().get(0).getOwner().getName());
+            } else {
+                toolbar.setTitle(getString(R.string.app_name));
+            }
             pager.setAdapter(null);
             Intent i = new Intent(MainActivity.this, SearchActivity.class);
             startActivity(i);
@@ -184,8 +196,13 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
             if(arrayList.get(0) instanceof Week) {
                 //We received the empty weeks for the pager!
                 ArrayList<Week> newWeeks = (ArrayList<Week>) obj;
-                this.weeks = newWeeks;
-                if(!weeks.isEmpty()) ownerType = weeks.get(0).getOwnerType();
+                if(!dataset.getCurrentWeeks().isEmpty()) {
+                    if(!dataset.getCurrentWeeks().get(0).getOwner().getName().equals(newWeeks.get(0).getOwner().getName())) {
+                        dataset.setCurrentWeeks(newWeeks);
+                    }
+                } else {
+                    dataset.setCurrentWeeks(newWeeks);
+                }
             } else if(arrayList.get(0) instanceof Result) {
                 ArrayList<Result> results = (ArrayList<Result>) obj;
                 //for now remove all courses, because we cannot handle them yet.
@@ -195,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
                         results.remove(r);
                     }
                 }
-                this.searchResults = results;
+                dataset.setSearchResults(results);
             }
         } else if(obj instanceof Exception) {
             ErrorDialog dialog = new ErrorDialog();
@@ -257,7 +274,8 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
 
             @Override
             public void onSearch(String searchTerm) {
-                toolbar.setTitle(searchTerm);
+//                toolbar.setTitle(searchTerm);
+                toolbar.setTitle("");
                 getWeekPager(searchTerm);
             }
 

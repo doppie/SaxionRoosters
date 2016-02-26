@@ -22,6 +22,7 @@ import nl.jelletenbrinke.saxionroosters.extras.S;
 import nl.jelletenbrinke.saxionroosters.interfaces.ClickListener;
 import nl.jelletenbrinke.saxionroosters.interfaces.OnAsyncTaskCompleted;
 import nl.jelletenbrinke.saxionroosters.model.College;
+import nl.jelletenbrinke.saxionroosters.model.Dataset;
 import nl.jelletenbrinke.saxionroosters.model.Day;
 import nl.jelletenbrinke.saxionroosters.model.Week;
 
@@ -39,12 +40,14 @@ public class WeekFragment extends Fragment implements ClickListener, OnAsyncTask
     private RelativeLayout loadingLayout, retryLayout;
 
     //data
-    private String owner, weekName, weekId, ownerType;
     private Week week;
+    private Dataset dataset;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        dataset = (Dataset) getActivity().getApplication();
     }
 
     @Override
@@ -55,24 +58,15 @@ public class WeekFragment extends Fragment implements ClickListener, OnAsyncTask
 
         //Reads the arguments to know which week should be loaded :)
         Bundle args = getArguments();
-        if(args.getString(S.GROUP) != null) {
-            owner = args.getString(S.GROUP);
-            ownerType = S.GROUP;
-        } else if(args.getString(S.TEACHER) != null) {
-            owner = args.getString(S.TEACHER);
-            ownerType = S.TEACHER;
+        week = dataset.getWeekById(args.getString(S.WEEK_ID));
+
+
+        //Run the task if this is an empty week object, else just load the existing week.
+        if(week.getDays().isEmpty()) {
+            getWeekTask();
+        } else {
+            updateUI();
         }
-        weekId = args.getString(S.WEEK_ID);
-        weekName = args.getString(S.WEEK_NAME);
-
-        if (owner == null || weekId == null) Log.e("debug", "oh noes, this can never be null :O");
-
-
-        //Run the task :)
-        getWeekTask();
-        //also show loading dialog :)
-
-
 
         return v;
     }
@@ -115,11 +109,12 @@ public class WeekFragment extends Fragment implements ClickListener, OnAsyncTask
     /* When called this updates all UI items that contain data.  */
     private void updateUI() {
         //TODO: error handling plsss.
-        if (week == null) {
+        if (week.getDays().isEmpty()) {
             showRetry();
             return;
         }
         listAdapter.removeAll();
+
 
         //Add all colleges to the adapter
         final ArrayList<College> colleges = new ArrayList<>();
@@ -129,7 +124,7 @@ public class WeekFragment extends Fragment implements ClickListener, OnAsyncTask
             if(day.getColleges().isEmpty()) {
                 showFreeDay = true;
             }
-            College dividerDate = new College(day.getName(), showFreeDay);
+            College dividerDate = new College(day.getDate(), showFreeDay);
             colleges.add(dividerDate);
 
             colleges.addAll(day.getColleges());
@@ -139,9 +134,9 @@ public class WeekFragment extends Fragment implements ClickListener, OnAsyncTask
     }
 
     private void getWeekTask() {
-        String url = S.URL + S.SCHEDULE + "/" + ownerType + ":" + owner + "/" + S.WEEK_ID + ":" + weekId;
-        NetworkAsyncTask task = new NetworkAsyncTask(WeekFragment.this, getActivity(), false);
-        task.execute(url, S.PARSE_WEEK, weekName, weekId, owner, ownerType);
+        String url = S.URL + S.SCHEDULE + "/" + week.getOwner().getTypeName() + ":" + week.getOwner().getName() + "/" + S.WEEK_ID + ":" + week.getId();
+        NetworkAsyncTask task = new NetworkAsyncTask(WeekFragment.this, getActivity(), false, week);
+        task.execute(url, S.PARSE_WEEK);
         //also show loading dialog :)
         showLoading();
     }
@@ -167,6 +162,7 @@ public class WeekFragment extends Fragment implements ClickListener, OnAsyncTask
         //We received a (full) week object show the schedule to the user :D
         if (object instanceof Week) {
             this.week = (Week) object;
+            dataset.updateWeekById(week);
             updateUI();
         } else if(object instanceof Exception) {
             //ok this is not the right way, but for now its ok.

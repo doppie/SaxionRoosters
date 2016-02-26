@@ -9,8 +9,6 @@ import java.util.ArrayList;
  */
 public class College {
 
-
-
     private String name;
     private String type;
     private String time;
