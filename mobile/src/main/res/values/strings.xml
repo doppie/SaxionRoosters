@@ -10,6 +10,9 @@
     <string name="dismiss">Dismiss</string>
     <string name="this_week">This week</string>
 
+    <!-- Dialog texts -->
+    <string name="error_title_no_internet">No internet connection</string>
+    <string name="error_message_no_internet">Please try again later. If this problem persists please contact the developers.</string>
 
 
     <string name="action_settings">Settings</string>

@@ -22,11 +22,13 @@ public class NetworkAsyncTask extends AsyncTask<String, Void, Object> {
 
     private OnAsyncTaskCompleted listener;
 
+    private boolean showProgressDialog = false;
     private ProgressDialog dialog;
 
-    public NetworkAsyncTask(OnAsyncTaskCompleted listener, Activity activity) {
+    public NetworkAsyncTask(OnAsyncTaskCompleted listener, Activity activity, boolean showProgressDialog) {
         this.listener = listener;
-        dialog = new ProgressDialog(activity);
+        this.showProgressDialog = showProgressDialog;
+        if(showProgressDialog) dialog = new ProgressDialog(activity);
     }
 
     @Override
@@ -68,6 +70,7 @@ public class NetworkAsyncTask extends AsyncTask<String, Void, Object> {
         } catch (IOException e) {
             //TODO: errorhandling plssss.
             e.printStackTrace();
+            return e;
         }
         return null;
     }
@@ -75,15 +78,17 @@ public class NetworkAsyncTask extends AsyncTask<String, Void, Object> {
     @Override
     protected void onPostExecute(Object object) {
         //Send the object to the attached listener.
-        dialog.dismiss();
+        if(showProgressDialog) dialog.dismiss();
         listener.onAsyncTaskCompleted(object);
 
     }
 
     @Override
     protected void onPreExecute() {
-        this.dialog.setMessage("Debug..");
-        this.dialog.show();
+        if(showProgressDialog) {
+            this.dialog.setMessage("Debug..");
+            this.dialog.show();
+        }
     }
 
     @Override

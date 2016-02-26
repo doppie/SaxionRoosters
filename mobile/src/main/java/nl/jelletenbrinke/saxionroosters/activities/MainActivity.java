@@ -1,6 +1,8 @@
 package nl.jelletenbrinke.saxionroosters.activities;
 
 import android.content.Intent;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 
 import nl.jelletenbrinke.saxionroosters.R;
 import nl.jelletenbrinke.saxionroosters.adapters.WeekPagerAdapter;
+import nl.jelletenbrinke.saxionroosters.dialogs.ErrorDialog;
 import nl.jelletenbrinke.saxionroosters.extras.NetworkAsyncTask;
 import nl.jelletenbrinke.saxionroosters.extras.S;
 import nl.jelletenbrinke.saxionroosters.interfaces.OnAsyncTaskCompleted;
@@ -32,12 +35,17 @@ import nl.jelletenbrinke.saxionroosters.model.Week;
  */
 public class MainActivity extends AppCompatActivity implements OnAsyncTaskCompleted {
 
-    private WeekPagerAdapter pagerAdapter;
+    //UI
+    private CoordinatorLayout mainLayout;
     private ViewPager pager;
     private TabLayout tabLayout;
     private SearchBox search;
     private Toolbar toolbar;
 
+    //adapters
+    private WeekPagerAdapter pagerAdapter;
+
+    //data
     private String group = "";
     private ArrayList<Week> weeks;
     private ArrayList<Result> searchResults;
@@ -58,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
 
     /* Initializes the UI, called from @onCreate */
     private void initUI() {
+        mainLayout = (CoordinatorLayout) findViewById(R.id.mainLayout);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -82,7 +91,6 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
         //Adding our results
         if(searchResults != null) {
             for(Result result : searchResults) {
-                Log.e("debug", "adding results: " + result.getAbbrevation() + result.getName() + result.getType());
                 SearchResult option = new SearchResult(result.getAbbrevation() + " (" + result.getName() + ")", getResources().getDrawable(R.drawable.magnify_grey));
                 search.addSearchable(option);
 
@@ -93,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
 
     private void getWeekPager(String group) {
         this.group = group;
-        NetworkAsyncTask getWeekPagerTask = new NetworkAsyncTask(this, this);
+        NetworkAsyncTask getWeekPagerTask = new NetworkAsyncTask(this, this, true);
         String url = S.URL + S.QUERY + group;
         getWeekPagerTask.execute(url, S.PARSE_WEEK_PAGER);
     }
@@ -102,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
         //First cancel if necessary.
         if(getSearchResultsTask != null) getSearchResultsTask.cancel(true);
 
-        getSearchResultsTask = new NetworkAsyncTask(this, this);
+        getSearchResultsTask = new NetworkAsyncTask(this, this, false);
         String url = S.URL + S.QUERY + query;
         getSearchResultsTask.execute(url, S.PARSE_SEARCH_RESULTS, query);
     }
@@ -161,6 +169,13 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
                 }
                 this.searchResults = results;
             }
+        } else if(obj instanceof Exception) {
+            ErrorDialog dialog = new ErrorDialog();
+            Bundle args = new Bundle();
+            args.putString(S.MESSAGE, getString(R.string.error_message_no_internet));
+            args.putString(S.TITLE, getString(R.string.error_title_no_internet));
+            dialog.setArguments(args);
+            dialog.show(getSupportFragmentManager(), "dialog");
         }
 
 
@@ -208,14 +223,12 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
             public void onSearchTermChanged(String term) {
                 // React to the search term changing
                 // Called after it has updated results
-                Log.e("debug", "searching.. " + term);
-                getSearchResults(term);
+                //start searching if there are more then 2 chars.
+                if(term.length() > 1) getSearchResults(term);
             }
 
             @Override
             public void onSearch(String searchTerm) {
-                Toast.makeText(MainActivity.this, searchTerm + " Searched",
-                        Toast.LENGTH_LONG).show();
                 toolbar.setTitle(searchTerm);
                 getWeekPager(searchTerm);
             }
@@ -223,7 +236,6 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
             @Override
             public void onResultClick(SearchResult result) {
                 //React to result being clicked
-                Log.e("debug", "onResultClick: " + result.title);
                 String title = result.title.substring(0, result.title.indexOf(" ("));
                 toolbar.setTitle(title);
 //                search.setSearchString(title);

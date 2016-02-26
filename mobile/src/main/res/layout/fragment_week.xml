@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<RelativeLayout
+    android:id="@+id/mainLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -13,7 +14,31 @@
         android:paddingTop="16dp"
         android:paddingBottom="48dp"
         android:clipToPadding="false"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-</android.support.design.widget.CoordinatorLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="48dp">
+        <include
+            android:id="@+id/loadingLayout"
+            layout="@layout/loading_layout"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+
+            android:layout_centerHorizontal="true" />
+        <include
+            android:id="@+id/retryLayout"
+            layout="@layout/retry_layout"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            android:layout_centerVertical="true"
+
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+</RelativeLayout>

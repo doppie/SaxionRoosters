@@ -2,6 +2,8 @@ package nl.jelletenbrinke.saxionroosters.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
@@ -29,10 +32,14 @@ import nl.jelletenbrinke.saxionroosters.model.Week;
 public class WeekFragment extends Fragment implements ClickListener, OnAsyncTaskCompleted {
 
 
+    //UI
+    private RelativeLayout mainLayout;
     private RecyclerView list;
     private CollegeAdapter listAdapter;
     private RecyclerView.LayoutManager listLayoutManager;
+    private RelativeLayout loadingLayout, retryLayout;
 
+    //data
     private String group, weekId;
     private Week week;
 
@@ -52,14 +59,15 @@ public class WeekFragment extends Fragment implements ClickListener, OnAsyncTask
         group = args.getString(S.GROUP);
         weekId = args.getString(S.WEEK);
 
-        if(group == null || weekId == null) Log.e("debug", "oh noes, this can never be null :O");
+        if (group == null || weekId == null) Log.e("debug", "oh noes, this can never be null :O");
 
 
         //Run the task :)
         String url = S.URL + S.SCHEDULE + "/" + S.GROUP + ":" + group + "/" + S.WEEK + ":" + weekId;
-        NetworkAsyncTask task = new NetworkAsyncTask(this, getActivity());
+        NetworkAsyncTask task = new NetworkAsyncTask(this, getActivity(), false);
         task.execute(url, S.PARSE_WEEK, group, weekId);
-
+        //also show loading dialog :)
+        showLoading();
 
 
         return v;
@@ -68,11 +76,12 @@ public class WeekFragment extends Fragment implements ClickListener, OnAsyncTask
     @Override
     public void onResume() {
         super.onResume();
-        updateUI();
+//        updateUI();
     }
 
     /* Initializes the UI, called from @onCreateView */
     private void initUI(View v) {
+        mainLayout = (RelativeLayout) v.findViewById(R.id.mainLayout);
         list = (RecyclerView) v.findViewById(R.id.list);
         //fixed size always true: important for performance!
         list.setHasFixedSize(true);
@@ -86,12 +95,30 @@ public class WeekFragment extends Fragment implements ClickListener, OnAsyncTask
         listAdapter = new CollegeAdapter(new ArrayList<College>(), this);
         //Sets an empty adapter.
         list.setAdapter(listAdapter);
+
+        loadingLayout = (RelativeLayout) v.findViewById(R.id.loadingLayout);
+        retryLayout = (RelativeLayout) v.findViewById(R.id.retryLayout);
+        retryLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Run the task :)
+                String url = S.URL + S.SCHEDULE + "/" + S.GROUP + ":" + group + "/" + S.WEEK + ":" + weekId;
+                NetworkAsyncTask task = new NetworkAsyncTask(WeekFragment.this, getActivity(), false);
+                task.execute(url, S.PARSE_WEEK, group, weekId);
+                //also show loading dialog :)
+                showLoading();
+            }
+        });
+
     }
 
     /* When called this updates all UI items that contain data.  */
     private void updateUI() {
         //TODO: error handling plsss.
-        if(week == null) return;
+        if (week == null) {
+            showRetry();
+            return;
+        }
         listAdapter.removeAll();
 
         //Add all colleges to the adapter
@@ -103,6 +130,7 @@ public class WeekFragment extends Fragment implements ClickListener, OnAsyncTask
             colleges.addAll(day.getColleges());
         }
         listAdapter.setData(colleges);
+        showList();
     }
 
     @Override
@@ -115,7 +143,7 @@ public class WeekFragment extends Fragment implements ClickListener, OnAsyncTask
         College college = listAdapter.getData().get(position);
 
         //Do something here!!
-        if(isLongClick) {
+        if (isLongClick) {
 
         }
     }
@@ -124,9 +152,36 @@ public class WeekFragment extends Fragment implements ClickListener, OnAsyncTask
     public void onAsyncTaskCompleted(Object object) {
 
         //We received a (full) week object show the schedule to the user :D
-        if(object instanceof Week) {
+        if (object instanceof Week) {
             this.week = (Week) object;
             updateUI();
+        } else if(object instanceof Exception) {
+            //ok this is not the right way, but for now its ok.
+            //for all errors show the retry button :)
+            Snackbar.make(mainLayout, "No internet connection.", Snackbar.LENGTH_SHORT).show();
+
+            showRetry();
         }
+    }
+
+    //TODO: We can add nice fade-in/out animations here.
+    private void showLoading() {
+        loadingLayout.setVisibility(View.VISIBLE);
+        retryLayout.setVisibility(View.GONE);
+        list.setVisibility(View.GONE);
+    }
+
+    //TODO: We can add nice fade-in/out animations here.
+    private void showList() {
+        loadingLayout.setVisibility(View.GONE);
+        retryLayout.setVisibility(View.GONE);
+        list.setVisibility(View.VISIBLE);
+    }
+
+    //TODO: We can add nice fade-in/out animations here.
+    private void showRetry() {
+        loadingLayout.setVisibility(View.GONE);
+        retryLayout.setVisibility(View.VISIBLE);
+        list.setVisibility(View.GONE);
     }
 }

@@ -5,6 +5,7 @@ package nl.jelletenbrinke.saxionroosters.extras;
  */
 public class S {
 
+    //used for html parse
     public static final String URL = "http://roosters.saxion.nl/";
     public static final String QUERY = "?q=";
     public static final String SCHEDULE = "schedule";
@@ -17,6 +18,11 @@ public class S {
     public static final String DATACELL_LEFT = "datacell_left";
     public static final String PULL_RIGHT = "pull-right";
 
+    //used for arguments in dialog
+    public static final String MESSAGE = "message";
+    public static final String TITLE = "title";
+
+    //used for asynctask
     public static final String PARSE_WEEK_PAGER = "parse_week_pager";
     public static final String PARSE_WEEK = "parse_week";
     public static final String PARSE_SEARCH_RESULTS = "parse_search_results";
