@@ -1,6 +1,7 @@
 package nl.jelletenbrinke.saxionroosters.activities;
 
 import android.content.Intent;
+import android.speech.RecognizerIntent;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -149,6 +150,19 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == SearchBox.VOICE_RECOGNITION_CODE && resultCode == this.RESULT_OK) {
+            ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+
+            if(!matches.isEmpty()) {
+                search.populateEditText(matches.get(0));
+            }
+
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
