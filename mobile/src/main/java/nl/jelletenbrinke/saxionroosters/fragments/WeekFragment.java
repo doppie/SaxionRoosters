@@ -71,13 +71,6 @@ public class WeekFragment extends Fragment implements ClickListener {
         Bundle args = getArguments();
         week = dataset.getWeekById(args.getString(S.WEEK_ID));
 
-        //Run the task if this is an empty week object, else just load the existing week.
-        if(week.getDays().isEmpty()) {
-            getWeekTask();
-        } else {
-            updateUI();
-        }
-
         //fixed size always true: important for performance!
         list.setHasFixedSize(true);
         listLayoutManager = new LinearLayoutManager(getActivity());
@@ -90,6 +83,13 @@ public class WeekFragment extends Fragment implements ClickListener {
         listAdapter = new CollegeAdapter(new ArrayList<College>(), this);
         //Sets an empty adapter.
         list.setAdapter(listAdapter);
+
+        //Run the task if this is an empty week object, else just load the existing week.
+        if(week.getDays().isEmpty()) {
+            getWeekTask();
+        } else {
+            updateUI();
+        }
     }
 
     /* When called this updates all UI items that contain data.  */
