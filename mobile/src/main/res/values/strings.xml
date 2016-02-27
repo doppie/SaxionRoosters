@@ -3,20 +3,21 @@
 
 
     <!-- items -->
-    <string name="item_removed">Removed item.</string>
+    <string name="item_removed">Item verwijderd</string>
     <!-- Basic texts -->
-    <string name="ok">Ok</string>
-    <string name="cancel">Cancel</string>
-    <string name="dismiss">Dismiss</string>
-    <string name="this_week">This week</string>
-    <string name="free_day">Nothing planned today.</string>
+    <string name="ok">Oké</string>
+    <string name="cancel">Annuleren</string>
+    <string name="dismiss">Sluiten</string>
+    <string name="loading">Laden...</string>
+    <string name="this_week">Deze week</string>
+    <string name="free_day">Niets op de planning</string>
 
     <!-- Dialog texts -->
-    <string name="error_title_no_internet">No internet connection</string>
-    <string name="error_message_no_internet">Please try again later. If this problem persists please contact the developers.</string>
+    <string name="error_title_no_internet">Geen internetverbinding</string>
+    <string name="error_message_no_internet">Probeer het later opnieuw. Neem contact op met de ontwikkelaars als het probleem blijft bestaan</string>
 
 
-    <string name="action_settings">Settings</string>
-    <string name="action_search">Search</string>
+    <string name="action_settings">Instellingen</string>
+    <string name="action_search">Zoeken</string>
     <string name="title_activity_search">SearchActivity</string>
 </resources>

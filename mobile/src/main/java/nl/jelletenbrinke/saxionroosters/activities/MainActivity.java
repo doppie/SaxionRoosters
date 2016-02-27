@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -27,11 +26,8 @@ import java.util.ArrayList;
 
 import nl.jelletenbrinke.saxionroosters.R;
 import nl.jelletenbrinke.saxionroosters.adapters.WeekPagerAdapter;
-import nl.jelletenbrinke.saxionroosters.dialogs.ErrorDialog;
 import nl.jelletenbrinke.saxionroosters.extras.HtmlRetriever;
-import nl.jelletenbrinke.saxionroosters.extras.NetworkAsyncTask;
 import nl.jelletenbrinke.saxionroosters.extras.S;
-import nl.jelletenbrinke.saxionroosters.interfaces.OnAsyncTaskCompleted;
 import nl.jelletenbrinke.saxionroosters.model.Dataset;
 import nl.jelletenbrinke.saxionroosters.model.Result;
 import nl.jelletenbrinke.saxionroosters.model.Week;
@@ -70,8 +66,6 @@ public class MainActivity extends AppCompatActivity {
 //    private String ownerType = "";
 //    private ArrayList<Week> weeks;
 //    private ArrayList<Result> searchResults;
-
-    private NetworkAsyncTask getSearchResultsTask;
 
     @AfterViews
     protected void init() {
@@ -186,8 +180,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onMenuClick() {
                 // Hamburger has been clicked
-                Toast.makeText(MainActivity.this, "Menu click",
-                        Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "Menu click", Toast.LENGTH_LONG).show();
             }
 
         });
@@ -277,7 +270,7 @@ public class MainActivity extends AppCompatActivity {
 
     @UiThread
     protected void postExecute(HtmlRetriever retriever, Object object) {
-        retriever.onRetrieveCompleted(object);
+        retriever.onWeekPagerRetrieveCompleted(object);
         updateUI();
         if(dialog != null && dialog.isShowing()) {
             dialog.dismiss();
@@ -287,7 +280,7 @@ public class MainActivity extends AppCompatActivity {
     @UiThread
     protected void preExecute() {
         dialog = new ProgressDialog(this);
-        this.dialog.setMessage("Laden..");
+        this.dialog.setMessage(getString(R.string.loading));
         this.dialog.show();
     }
 

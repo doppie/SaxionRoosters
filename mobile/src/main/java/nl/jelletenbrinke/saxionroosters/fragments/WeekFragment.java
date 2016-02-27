@@ -7,25 +7,23 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
 
 import nl.jelletenbrinke.saxionroosters.R;
 import nl.jelletenbrinke.saxionroosters.adapters.CollegeAdapter;
-import nl.jelletenbrinke.saxionroosters.extras.NetworkAsyncTask;
+import nl.jelletenbrinke.saxionroosters.extras.HtmlRetriever;
 import nl.jelletenbrinke.saxionroosters.extras.S;
 import nl.jelletenbrinke.saxionroosters.interfaces.ClickListener;
-import nl.jelletenbrinke.saxionroosters.interfaces.OnAsyncTaskCompleted;
 import nl.jelletenbrinke.saxionroosters.model.College;
 import nl.jelletenbrinke.saxionroosters.model.Dataset;
 import nl.jelletenbrinke.saxionroosters.model.Day;
@@ -35,7 +33,7 @@ import nl.jelletenbrinke.saxionroosters.model.Week;
  * Created by Doppie on 24-2-2016.
  */
 @EFragment(R.layout.fragment_week)
-public class WeekFragment extends Fragment implements ClickListener, OnAsyncTaskCompleted {
+public class WeekFragment extends Fragment implements ClickListener {
 
 
     //UI
@@ -121,12 +119,35 @@ public class WeekFragment extends Fragment implements ClickListener, OnAsyncTask
         showList();
     }
 
-    private void getWeekTask() {
+    @Background
+    protected void getWeekTask() {
+        preExecute();
+
+        HtmlRetriever retriever = new HtmlRetriever(getActivity(), dataset, week);
         String url = S.URL + S.SCHEDULE + "/" + week.getOwner().getTypeName() + ":" + week.getOwner().getName() + "/" + S.WEEK_ID + ":" + week.getId();
-        NetworkAsyncTask task = new NetworkAsyncTask(WeekFragment.this, getActivity(), false, week);
-        task.execute(url, S.PARSE_WEEK);
-        //also show loading dialog :)
-        showLoading();
+        Object object = retriever.retrieveHtml(url, S.PARSE_WEEK);
+
+        postExecute(retriever, object);
+    }
+
+    @UiThread
+    protected void postExecute(HtmlRetriever retriever, Object object) {
+        Week week = retriever.onWeekScheduleRetrieveCompleted(object);
+        if(week != null) {
+            this.week = week;
+            updateUI();
+        }
+        else {
+            Snackbar.make(mainLayout, getString(R.string.error_title_no_internet), Snackbar.LENGTH_SHORT).show();
+            showRetry();
+        }
+    }
+
+    @UiThread
+    protected void preExecute() {
+        loadingLayout.setVisibility(View.VISIBLE);
+        retryLayout.setVisibility(View.GONE);
+        list.setVisibility(View.GONE);
     }
 
     @Override
@@ -147,30 +168,6 @@ public class WeekFragment extends Fragment implements ClickListener, OnAsyncTask
         if (isLongClick) {
 
         }
-    }
-
-    @Override
-    public void onAsyncTaskCompleted(Object object) {
-
-        //We received a (full) week object show the schedule to the user :D
-        if (object instanceof Week) {
-            this.week = (Week) object;
-            dataset.updateWeekById(week);
-            updateUI();
-        } else if(object instanceof Exception) {
-            //ok this is not the right way, but for now its ok.
-            //for all errors show the retry button :)
-            Snackbar.make(mainLayout, "No internet connection.", Snackbar.LENGTH_SHORT).show();
-
-            showRetry();
-        }
-    }
-
-    //TODO: We can add nice fade-in/out animations here.
-    private void showLoading() {
-        loadingLayout.setVisibility(View.VISIBLE);
-        retryLayout.setVisibility(View.GONE);
-        list.setVisibility(View.GONE);
     }
 
     //TODO: We can add nice fade-in/out animations here.

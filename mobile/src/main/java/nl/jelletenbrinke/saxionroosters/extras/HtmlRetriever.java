@@ -3,8 +3,10 @@ package nl.jelletenbrinke.saxionroosters.extras;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 
+import org.androidannotations.annotations.UiThread;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -33,7 +35,9 @@ public class HtmlRetriever {
         this.dataset = dataset;
     }
 
-    public HtmlRetriever(Week week) {
+    public HtmlRetriever(Activity context, Dataset dataset, Week week) {
+        this.context = context;
+        this.dataset = dataset;
         this.week = week;
     }
 
@@ -85,7 +89,7 @@ public class HtmlRetriever {
         return null;
     }
 
-    public void onRetrieveCompleted(Object obj) {
+    public void onWeekPagerRetrieveCompleted(Object obj) {
         if(obj == null) {
             if(!dataset.getCurrentWeeks().isEmpty()) {
                 ((MainActivity) context).getToolbar().setTitle(dataset.getCurrentWeeks().get(0).getOwner().getName());
@@ -132,6 +136,18 @@ public class HtmlRetriever {
             dialog.setArguments(args);
             dialog.show(((MainActivity) context).getSupportFragmentManager(), "dialog");
         }
+    }
+
+    public Week onWeekScheduleRetrieveCompleted(Object object) {
+        //We received a (full) week object show the schedule to the user :D
+        if (object instanceof Week) {
+            this.week = (Week) object;
+            dataset.updateWeekById(week);
+            return week;
+        } else if(object instanceof Exception) {
+            return null;
+        }
+        return null;
     }
 
 }
