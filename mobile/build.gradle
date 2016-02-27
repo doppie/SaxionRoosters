@@ -54,4 +54,6 @@ dependencies {
     apt "org.androidannotations:androidannotations:$AAVersion"
     compile "org.androidannotations:androidannotations-api:$AAVersion"
 
+    compile 'com.google.code.gson:gson:2.6.2'
+
 }

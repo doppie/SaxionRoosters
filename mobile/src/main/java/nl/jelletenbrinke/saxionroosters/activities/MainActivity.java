@@ -18,6 +18,7 @@ import com.quinny898.library.persistentsearch.SearchResult;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
@@ -28,7 +29,7 @@ import nl.jelletenbrinke.saxionroosters.R;
 import nl.jelletenbrinke.saxionroosters.adapters.WeekPagerAdapter;
 import nl.jelletenbrinke.saxionroosters.extras.HtmlRetriever;
 import nl.jelletenbrinke.saxionroosters.extras.S;
-import nl.jelletenbrinke.saxionroosters.model.Dataset;
+import nl.jelletenbrinke.saxionroosters.extras.Storage;
 import nl.jelletenbrinke.saxionroosters.model.Result;
 import nl.jelletenbrinke.saxionroosters.model.Week;
 
@@ -61,7 +62,9 @@ public class MainActivity extends AppCompatActivity {
     private WeekPagerAdapter pagerAdapter;
 
     //data
-    private Dataset dataset;
+    @Bean
+    protected Storage storage;
+
 //    private String owner = "";
 //    private String ownerType = "";
 //    private ArrayList<Week> weeks;
@@ -69,8 +72,6 @@ public class MainActivity extends AppCompatActivity {
 
     @AfterViews
     protected void init() {
-        dataset = (Dataset) getApplication();
-
         initUI();
     }
 
@@ -87,21 +88,21 @@ public class MainActivity extends AppCompatActivity {
 
     /* When called this updates all UI items that contain data.  */
     private void updateUI() {
-        if(!dataset.getCurrentWeeks().isEmpty()) {
-            toolbar.setTitle(dataset.getCurrentWeeks().get(0).getOwner().getName());
+        if(!storage.getCurrentWeeks().isEmpty()) {
+            toolbar.setTitle(storage.getCurrentWeeks().get(0).getOwner().getName());
         } else {
             toolbar.setTitle(getString(R.string.app_name));
         }
 
-        if(dataset.getCurrentWeeks() != null) {
+        if(storage.getCurrentWeeks() != null) {
             pager.setAdapter(null);
-            pagerAdapter = new WeekPagerAdapter(this, getSupportFragmentManager(), dataset.getCurrentWeeks());
+            pagerAdapter = new WeekPagerAdapter(this, getSupportFragmentManager(), storage.getCurrentWeeks());
             pager.setAdapter(pagerAdapter);
             tabLayout.setupWithViewPager(pager);
 
             //get the current week:
             Week currentWeek = null;
-            for(Week week : dataset.getCurrentWeeks()) {
+            for(Week week : storage.getCurrentWeeks()) {
                 if(week.getId().equals("0")) currentWeek = week;
             }
             //select the current week
@@ -109,8 +110,8 @@ public class MainActivity extends AppCompatActivity {
         }
         search.clearSearchable();
         //Adding our results
-        if(dataset.getSearchResults() != null) {
-            for(Result result : dataset.getSearchResults()) {
+        if(storage.getSearchResults() != null) {
+            for(Result result : storage.getSearchResults()) {
                 SearchResult option = null;
                 if(result.getName() != null && !result.getName().isEmpty()) {
                     option = new SearchResult(result.getAbbrevation() + " (" + result.getName() + ")", getResources().getDrawable(R.drawable.magnify_grey));
@@ -252,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
     protected void getWeekPager(String name) {
         preExecute();
 
-        HtmlRetriever retriever = new HtmlRetriever(this, dataset);
+        HtmlRetriever retriever = new HtmlRetriever(this);
         String url = S.URL + S.QUERY + name;
         Object object = retriever.retrieveHtml(url, S.PARSE_WEEK_PAGER);
 
@@ -261,7 +262,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Background
     protected void getSearchResults(String query) {
-        HtmlRetriever retriever = new HtmlRetriever(this, dataset);
+        HtmlRetriever retriever = new HtmlRetriever(this);
         String url = S.URL + S.QUERY + query;
         Object object = retriever.retrieveHtml(url, S.PARSE_SEARCH_RESULTS, query);
 

@@ -3,10 +3,8 @@ package nl.jelletenbrinke.saxionroosters.extras;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 
-import org.androidannotations.annotations.UiThread;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -17,7 +15,6 @@ import nl.jelletenbrinke.saxionroosters.R;
 import nl.jelletenbrinke.saxionroosters.activities.MainActivity;
 import nl.jelletenbrinke.saxionroosters.activities.SearchActivity;
 import nl.jelletenbrinke.saxionroosters.dialogs.ErrorDialog;
-import nl.jelletenbrinke.saxionroosters.model.Dataset;
 import nl.jelletenbrinke.saxionroosters.model.Result;
 import nl.jelletenbrinke.saxionroosters.model.Week;
 
@@ -27,17 +24,17 @@ import nl.jelletenbrinke.saxionroosters.model.Week;
 public class HtmlRetriever {
 
     private Activity context;
-    private Dataset dataset;
+    private Storage storage;
     private Week week;
 
-    public HtmlRetriever(Activity context, Dataset dataset) {
+    public HtmlRetriever(Activity context) {
         this.context = context;
-        this.dataset = dataset;
+        storage = Storage.getInstance(context);
     }
 
-    public HtmlRetriever(Activity context, Dataset dataset, Week week) {
+    public HtmlRetriever(Activity context, Week week) {
         this.context = context;
-        this.dataset = dataset;
+        storage = Storage.getInstance(context);
         this.week = week;
     }
 
@@ -91,8 +88,8 @@ public class HtmlRetriever {
 
     public void onWeekPagerRetrieveCompleted(Object obj) {
         if(obj == null) {
-            if(!dataset.getCurrentWeeks().isEmpty()) {
-                ((MainActivity) context).getToolbar().setTitle(dataset.getCurrentWeeks().get(0).getOwner().getName());
+            if(!storage.getCurrentWeeks().isEmpty()) {
+                ((MainActivity) context).getToolbar().setTitle(storage.getCurrentWeeks().get(0).getOwner().getName());
             } else {
                 ((MainActivity) context).getToolbar().setTitle(context.getString(R.string.app_name));
             }
@@ -110,12 +107,12 @@ public class HtmlRetriever {
             if(arrayList.get(0) instanceof Week) {
                 //We received the empty weeks for the pager!
                 ArrayList<Week> newWeeks = (ArrayList<Week>) obj;
-                if(!dataset.getCurrentWeeks().isEmpty()) {
-                    if(!dataset.getCurrentWeeks().get(0).getOwner().getName().equals(newWeeks.get(0).getOwner().getName())) {
-                        dataset.setCurrentWeeks(newWeeks);
+                if(!storage.getCurrentWeeks().isEmpty()) {
+                    if(!storage.getCurrentWeeks().get(0).getOwner().getName().equals(newWeeks.get(0).getOwner().getName())) {
+                        storage.setCurrentWeeks(newWeeks);
                     }
                 } else {
-                    dataset.setCurrentWeeks(newWeeks);
+                    storage.setCurrentWeeks(newWeeks);
                 }
             } else if(arrayList.get(0) instanceof Result) {
                 ArrayList<Result> results = (ArrayList<Result>) obj;
@@ -126,7 +123,7 @@ public class HtmlRetriever {
                         results.remove(r);
                     }
                 }
-                dataset.setSearchResults(results);
+                storage.setSearchResults(results);
             }
         } else if(obj instanceof Exception) {
             ErrorDialog dialog = new ErrorDialog();
@@ -142,7 +139,7 @@ public class HtmlRetriever {
         //We received a (full) week object show the schedule to the user :D
         if (object instanceof Week) {
             this.week = (Week) object;
-            dataset.updateWeekById(week);
+            storage.updateWeekById(week);
             return week;
         } else if(object instanceof Exception) {
             return null;

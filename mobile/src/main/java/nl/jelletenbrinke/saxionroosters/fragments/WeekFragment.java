@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.UiThread;
@@ -23,9 +24,9 @@ import nl.jelletenbrinke.saxionroosters.R;
 import nl.jelletenbrinke.saxionroosters.adapters.CollegeAdapter;
 import nl.jelletenbrinke.saxionroosters.extras.HtmlRetriever;
 import nl.jelletenbrinke.saxionroosters.extras.S;
+import nl.jelletenbrinke.saxionroosters.extras.Storage;
 import nl.jelletenbrinke.saxionroosters.interfaces.ClickListener;
 import nl.jelletenbrinke.saxionroosters.model.College;
-import nl.jelletenbrinke.saxionroosters.model.Dataset;
 import nl.jelletenbrinke.saxionroosters.model.Day;
 import nl.jelletenbrinke.saxionroosters.model.Week;
 
@@ -54,7 +55,9 @@ public class WeekFragment extends Fragment implements ClickListener {
 
     //data
     private Week week;
-    private Dataset dataset;
+
+    @Bean
+    protected Storage storage;
 
     @Override
     public void onResume() {
@@ -65,11 +68,9 @@ public class WeekFragment extends Fragment implements ClickListener {
     /* Initializes the UI after views are injected */
     @AfterViews
     protected void initUI() {
-        dataset = (Dataset) getActivity().getApplication();
-
         //Reads the arguments to know which week should be loaded :)
         Bundle args = getArguments();
-        week = dataset.getWeekById(args.getString(S.WEEK_ID));
+        week = storage.getWeekById(args.getString(S.WEEK_ID));
 
         //fixed size always true: important for performance!
         list.setHasFixedSize(true);
@@ -123,7 +124,7 @@ public class WeekFragment extends Fragment implements ClickListener {
     protected void getWeekTask() {
         preExecute();
 
-        HtmlRetriever retriever = new HtmlRetriever(getActivity(), dataset, week);
+        HtmlRetriever retriever = new HtmlRetriever(getActivity(), week);
         String url = S.URL + S.SCHEDULE + "/" + week.getOwner().getTypeName() + ":" + week.getOwner().getName() + "/" + S.WEEK_ID + ":" + week.getId();
         Object object = retriever.retrieveHtml(url, S.PARSE_WEEK);
 
