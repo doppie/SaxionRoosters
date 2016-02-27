@@ -17,10 +17,10 @@ Contributions we would love to see:
 We will use GitHub to track issues and feature requests. So please share your ideas with us or contribute your code :)
 
 ## GitHub Managers
-* Jelle ten Brinke([@doppie](https://github.com/doppie/))
-* Hugo Olthof([@HugoOltHof](https://github.com/hugoolthof/))
+* Jelle ten Brinke ([@doppie](https://github.com/doppie/))
+* Hugo Olthof ([@HugoOltHof](https://github.com/hugoolthof/))
 
-Want to join us as a GitHub manager? Contact Jelle ten Brinke([@doppie](https://github.com/doppie/))
+Want to join us as a GitHub manager? Contact Jelle ten Brinke ([@doppie](https://github.com/doppie/))
 
 ## Contributing
 We would love to add your contributions to this app.
@@ -30,6 +30,9 @@ We would love to add your contributions to this app.
 3. Share it with us :).
 
 By contributing to Saxion Roosters, you agree that your contributions will be licensed under its BSD license.
+
+## Android Annotations
+This app uses the Android Annotations plugin. It uses annotations to speed up the coding process. For more info on the available annotations, please visit this website: https://github.com/excilys/androidannotations/wiki/AvailableAnnotations
 
 ## License
 Copyright (c) 2016, Jelle ten Brinke
