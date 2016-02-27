@@ -1,5 +1,5 @@
 # Saxion Roosters
-Saxion Roosters is an unofficial Android App for Students and employees.
+Saxion Roosters is an unofficial Android App for students and employees of Saxion Hogeschool Enschede.
 The goal is to create a better overall user experience by adding extra features.
 
 Contributions we would love to see:
