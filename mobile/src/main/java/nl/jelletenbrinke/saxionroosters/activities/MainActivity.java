@@ -1,5 +1,6 @@
 package nl.jelletenbrinke.saxionroosters.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.speech.RecognizerIntent;
 import android.support.design.widget.CoordinatorLayout;
@@ -19,6 +20,7 @@ import com.quinny898.library.persistentsearch.SearchResult;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
@@ -26,11 +28,11 @@ import java.util.ArrayList;
 import nl.jelletenbrinke.saxionroosters.R;
 import nl.jelletenbrinke.saxionroosters.adapters.WeekPagerAdapter;
 import nl.jelletenbrinke.saxionroosters.dialogs.ErrorDialog;
+import nl.jelletenbrinke.saxionroosters.extras.HtmlRetriever;
 import nl.jelletenbrinke.saxionroosters.extras.NetworkAsyncTask;
 import nl.jelletenbrinke.saxionroosters.extras.S;
 import nl.jelletenbrinke.saxionroosters.interfaces.OnAsyncTaskCompleted;
 import nl.jelletenbrinke.saxionroosters.model.Dataset;
-import nl.jelletenbrinke.saxionroosters.model.Owner;
 import nl.jelletenbrinke.saxionroosters.model.Result;
 import nl.jelletenbrinke.saxionroosters.model.Week;
 
@@ -39,7 +41,7 @@ import nl.jelletenbrinke.saxionroosters.model.Week;
  * The main activity.
  */
 @EActivity(R.layout.activity_main)
-public class MainActivity extends AppCompatActivity implements OnAsyncTaskCompleted {
+public class MainActivity extends AppCompatActivity {
 
     //UI
     @ViewById(R.id.mainLayout)
@@ -56,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
 
     @ViewById(R.id.toolbar)
     protected Toolbar toolbar;
+
+    private ProgressDialog dialog;
 
     //adapters
     private WeekPagerAdapter pagerAdapter;
@@ -127,22 +131,6 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
         search.updateResults();
     }
 
-    private void getWeekPager(String name) {
-        NetworkAsyncTask getWeekPagerTask = new NetworkAsyncTask(this, this, true);
-        String url = S.URL + S.QUERY + name;
-        getWeekPagerTask.execute(url, S.PARSE_WEEK_PAGER);
-    }
-
-    private void getSearchResults(String query) {
-        //First cancel if necessary.
-        if(getSearchResultsTask != null) getSearchResultsTask.cancel(true);
-
-        getSearchResultsTask = new NetworkAsyncTask(this, this, false);
-        String url = S.URL + S.QUERY + query;
-        getSearchResultsTask.execute(url, S.PARSE_SEARCH_RESULTS, query);
-    }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -178,60 +166,6 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
 
         }
         super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    public void onAsyncTaskCompleted(Object obj) {
-
-        if(obj == null) {
-            if(!dataset.getCurrentWeeks().isEmpty()) {
-                toolbar.setTitle(dataset.getCurrentWeeks().get(0).getOwner().getName());
-            } else {
-                toolbar.setTitle(getString(R.string.app_name));
-            }
-            pager.setAdapter(null);
-            Intent i = new Intent(MainActivity.this, SearchActivity.class);
-            startActivity(i);
-        } else if(obj instanceof ArrayList) {
-            ArrayList<Object> arrayList = (ArrayList<Object>) obj;
-
-            //an empty arraylist this means the result is bad.
-            if(arrayList.isEmpty()) {
-                return;
-            }
-
-            if(arrayList.get(0) instanceof Week) {
-                //We received the empty weeks for the pager!
-                ArrayList<Week> newWeeks = (ArrayList<Week>) obj;
-                if(!dataset.getCurrentWeeks().isEmpty()) {
-                    if(!dataset.getCurrentWeeks().get(0).getOwner().getName().equals(newWeeks.get(0).getOwner().getName())) {
-                        dataset.setCurrentWeeks(newWeeks);
-                    }
-                } else {
-                    dataset.setCurrentWeeks(newWeeks);
-                }
-            } else if(arrayList.get(0) instanceof Result) {
-                ArrayList<Result> results = (ArrayList<Result>) obj;
-                //for now remove all courses, because we cannot handle them yet.
-                for(int i = 0; i < results.size(); i++) {
-                    Result r = results.get(i);
-                    if(r.getType() == null || r.getType().equals(S.COURSE)) {
-                        results.remove(r);
-                    }
-                }
-                dataset.setSearchResults(results);
-            }
-        } else if(obj instanceof Exception) {
-            ErrorDialog dialog = new ErrorDialog();
-            Bundle args = new Bundle();
-            args.putString(S.MESSAGE, getString(R.string.error_message_no_internet));
-            args.putString(S.TITLE, getString(R.string.error_title_no_internet));
-            dialog.setArguments(args);
-            dialog.show(getSupportFragmentManager(), "dialog");
-        }
-
-
-        updateUI();
     }
 
     public void openSearch() {
@@ -276,7 +210,7 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
                 // React to the search term changing
                 // Called after it has updated results
                 //start searching if there are more then 2 chars.
-                if(term.length() > 1) getSearchResults(term);
+                if (term.length() > 1) getSearchResults(term);
             }
 
             @Override
@@ -290,7 +224,7 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
             public void onResultClick(SearchResult result) {
                 //React to result being clicked
                 String title = result.title;
-                if(result.title.contains(" (")) {
+                if (result.title.contains(" (")) {
                     title = result.title.substring(0, result.title.indexOf(" ("));
                 }
                 toolbar.setTitle(title);
@@ -312,4 +246,49 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
         search.hideCircularly(this);
         if(search.getSearchText().isEmpty())toolbar.setTitle(getString(R.string.app_name));
     }
+
+    public ViewPager getPager() {
+        return pager;
+    }
+
+    public Toolbar getToolbar() {
+        return toolbar;
+    }
+
+    @Background
+    protected void getWeekPager(String name) {
+        preExecute();
+
+        HtmlRetriever retriever = new HtmlRetriever(this, dataset);
+        String url = S.URL + S.QUERY + name;
+        Object object = retriever.retrieveHtml(url, S.PARSE_WEEK_PAGER);
+
+        postExecute(retriever, object);
+    }
+
+    @Background
+    protected void getSearchResults(String query) {
+        HtmlRetriever retriever = new HtmlRetriever(this, dataset);
+        String url = S.URL + S.QUERY + query;
+        Object object = retriever.retrieveHtml(url, S.PARSE_SEARCH_RESULTS, query);
+
+        postExecute(retriever, object);
+    }
+
+    @UiThread
+    protected void postExecute(HtmlRetriever retriever, Object object) {
+        retriever.onRetrieveCompleted(object);
+        updateUI();
+        if(dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
+    }
+
+    @UiThread
+    protected void preExecute() {
+        dialog = new ProgressDialog(this);
+        this.dialog.setMessage("Laden..");
+        this.dialog.show();
+    }
+
 }
