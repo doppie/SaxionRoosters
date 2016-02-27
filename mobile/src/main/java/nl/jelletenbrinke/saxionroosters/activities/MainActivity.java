@@ -127,7 +127,6 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
         search.updateResults();
     }
 
-    @Background
     private void getWeekPager(String name) {
         NetworkAsyncTask getWeekPagerTask = new NetworkAsyncTask(this, this, true);
         String url = S.URL + S.QUERY + name;
