@@ -21,6 +21,7 @@ android {
     repositories {
         mavenCentral()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+        maven { url "https://jitpack.io" }
     }
 }
 
@@ -37,8 +38,8 @@ dependencies {
     compile 'com.android.support:cardview-v7:23.1.1'
     compile 'com.android.support:recyclerview-v7:23.1.1'
 
-    /* Used for the searchbar like in playstore */
-    compile 'com.quinny898.library.persistentsearch:library:1.1.0-SNAPSHOT'
+    /* Used for the searchbar like in playstore     compile 'com.quinny898.library.persistentsearch:library:1.1.0-SNAPSHOT' */
+    compile 'com.github.doppie:PersistentSearch:master-SNAPSHOT'
     /* Used for parsing HTML */
     compile 'org.jsoup:jsoup:1.8.3'
 
