@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import nl.jelletenbrinke.saxionroosters.R;
 import nl.jelletenbrinke.saxionroosters.extras.S;
 import nl.jelletenbrinke.saxionroosters.fragments.WeekFragment;
+import nl.jelletenbrinke.saxionroosters.fragments.WeekFragment_;
 import nl.jelletenbrinke.saxionroosters.model.Week;
 
 /**
@@ -32,7 +33,7 @@ public class WeekPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         Week week = weeks.get(position);
 
-        WeekFragment fragment = new WeekFragment();
+        WeekFragment fragment = new WeekFragment_();
         Bundle args = new Bundle();
         args.putString(week.getOwner().getTypeName(), week.getOwner().getName());
         args.putString(S.WEEK_ID, week.getId());

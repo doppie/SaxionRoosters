@@ -25,7 +25,15 @@ android {
     }
 }
 
+apply plugin: 'android-apt'
+def AAVersion = '3.2'
 
+apt {
+    arguments {
+        resourcePackageName 'nl.jelletenbrinke.saxionroosters'
+        androidManifestFile variant.outputs[0].processResources.manifestFile
+    }
+}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -42,5 +50,8 @@ dependencies {
     compile 'com.github.doppie:PersistentSearch:master-SNAPSHOT'
     /* Used for parsing HTML */
     compile 'org.jsoup:jsoup:1.8.3'
+
+    apt "org.androidannotations:androidannotations:$AAVersion"
+    compile "org.androidannotations:androidannotations-api:$AAVersion"
 
 }

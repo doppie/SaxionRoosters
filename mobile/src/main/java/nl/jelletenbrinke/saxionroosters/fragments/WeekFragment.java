@@ -13,6 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ViewById;
+
 import java.util.ArrayList;
 
 import nl.jelletenbrinke.saxionroosters.R;
@@ -29,37 +34,44 @@ import nl.jelletenbrinke.saxionroosters.model.Week;
 /**
  * Created by Doppie on 24-2-2016.
  */
+@EFragment(R.layout.fragment_week)
 public class WeekFragment extends Fragment implements ClickListener, OnAsyncTaskCompleted {
 
 
     //UI
-    private RelativeLayout mainLayout;
-    private RecyclerView list;
+    @ViewById(R.id.mainLayout)
+    protected RelativeLayout mainLayout;
+
+    @ViewById(R.id.list)
+    protected RecyclerView list;
+
+    @ViewById(R.id.loadingLayout)
+    protected RelativeLayout loadingLayout;
+
+    @ViewById(R.id.retryLayout)
+    protected RelativeLayout retryLayout;
+
     private CollegeAdapter listAdapter;
     private RecyclerView.LayoutManager listLayoutManager;
-    private RelativeLayout loadingLayout, retryLayout;
 
     //data
     private Week week;
     private Dataset dataset;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        dataset = (Dataset) getActivity().getApplication();
+    public void onResume() {
+        super.onResume();
+//        updateUI();
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_week, container, false);
-
-        initUI(v);
+    /* Initializes the UI after views are injected */
+    @AfterViews
+    protected void initUI() {
+        dataset = (Dataset) getActivity().getApplication();
 
         //Reads the arguments to know which week should be loaded :)
         Bundle args = getArguments();
         week = dataset.getWeekById(args.getString(S.WEEK_ID));
-
 
         //Run the task if this is an empty week object, else just load the existing week.
         if(week.getDays().isEmpty()) {
@@ -68,19 +80,6 @@ public class WeekFragment extends Fragment implements ClickListener, OnAsyncTask
             updateUI();
         }
 
-        return v;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-//        updateUI();
-    }
-
-    /* Initializes the UI, called from @onCreateView */
-    private void initUI(View v) {
-        mainLayout = (RelativeLayout) v.findViewById(R.id.mainLayout);
-        list = (RecyclerView) v.findViewById(R.id.list);
         //fixed size always true: important for performance!
         list.setHasFixedSize(true);
         listLayoutManager = new LinearLayoutManager(getActivity());
@@ -93,17 +92,6 @@ public class WeekFragment extends Fragment implements ClickListener, OnAsyncTask
         listAdapter = new CollegeAdapter(new ArrayList<College>(), this);
         //Sets an empty adapter.
         list.setAdapter(listAdapter);
-
-        loadingLayout = (RelativeLayout) v.findViewById(R.id.loadingLayout);
-        retryLayout = (RelativeLayout) v.findViewById(R.id.retryLayout);
-        retryLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Run the task :)
-                getWeekTask();
-            }
-        });
-
     }
 
     /* When called this updates all UI items that contain data.  */
@@ -144,6 +132,11 @@ public class WeekFragment extends Fragment implements ClickListener, OnAsyncTask
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Click(R.id.retryLayout)
+    protected void onRetryClick() {
+        getWeekTask();
     }
 
     @Override

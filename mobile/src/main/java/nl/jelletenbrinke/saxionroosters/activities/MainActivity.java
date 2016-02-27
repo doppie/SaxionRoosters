@@ -16,6 +16,11 @@ import android.widget.Toast;
 import com.quinny898.library.persistentsearch.SearchBox;
 import com.quinny898.library.persistentsearch.SearchResult;
 
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ViewById;
+
 import java.util.ArrayList;
 
 import nl.jelletenbrinke.saxionroosters.R;
@@ -33,14 +38,24 @@ import nl.jelletenbrinke.saxionroosters.model.Week;
 /**
  * The main activity.
  */
+@EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity implements OnAsyncTaskCompleted {
 
     //UI
-    private CoordinatorLayout mainLayout;
-    private ViewPager pager;
-    private TabLayout tabLayout;
-    private SearchBox search;
-    private Toolbar toolbar;
+    @ViewById(R.id.mainLayout)
+    protected CoordinatorLayout mainLayout;
+
+    @ViewById(R.id.container)
+    protected ViewPager pager;
+
+    @ViewById(R.id.tabs)
+    protected TabLayout tabLayout;
+
+    @ViewById(R.id.searchbox)
+    protected SearchBox search;
+
+    @ViewById(R.id.toolbar)
+    protected Toolbar toolbar;
 
     //adapters
     private WeekPagerAdapter pagerAdapter;
@@ -54,11 +69,8 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
 
     private NetworkAsyncTask getSearchResultsTask;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+    @AfterViews
+    protected void init() {
         dataset = (Dataset) getApplication();
 
         initUI();
@@ -66,18 +78,13 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
 
     /* Initializes the UI, called from @onCreate */
     private void initUI() {
-        mainLayout = (CoordinatorLayout) findViewById(R.id.mainLayout);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        search = (SearchBox) findViewById(R.id.searchbox);
         search.enableVoiceRecognition(this);
 //        search.setMenuVisibility(View.GONE);
 
-        pager = (ViewPager) findViewById(R.id.container);
         //Don't load all pages at once, only load one extra left and right of the current view.
         pager.setOffscreenPageLimit(1);
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
     }
 
     /* When called this updates all UI items that contain data.  */
@@ -120,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements OnAsyncTaskComple
         search.updateResults();
     }
 
+    @Background
     private void getWeekPager(String name) {
         NetworkAsyncTask getWeekPagerTask = new NetworkAsyncTask(this, this, true);
         String url = S.URL + S.QUERY + name;

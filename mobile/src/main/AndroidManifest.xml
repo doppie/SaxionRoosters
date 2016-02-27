@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar" >
-        <activity android:name=".activities.MainActivity" >
+        <activity android:name=".activities.MainActivity_" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.SearchActivity"
+            android:name=".activities.SearchActivity_"
             android:label="@string/title_activity_search"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
