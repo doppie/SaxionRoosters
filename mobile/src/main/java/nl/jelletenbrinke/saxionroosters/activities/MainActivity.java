@@ -65,10 +65,6 @@ public class MainActivity extends AppCompatActivity {
     @Bean
     protected Storage storage;
 
-//    private String owner = "";
-//    private String ownerType = "";
-//    private ArrayList<Week> weeks;
-//    private ArrayList<Result> searchResults;
 
     @AfterViews
     protected void init() {

@@ -45,6 +45,7 @@ public class Storage {
     protected Storage(Context ctx) {
         this.context = ctx.getApplicationContext();
         currentWeeks = new ArrayList<>();
+        searchResults = new ArrayList<>();
     }
 
     public <T> T getObject(Class<T> pojo) {
