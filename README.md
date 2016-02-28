@@ -7,10 +7,10 @@ Contributions we would love to see:
 * Favourites for groups and/or teachers
 * Android Wear support
 * Implementation improvements
-* UI/UX improvements
+* UI/UX (color) improvements
+* Tablet optimized UI
 * Error handling
 * Search functionality
-* etc..
 
 
 ## Issues
@@ -35,7 +35,7 @@ By contributing to Saxion Roosters, you agree that your contributions will be li
 This app uses the Android Annotations plugin. It uses annotations to speed up the coding process. For more info on the available annotations, please visit this website: https://github.com/excilys/androidannotations/wiki/AvailableAnnotations
 
 ## License
-Copyright (c) 2016, Jelle ten Brinke
+Copyright (c) 2016, Jelle ten Brinke & Hugo Olthof
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
