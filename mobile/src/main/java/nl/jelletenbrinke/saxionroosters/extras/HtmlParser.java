@@ -1,18 +1,11 @@
 package nl.jelletenbrinke.saxionroosters.extras;
 
-import android.util.Log;
-
-import com.quinny898.library.persistentsearch.SearchResult;
-
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
-import nl.jelletenbrinke.saxionroosters.R;
 import nl.jelletenbrinke.saxionroosters.model.College;
 import nl.jelletenbrinke.saxionroosters.model.Day;
 import nl.jelletenbrinke.saxionroosters.model.Group;

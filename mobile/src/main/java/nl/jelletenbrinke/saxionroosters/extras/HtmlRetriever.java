@@ -89,7 +89,7 @@ public class HtmlRetriever {
     public void onWeekPagerRetrieveCompleted(Object obj) {
         if(obj == null) {
             if(!storage.getCurrentWeeks().isEmpty()) {
-                ((MainActivity) context).getToolbar().setTitle(storage.getCurrentWeeks().get(0).getOwner().getName());
+                ((MainActivity) context).getToolbar().setSubtitle(storage.getCurrentWeeks().get(0).getOwner().getName());
             } else {
                 ((MainActivity) context).getToolbar().setTitle(context.getString(R.string.app_name));
             }
