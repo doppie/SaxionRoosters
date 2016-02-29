@@ -19,6 +19,7 @@ public class S {
     public static final String NAMEROW = "namerow";
     public static final String DATACELL_LEFT = "datacell_left";
     public static final String PULL_RIGHT = "pull-right";
+    public static final String SEARCH_QUERY = "search_query";
 
     //used for arguments in dialog
     public static final String MESSAGE = "message";

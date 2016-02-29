@@ -3,6 +3,7 @@ package nl.jelletenbrinke.saxionroosters.extras;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import org.jsoup.Jsoup;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import nl.jelletenbrinke.saxionroosters.R;
 import nl.jelletenbrinke.saxionroosters.activities.MainActivity;
 import nl.jelletenbrinke.saxionroosters.activities.SearchActivity;
+import nl.jelletenbrinke.saxionroosters.activities.SearchActivity_;
 import nl.jelletenbrinke.saxionroosters.dialogs.ErrorDialog;
 import nl.jelletenbrinke.saxionroosters.model.Result;
 import nl.jelletenbrinke.saxionroosters.model.Week;
@@ -90,11 +92,9 @@ public class HtmlRetriever {
         if(obj == null) {
             if(!storage.getCurrentWeeks().isEmpty()) {
                 ((MainActivity) context).getToolbar().setSubtitle(storage.getCurrentWeeks().get(0).getOwner().getName());
-            } else {
-                ((MainActivity) context).getToolbar().setTitle(context.getString(R.string.app_name));
             }
             ((MainActivity) context).getPager().setAdapter(null);
-            Intent i = new Intent(context, SearchActivity.class);
+            Intent i = new Intent(context, SearchActivity_.class);
             context.startActivity(i);
         } else if(obj instanceof ArrayList) {
             ArrayList<Object> arrayList = (ArrayList<Object>) obj;
@@ -131,7 +131,7 @@ public class HtmlRetriever {
             args.putString(S.MESSAGE, context.getString(R.string.error_message_no_internet));
             args.putString(S.TITLE, context.getString(R.string.error_title_no_internet));
             dialog.setArguments(args);
-            dialog.show(((MainActivity) context).getSupportFragmentManager(), "dialog");
+            dialog.show(((AppCompatActivity) context).getSupportFragmentManager(), "dialog");
         }
     }
 

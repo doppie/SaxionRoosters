@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
     /* When called this updates all UI items that contain data.  */
     private void updateUI() {
         if(!storage.getCurrentWeeks().isEmpty()) {
-            toolbar.setTitle(storage.getCurrentWeeks().get(0).getOwner().getName());
+            toolbar.setSubtitle(storage.getCurrentWeeks().get(0).getOwner().getName());
         } else {
             toolbar.setTitle(getString(R.string.app_name));
         }
