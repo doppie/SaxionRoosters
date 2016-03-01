@@ -11,6 +11,7 @@
     <string name="loading">Laden...</string>
     <string name="this_week">Deze week</string>
     <string name="free_day">Niets op de planning</string>
+    <string name="no_results">Geen zoek resultaten.</string>
 
     <!-- Dialog texts -->
     <string name="error_title_no_internet">Geen internetverbinding</string>

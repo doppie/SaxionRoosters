@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import nl.jelletenbrinke.saxionroosters.R;
+import nl.jelletenbrinke.saxionroosters.activities.BaseActivity;
 import nl.jelletenbrinke.saxionroosters.activities.MainActivity;
 import nl.jelletenbrinke.saxionroosters.activities.SearchActivity;
 import nl.jelletenbrinke.saxionroosters.activities.SearchActivity_;
@@ -90,12 +91,17 @@ public class HtmlRetriever {
 
     public void onWeekPagerRetrieveCompleted(Object obj) {
         if(obj == null) {
-            if(!storage.getCurrentWeeks().isEmpty()) {
-                ((MainActivity) context).getToolbar().setSubtitle(storage.getCurrentWeeks().get(0).getOwner().getName());
+            if(context instanceof MainActivity) {
+                if(!storage.getCurrentWeeks().isEmpty()) {
+                    ((MainActivity) context).getToolbar().setSubtitle(storage.getCurrentWeeks().get(0).getOwner().getName());
+                }
+                ((MainActivity) context).getPager().setAdapter(null);
+                Intent i = new Intent(context, SearchActivity_.class);
+                context.startActivity(i);
+            } else if(context instanceof SearchActivity) {
+
             }
-            ((MainActivity) context).getPager().setAdapter(null);
-            Intent i = new Intent(context, SearchActivity_.class);
-            context.startActivity(i);
+
         } else if(obj instanceof ArrayList) {
             ArrayList<Object> arrayList = (ArrayList<Object>) obj;
 

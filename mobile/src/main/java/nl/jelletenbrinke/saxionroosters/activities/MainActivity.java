@@ -40,7 +40,7 @@ import nl.jelletenbrinke.saxionroosters.model.Week;
  * The main activity.
  */
 @EActivity(R.layout.activity_main)
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     //UI
     @ViewById(R.id.mainLayout)
@@ -58,15 +58,9 @@ public class MainActivity extends AppCompatActivity {
     @ViewById(R.id.toolbar)
     protected Toolbar toolbar;
 
-    private ProgressDialog dialog;
-
     //adapters
     private WeekPagerAdapter pagerAdapter;
     private SearchAdapter searchAdapter;
-
-    //data
-    @Bean
-    protected Storage storage;
 
 
     @AfterViews

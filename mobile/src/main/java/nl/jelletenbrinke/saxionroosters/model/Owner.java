@@ -17,6 +17,11 @@ public class Owner {
         this.type = type;
     }
 
+    public Owner(OwnerType type) {
+        this.name = null;
+        this.type = type;
+    }
+
     public String getName() {
         return name;
     }
