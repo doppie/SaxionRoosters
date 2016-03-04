@@ -36,7 +36,6 @@
         android:layout_height="wrap_content"
         android:focusable="true"
         android:clickable="true"
-        android:background="@color/main_color_grey_100"
         android:foreground="?android:attr/selectableItemBackground"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
@@ -46,6 +45,7 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
+
             android:layout_height="wrap_content">
 
             <View

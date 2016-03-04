@@ -95,10 +95,6 @@ public class HtmlRetriever {
     public void onWeekPagerRetrieveCompleted(Object obj) {
         if(obj instanceof String) {
             if(context instanceof MainActivity) {
-                if(!storage.getCurrentWeeks().isEmpty()) {
-                    ((MainActivity) context).getToolbar().setSubtitle(storage.getCurrentWeeks().get(0).getOwner().getName());
-                }
-                ((MainActivity) context).getPager().setAdapter(null);
                 Intent i = new Intent(context, SearchActivity_.class);
                 i.putExtra(S.SEARCH_QUERY, (String) obj);
                 context.startActivity(i);
