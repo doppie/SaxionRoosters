@@ -11,7 +11,9 @@ import java.util.ArrayList;
 
 import nl.jelletenbrinke.saxionroosters.R;
 import nl.jelletenbrinke.saxionroosters.interfaces.ClickListener;
+import nl.jelletenbrinke.saxionroosters.model.Group;
 import nl.jelletenbrinke.saxionroosters.model.Owner;
+import nl.jelletenbrinke.saxionroosters.model.Teacher;
 
 /**
  * Created by Doppie on 1-3-2016.
@@ -78,21 +80,34 @@ public class OwnerAdapter extends RecyclerView.Adapter<OwnerAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, int position) {
         Owner owner = data.get(position);
 
-        if(owner.getName() != null) {
-            holder.line.setVisibility(View.GONE);
-            holder.ownerTypeText.setVisibility(View.GONE);
-            holder.cardView.setVisibility(View.VISIBLE);
-
-            holder.nameText.setText(owner.getName());
-            holder.courseText.setText("Opleiding X");
-
-        } else {
+        if(owner.getName() != null && owner.getType() == null) {
+            //this is a divider.
 
             holder.line.setVisibility(View.VISIBLE);
             holder.ownerTypeText.setVisibility(View.VISIBLE);
             holder.cardView.setVisibility(View.GONE);
 
-            holder.ownerTypeText.setText(owner.getTypeName());
+            holder.ownerTypeText.setText(owner.getName());
+
+        } else if(owner.getName() != null) {
+            //this is a normal owner item.
+
+            if(owner instanceof Group) {
+                Group group = (Group) owner;
+                holder.nameText.setText(group.getName());
+                holder.courseText.setText(group.getCourseName());
+            } else if(owner instanceof Teacher) {
+                Teacher teacher = (Teacher) owner;
+                holder.nameText.setText(teacher.getName());
+                holder.courseText.setText(teacher.getIdName());
+            }
+
+            holder.line.setVisibility(View.GONE);
+            holder.ownerTypeText.setVisibility(View.GONE);
+            holder.cardView.setVisibility(View.VISIBLE);
+
+
+
         }
     }
 

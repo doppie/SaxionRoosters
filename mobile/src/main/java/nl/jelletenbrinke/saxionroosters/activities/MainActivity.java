@@ -33,6 +33,7 @@ import nl.jelletenbrinke.saxionroosters.extras.HtmlRetriever;
 import nl.jelletenbrinke.saxionroosters.extras.S;
 import nl.jelletenbrinke.saxionroosters.extras.Storage;
 import nl.jelletenbrinke.saxionroosters.extras.Tools;
+import nl.jelletenbrinke.saxionroosters.model.Owner;
 import nl.jelletenbrinke.saxionroosters.model.Result;
 import nl.jelletenbrinke.saxionroosters.model.Week;
 
@@ -107,43 +108,24 @@ public class MainActivity extends BaseActivity {
     /* When called this updates all UI items that contain data.  */
     private void updateUI() {
         Log.e("debug", "updateUI");
-        if(!storage.getCurrentWeeks().isEmpty()) {
-            toolbar.setSubtitle(storage.getCurrentWeeks().get(0).getOwner().getName());
-        } else {
-            toolbar.setTitle(getString(R.string.app_name));
-        }
 
+        //Update the titlebar
+        if(!storage.getCurrentWeeks().isEmpty()) toolbar.setSubtitle(Tools.getOwnerRepresentativeName(storage.getCurrentWeeks().get(0).getOwner()));
+
+        //Check if the pager needs an update.
         if(storage.getCurrentWeeks() != null) {
-            pager.setAdapter(null);
-            pagerAdapter = new WeekPagerAdapter(this, getSupportFragmentManager(), storage.getCurrentWeeks());
-            pager.setAdapter(pagerAdapter);
-            tabLayout.setupWithViewPager(pager);
-
-            //get the current week:
-            Week currentWeek = null;
-            for(Week week : storage.getCurrentWeeks()) {
-                if(week.getId().equals("0")) currentWeek = week;
+            if(pagerAdapter != null && pagerAdapter.getCount() > 0 && !storage.getCurrentWeeks().isEmpty()) {
+                Owner oldOwner = pagerAdapter.getOwnerForWeeks();
+                Owner newOwner = storage.getCurrentWeeks().get(0).getOwner();
+                if(!oldOwner.equals(newOwner) && oldOwner != null) updatePager();
+            } else {
+                updatePager();
             }
-            //select the current week
-            if(currentWeek != null) pager.setCurrentItem(pagerAdapter.getItemPosition(currentWeek));
         }
 
-//        searchView.setAdapter(null);
+        //Update the searchresults in the searchview.
         ArrayList<SearchItem> searchResults = new ArrayList<>();
-        //Adding our results
-        if(storage.getSearchResults() != null) {
-            for(Result result : storage.getSearchResults()) {
-                SearchItem item = null;
-                if(result.getName() != null && !result.getName().isEmpty()) {
-                    item = new SearchItem(result.getAbbrevation() + " (" + result.getName() + ")", R.drawable.magnify_grey);
-                } else if(result.getAbbrevation() != null) {
-                    item = new SearchItem(result.getAbbrevation(), R.drawable.magnify_grey);
-                }
-
-                if(item != null) searchResults.add(item);
-
-            }
-        }
+        if(storage.getSearchResults() != null) searchResults = Tools.getResultsForSearchView(storage.getSearchResults());
         searchAdapter = new SearchAdapter(this, new ArrayList<SearchItem>(), searchResults, SearchCodes.THEME_LIGHT);
         searchAdapter.setOnItemClickListener(new SearchAdapter.OnItemClickListener() {
             @Override
@@ -158,6 +140,21 @@ public class MainActivity extends BaseActivity {
             }
         });
         searchView.setAdapter(searchAdapter);
+    }
+
+    private void updatePager() {
+        pager.setAdapter(null);
+        pagerAdapter = new WeekPagerAdapter(this, getSupportFragmentManager(), storage.getCurrentWeeks());
+        pager.setAdapter(pagerAdapter);
+        tabLayout.setupWithViewPager(pager);
+
+        //get the current week:
+        Week currentWeek = null;
+        for (Week week : storage.getCurrentWeeks()) {
+            if (week.getId().equals("0")) currentWeek = week;
+        }
+        //select the current week
+        if (currentWeek != null) pager.setCurrentItem(pagerAdapter.getItemPosition(currentWeek));
     }
 
     @Override

@@ -1,5 +1,7 @@
 package nl.jelletenbrinke.saxionroosters.extras;
 
+import android.util.Log;
+
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -100,9 +102,18 @@ public class HtmlParser {
                         //Right now we put them all in one teacher object
                         //TODO: give every Teacher its own Object.
                         if (span.className().equals(S.DATACELL_LEFT)) {
-                            Element link = span.firstElementSibling();
-                            Teacher teacher = new Teacher(link.text());
-                            teachers.add(teacher);
+                            Elements as = span.select("a");
+                            for(Element a : as) {
+                                String href = a.attr("href");
+                                Log.e("debug", "href1: " + href);
+                                if(href != null && href.contains("/teacher:") && href.contains("/week")) href = href.substring(href.indexOf("teacher:"), href.indexOf("/week"));
+                                Log.e("debug", "href: " + href);
+
+                                Teacher teacher = new Teacher(a.text(), href);
+                                teachers.add(teacher);
+                            }
+
+
                         } else if (span.className().equals(S.PULL_RIGHT)) {
                             //The location contains a string with all locations
                             //So maybe we should create an arraylist of this one.
@@ -158,11 +169,13 @@ public class HtmlParser {
                 weekId = href.substring(href.indexOf("/week:") + 6, href.indexOf("/group:"));
 
                 String ownerName = href.substring(href.indexOf("/group:") + 7);
-                owner = new Group(ownerName);
+
+                //we need to find the course name here somehow..
+                owner = new Group(ownerName, S.UNKNOWN);
             } else if(href.contains("/teacher:")) {
                 weekId = href.substring(href.indexOf("/week:") + 6, href.indexOf("/teacher:"));
                 String ownerName = href.substring(href.indexOf("/teacher:") + 9);
-                owner = new Teacher(ownerName);
+                owner = new Teacher(ownerName, S.UNKNOWN);
             }
             String weekName = a.text();
 
@@ -203,6 +216,8 @@ public class HtmlParser {
                                 type = S.TEACHER;
                             } else if(href.contains("course:")) {
                                 type = S.COURSE;
+                            } else if(href.contains("academy:")) {
+                                type = S.ACADEMY;
                             }
                         } else if(type != null) {
                             if(type.equals(S.GROUP)) {
@@ -213,6 +228,8 @@ public class HtmlParser {
                                 name = a.text();
                             } else if(type.equals(S.COURSE)) {
                                 //no second line here, so name will stay empty.
+                            } else if(type.equals(S.ACADEMY)) {
+                                //do something.
                             }
                         }
                     }

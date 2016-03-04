@@ -9,9 +9,14 @@ import nl.jelletenbrinke.saxionroosters.model.College;
  */
 public class Group extends Owner {
 
-    public Group(String name) {
+    private String courseName;
+
+    public Group(String name, String courseName) {
         super(name, OwnerType.GROUP);
+        this.courseName = courseName;
     }
 
-
+    public String getCourseName() {
+        return courseName;
+    }
 }

@@ -12,6 +12,7 @@ import nl.jelletenbrinke.saxionroosters.R;
 import nl.jelletenbrinke.saxionroosters.extras.S;
 import nl.jelletenbrinke.saxionroosters.fragments.WeekFragment;
 import nl.jelletenbrinke.saxionroosters.fragments.WeekFragment_;
+import nl.jelletenbrinke.saxionroosters.model.Owner;
 import nl.jelletenbrinke.saxionroosters.model.Week;
 
 /**
@@ -50,6 +51,12 @@ public class WeekPagerAdapter extends FragmentStatePagerAdapter {
     public void addToBack(Week week) {
         weeks.add(week);
         notifyDataSetChanged();
+    }
+
+    public Owner getOwnerForWeeks() {
+        if(weeks.isEmpty()) return null;
+        Week week = weeks.get(0);
+        return week.getOwner();
     }
 
     @Override

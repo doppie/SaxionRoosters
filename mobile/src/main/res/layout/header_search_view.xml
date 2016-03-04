@@ -55,7 +55,7 @@
                     android:layout_marginRight="@dimen/search_view_margin_text"
                     android:layout_marginStart="@dimen/search_view_margin_text"
                     android:layout_weight="1"
-                    android:hint="Zoeken op groep of leraar"
+                    android:hint="@string/search_hint"
                     android:textColor="@color/material_grey_600"
                     android:textColorHint="@color/material_grey_400"
                     android:textCursorDrawable="@null"

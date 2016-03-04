@@ -18,6 +18,7 @@ import nl.jelletenbrinke.saxionroosters.activities.MainActivity;
 import nl.jelletenbrinke.saxionroosters.activities.SearchActivity;
 import nl.jelletenbrinke.saxionroosters.activities.SearchActivity_;
 import nl.jelletenbrinke.saxionroosters.dialogs.ErrorDialog;
+import nl.jelletenbrinke.saxionroosters.model.Owner;
 import nl.jelletenbrinke.saxionroosters.model.Result;
 import nl.jelletenbrinke.saxionroosters.model.Week;
 
@@ -71,11 +72,13 @@ public class HtmlRetriever {
                     //url[2] contains our query string.
                     //TODO: this should be a full result object.
                     ArrayList<Week> weeks = HtmlParser.parseWeekPager(doc);
-                    String owner = url[2];
+                    String ownerAbbreviation = url[2];
+                    String ownerType = null;
                     if(!weeks.isEmpty()) {
-                        owner = weeks.get(0).getOwner().getName();
+                        ownerAbbreviation = weeks.get(0).getOwner().getName();
+                        ownerType = weeks.get(0).getOwner().getTypeName();
                     }
-                    results.add(new Result(owner, "", ""));
+                    results.add(new Result(ownerAbbreviation, "" , ownerType));
                 }
 
                 return results;

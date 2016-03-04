@@ -130,23 +130,12 @@ public class SearchActivity extends BaseActivity implements ClickListener{
     @UiThread
     protected void updateUI() {
         Log.e("debug", "updateUI");
+
         ArrayList<Owner> searchResults = new ArrayList<>();
-        //Adding our results
+
+        //Adding our results to ownerAdapter
         if(storage.getSearchResults() != null && !storage.getSearchResults().isEmpty()) {
-            for(Result result : storage.getSearchResults()) {
-                Owner owner = null;
-                Owner.OwnerType type = Owner.OwnerType.GROUP;
-                if(result.getType() != null && result.getType().equals(S.TEACHER)) type = Owner.OwnerType.TEACHER;
-                if(result.getName() != null && !result.getName().isEmpty()) {
-
-                    owner = new Owner(result.getAbbrevation() + " (" + result.getName() + ")", type);
-                } else if(result.getAbbrevation() != null) {
-                    owner = new Owner(result.getAbbrevation(), type);
-                }
-
-                if(owner != null) searchResults.add(owner);
-
-            }
+            searchResults = Tools.getResultsForOwnerAdapter(storage.getSearchResults(), true);
             noResultsView.setVisibility(View.GONE);
             list.setVisibility(View.VISIBLE);
             loadingLayout.setVisibility(View.GONE);

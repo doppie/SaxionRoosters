@@ -7,7 +7,7 @@ import nl.jelletenbrinke.saxionroosters.extras.S;
  */
 public class Owner {
 
-    public static enum OwnerType { GROUP, TEACHER }
+    public static enum OwnerType { GROUP, TEACHER, COURSE, ACADEMY }
 
     private String name;
     private OwnerType type;
@@ -34,6 +34,8 @@ public class Owner {
         switch (type) {
             case GROUP: return S.GROUP;
             case TEACHER: return S.TEACHER;
+            case COURSE: return S.COURSE;
+            case ACADEMY: return S.ACADEMY;
             default: return "UNKNOWN";
         }
     }

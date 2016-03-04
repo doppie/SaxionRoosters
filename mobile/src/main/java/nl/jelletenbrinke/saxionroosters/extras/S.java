@@ -13,6 +13,7 @@ public class S {
     public static final String GROUP = "group";
     public static final String COURSE = "course";
     public static final String TEACHER = "teacher";
+    public static final String ACADEMY = "academy";
     public static final String WEEK_ID = "week";
     public static final String WEEK_NAME = "week_name";
     public static final String TIMES = "times";
@@ -20,6 +21,7 @@ public class S {
     public static final String DATACELL_LEFT = "datacell_left";
     public static final String PULL_RIGHT = "pull-right";
     public static final String SEARCH_QUERY = "search_query";
+    public static final String UNKNOWN = "unknown";
 
     //used for arguments in dialog
     public static final String MESSAGE = "message";

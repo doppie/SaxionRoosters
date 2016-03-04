@@ -5,9 +5,15 @@ package nl.jelletenbrinke.saxionroosters.model;
  */
 public class Teacher extends Owner {
 
+    private String idName;
 
-    public Teacher(String name) {
-        super(name, OwnerType.TEACHER);
+    public Teacher(String fullName, String idName) {
+        super(fullName, OwnerType.TEACHER);
+        this.idName = idName;
+    }
+
+    public String getIdName() {
+        return idName;
     }
     
 }
