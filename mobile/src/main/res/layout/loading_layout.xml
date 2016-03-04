@@ -8,7 +8,5 @@
         android:indeterminate="true"
         android:indeterminateTint="@color/material_grey_400"
         android:indeterminateTintMode="src_in"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/view"
-        android:layout_toEndOf="@+id/view" />
+        android:layout_alignParentTop="true" />
 </RelativeLayout>

@@ -56,7 +56,7 @@ public class HtmlRetriever {
                 //If there is no pagination div, we know this is a list of results.
                 //Else this is our final result.
                 if(doc.select("div.pagination").isEmpty()) {
-                    return null;
+                    return url[2];
                 } else {
                     ArrayList weeks = HtmlParser.parseWeekPager(doc);
                     return weeks;
@@ -90,16 +90,17 @@ public class HtmlRetriever {
     }
 
     public void onWeekPagerRetrieveCompleted(Object obj) {
-        if(obj == null) {
+        if(obj instanceof String) {
             if(context instanceof MainActivity) {
                 if(!storage.getCurrentWeeks().isEmpty()) {
                     ((MainActivity) context).getToolbar().setSubtitle(storage.getCurrentWeeks().get(0).getOwner().getName());
                 }
                 ((MainActivity) context).getPager().setAdapter(null);
                 Intent i = new Intent(context, SearchActivity_.class);
+                i.putExtra(S.SEARCH_QUERY, (String) obj);
                 context.startActivity(i);
             } else if(context instanceof SearchActivity) {
-
+                storage.setSearchResults(new ArrayList<Result>());
             }
 
         } else if(obj instanceof ArrayList) {
@@ -107,6 +108,7 @@ public class HtmlRetriever {
 
             //an empty arraylist this means the result is bad.
             if(arrayList.isEmpty()) {
+                storage.setSearchResults(new ArrayList<Result>());
                 return;
             }
 
@@ -116,10 +118,13 @@ public class HtmlRetriever {
                 if(!storage.getCurrentWeeks().isEmpty()) {
                     if(!storage.getCurrentWeeks().get(0).getOwner().getName().equals(newWeeks.get(0).getOwner().getName())) {
                         storage.setCurrentWeeks(newWeeks);
+                    } else {
+                        //add the new weeks if they don't exist to currentWeeks.
                     }
                 } else {
                     storage.setCurrentWeeks(newWeeks);
                 }
+                if(context instanceof SearchActivity) ((SearchActivity) context).finish();
             } else if(arrayList.get(0) instanceof Result) {
                 ArrayList<Result> results = (ArrayList<Result>) obj;
                 //for now remove all courses, because we cannot handle them yet.

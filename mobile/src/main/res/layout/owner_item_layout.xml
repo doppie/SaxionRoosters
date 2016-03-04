@@ -38,7 +38,6 @@
         android:clickable="true"
         android:background="@color/main_color_grey_100"
         android:foreground="?android:attr/selectableItemBackground"
-        card_view:cardCornerRadius="0dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="6dp"

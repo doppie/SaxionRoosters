@@ -32,6 +32,7 @@ import nl.jelletenbrinke.saxionroosters.adapters.WeekPagerAdapter;
 import nl.jelletenbrinke.saxionroosters.extras.HtmlRetriever;
 import nl.jelletenbrinke.saxionroosters.extras.S;
 import nl.jelletenbrinke.saxionroosters.extras.Storage;
+import nl.jelletenbrinke.saxionroosters.extras.Tools;
 import nl.jelletenbrinke.saxionroosters.model.Result;
 import nl.jelletenbrinke.saxionroosters.model.Week;
 
@@ -97,8 +98,15 @@ public class MainActivity extends BaseActivity {
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUI();
+    }
+
     /* When called this updates all UI items that contain data.  */
     private void updateUI() {
+        Log.e("debug", "updateUI");
         if(!storage.getCurrentWeeks().isEmpty()) {
             toolbar.setSubtitle(storage.getCurrentWeeks().get(0).getOwner().getName());
         } else {
@@ -144,10 +152,7 @@ public class MainActivity extends BaseActivity {
 
                 TextView textView = (TextView) view.findViewById(R.id.textView_item_text);
                 String text = textView.getText() + "";
-
-                if (text.contains(" (")) {
-                    text = text.substring(0, text.indexOf(" ("));
-                }
+                text = Tools.parseQueryFromName(text);
 
                 getWeekPager(text.toString());
             }
@@ -194,12 +199,12 @@ public class MainActivity extends BaseActivity {
     }
 
     @Background
-    protected void getWeekPager(String name) {
+    protected void getWeekPager(String query) {
         preExecute();
 
         HtmlRetriever retriever = new HtmlRetriever(this);
-        String url = S.URL + S.QUERY + name;
-        Object object = retriever.retrieveHtml(url, S.PARSE_WEEK_PAGER);
+        String url = S.URL + S.QUERY + query;
+        Object object = retriever.retrieveHtml(url, S.PARSE_WEEK_PAGER, query);
 
         postExecute(retriever, object);
     }
