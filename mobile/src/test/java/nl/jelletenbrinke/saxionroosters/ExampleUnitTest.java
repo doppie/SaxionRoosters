@@ -1,4 +1,4 @@
-package nl.jelletenbrinke.saxionroosters;
+package dev.saxionroosters;
 
 import org.junit.Test;
 

@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:background="@android:color/transparent"
         android:fitsSystemWindows="true"
-        tools:context="nl.jelletenbrinke.saxionroosters.activities.MainActivity">
+        tools:context="dev.saxionroosters.activities.MainActivity">
 
 
         <android.support.design.widget.AppBarLayout
@@ -50,7 +50,7 @@
 
     </android.support.design.widget.CoordinatorLayout>
 
-    <nl.jelletenbrinke.saxionroosters.views.JelleTextView
+    <dev.saxionroosters.views.JelleTextView
         android:id="@+id/noResultsView"
         style="@style/TextViewAppearance.Body2"
         android:layout_width="match_parent"

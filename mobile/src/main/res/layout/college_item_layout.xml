@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <nl.jelletenbrinke.saxionroosters.views.JelleTextView
+    <dev.saxionroosters.views.JelleTextView
         android:id="@+id/dateText"
         style="@style/TextViewAppearance.Body3"
         android:layout_width="match_parent"
@@ -68,7 +68,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent">
 
-                    <nl.jelletenbrinke.saxionroosters.views.JelleTextView
+                    <dev.saxionroosters.views.JelleTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -79,7 +79,7 @@
 
                 </LinearLayout>
 
-                <nl.jelletenbrinke.saxionroosters.views.JelleTextView
+                <dev.saxionroosters.views.JelleTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
@@ -94,7 +94,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"/>
 
-            <nl.jelletenbrinke.saxionroosters.views.JelleTextView
+            <dev.saxionroosters.views.JelleTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -111,7 +111,7 @@
 
         </android.support.v7.widget.CardView>
 
-    <nl.jelletenbrinke.saxionroosters.views.JelleTextView
+    <dev.saxionroosters.views.JelleTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/freeDayView"
