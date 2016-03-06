@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#a7cd3a</color>
+    <!-- Saxion Official colors -->
+   <color name="colorPrimary">#a7cd3a</color>
     <color name="colorPrimaryDark">#008539</color>
+
+    <!-- Material Generated colorPrimaryDark from Saxion Official colorPrimary -->
+    <!--<color name="colorPrimary">#a7cd3a</color>
+    <color name="colorPrimaryDark">#82a129</color> -->
+
+    <!-- Material picked colors -->
+    <!--<color name="colorPrimary">#8bc34a</color>
+    <color name="colorPrimaryDark">#689f38</color> -->
     <color name="colorAccent">#fff</color>
 
     <color name="main_color_500">@color/material_blue_500</color>
