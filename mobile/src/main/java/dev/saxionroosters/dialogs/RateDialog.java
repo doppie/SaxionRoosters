@@ -18,8 +18,8 @@ import dev.saxionroosters.extras.AnalyticsTrackers;
  */
 public class RateDialog extends DialogFragment {
 
-    private final static int DAYS_UNTIL_PROMPT = 0;
-    private final static int LAUNCHES_UNTIL_PROMPT = 0;
+    private final static int DAYS_UNTIL_PROMPT = 7;
+    private final static int LAUNCHES_UNTIL_PROMPT = 7;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
