@@ -21,6 +21,18 @@
     <string name="dialog_info_title">Over Saxion Roosters</string>
     <string name="dialog_info_message">Saxion Roosters is een app ontwikkeld door studenten van Saxion Hogeschool. Saxion Hogeschool is niet betrokken geweest bij de ontwikkeling van deze app. \n\nDe source code van deze app is publiekelijk beschikbaar op GitHub onder de open source licentie BSD. Wil je bijdragen aan de app, dat kan! Maak een issue aan op GitHub of neem even contact op per mail. \n\nCredits: \n\u25CF Jelle ten Brinke \n\u25CF Hugo Olthof</string>
 
+
+    <!-- Feedback dialog -->
+    <string name="feedback">Feedback</string>
+    <string name="feedback_message">Wat vind je van de app? Laat het ons weten!</string>
+    <string name="feedback_dislike_message">Help ons door je mening te laten horen!</string>
+    <string name="like">Like</string>
+    <string name="contact">Contact</string>
+    <string name="dislike">Dislike</string>
+    <string name="support_request_message">We horen het graag als je vragen, problemen of suggesties hebt!</string>
+    <string name="support_email">saxionroosters.dev@gmail.com</string>
+    <string name="support">Support</string>
+
     <string name="action_info">Info</string>
     <string name="action_settings">Instellingen</string>
     <string name="action_search">Zoeken</string>

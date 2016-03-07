@@ -28,6 +28,8 @@ import java.util.ArrayList;
 import dev.saxionroosters.R;
 import dev.saxionroosters.adapters.WeekPagerAdapter;
 import dev.saxionroosters.dialogs.AboutDialog;
+import dev.saxionroosters.dialogs.FeedbackDialog;
+import dev.saxionroosters.extras.AnalyticsTrackers;
 import dev.saxionroosters.extras.HtmlRetriever;
 import dev.saxionroosters.extras.S;
 import dev.saxionroosters.extras.Tools;
@@ -64,6 +66,9 @@ public class MainActivity extends BaseActivity {
 
     @AfterViews
     protected void init() {
+        AnalyticsTrackers.initialize(this);
+        new FeedbackDialog().app_launched(this);
+
         initUI();
     }
 

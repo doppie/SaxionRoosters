@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
 import java.util.HashMap;
@@ -72,5 +73,14 @@ public final class AnalyticsTrackers {
         }
 
         return mTrackers.get(target);
+    }
+
+
+    public static synchronized void sendEvent(String cat, String action) {
+        if(sInstance == null) {
+            Log.e("debug", "Hmm no analytics instance, can't send event");
+            return;
+        }
+        sInstance.get(Target.APP).send(new HitBuilders.EventBuilder().setCategory(cat).setAction(action).build());
     }
 }
