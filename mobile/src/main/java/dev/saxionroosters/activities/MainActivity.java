@@ -29,6 +29,7 @@ import dev.saxionroosters.R;
 import dev.saxionroosters.adapters.WeekPagerAdapter;
 import dev.saxionroosters.dialogs.AboutDialog;
 import dev.saxionroosters.dialogs.FeedbackDialog;
+import dev.saxionroosters.dialogs.RateDialog;
 import dev.saxionroosters.extras.AnalyticsTrackers;
 import dev.saxionroosters.extras.HtmlRetriever;
 import dev.saxionroosters.extras.S;
@@ -68,7 +69,7 @@ public class MainActivity extends BaseActivity {
     protected void init() {
         AnalyticsTrackers.initialize(this);
         new FeedbackDialog().app_launched(this);
-
+        new RateDialog().app_launched(this);
         initUI();
     }
 

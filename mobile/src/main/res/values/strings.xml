@@ -33,6 +33,14 @@
     <string name="support_email">saxionroosters.dev@gmail.com</string>
     <string name="support">Support</string>
 
+    <!-- Rate dialog -->
+    <string name="rate_my_app">Ben je blij met de app? Waardeer ons in de Play Store! \n\nWist je al dat iedereen aan deze app kan meewerken en bijdragen? Check onze GitHub pagina of neem contact met ons op. </string>
+    <string name="rate">Rate</string>
+    <string name="ofcourse">Ja, graag</string>
+    <string name="no_thanks">Nee</string>
+    <string name="maybe_later">Later</string>
+    <string name="contact_me">Contact</string>
+
     <string name="action_info">Info</string>
     <string name="action_settings">Instellingen</string>
     <string name="action_search">Zoeken</string>

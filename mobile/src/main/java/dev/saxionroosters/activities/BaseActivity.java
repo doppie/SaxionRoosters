@@ -21,11 +21,4 @@ public class BaseActivity extends AppCompatActivity {
     @Bean
     protected Storage storage;
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        AnalyticsTrackers.initialize(this);
-    }
-
 }
