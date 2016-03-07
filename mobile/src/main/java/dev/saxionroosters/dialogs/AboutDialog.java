@@ -2,6 +2,7 @@ package dev.saxionroosters.dialogs;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -41,7 +42,18 @@ public class AboutDialog extends DialogFragment {
             }
         });
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(getString(R.string.dialog_info_title));
+
+        String title = getString(R.string.dialog_info_title);
+
+        try {
+            //Add the version name of the app.
+            String versionName = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0).versionName;
+            title += " (v" + versionName + ")";
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        builder.setTitle(title);
+        builder.setIcon(getResources().getDrawable(R.drawable.information_outline));
         builder.setView(view);
 
         return builder.create();
