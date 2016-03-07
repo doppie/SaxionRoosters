@@ -3,6 +3,8 @@ package dev.saxionroosters.extras;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.Tracker;
 import com.google.gson.Gson;
 
 import org.androidannotations.annotations.Bean;
@@ -11,6 +13,7 @@ import org.androidannotations.annotations.RootContext;
 
 import java.util.ArrayList;
 
+import dev.saxionroosters.R;
 import dev.saxionroosters.model.Result;
 import dev.saxionroosters.model.Week;
 

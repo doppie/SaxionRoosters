@@ -1,7 +1,5 @@
 package dev.saxionroosters.extras;
 
-import android.util.Log;
-
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -105,9 +103,7 @@ public class HtmlParser {
                             Elements as = span.select("a");
                             for(Element a : as) {
                                 String href = a.attr("href");
-                                Log.e("debug", "href1: " + href);
                                 if(href != null && href.contains("/teacher:") && href.contains("/week")) href = href.substring(href.indexOf("teacher:"), href.indexOf("/week"));
-                                Log.e("debug", "href: " + href);
 
                                 Teacher teacher = new Teacher(a.text(), href);
                                 teachers.add(teacher);

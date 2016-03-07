@@ -7,6 +7,7 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 
 import dev.saxionroosters.R;
+import dev.saxionroosters.extras.AnalyticsTrackers;
 import dev.saxionroosters.extras.Storage;
 
 /**
@@ -19,5 +20,12 @@ public class BaseActivity extends AppCompatActivity {
 
     @Bean
     protected Storage storage;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        AnalyticsTrackers.initialize(this);
+    }
 
 }
