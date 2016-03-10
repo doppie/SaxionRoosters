@@ -11,8 +11,7 @@ import java.util.ArrayList;
 import dev.saxionroosters.R;
 import dev.saxionroosters.extras.S;
 import dev.saxionroosters.fragments.CollegeDetailsFragment;
-import dev.saxionroosters.fragments.WeekFragment;
-import dev.saxionroosters.fragments.WeekFragment_;
+import dev.saxionroosters.fragments.CollegeDetailsFragment_;
 import dev.saxionroosters.model.Week;
 
 /**
@@ -31,7 +30,7 @@ public class CollegeDetailsPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        CollegeDetailsFragment fragment = new CollegeDetailsFragment();
+        CollegeDetailsFragment fragment = new CollegeDetailsFragment_();
 //        WeekFragment fragment = new WeekFragment_();
 //        Bundle args = new Bundle();
 //        args.putString(week.getOwner().getTypeName(), week.getOwner().getName());

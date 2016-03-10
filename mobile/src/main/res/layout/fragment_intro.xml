@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/colorPrimary"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/imageView2"
+        android:src="@drawable/intro_home"
+        android:adjustViewBounds="true"
+        android:layout_gravity="center_horizontal" />
+
+
+    <dev.saxionroosters.views.JelleTextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="48dp"
+        android:layout_marginRight="48dp"
+        style="@style/TextViewAppearance.Title1"
+        android:textColor="#fff"
+        android:layout_gravity="center"
+        android:text="Altijd je rooster bij de hand."
+        android:layout_marginTop="24dp" />
+
+    <dev.saxionroosters.views.JelleTextView
+        android:id="@+id/subtitleText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="48dp"
+        android:layout_marginRight="48dp"
+        style="@style/TextViewAppearance.Body2"
+        android:textColor="#fff"
+        android:gravity="center_horizontal"
+        android:text="Gemaakt door studenten vóór studenten en leraren van het Saxion."
+        android:layout_marginBottom="16dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"/>
+
+</LinearLayout>

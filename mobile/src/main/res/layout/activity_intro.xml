@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Doorgaan"
+        android:id="@+id/skipButton"
+        android:textColor="#fff"
+        android:background="?attr/selectableItemBackground"
+        android:layout_marginRight="16dp"
+        android:layout_gravity="right" />
+
+    <dev.saxionroosters.views.JelleTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        style="@style/TextViewAppearance.Headline3"
+        android:layout_gravity="center"
+        android:text="Saxion Roosters"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"/>
+
+    <android.support.v4.view.ViewPager android:id="@+id/pager"
+        android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+    <com.viewpagerindicator.CirclePageIndicator
+        android:id="@+id/pagerIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="8dp"
+        app:radius="4dp"
+        app:pageColor="#60FFFFFF"
+        app:fillColor="#FFFFFF"
+        app:strokeWidth="0dp"
+
+        android:layout_marginBottom="24dp"/>
+
+</LinearLayout>

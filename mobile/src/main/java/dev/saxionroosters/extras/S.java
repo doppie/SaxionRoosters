@@ -26,6 +26,7 @@ public class S {
     //used for arguments in dialog
     public static final String MESSAGE = "message";
     public static final String TITLE = "title";
+    public static final String SUBTITLE = "subtitle";
 
     //used for asynctask
     public static final String PARSE_WEEK_PAGER = "parse_week_pager";

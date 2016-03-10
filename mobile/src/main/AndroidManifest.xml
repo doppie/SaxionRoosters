@@ -28,7 +28,10 @@
 
         <activity
             android:name=".activities.CollegeDetailActivity_"
-            android:label="College details"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".activities.IntroActivity_"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data

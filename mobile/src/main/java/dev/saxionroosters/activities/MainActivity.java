@@ -2,6 +2,7 @@ package dev.saxionroosters.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.Toolbar;
@@ -67,10 +68,21 @@ public class MainActivity extends BaseActivity {
 
     @AfterViews
     protected void init() {
+
         AnalyticsTrackers.initialize(this);
         new FeedbackDialog().app_launched(this);
         new RateDialog().app_launched(this);
         initUI();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        //TODO: only call when you want to show update intro or first time intro.
+        //Can only be called in oncreate or later, @afterViews is too early and will create errors.
+        Intent i = new Intent(MainActivity.this, IntroActivity_.class);
+        startActivity(i);
     }
 
     /* Initializes the UI, called from @onCreate */
