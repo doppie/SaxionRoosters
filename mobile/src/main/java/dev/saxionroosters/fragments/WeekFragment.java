@@ -3,6 +3,7 @@ package dev.saxionroosters.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,10 +22,13 @@ import org.androidannotations.annotations.ViewById;
 import java.util.ArrayList;
 
 import dev.saxionroosters.R;
+import dev.saxionroosters.activities.CollegeDetailActivity;
+import dev.saxionroosters.activities.CollegeDetailActivity_;
 import dev.saxionroosters.adapters.CollegeAdapter;
 import dev.saxionroosters.extras.HtmlRetriever;
 import dev.saxionroosters.extras.S;
 import dev.saxionroosters.extras.Storage;
+import dev.saxionroosters.extras.Tools;
 import dev.saxionroosters.interfaces.ClickListener;
 import dev.saxionroosters.model.College;
 import dev.saxionroosters.model.Day;
@@ -162,12 +166,17 @@ public class WeekFragment extends Fragment implements ClickListener {
     }
 
     @Override
-    public void onClick(int position, boolean isLongClick) {
+    public void onClick(View v, int position, boolean isLongClick) {
         College college = listAdapter.getData().get(position);
 
         //Do something here!!
         if (isLongClick) {
 
+        } else {
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), v, "collegeCardView");
+            Intent i = new Intent(getActivity(), CollegeDetailActivity_.class);
+            if(Tools.isLollipop()) startActivity(i, options.toBundle());
+            else startActivity(i);
         }
     }
 

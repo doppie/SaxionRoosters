@@ -1,5 +1,7 @@
 package dev.saxionroosters.extras;
 
+import android.os.Build;
+
 import com.lapism.searchview.adapter.SearchItem;
 
 import java.util.ArrayList;
@@ -14,6 +16,14 @@ import dev.saxionroosters.model.Teacher;
  * Created by Doppie on 4-3-2016.
  */
 public class Tools {
+
+
+    public static boolean isLollipop() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            return true;
+        }
+        return false;
+    }
 
     public static String parseQueryFromName(String name) {
         if (name.contains(" (")) {

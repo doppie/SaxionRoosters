@@ -40,7 +40,8 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="4dp"
-        android:layout_marginTop="4dp">
+        android:layout_marginTop="4dp"
+        android:transitionName="collegeCardView">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -118,6 +119,7 @@
         android:text="@string/free_day"
         style="@style/TextViewAppearance.Body2"
         android:layout_gravity="center_horizontal"
+        android:visibility="gone"
         android:layout_margin="16dp" />
 
 </LinearLayout>

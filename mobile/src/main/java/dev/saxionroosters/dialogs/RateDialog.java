@@ -32,6 +32,12 @@ public class RateDialog extends DialogFragment {
             public void onClick(DialogInterface dialog, int which) {
                 getActivity().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=dev.saxionroosters")));
 
+                SharedPreferences prefs = getActivity().getSharedPreferences("ratedialog", 0);
+                SharedPreferences.Editor editor = prefs.edit();
+                if (editor != null) {
+                    editor.putBoolean("dontshowagain", true);
+                    editor.commit();
+                }
                 AnalyticsTrackers.sendEvent("Rate", "Yes");
                 dialog.dismiss();
             }

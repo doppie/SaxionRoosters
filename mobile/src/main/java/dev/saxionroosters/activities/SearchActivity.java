@@ -196,7 +196,7 @@ public class SearchActivity extends BaseActivity implements ClickListener{
     }
 
     @Override
-    public void onClick(int position, boolean isLongClick) {
+    public void onClick(View v, int position, boolean isLongClick) {
         Owner item = ownerAdapter.getData().get(position);
         if(!isLongClick) {
             String name = Tools.parseQueryFromName(item.getName());

@@ -136,12 +136,12 @@ public class CollegeAdapter extends RecyclerView.Adapter<CollegeAdapter.ViewHold
 
         @Override
         public void onClick(View v) {
-            clickListener.onClick(getAdapterPosition(), false);
+            clickListener.onClick(v, getAdapterPosition(), false);
         }
 
         @Override
         public boolean onLongClick(View v) {
-            clickListener.onClick(getAdapterPosition(), true);
+            clickListener.onClick(v, getAdapterPosition(), true);
             return true;
         }
     }
