@@ -50,4 +50,5 @@ dependencies {
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'com.google.android.gms:play-services-analytics:8.4.0'
     compile 'com.github.JakeWharton:ViewPagerIndicator:2.4.1@aar'
+    compile 'com.android.support:support-v4:23.2.0'
 }

@@ -35,10 +35,12 @@ public class IntroPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 args.putString(S.TITLE, a.getString(R.string.intro_title_1));
                 args.putString(S.SUBTITLE, a.getString(R.string.intro_subtitle_1));
+                args.putString(S.IMAGE_NAME, "intro_home");
                 break;
             case 1:
                 args.putString(S.TITLE, a.getString(R.string.intro_title_2));
                 args.putString(S.SUBTITLE, a.getString(R.string.intro_subtitle_2));
+                args.putString(S.IMAGE_NAME, "intro_github");
                 break;
 //            case 2:
 //                args.putString(S.TITLE, a.getString(R.string.intro_title_3));

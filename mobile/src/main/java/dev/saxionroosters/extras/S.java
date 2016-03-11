@@ -23,10 +23,11 @@ public class S {
     public static final String SEARCH_QUERY = "search_query";
     public static final String UNKNOWN = "unknown";
 
-    //used for arguments in dialog
+    //used for arguments in dialogs and fragments
     public static final String MESSAGE = "message";
     public static final String TITLE = "title";
     public static final String SUBTITLE = "subtitle";
+    public static final String IMAGE_NAME = "image_name";
 
     //used for asynctask
     public static final String PARSE_WEEK_PAGER = "parse_week_pager";
