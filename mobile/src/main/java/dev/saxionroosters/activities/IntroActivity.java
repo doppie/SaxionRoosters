@@ -1,5 +1,6 @@
 package dev.saxionroosters.activities;
 
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
@@ -44,6 +45,8 @@ public class IntroActivity extends BaseActivity {
         skipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent i = new Intent(IntroActivity.this, MainActivity_.class);
+                startActivity(i);
                 finish();
             }
         });

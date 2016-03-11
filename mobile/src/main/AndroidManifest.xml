@@ -32,6 +32,7 @@
 
         <activity
             android:name=".activities.IntroActivity_"
+            android:windowSoftInputMode="stateVisible|adjustPan"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data

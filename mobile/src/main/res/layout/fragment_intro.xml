@@ -23,7 +23,7 @@
         style="@style/TextViewAppearance.Title1"
         android:textColor="#fff"
         android:layout_gravity="center"
-        android:text="Altijd je rooster bij de hand."
+        android:text="@string/intro_title_1"
         android:layout_marginTop="24dp" />
 
     <dev.saxionroosters.views.JelleTextView
@@ -35,7 +35,7 @@
         style="@style/TextViewAppearance.Body2"
         android:textColor="#fff"
         android:gravity="center_horizontal"
-        android:text="Gemaakt door studenten vóór studenten en leraren van het Saxion."
+        android:text="@string/intro_subtitle_1"
         android:layout_marginBottom="16dp" />
 
     <View

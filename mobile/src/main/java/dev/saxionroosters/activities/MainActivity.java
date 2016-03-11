@@ -73,17 +73,9 @@ public class MainActivity extends BaseActivity {
         new FeedbackDialog().app_launched(this);
         new RateDialog().app_launched(this);
         initUI();
+        initStartupOwner();
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        //TODO: only call when you want to show update intro or first time intro.
-        //Can only be called in oncreate or later, @afterViews is too early and will create errors.
-        Intent i = new Intent(MainActivity.this, IntroActivity_.class);
-        startActivity(i);
-    }
 
     /* Initializes the UI, called from @onCreate */
     private void initUI() {
@@ -114,10 +106,30 @@ public class MainActivity extends BaseActivity {
         });
     }
 
+    private void initStartupOwner() {
+        String startupOwnerName = (String) storage.getObject(S.SETTING_STARTUP_OWNER);
+        if(startupOwnerName != null && !startupOwnerName.isEmpty()) {
+            getWeekPager(startupOwnerName);
+        }
+    }
+
     @Override
     public void onResume() {
         super.onResume();
+
+
+        showIntro();
         updateUI();
+    }
+
+    private void showIntro() {
+
+        if(storage.getObject(S.INTRO_COMPLETE) == null
+                || ((String) storage.getObject(S.INTRO_COMPLETE)).equals("")) {
+        //If the user has not seen the intro yet, we should show it to him
+            Intent i = new Intent(MainActivity.this, IntroActivity_.class);
+            startActivity(i);
+        }
     }
 
     /* When called this updates all UI items that contain data.  */

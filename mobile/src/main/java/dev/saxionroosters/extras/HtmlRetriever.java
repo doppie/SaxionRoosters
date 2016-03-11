@@ -13,10 +13,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import dev.saxionroosters.R;
+import dev.saxionroosters.activities.IntroActivity;
 import dev.saxionroosters.activities.MainActivity;
 import dev.saxionroosters.activities.SearchActivity;
 import dev.saxionroosters.activities.SearchActivity_;
 import dev.saxionroosters.dialogs.ErrorDialog;
+import dev.saxionroosters.fragments.IntroFragment;
+import dev.saxionroosters.model.Owner;
 import dev.saxionroosters.model.Result;
 import dev.saxionroosters.model.Week;
 
@@ -122,6 +125,13 @@ public class HtmlRetriever {
                     storage.setCurrentWeeks(newWeeks);
                 }
                 if(context instanceof SearchActivity) ((SearchActivity) context).finish();
+                else if(context instanceof IntroActivity) {
+
+                    Owner owner = ((Week) arrayList.get(0)).getOwner();
+                    storage.saveObject(S.SETTING_STARTUP_OWNER, Tools.getOwnerIdName(owner));
+                    storage.saveObject(S.INTRO_COMPLETE, "true");
+                    ((IntroActivity) context).finish();
+                }
             } else if(arrayList.get(0) instanceof Result) {
                 ArrayList<Result> results = (ArrayList<Result>) obj;
                 //for now remove all courses, because we cannot handle them yet.

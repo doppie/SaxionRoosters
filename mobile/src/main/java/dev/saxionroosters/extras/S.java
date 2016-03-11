@@ -33,5 +33,9 @@ public class S {
     public static final String PARSE_WEEK = "parse_week";
     public static final String PARSE_SEARCH_RESULTS = "parse_search_results";
 
+    //used for preferences
+    public static final String SETTING_STARTUP_OWNER = "startup_owner";
+    public static final String INTRO_COMPLETE = "intro_complete";
+
 
 }

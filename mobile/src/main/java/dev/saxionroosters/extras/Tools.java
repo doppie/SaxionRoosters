@@ -131,4 +131,11 @@ public class Tools {
 
         return owner.getName();
     }
+
+    public static String getOwnerIdName(Owner owner) {
+        if(owner instanceof Group) return ((Group) owner).getName();
+        if(owner instanceof Teacher) return ((Teacher) owner).getIdName();
+
+        return owner.getName();
+    }
 }

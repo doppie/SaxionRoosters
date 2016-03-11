@@ -1,7 +1,8 @@
-package dev.saxionroosters.activities;
+package dev.saxionroosters.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,8 +20,9 @@ import android.widget.TextView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
-import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
@@ -28,20 +30,22 @@ import java.util.ArrayList;
 
 import dev.saxionroosters.R;
 import dev.saxionroosters.adapters.OwnerAdapter;
+import dev.saxionroosters.adapters.SimpleOwnerAdapter;
 import dev.saxionroosters.extras.HtmlRetriever;
 import dev.saxionroosters.extras.S;
+import dev.saxionroosters.extras.Storage;
 import dev.saxionroosters.extras.Tools;
 import dev.saxionroosters.interfaces.ClickListener;
 import dev.saxionroosters.model.Owner;
 
-@EActivity(R.layout.activity_search)
-public class SearchActivity extends BaseActivity implements ClickListener{
+/**
+ * Created by Doppie on 11-3-2016.
+ */
+@EFragment(R.layout.fragment_setup)
+public class SetupFragment extends Fragment implements ClickListener {
 
     @ViewById(R.id.searchText)
     protected EditText searchText;
-
-    @ViewById(R.id.backButton)
-    protected ImageView backButton;
 
     @ViewById(R.id.clearTextButton)
     protected ImageView clearTextButton;
@@ -49,25 +53,26 @@ public class SearchActivity extends BaseActivity implements ClickListener{
     @ViewById(R.id.list)
     protected RecyclerView list;
 
-    @ViewById(R.id.noResultsView)
-    protected TextView noResultsView;
+    @ViewById(R.id.titleText)
+    protected TextView titleText;
+
+    @ViewById(R.id.subtitleText)
+    protected TextView subtitleText;
 
     @ViewById(R.id.loadingLayout)
     protected RelativeLayout loadingLayout;
 
     //adapters
-    private OwnerAdapter ownerAdapter;
+    private SimpleOwnerAdapter simpleOwnerAdapter;
     private RecyclerView.LayoutManager listLayoutManager;
 
+    private ProgressDialog dialog;
+
+    @Bean
+    protected Storage storage;
 
     @AfterViews
     protected void init() {
-        backButton.setVisibility(View.VISIBLE);
-        String searchQuery = getIntent().getStringExtra(S.SEARCH_QUERY);
-        if(searchQuery != null && !searchQuery.isEmpty()) {
-            searchText.setText(searchQuery);
-            clearTextButton.setVisibility(View.VISIBLE);
-        }
 
         searchText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -101,12 +106,12 @@ public class SearchActivity extends BaseActivity implements ClickListener{
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
 
                     String query = v.getText().toString();
-                    if(query != null && query.length() > 1) getSearchResults(query);
+                    if (query != null && query.length() > 1) getSearchResults(query);
 
                     //Try to close the keyboard :)
-                    View view = SearchActivity.this.getCurrentFocus();
+                    View view = getActivity().getCurrentFocus();
                     if (view != null) {
-                        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                     }
 
@@ -118,14 +123,13 @@ public class SearchActivity extends BaseActivity implements ClickListener{
 
         //fixed size always true: important for performance!
         list.setHasFixedSize(true);
-        listLayoutManager = new LinearLayoutManager(this);
+        listLayoutManager = new LinearLayoutManager(getActivity());
         list.setLayoutManager(listLayoutManager);
 
         //This one is used whenever an item is removed or added to the adapter
         //It animates the item nicely :)
         list.setItemAnimator(new DefaultItemAnimator());
 
-        updateUI();
     }
 
     @UiThread
@@ -136,25 +140,27 @@ public class SearchActivity extends BaseActivity implements ClickListener{
 
         //Adding our results to ownerAdapter
         if(storage.getSearchResults() != null && !storage.getSearchResults().isEmpty()) {
-            searchResults = Tools.getResultsForOwnerAdapter(storage.getSearchResults(), true);
-            noResultsView.setVisibility(View.GONE);
+            searchResults = Tools.getResultsForOwnerAdapter(storage.getSearchResults(), false);
+            titleText.setVisibility(View.GONE);
+            subtitleText.setVisibility(View.GONE);
             list.setVisibility(View.VISIBLE);
             loadingLayout.setVisibility(View.GONE);
         } else {
-            noResultsView.setVisibility(View.VISIBLE);
+            titleText.setVisibility(View.VISIBLE);
+            subtitleText.setVisibility(View.VISIBLE);
             list.setVisibility(View.GONE);
             loadingLayout.setVisibility(View.GONE);
         }
         list.setAdapter(null);
-        ownerAdapter = new OwnerAdapter(searchResults, this);
-        list.setAdapter(ownerAdapter);
+        simpleOwnerAdapter = new SimpleOwnerAdapter(searchResults, this);
+        list.setAdapter(simpleOwnerAdapter);
     }
 
     @Background
     protected void getWeekPager(String query) {
         preExecute(true);
 
-        HtmlRetriever retriever = new HtmlRetriever(this);
+        HtmlRetriever retriever = new HtmlRetriever(getActivity());
         String url = S.URL + S.QUERY + query;
         Object object = retriever.retrieveHtml(url, S.PARSE_WEEK_PAGER, query);
 
@@ -166,7 +172,7 @@ public class SearchActivity extends BaseActivity implements ClickListener{
         preExecute(false);
 
 
-        HtmlRetriever retriever = new HtmlRetriever(this);
+        HtmlRetriever retriever = new HtmlRetriever(getActivity());
         String url = S.URL + S.QUERY + query;
         Object object = retriever.retrieveHtml(url, S.PARSE_SEARCH_RESULTS, query);
 
@@ -177,6 +183,7 @@ public class SearchActivity extends BaseActivity implements ClickListener{
     protected void postExecute(HtmlRetriever retriever, Object object) {
         retriever.onWeekPagerRetrieveCompleted(object);
         updateUI();
+
         if(dialog != null && dialog.isShowing()) {
             dialog.dismiss();
         }
@@ -188,9 +195,10 @@ public class SearchActivity extends BaseActivity implements ClickListener{
         if(!dialogStyle) {
             loadingLayout.setVisibility(View.VISIBLE);
             list.setVisibility(View.GONE);
-            noResultsView.setVisibility(View.GONE);
+            titleText.setVisibility(View.GONE);
+            subtitleText.setVisibility(View.GONE);
         } else {
-            dialog = new ProgressDialog(this);
+            dialog = new ProgressDialog(getActivity());
             this.dialog.setMessage(getString(R.string.loading));
             this.dialog.show();
         }
@@ -198,16 +206,11 @@ public class SearchActivity extends BaseActivity implements ClickListener{
 
     @Override
     public void onClick(View v, int position, boolean isLongClick) {
-        Owner item = ownerAdapter.getData().get(position);
+        Owner item = simpleOwnerAdapter.getData().get(position);
         if(!isLongClick) {
             String name = Tools.parseQueryFromName(item.getName());
             getWeekPager(name);
         }
-    }
-
-    @Click(R.id.backButton)
-    void backButtonClicked() {
-        super.onBackPressed();
     }
 
     @Click(R.id.clearTextButton)
@@ -218,4 +221,5 @@ public class SearchActivity extends BaseActivity implements ClickListener{
             clearTextButton.setVisibility(View.INVISIBLE);
         }
     }
+
 }

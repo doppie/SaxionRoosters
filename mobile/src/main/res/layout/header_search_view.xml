@@ -42,6 +42,7 @@
                     android:layout_width="@dimen/search_icon"
                     android:layout_height="@dimen/search_icon"
                     android:tint="@color/material_grey_600"
+                    android:visibility="gone"
                     android:src="@drawable/search_ic_arrow_back_black_24dp"
                     android:contentDescription="@string/search_cont_desc" />
 

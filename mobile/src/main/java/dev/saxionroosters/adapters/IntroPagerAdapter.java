@@ -11,6 +11,8 @@ import dev.saxionroosters.R;
 import dev.saxionroosters.extras.S;
 import dev.saxionroosters.fragments.IntroFragment;
 import dev.saxionroosters.fragments.IntroFragment_;
+import dev.saxionroosters.fragments.SetupFragment;
+import dev.saxionroosters.fragments.SetupFragment_;
 
 /**
  * Created by Doppie on 10-3-2016.
@@ -27,7 +29,7 @@ public class IntroPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        IntroFragment fragment = new IntroFragment_();
+        Fragment fragment = new IntroFragment_();
         Bundle args = new Bundle();
         switch (position) {
             case 0:
@@ -38,9 +40,12 @@ public class IntroPagerAdapter extends FragmentPagerAdapter {
                 args.putString(S.TITLE, a.getString(R.string.intro_title_2));
                 args.putString(S.SUBTITLE, a.getString(R.string.intro_subtitle_2));
                 break;
+//            case 2:
+//                args.putString(S.TITLE, a.getString(R.string.intro_title_3));
+//                args.putString(S.SUBTITLE, a.getString(R.string.intro_subtitle_3));
+//                break;
             case 2:
-                args.putString(S.TITLE, a.getString(R.string.intro_title_3));
-                args.putString(S.SUBTITLE, a.getString(R.string.intro_subtitle_3));
+                fragment = new SetupFragment_();
                 break;
         }
 
