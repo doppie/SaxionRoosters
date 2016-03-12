@@ -1,9 +1,11 @@
 package dev.saxionroosters.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Doppie on 22-2-2016.
  */
-public class Teacher extends Owner {
+public class Teacher extends Owner implements Serializable {
 
     private String idName;
 

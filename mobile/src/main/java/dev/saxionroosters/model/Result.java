@@ -1,9 +1,11 @@
 package dev.saxionroosters.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Doppie on 25-2-2016.
  */
-public class Result {
+public class Result implements Serializable {
 
     private String abbrevation;
     private String name;

@@ -1,11 +1,12 @@
 package dev.saxionroosters.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Doppie on 24-2-2016.
  */
-public class Week {
+public class Week implements Serializable {
 
     private ArrayList<Day> days;
     private String name;

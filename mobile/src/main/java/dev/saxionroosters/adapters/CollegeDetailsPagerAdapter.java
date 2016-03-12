@@ -12,6 +12,9 @@ import dev.saxionroosters.R;
 import dev.saxionroosters.extras.S;
 import dev.saxionroosters.fragments.CollegeDetailsFragment;
 import dev.saxionroosters.fragments.CollegeDetailsFragment_;
+import dev.saxionroosters.fragments.CollegeLocationFragment;
+import dev.saxionroosters.fragments.CollegeLocationFragment_;
+import dev.saxionroosters.model.College;
 import dev.saxionroosters.model.Week;
 
 /**
@@ -20,24 +23,26 @@ import dev.saxionroosters.model.Week;
  */
 public class CollegeDetailsPagerAdapter extends FragmentStatePagerAdapter {
 
+    private College college;
 
-
-    public CollegeDetailsPagerAdapter(FragmentManager fm) {
+    public CollegeDetailsPagerAdapter(FragmentManager fm, College college) {
         super(fm);
-
+        this.college = college;
     }
 
     @Override
     public Fragment getItem(int position) {
-
-        CollegeDetailsFragment fragment = new CollegeDetailsFragment_();
-//        WeekFragment fragment = new WeekFragment_();
-//        Bundle args = new Bundle();
-//        args.putString(week.getOwner().getTypeName(), week.getOwner().getName());
-//        args.putString(S.WEEK_ID, week.getId());
-//        fragment.setArguments(args);
-
-        return fragment;
+        if(position == 0) {
+            CollegeDetailsFragment fragment = new CollegeDetailsFragment_();
+            Bundle args = new Bundle();
+            args.putSerializable("college", college);
+            fragment.setArguments(args);
+            return fragment;
+        }
+        else {
+            CollegeLocationFragment fragment = new CollegeLocationFragment_();
+            return fragment;
+        }
     }
 
 

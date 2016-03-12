@@ -1,9 +1,11 @@
 package dev.saxionroosters.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Doppie on 22-2-2016.
  */
-public class Group extends Owner {
+public class Group extends Owner implements Serializable {
 
     private String courseName;
 

@@ -175,6 +175,7 @@ public class WeekFragment extends Fragment implements ClickListener {
         } else {
             ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), v, "collegeCardView");
             Intent i = new Intent(getActivity(), CollegeDetailActivity_.class);
+            i.putExtra("college", college);
             if(Tools.isLollipop()) startActivity(i, options.toBundle());
             else startActivity(i);
         }

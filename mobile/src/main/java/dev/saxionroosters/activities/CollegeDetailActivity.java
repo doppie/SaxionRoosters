@@ -1,8 +1,10 @@
 package dev.saxionroosters.activities;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
 import org.androidannotations.annotations.AfterViews;
@@ -12,6 +14,8 @@ import org.androidannotations.annotations.ViewById;
 import dev.saxionroosters.R;
 import dev.saxionroosters.adapters.CollegeDetailsPagerAdapter;
 import dev.saxionroosters.extras.Tools;
+import dev.saxionroosters.model.College;
+import dev.saxionroosters.views.JelleTextView;
 
 /**
  * Created by Doppie on 10-3-2016.
@@ -29,6 +33,15 @@ public class CollegeDetailActivity extends BaseActivity {
     @ViewById(R.id.container)
     protected ViewPager pager;
 
+    @ViewById(R.id.nameText)
+    protected JelleTextView nameText;
+
+    @ViewById(R.id.timeText)
+    protected JelleTextView timeText;
+
+    @ViewById(R.id.locationText)
+    protected JelleTextView locationText;
+
     //adapters
     private CollegeDetailsPagerAdapter pagerAdapter;
 
@@ -45,7 +58,18 @@ public class CollegeDetailActivity extends BaseActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         toolbar.setTitle("College details");
 
-        pagerAdapter = new CollegeDetailsPagerAdapter(getSupportFragmentManager());
+        Intent i = getIntent();
+        College college = null;
+        if(i != null) {
+            college = (College) i.getSerializableExtra("college");
+            if(college != null) {
+                nameText.setText(college.getName());
+                timeText.setText(college.getTime());
+                locationText.setText(college.getLocation());
+            }
+        }
+
+        pagerAdapter = new CollegeDetailsPagerAdapter(getSupportFragmentManager(), college);
         pager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(pager);
     }

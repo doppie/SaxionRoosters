@@ -1,11 +1,12 @@
 package dev.saxionroosters.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Doppie on 22-2-2016.
  */
-public class Day {
+public class Day implements Serializable {
 
     private String date;
     private ArrayList<College> colleges;

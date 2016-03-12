@@ -13,14 +13,16 @@
     <string name="free_day">Niets op de planning</string>
     <string name="no_results">Geen zoek resultaten.</string>
     <string name="search_hint">Zoeken op groep of docent</string>
+    <string name="teacher_text">Docent:</string>
+    <string name="teachers_text">Docenten:</string>
+    <string name="no_teachers">Geen begeleiding</string>
 
     <!-- Dialog texts -->
     <string name="error_title_no_internet">Geen internetverbinding</string>
     <string name="error_message_no_internet">Probeer het later opnieuw. Neem contact op met de ontwikkelaars als het probleem blijft bestaan</string>
 
     <string name="dialog_info_title">Over Saxion Roosters</string>
-    <string name="dialog_info_message">Saxion Roosters is een app ontwikkeld door studenten van Saxion Hogeschool. Saxion Hogeschool is niet betrokken geweest bij de ontwikkeling van deze app. \n\nDe source code van deze app is publiekelijk beschikbaar op GitHub onder de open source licentie BSD. Wil je bijdragen aan de app, dat kan! Maak een issue aan op GitHub of neem even contact op per mail. \n\nCredits: \n\u25CF Jelle ten Brinke \n\u25CF Hugo Olthof</string>
-
+    <string name="dialog_info_message">Saxion Roosters is een app ontwikkeld door studenten van Saxion Hogeschool. Saxion Hogeschool is niet betrokken geweest bij de ontwikkeling van deze app. \n\nDe source code van deze app is publiekelijk beschikbaar op GitHub onder de open source licentie BSD. Wil je bijdragen aan de app? Dat kan! Maak een issue aan op GitHub of neem even contact op per mail. \n\nCredits: \n\u25CF Jelle ten Brinke \n\u25CF Hugo Olthof</string>
 
     <!-- Feedback dialog -->
     <string name="feedback">Feedback</string>
@@ -43,11 +45,11 @@
 
     <!-- Intro texts -->
     <string name="intro_title_1">Altijd je rooster bij de hand</string>
-    <string name="intro_subtitle_1">Super eenvoudig, altijd je rooster bij de hand. Gemaakt met \u2665 door studenten, vóór studenten &amp; docenten van het Saxion.</string>
+    <string name="intro_subtitle_1">Super eenvoudig, altijd je rooster bij de hand. Gemaakt met \u2665 dóór studenten, vóór studenten &amp; docenten van het Saxion.</string>
     <string name="intro_title_2">Community</string>
-    <string name="intro_subtitle_2">Designers, ontwikkelaars, creatieve denkers en doeners schaart u! Community gericht &amp; opensource code, jij bepaalt de volgende stap van deze app.</string>
+    <string name="intro_subtitle_2">Designers, ontwikkelaars, creatieve denkers en doeners schaart u! Community gericht &amp; opensource code, jij bepaalt de volgende stap van deze app!</string>
     <string name="intro_title_3">Nooit meer te laat</string>
-    <string name="intro_subtitle_3">Notificaties helpen je bij het op tijd komen voor een college. Stel ze in per college. Krijg vlak van te voren een reminder, zo kom je nooit meer te laat(toch?!).</string>
+    <string name="intro_subtitle_3">Notificaties helpen je bij het op tijd komen voor een college. Stel ze in per college en krijg vlak van te voren een reminder. Zo kom je nooit meer te laat (toch?!).</string>
     <string name="intro_title_4">Selectief</string>
     <string name="intro_subtitle_4">Geen overvolle Google Calendar meer. Niet elk college is voor jou interessant. Daarom kan je colleges selectief importeren in Google Calendar.</string>
 

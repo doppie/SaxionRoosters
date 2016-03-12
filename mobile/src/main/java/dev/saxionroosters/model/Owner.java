@@ -1,11 +1,13 @@
 package dev.saxionroosters.model;
 
+import java.io.Serializable;
+
 import dev.saxionroosters.extras.S;
 
 /**
  * Created by Doppie on 26-2-2016.
  */
-public class Owner {
+public class Owner implements Serializable {
 
     public static enum OwnerType { GROUP, TEACHER, COURSE, ACADEMY }
 
