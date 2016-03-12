@@ -195,6 +195,7 @@ public class MainActivity extends BaseActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
+            SettingsActivity_.intent(MainActivity.this).start();
             return true;
         } else if(id == R.id.action_search) {
             searchView.show(true);

@@ -21,10 +21,10 @@
         <activity
             android:name=".activities.SearchActivity_"
             android:label="@string/title_activity_search"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.BaseActivity_"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".activities.CollegeDetailActivity_"
@@ -33,6 +33,9 @@
         <activity
             android:name=".activities.IntroActivity_"
             android:windowSoftInputMode="stateVisible|adjustPan|stateAlwaysHidden"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.SettingsActivity_"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data

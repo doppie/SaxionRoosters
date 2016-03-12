@@ -56,7 +56,7 @@ public class CollegeDetailActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        toolbar.setTitle("College details");
+        toolbar.setSubtitle("Les details");
 
         Intent i = getIntent();
         College college = null;

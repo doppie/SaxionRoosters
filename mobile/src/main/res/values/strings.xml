@@ -16,6 +16,7 @@
     <string name="teacher_text">Docent:</string>
     <string name="teachers_text">Docenten:</string>
     <string name="no_teachers">Geen begeleiding</string>
+    <string name="change_class">Wijzig klas:</string>
 
     <!-- Dialog texts -->
     <string name="error_title_no_internet">Geen internetverbinding</string>
