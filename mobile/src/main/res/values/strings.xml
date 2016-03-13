@@ -57,6 +57,7 @@
     <string name="action_info">Info</string>
     <string name="action_settings">Instellingen</string>
     <string name="action_search">Zoeken</string>
+    <string name="action_intro">Introductie</string>
     <string name="title_activity_search">SearchActivity</string>
 
     <string name="error_intro_select_startup_owner">Selecteer eerst je groep of docent om door te gaan.</string>

@@ -203,6 +203,9 @@ public class MainActivity extends BaseActivity {
         } else if(id == R.id.action_info) {
             AboutDialog dialog = new AboutDialog();
             dialog.show(getSupportFragmentManager(), "dialog");
+        } else if(id == R.id.action_intro) {
+            Intent i = new Intent(MainActivity.this, IntroActivity_.class);
+            startActivity(i);
         }
 
         return super.onOptionsItemSelected(item);
