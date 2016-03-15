@@ -18,7 +18,7 @@ We will use GitHub to track issues and feature requests. So please share your id
 
 ## GitHub Managers
 * Jelle ten Brinke ([@doppie](https://github.com/doppie/))
-* Hugo Olthof ([@HugoOltHof](https://github.com/hugoolthof/))
+* Hugo Olthof ([@HugoOlthof](https://github.com/hugoolthof/))
 
 Want to join us as a GitHub manager? Contact Jelle ten Brinke ([@doppie](https://github.com/doppie/))
 
