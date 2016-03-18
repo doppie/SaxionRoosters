@@ -95,7 +95,7 @@ public class CollegeAdapter extends RecyclerView.Adapter<CollegeAdapter.ViewHold
 
             holder.nameText.setText(college.getName());
             holder.timeText.setText(college.getTime());
-            holder.locationText.setText(college.getLocation());
+            holder.locationText.setText(college.getVerticalLocation());
 
 
         } else {

@@ -42,6 +42,7 @@ public class HtmlParser {
             String collegeName = null;
             String location = null;
             String collegeType = null;
+            String date = S.UNKNOWN;
             ArrayList<Teacher> teachers = new ArrayList<>();
 
             Elements tableRows = table.select("tr");
@@ -69,7 +70,8 @@ public class HtmlParser {
 
                         //save the current college and reset vars
                         if (times != null) {
-                            College college = new College(collegeName, collegeType, times, location, teachers);
+                            date = (currentDay != null) ? currentDay.getDate() : S.UNKNOWN;
+                            College college = new College(collegeName, collegeType, times, date, location, teachers);
                             currentDay.getColleges().add(college);
 
                             collegeName = null;
@@ -105,8 +107,10 @@ public class HtmlParser {
                                 String href = a.attr("href");
                                 if(href != null && href.contains("/teacher:") && href.contains("/week")) href = href.substring(href.indexOf("teacher:"), href.indexOf("/week"));
 
-                                Teacher teacher = new Teacher(a.text(), href);
-                                teachers.add(teacher);
+                                if(!a.text().isEmpty()) {
+                                    Teacher teacher = new Teacher(a.text(), href);
+                                    teachers.add(teacher);
+                                }
                             }
 
 
@@ -126,7 +130,7 @@ public class HtmlParser {
             }
             //add the last unclosed college
             if (times != null) {
-                College college = new College(collegeName, collegeType, times, location, teachers);
+                College college = new College(collegeName, collegeType, times, date, location, teachers);
                 currentDay.getColleges().add(college);
             }
         }

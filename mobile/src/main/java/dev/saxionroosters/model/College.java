@@ -17,13 +17,14 @@ public class College implements Serializable {
     private String date;
     private boolean showFreeDay = false;
 
-    public College(String name, String type, String time, String location, ArrayList<Teacher> teachers) {
+    public College(String name, String type, String time, String date, String location, ArrayList<Teacher> teachers) {
         this.name = name;
         this.type = type;
         this.time = time;
         this.location = location;
+        this.date = date;
         //Make sure every location has its own line by adding \n to every whitespace, looks much better.
-        if(this.location != null) this.location = this.location.replaceAll("\\s+", "\n");
+//        if(this.location != null) this.location = this.location.replaceAll("\\s+", "\n");
         this.teachers = teachers;
     }
 
@@ -45,6 +46,10 @@ public class College implements Serializable {
 
     public String getLocation() {
         return location;
+    }
+
+    public String getVerticalLocation() {
+        return location.replaceAll("\\s+", "\n");
     }
 
     public String getName() {

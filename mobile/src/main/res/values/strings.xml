@@ -17,6 +17,11 @@
     <string name="teachers_text">Docenten:</string>
     <string name="no_teachers">Geen begeleiding</string>
     <string name="change_class">Wijzig klas:</string>
+    <string name="teachers">Docent(en)</string>
+    <string name="time">Tijd</string>
+    <string name="location">Locatie</string>
+    <string name="time_and_location">Tijd &amp; Locatie</string>
+    <string name="description">Beschrijving</string>
 
     <!-- Dialog texts -->
     <string name="error_title_no_internet">Geen internetverbinding</string>
@@ -59,6 +64,10 @@
     <string name="action_search">Zoeken</string>
     <string name="action_intro">Introductie</string>
     <string name="title_activity_search">SearchActivity</string>
+
+    <string name="activity_college_details_subtitle">College details</string>
+
+    <string name="no_teacher_available">Geen docent aanwezig.</string>
 
     <string name="error_intro_select_startup_owner">Selecteer eerst je groep of docent om door te gaan.</string>
 </resources>

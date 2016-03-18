@@ -27,8 +27,8 @@ public class CollegeDetailActivity extends BaseActivity {
     @ViewById(R.id.toolbar)
     protected Toolbar toolbar;
 
-    @ViewById(R.id.tabs)
-    protected TabLayout tabLayout;
+//    @ViewById(R.id.tabs)
+//    protected TabLayout tabLayout;
 
     @ViewById(R.id.container)
     protected ViewPager pager;
@@ -56,7 +56,7 @@ public class CollegeDetailActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        toolbar.setSubtitle("Les details");
+        toolbar.setSubtitle(getString(R.string.activity_college_details_subtitle));
 
         Intent i = getIntent();
         College college = null;
@@ -65,13 +65,13 @@ public class CollegeDetailActivity extends BaseActivity {
             if(college != null) {
                 nameText.setText(college.getName());
                 timeText.setText(college.getTime());
-                locationText.setText(college.getLocation());
+                locationText.setText(college.getVerticalLocation());
             }
         }
 
         pagerAdapter = new CollegeDetailsPagerAdapter(getSupportFragmentManager(), college);
         pager.setAdapter(pagerAdapter);
-        tabLayout.setupWithViewPager(pager);
+//        tabLayout.setupWithViewPager(pager);
     }
 
     @Override
