@@ -133,7 +133,9 @@ public class MainActivity extends BaseActivity {
     }
 
     /* When called this updates all UI items that contain data.  */
-    private void updateUI() {
+    @Override
+    @UiThread
+    public void updateUI() {
         Log.e("debug", "updateUI");
 
         //Update the titlebar

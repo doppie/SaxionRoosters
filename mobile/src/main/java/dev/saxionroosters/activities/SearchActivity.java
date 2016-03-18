@@ -129,7 +129,8 @@ public class SearchActivity extends BaseActivity implements ClickListener{
     }
 
     @UiThread
-    protected void updateUI() {
+    @Override
+    public void updateUI() {
         Log.e("debug", "updateUI");
 
         ArrayList<Owner> searchResults = new ArrayList<>();

@@ -48,6 +48,7 @@ public class IntroPagerAdapter extends FragmentPagerAdapter {
 //                break;
             case 2:
                 fragment = new SetupFragment_();
+                args.putString(S.VIEW_TYPE, S.FRAGMENT);
                 break;
         }
 

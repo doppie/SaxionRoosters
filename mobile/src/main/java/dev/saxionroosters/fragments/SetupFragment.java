@@ -1,8 +1,17 @@
 package dev.saxionroosters.fragments;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +19,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -29,6 +39,7 @@ import org.androidannotations.annotations.ViewById;
 import java.util.ArrayList;
 
 import dev.saxionroosters.R;
+import dev.saxionroosters.activities.BaseActivity;
 import dev.saxionroosters.adapters.OwnerAdapter;
 import dev.saxionroosters.adapters.SimpleOwnerAdapter;
 import dev.saxionroosters.extras.HtmlRetriever;
@@ -42,7 +53,7 @@ import dev.saxionroosters.model.Owner;
  * Created by Doppie on 11-3-2016.
  */
 @EFragment(R.layout.fragment_setup)
-public class SetupFragment extends Fragment implements ClickListener {
+public class SetupFragment extends DialogFragment implements ClickListener {
 
     @ViewById(R.id.searchText)
     protected EditText searchText;
@@ -71,8 +82,12 @@ public class SetupFragment extends Fragment implements ClickListener {
     @Bean
     protected Storage storage;
 
+    private String viewType = S.FRAGMENT;
+
     @AfterViews
     protected void init() {
+
+        viewType = getArguments().getString(S.VIEW_TYPE);
 
         searchText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -130,6 +145,8 @@ public class SetupFragment extends Fragment implements ClickListener {
         //It animates the item nicely :)
         list.setItemAnimator(new DefaultItemAnimator());
 
+        if(viewType.equals(S.DIALOG))   getDialog().setTitle("Selecteer rooster");
+
     }
 
     @UiThread
@@ -154,6 +171,20 @@ public class SetupFragment extends Fragment implements ClickListener {
         list.setAdapter(null);
         simpleOwnerAdapter = new SimpleOwnerAdapter(searchResults, this);
         list.setAdapter(simpleOwnerAdapter);
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+
+        ((BaseActivity) getActivity()).updateUI();
+    }
+
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        super.onCancel(dialog);
+
+        ((BaseActivity) getActivity()).updateUI();
     }
 
     @Background
@@ -209,7 +240,12 @@ public class SetupFragment extends Fragment implements ClickListener {
         Owner item = simpleOwnerAdapter.getData().get(position);
         if(!isLongClick) {
             String name = Tools.parseQueryFromName(item.getName());
-            getWeekPager(name);
+            if(viewType.equals(S.FRAGMENT)) {
+                getWeekPager(name);
+            } else if(viewType.equals(S.DIALOG)) {
+                storage.saveObject(S.SETTING_STARTUP_OWNER, name);
+                dismiss();
+            }
         }
     }
 

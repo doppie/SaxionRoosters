@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.UiThread;
 
 import dev.saxionroosters.R;
 import dev.saxionroosters.extras.AnalyticsTrackers;
@@ -20,5 +21,8 @@ public class BaseActivity extends AppCompatActivity {
 
     @Bean
     protected Storage storage;
+
+    @UiThread
+    public void updateUI() {}
 
 }

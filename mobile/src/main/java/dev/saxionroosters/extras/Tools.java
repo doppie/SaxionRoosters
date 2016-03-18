@@ -5,11 +5,13 @@ import android.os.Build;
 import com.lapism.searchview.adapter.SearchItem;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import dev.saxionroosters.R;
 import dev.saxionroosters.model.Group;
 import dev.saxionroosters.model.Owner;
 import dev.saxionroosters.model.Result;
+import dev.saxionroosters.model.Setting;
 import dev.saxionroosters.model.Teacher;
 
 /**

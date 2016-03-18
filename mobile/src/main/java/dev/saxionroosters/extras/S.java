@@ -22,6 +22,9 @@ public class S {
     public static final String PULL_RIGHT = "pull-right";
     public static final String SEARCH_QUERY = "search_query";
     public static final String UNKNOWN = "unknown";
+    public static final String VIEW_TYPE = "view_type";
+    public static final String FRAGMENT = "fragment";
+    public static final String DIALOG = "dialog";
 
     //used for arguments in dialogs and fragments
     public static final String MESSAGE = "message";

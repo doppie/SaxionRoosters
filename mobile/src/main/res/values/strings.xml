@@ -22,6 +22,7 @@
     <string name="location">Locatie</string>
     <string name="time_and_location">Tijd &amp; Locatie</string>
     <string name="description">Beschrijving</string>
+    <string name="settings">Instellingen</string>
 
     <!-- Dialog texts -->
     <string name="error_title_no_internet">Geen internetverbinding</string>
@@ -59,7 +60,7 @@
     <string name="intro_title_4">Selectief</string>
     <string name="intro_subtitle_4">Geen overvolle Google Calendar meer. Niet elk college is voor jou interessant. Daarom kan je colleges selectief importeren in Google Calendar.</string>
 
-    <string name="action_info">Info</string>
+    <string name="action_info">About/Contact</string>
     <string name="action_settings">Instellingen</string>
     <string name="action_search">Zoeken</string>
     <string name="action_intro">Introductie</string>
@@ -70,4 +71,8 @@
     <string name="no_teacher_available">Geen docent aanwezig.</string>
 
     <string name="error_intro_select_startup_owner">Selecteer eerst je groep of docent om door te gaan.</string>
+
+    <!-- Setting texts -->
+    <string name="setting_startup_owner_title">Rooster na opstarten</string>
+    <string name="setting_startup_owner_subtitle">Geen rooster geselecteerd.</string>
 </resources>
