@@ -19,7 +19,6 @@ import dev.saxionroosters.model.Teacher;
  */
 public class Tools {
 
-
     public static boolean isLollipop() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             return true;

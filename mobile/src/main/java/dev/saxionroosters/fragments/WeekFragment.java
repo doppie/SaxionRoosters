@@ -22,6 +22,7 @@ import org.androidannotations.annotations.ViewById;
 import java.util.ArrayList;
 
 import dev.saxionroosters.R;
+import dev.saxionroosters.activities.BaseActivity;
 import dev.saxionroosters.activities.CollegeDetailActivity;
 import dev.saxionroosters.activities.CollegeDetailActivity_;
 import dev.saxionroosters.adapters.CollegeAdapter;
@@ -171,7 +172,7 @@ public class WeekFragment extends Fragment implements ClickListener {
 
         //Do something here!!
         if (isLongClick) {
-
+            ((BaseActivity) getActivity()).scheduleNotification(((BaseActivity) getActivity()).getNotification("Test notification"), 5000);
         } else {
             ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), v, "collegeCardView");
             Intent i = new Intent(getActivity(), CollegeDetailActivity_.class);
