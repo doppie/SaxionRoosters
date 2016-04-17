@@ -1,78 +1,82 @@
 <resources>
     <string name="app_name">Saxion Roosters</string>
-
+    <string name="app_name_short">Roosters</string>
 
     <!-- items -->
-    <string name="item_removed">Item verwijderd</string>
+    <string name="item_removed">Item removed</string>
+
     <!-- Basic texts -->
-    <string name="ok">Oké</string>
-    <string name="cancel">Annuleren</string>
-    <string name="dismiss">Sluiten</string>
-    <string name="loading">Laden...</string>
-    <string name="this_week">Deze week</string>
-    <string name="free_day">Niets op de planning</string>
-    <string name="no_results">Geen zoek resultaten.</string>
-    <string name="search_hint">Zoeken op groep of docent</string>
-    <string name="teacher_text">Docent:</string>
-    <string name="teachers_text">Docenten:</string>
-    <string name="no_teachers">Geen begeleiding</string>
-    <string name="change_class">Wijzig klas:</string>
-    <string name="teachers">Docent(en)</string>
-    <string name="time">Tijd</string>
-    <string name="location">Locatie</string>
-    <string name="time_and_location">Tijd &amp; Locatie</string>
-    <string name="description">Beschrijving</string>
-    <string name="settings">Instellingen</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="dismiss">Close</string>
+    <string name="loading">Loading...</string>
+    <string name="this_week">This week</string>
+    <string name="free_day">Nothing to show</string>
+    <string name="no_results">No search results.</string>
+    <string name="search_hint">Search for group or teacher</string>
+    <string name="teacher_text">Teacher:</string>
+    <string name="teachers_text">Teachers:</string>
+    <string name="no_teachers">No supervision</string>
+    <string name="change_class">Change group:</string>
+    <string name="teachers">Teacher(s)</string>
+    <string name="time">Time</string>
+    <string name="location">Location</string>
+    <string name="time_and_location">Time &amp; Location</string>
+    <string name="description">Description</string>
+    <string name="settings">Settings</string>
 
     <!-- Dialog texts -->
-    <string name="error_title_no_internet">Geen internetverbinding</string>
-    <string name="error_message_no_internet">Probeer het later opnieuw. Neem contact op met de ontwikkelaars als het probleem blijft bestaan</string>
+    <string name="error_title_no_internet">No internet connection</string>
+    <string name="error_message_no_internet">Try again later. Please contact the developers if the problem persists.</string>
 
-    <string name="dialog_info_title">Over Saxion Roosters</string>
-    <string name="dialog_info_message">Saxion Roosters is een app ontwikkeld door studenten van Saxion Hogeschool. Saxion Hogeschool is niet betrokken geweest bij de ontwikkeling van deze app. \n\nDe source code van deze app is publiekelijk beschikbaar op GitHub onder de open source licentie BSD. Wil je bijdragen aan de app? Dat kan! Maak een issue aan op GitHub of neem even contact op per mail. \n\nCredits: \n\u25CF Jelle ten Brinke \n\u25CF Hugo Olthof</string>
+    <string name="dialog_info_title">About Saxion Roosters</string>
+    <string name="dialog_info_message">Saxion Roosters is an app developed by students of Saxion University of Applied Sciences. Saxion was not involved in the development of this app. \n\nThe source code is published on GitHub under the BSD open source license. You can contribute to this app! Create an issue/pull request on GitHub or contact us by mail. \n\nCredits: \n\u25CF Jelle ten Brinke \n\u25CF Hugo Olthof</string>
 
     <!-- Feedback dialog -->
     <string name="feedback">Feedback</string>
-    <string name="feedback_message">Wat vind je van de app? Laat het ons weten!</string>
-    <string name="feedback_dislike_message">Help ons door je mening te laten horen!</string>
+    <string name="feedback_message">What do you think of the app? Let us know and/or contribute yourself!</string>
+    <string name="feedback_dislike_message">We want to have your opinion!</string>
     <string name="like">Like</string>
     <string name="contact">Contact</string>
     <string name="dislike">Dislike</string>
-    <string name="support_request_message">We horen het graag als je vragen, problemen of suggesties hebt!</string>
+    <string name="support_request_message">We would like to hear from you!</string>
     <string name="support_email">saxionroosters.dev@gmail.com</string>
     <string name="support">Support</string>
 
     <!-- Rate dialog -->
-    <string name="rate_my_app">Ben je blij met de app? Waardeer ons in de Play Store! \n\nWist je al dat iedereen aan deze app kan meewerken en bijdragen? Check onze GitHub pagina of neem contact met ons op. </string>
+    <string name="rate_my_app">Are you happy with app? Help us by rating the app! \n\nDid you know that everyone is eligible to contribute to this app? Check out our GitHub(SaxionRoosters) or contact us by mail. </string>
     <string name="rate">Rate</string>
-    <string name="ofcourse">Ja, graag</string>
-    <string name="no_thanks">Nee</string>
+    <string name="ofcourse">Yes, ofcourse</string>
+    <string name="no_thanks">No</string>
     <string name="maybe_later">Later</string>
     <string name="contact_me">Contact</string>
 
     <!-- Intro texts -->
-    <string name="intro_title_1">Altijd je rooster bij de hand</string>
-    <string name="intro_subtitle_1">Super eenvoudig, altijd je rooster bij de hand. Gemaakt met \u2665 dóór studenten, vóór studenten &amp; docenten van het Saxion.</string>
+    <string name="intro_title_1">Your schedule at hand</string>
+    <string name="intro_subtitle_1">Super easy, always your schedule with you. Created with \u2665 by students, for students &amp; teachers of Saxion University of Applied Sciences.</string>
     <string name="intro_title_2">Community</string>
-    <string name="intro_subtitle_2">Designers, ontwikkelaars, creatieve denkers en doeners schaart u! Community gericht &amp; opensource code, jij bepaalt de volgende stap van deze app!</string>
+    <string name="intro_subtitle_2">Designers, developers, creative thinkers and do-ers gather yourselves!  Community oriented &amp; opensource code, you decide the next step of this app!</string>
     <string name="intro_title_3">Nooit meer te laat</string>
     <string name="intro_subtitle_3">Notificaties helpen je bij het op tijd komen voor een college. Stel ze in per college en krijg vlak van te voren een reminder. Zo kom je nooit meer te laat (toch?!).</string>
     <string name="intro_title_4">Selectief</string>
     <string name="intro_subtitle_4">Geen overvolle Google Calendar meer. Niet elk college is voor jou interessant. Daarom kan je colleges selectief importeren in Google Calendar.</string>
+    <string name="getting_started">Getting started</string>
+    <string name="setup_select_group_teacher">Select the schedule you want to see when you launch. Afterwards you can always change this through settings.</string>
 
     <string name="action_info">About/Contact</string>
-    <string name="action_settings">Instellingen</string>
-    <string name="action_search">Zoeken</string>
-    <string name="action_intro">Introductie</string>
-    <string name="title_activity_search">SearchActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_search">Search</string>
+    <string name="action_intro">Introduction</string>
 
     <string name="activity_college_details_subtitle">College details</string>
 
-    <string name="no_teacher_available">Geen docent aanwezig.</string>
+    <string name="no_teacher_available">No teachers scheduled.</string>
 
-    <string name="error_intro_select_startup_owner">Selecteer eerst je groep of docent om door te gaan.</string>
+    <string name="error_intro_select_startup_owner">First select/search your group or teacher to continue.</string>
 
     <!-- Setting texts -->
-    <string name="setting_startup_owner_title">Rooster na opstarten</string>
-    <string name="setting_startup_owner_subtitle">Geen rooster geselecteerd.</string>
+    <string name="setting_startup_owner_title">Schedule after launch</string>
+    <string name="setting_startup_owner_subtitle">No schedule selected.</string>
+
+
 </resources>

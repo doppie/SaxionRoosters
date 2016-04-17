@@ -35,7 +35,7 @@ public class CollegeDetailsPagerAdapter extends FragmentStatePagerAdapter {
         if(position == 0) {
             CollegeDetailsFragment fragment = new CollegeDetailsFragment_();
             Bundle args = new Bundle();
-            args.putSerializable("college", college);
+            args.putSerializable(S.COLLEGE, college);
             fragment.setArguments(args);
             return fragment;
         }

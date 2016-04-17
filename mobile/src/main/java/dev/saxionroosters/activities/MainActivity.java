@@ -2,9 +2,12 @@ package dev.saxionroosters.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 
 import android.support.v4.view.ViewPager;
@@ -13,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
 import com.lapism.searchview.adapter.SearchAdapter;
 import com.lapism.searchview.adapter.SearchItem;
 import com.lapism.searchview.view.SearchCodes;
@@ -108,7 +112,7 @@ public class MainActivity extends BaseActivity {
 
     private void initStartupOwner() {
         String startupOwnerName = (String) storage.getObject(S.SETTING_STARTUP_OWNER);
-        if(startupOwnerName != null && !startupOwnerName.isEmpty()) {
+        if (startupOwnerName != null && !startupOwnerName.isEmpty()) {
             getWeekPager(startupOwnerName);
         }
     }
@@ -124,9 +128,9 @@ public class MainActivity extends BaseActivity {
 
     private void showIntro() {
 
-        if(storage.getObject(S.INTRO_COMPLETE) == null
+        if (storage.getObject(S.INTRO_COMPLETE) == null
                 || ((String) storage.getObject(S.INTRO_COMPLETE)).equals("")) {
-        //If the user has not seen the intro yet, we should show it to him
+            //If the user has not seen the intro yet, we should show it to him
             Intent i = new Intent(MainActivity.this, IntroActivity_.class);
             startActivity(i);
         }
@@ -139,14 +143,15 @@ public class MainActivity extends BaseActivity {
         Log.e("debug", "updateUI");
 
         //Update the titlebar
-        if(!storage.getCurrentWeeks().isEmpty()) toolbar.setSubtitle(Tools.getOwnerRepresentativeName(storage.getCurrentWeeks().get(0).getOwner()));
+        if (!storage.getCurrentWeeks().isEmpty())
+            toolbar.setSubtitle(Tools.getOwnerRepresentativeName(storage.getCurrentWeeks().get(0).getOwner()));
 
         //Check if the pager needs an update.
-        if(storage.getCurrentWeeks() != null) {
-            if(pagerAdapter != null && pagerAdapter.getCount() > 0 && !storage.getCurrentWeeks().isEmpty()) {
+        if (storage.getCurrentWeeks() != null) {
+            if (pagerAdapter != null && pagerAdapter.getCount() > 0 && !storage.getCurrentWeeks().isEmpty()) {
                 Owner oldOwner = pagerAdapter.getOwnerForWeeks();
                 Owner newOwner = storage.getCurrentWeeks().get(0).getOwner();
-                if(!oldOwner.equals(newOwner) && oldOwner != null) updatePager();
+                if (!oldOwner.equals(newOwner) && oldOwner != null) updatePager();
             } else {
                 updatePager();
             }
@@ -154,7 +159,8 @@ public class MainActivity extends BaseActivity {
 
         //Update the searchresults in the searchview.
         ArrayList<SearchItem> searchResults = new ArrayList<>();
-        if(storage.getSearchResults() != null) searchResults = Tools.getResultsForSearchView(storage.getSearchResults());
+        if (storage.getSearchResults() != null)
+            searchResults = Tools.getResultsForSearchView(storage.getSearchResults());
         searchAdapter = new SearchAdapter(this, new ArrayList<SearchItem>(), searchResults, SearchCodes.THEME_LIGHT);
         searchAdapter.setOnItemClickListener(new SearchAdapter.OnItemClickListener() {
             @Override
@@ -189,6 +195,13 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        //Make sure the icon color is white. Even on older devices.
+        MenuItem settings = menu.findItem(R.id.action_settings);
+        Drawable settingsIcon = ContextCompat.getDrawable(this, R.drawable.abc_ic_menu_overflow_material);
+        settingsIcon.setColorFilter(ContextCompat.getColor(this, R.color.cpb_white), PorterDuff.Mode.SRC_ATOP);
+        settings.setIcon(settingsIcon);
+
         return true;
     }
 
@@ -196,18 +209,21 @@ public class MainActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
-            SettingsActivity_.intent(MainActivity.this).start();
-            return true;
-        } else if(id == R.id.action_search) {
-            searchView.show(true);
-            return true;
-        } else if(id == R.id.action_info) {
-            AboutDialog dialog = new AboutDialog();
-            dialog.show(getSupportFragmentManager(), "dialog");
-        } else if(id == R.id.action_intro) {
-            Intent i = new Intent(MainActivity.this, IntroActivity_.class);
-            startActivity(i);
+        switch (id) {
+            case R.id.action_settings:
+                SettingsActivity_.intent(MainActivity.this).start();
+                return true;
+            case R.id.action_search:
+                searchView.show(true);
+                return true;
+            case R.id.action_info:
+                AboutDialog dialog = new AboutDialog();
+                dialog.show(getSupportFragmentManager(), "dialog");
+                return true;
+            case R.id.action_intro:
+                Intent i = new Intent(MainActivity.this, IntroActivity_.class);
+                startActivity(i);
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -250,7 +266,7 @@ public class MainActivity extends BaseActivity {
     protected void postExecute(HtmlRetriever retriever, Object object) {
         retriever.onWeekPagerRetrieveCompleted(object);
         updateUI();
-        if(dialog != null && dialog.isShowing()) {
+        if (dialog != null && dialog.isShowing()) {
             dialog.dismiss();
         }
     }

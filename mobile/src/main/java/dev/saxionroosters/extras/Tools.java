@@ -1,6 +1,7 @@
 package dev.saxionroosters.extras;
 
 import android.os.Build;
+import android.util.Log;
 
 import com.lapism.searchview.adapter.SearchItem;
 
@@ -18,6 +19,8 @@ import dev.saxionroosters.model.Teacher;
  * Created by Doppie on 4-3-2016.
  */
 public class Tools {
+
+    public static boolean logging = false;
 
     public static boolean isLollipop() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -138,5 +141,9 @@ public class Tools {
         if(owner instanceof Teacher) return ((Teacher) owner).getIdName();
 
         return owner.getName();
+    }
+
+    public static void log(String message) {
+        if(logging) Log.e("SaxionRoosters", message);
     }
 }

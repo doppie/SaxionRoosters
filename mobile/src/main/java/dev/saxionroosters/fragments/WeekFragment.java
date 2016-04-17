@@ -19,13 +19,16 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import dev.saxionroosters.R;
 import dev.saxionroosters.activities.BaseActivity;
 import dev.saxionroosters.activities.CollegeDetailActivity;
 import dev.saxionroosters.activities.CollegeDetailActivity_;
 import dev.saxionroosters.adapters.CollegeAdapter;
+import dev.saxionroosters.adapters.DatabaseAdapter;
 import dev.saxionroosters.extras.HtmlRetriever;
 import dev.saxionroosters.extras.S;
 import dev.saxionroosters.extras.Storage;
@@ -63,12 +66,6 @@ public class WeekFragment extends Fragment implements ClickListener {
 
     @Bean
     protected Storage storage;
-
-    @Override
-    public void onResume() {
-        super.onResume();
-//        updateUI();
-    }
 
     /* Initializes the UI after views are injected */
     @AfterViews
@@ -172,11 +169,13 @@ public class WeekFragment extends Fragment implements ClickListener {
 
         //Do something here!!
         if (isLongClick) {
-            ((BaseActivity) getActivity()).scheduleNotification(((BaseActivity) getActivity()).getNotification("Test notification"), 5000);
+//            boolean success = storage.addNotification(college.getName(), college.getDate(), new Date(System.currentTimeMillis() + 5000));
+//            if(success) ((BaseActivity) getActivity()).scheduleNotification(((BaseActivity) getActivity()).getNotification(""), 5000);
+//            else Tools.log("NOOO! Couldnt save notification in DB");
         } else {
             ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), v, "collegeCardView");
             Intent i = new Intent(getActivity(), CollegeDetailActivity_.class);
-            i.putExtra("college", college);
+            i.putExtra(S.COLLEGE, college);
             if(Tools.isLollipop()) startActivity(i, options.toBundle());
             else startActivity(i);
         }

@@ -76,13 +76,10 @@ public class SearchActivity extends BaseActivity implements ClickListener{
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Log.e("debug", "onTextChanged: " + s);
-            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
             @Override
             public void afterTextChanged(Editable s) {
-                Log.e("debug", "afterTextChanged: " + s.toString());
                 String query = s.toString();
                 if (query.length() > 0) {
                     clearTextButton.setVisibility(View.VISIBLE);
@@ -131,8 +128,6 @@ public class SearchActivity extends BaseActivity implements ClickListener{
     @UiThread
     @Override
     public void updateUI() {
-        Log.e("debug", "updateUI");
-
         ArrayList<Owner> searchResults = new ArrayList<>();
 
         //Adding our results to ownerAdapter

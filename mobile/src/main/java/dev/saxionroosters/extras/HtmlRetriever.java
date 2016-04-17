@@ -44,7 +44,7 @@ public class HtmlRetriever {
     }
 
     public Object retrieveHtml(String... url) {
-        Log.e("debug", "Request: " + url[0]);
+        Tools.log("Request: " + url[0]);
 
         try {
             //Get the document from the internet

@@ -1,7 +1,10 @@
 package dev.saxionroosters.activities;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -13,6 +16,7 @@ import org.androidannotations.annotations.ViewById;
 
 import dev.saxionroosters.R;
 import dev.saxionroosters.adapters.CollegeDetailsPagerAdapter;
+import dev.saxionroosters.extras.S;
 import dev.saxionroosters.extras.Tools;
 import dev.saxionroosters.model.College;
 import dev.saxionroosters.views.JelleTextView;
@@ -58,10 +62,15 @@ public class CollegeDetailActivity extends BaseActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         toolbar.setSubtitle(getString(R.string.activity_college_details_subtitle));
 
+        //ensure the backbutton is white on older devices aswell.
+        Drawable backButton = ContextCompat.getDrawable(this, R.drawable.abc_ic_ab_back_material);
+        backButton.setColorFilter(ContextCompat.getColor(this, R.color.cpb_white), PorterDuff.Mode.SRC_ATOP);
+        getSupportActionBar().setHomeAsUpIndicator(backButton);
+
         Intent i = getIntent();
         College college = null;
         if(i != null) {
-            college = (College) i.getSerializableExtra("college");
+            college = (College) i.getSerializableExtra(S.COLLEGE);
             if(college != null) {
                 nameText.setText(college.getName());
                 timeText.setText(college.getTime());
@@ -71,6 +80,7 @@ public class CollegeDetailActivity extends BaseActivity {
 
         pagerAdapter = new CollegeDetailsPagerAdapter(getSupportFragmentManager(), college);
         pager.setAdapter(pagerAdapter);
+        //commented out for now till we have more tabs to show.
 //        tabLayout.setupWithViewPager(pager);
     }
 

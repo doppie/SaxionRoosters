@@ -33,7 +33,7 @@ public final class AnalyticsTrackers {
 
     public static synchronized void initialize(Context context) {
         if (sInstance != null) {
-            Log.e("debug", "Analytics already initialized, unnecesary call(says Jelle)");
+            Tools.log("Analytics already initialized");
             return;
         }
 
@@ -78,7 +78,7 @@ public final class AnalyticsTrackers {
 
     public static synchronized void sendEvent(String cat, String action) {
         if(sInstance == null) {
-            Log.e("debug", "Hmm no analytics instance, can't send event");
+            Tools.log("Hmm no analytics instance, can't send event");
             return;
         }
         sInstance.get(Target.APP).send(new HitBuilders.EventBuilder().setCategory(cat).setAction(action).build());

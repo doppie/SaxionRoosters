@@ -11,10 +11,14 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import dev.saxionroosters.R;
+import dev.saxionroosters.adapters.DatabaseAdapter;
 import dev.saxionroosters.model.Result;
+import dev.saxionroosters.model.RoosterNotification;
 import dev.saxionroosters.model.Week;
 
 /**
@@ -28,6 +32,9 @@ public class Storage {
     //data
     private ArrayList<Week> currentWeeks;
     private ArrayList<Result> searchResults;
+    private ArrayList<RoosterNotification> notifications;
+
+    private DatabaseAdapter dbAdapter;
 
     @Bean
     static Storage instance;
@@ -49,6 +56,9 @@ public class Storage {
         this.context = ctx.getApplicationContext();
         currentWeeks = new ArrayList<>();
         searchResults = new ArrayList<>();
+        notifications = new ArrayList<>();
+        dbAdapter = DatabaseAdapter.getInstance(ctx);
+//        notifications.addAll(dbAdapter.getNotifications());
     }
 
     public <T> T getObject(Class<T> pojo) {
@@ -123,4 +133,25 @@ public class Storage {
         this.searchResults = searchResults;
     }
 
+
+    /**
+     * DATABASE CALLS BELOW
+     */
+    public boolean addNotification(String title, String subtitle, Date showDate) {
+        try {
+            int id = dbAdapter.addNotification(title, subtitle, showDate);
+            if(id > 0) {
+                notifications.add(new RoosterNotification(id, title, subtitle, showDate));
+                return true;
+            }
+        } catch (SQLException e) {
+            Tools.log(e.getMessage());
+        }
+
+        return false;
+    }
+
+    public void removeNotification(int notificationId) {
+
+    }
 }

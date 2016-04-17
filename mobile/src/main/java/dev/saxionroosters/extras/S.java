@@ -14,6 +14,7 @@ public class S {
     public static final String COURSE = "course";
     public static final String TEACHER = "teacher";
     public static final String ACADEMY = "academy";
+    public static final String COLLEGE = "college";
     public static final String WEEK_ID = "week";
     public static final String WEEK_NAME = "week_name";
     public static final String TIMES = "times";
@@ -25,6 +26,12 @@ public class S {
     public static final String VIEW_TYPE = "view_type";
     public static final String FRAGMENT = "fragment";
     public static final String DIALOG = "dialog";
+
+    //db columns & stuff
+    public static final String NOTIFICATION_ID="row_id";
+    public static final String CONTENT_TITLE = "content_title";
+    public static final String CONTENT_SUBTITLE = "content_subtitle";
+    public static final String SHOW_DATE = "show_date";
 
     //used for arguments in dialogs and fragments
     public static final String MESSAGE = "message";

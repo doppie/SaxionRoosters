@@ -1,7 +1,10 @@
 package dev.saxionroosters.activities;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,6 +48,11 @@ public class SettingsActivity extends BaseActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         toolbar.setSubtitle(getString(R.string.settings));
+
+        //ensure the backbutton is white on older devices aswell.
+        Drawable backButton = ContextCompat.getDrawable(this, R.drawable.abc_ic_ab_back_material);
+        backButton.setColorFilter(ContextCompat.getColor(this, R.color.cpb_white), PorterDuff.Mode.SRC_ATOP);
+        getSupportActionBar().setHomeAsUpIndicator(backButton);
 
         fillSettingsLayout(getSettings());
     }
