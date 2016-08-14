@@ -50,7 +50,7 @@ public class SettingsActivity extends BaseActivity {
         toolbar.setSubtitle(getString(R.string.settings));
 
         //ensure the backbutton is white on older devices aswell.
-        Drawable backButton = ContextCompat.getDrawable(this, R.drawable.abc_ic_ab_back_material);
+        Drawable backButton = ContextCompat.getDrawable(this, R.drawable.ic_arrow_back_black_24dp);
         backButton.setColorFilter(ContextCompat.getColor(this, R.color.cpb_white), PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(backButton);
 

@@ -20,7 +20,7 @@ import dev.saxionroosters.model.Teacher;
  */
 public class Tools {
 
-    public static boolean logging = false;
+    public static boolean logging = true;
 
     public static boolean isLollipop() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

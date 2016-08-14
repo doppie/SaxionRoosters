@@ -198,7 +198,7 @@ public class MainActivity extends BaseActivity {
 
         //Make sure the icon color is white. Even on older devices.
         MenuItem settings = menu.findItem(R.id.action_settings);
-        Drawable settingsIcon = ContextCompat.getDrawable(this, R.drawable.abc_ic_menu_overflow_material);
+        Drawable settingsIcon = ContextCompat.getDrawable(this, R.drawable.ic_arrow_back_black_24dp);
         settingsIcon.setColorFilter(ContextCompat.getColor(this, R.color.cpb_white), PorterDuff.Mode.SRC_ATOP);
         settings.setIcon(settingsIcon);
 
