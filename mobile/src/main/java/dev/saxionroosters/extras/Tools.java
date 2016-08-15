@@ -1,5 +1,6 @@
 package dev.saxionroosters.extras;
 
+import android.graphics.Point;
 import android.os.Build;
 import android.util.Log;
 
@@ -27,6 +28,10 @@ public class Tools {
             return true;
         }
         return false;
+    }
+
+    public static boolean calculatePointIsInsideOfPolygon(Point point, Polygon polygon) {
+        return polygon.contains(point);
     }
 
     public static String parseQueryFromName(String name) {
