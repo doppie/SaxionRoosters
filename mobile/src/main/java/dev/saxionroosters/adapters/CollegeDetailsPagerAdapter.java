@@ -1,21 +1,17 @@
 package dev.saxionroosters.adapters;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import java.util.ArrayList;
 
-import dev.saxionroosters.R;
 import dev.saxionroosters.extras.S;
 import dev.saxionroosters.fragments.CollegeDetailsFragment;
 import dev.saxionroosters.fragments.CollegeDetailsFragment_;
-import dev.saxionroosters.fragments.CollegeLocationFragment;
-import dev.saxionroosters.fragments.CollegeLocationFragment_;
+import dev.saxionroosters.fragments.MapsFragment;
+import dev.saxionroosters.fragments.MapsFragment_;
 import dev.saxionroosters.model.College;
-import dev.saxionroosters.model.Week;
 
 /**
  * Created by Doppie on 24-2-2016.
@@ -40,7 +36,7 @@ public class CollegeDetailsPagerAdapter extends FragmentStatePagerAdapter {
             return fragment;
         }
         else {
-            CollegeLocationFragment fragment = new CollegeLocationFragment_();
+            MapsFragment fragment = new MapsFragment_();
             return fragment;
         }
     }
@@ -48,7 +44,7 @@ public class CollegeDetailsPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 1;
+        return 2;
     }
 
     @Override
