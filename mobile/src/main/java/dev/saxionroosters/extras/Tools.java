@@ -4,7 +4,9 @@ import android.graphics.Point;
 import android.os.Build;
 import android.util.Log;
 
-import com.lapism.searchview.adapter.SearchItem;
+
+import com.google.android.gms.maps.model.Polygon;
+import com.lapism.searchview.SearchItem;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -30,9 +32,9 @@ public class Tools {
         return false;
     }
 
-    public static boolean calculatePointIsInsideOfPolygon(Point point, Polygon polygon) {
-        return polygon.contains(point);
-    }
+//    public static boolean calculatePointIsInsideOfPolygon(Point point, Polygon polygon) {
+//        return polygon.contains(point);
+//    }
 
     public static String parseQueryFromName(String name) {
         if (name.contains(" (")) {
@@ -111,9 +113,9 @@ public class Tools {
         for(Result result : results) {
             SearchItem item = null;
             if(result.getName() != null && !result.getName().isEmpty()) {
-                item = new SearchItem(result.getAbbrevation() + " (" + result.getName() + ")", R.drawable.magnify_grey);
+                item = new SearchItem(R.drawable.magnify_grey, result.getAbbrevation() + " (" + result.getName() + ")");
             } else if(result.getAbbrevation() != null) {
-                item = new SearchItem(result.getAbbrevation(), R.drawable.magnify_grey);
+                item = new SearchItem(R.drawable.magnify_grey, result.getAbbrevation());
             }
 
             Owner.OwnerType type = Tools.parseOwnerTypeFromString(result.getType());

@@ -17,10 +17,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.lapism.searchview.adapter.SearchAdapter;
-import com.lapism.searchview.adapter.SearchItem;
-import com.lapism.searchview.view.SearchCodes;
-import com.lapism.searchview.view.SearchView;
+
+import com.lapism.searchview.SearchAdapter;
+import com.lapism.searchview.SearchItem;
+import com.lapism.searchview.SearchView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
@@ -89,16 +89,20 @@ public class MainActivity extends BaseActivity {
         //Don't load all pages at once, only load one extra left and right of the current view.
         pager.setOffscreenPageLimit(1);
 
-//        searchView = (SearchView) findViewById(R.id.searchView);
-        searchView.setVersion(SearchCodes.VERSION_MENU_ITEM);
-        searchView.setStyle(SearchCodes.STYLE_MENU_ITEM_CLASSIC);
-        searchView.setTheme(SearchCodes.THEME_LIGHT);
+        //Update the searchresults in the searchview.
+        ArrayList<SearchItem> searchResults = new ArrayList<>();
+        if (storage.getSearchResults() != null)
+            searchResults = Tools.getResultsForSearchView(storage.getSearchResults());
+        searchAdapter = new SearchAdapter(this, searchResults);
+
+        searchView.setVersion(SearchView.VERSION_MENU_ITEM);
+        searchView.setTheme(SearchView.THEME_LIGHT, true);
         searchView.setAnimationDuration(300);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 getWeekPager(query);
-                searchView.hide(true);
+                searchView.close(true);
                 return false;
             }
 
@@ -161,11 +165,12 @@ public class MainActivity extends BaseActivity {
         ArrayList<SearchItem> searchResults = new ArrayList<>();
         if (storage.getSearchResults() != null)
             searchResults = Tools.getResultsForSearchView(storage.getSearchResults());
-        searchAdapter = new SearchAdapter(this, new ArrayList<SearchItem>(), searchResults, SearchCodes.THEME_LIGHT);
+
+        searchAdapter.setSuggestionsList(searchResults);
         searchAdapter.setOnItemClickListener(new SearchAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                searchView.hide(true);
+                searchView.close(true);
 
                 TextView textView = (TextView) view.findViewById(R.id.textView_item_text);
                 String text = textView.getText() + "";
@@ -214,7 +219,7 @@ public class MainActivity extends BaseActivity {
                 SettingsActivity_.intent(MainActivity.this).start();
                 return true;
             case R.id.action_search:
-                searchView.show(true);
+                searchView.open(true);
                 return true;
             case R.id.action_info:
                 AboutDialog dialog = new AboutDialog();
