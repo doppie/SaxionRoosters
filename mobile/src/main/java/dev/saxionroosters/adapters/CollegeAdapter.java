@@ -61,7 +61,7 @@ public class CollegeAdapter extends RecyclerView.Adapter<CollegeAdapter.ViewHold
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         //initialize the view
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.college_item_layout, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_college, parent, false);
         ViewHolder h = new ViewHolder(v, clickListener);
         h.cardView = (CardView) v.findViewById(R.id.card_view);
         h.nameText = (TextView) v.findViewById(R.id.nameText);

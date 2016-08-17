@@ -29,7 +29,6 @@
         android:layout_marginBottom="4dp" />
 
     <android.support.v7.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
         android:layout_gravity="center"
         android:layout_width="fill_parent"
@@ -75,6 +74,8 @@
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Paprika"
                         style="@style/TextViewAppearance.Body2"
+                        android:maxLines="1"
+                        android:ellipsize="end"
                         android:textSize="16sp"
                         android:id="@+id/nameText" />
 
@@ -103,6 +104,8 @@
                 android:id="@+id/locationText"
                 android:textSize="11sp"
                 style="@style/TextViewAppearance.Body2"
+                android:maxLines="3"
+                android:ellipsize="end"
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="16dp"
