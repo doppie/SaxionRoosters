@@ -11,6 +11,8 @@ Contributions we would love to see:
 * Tablet optimized UI
 * Error handling
 * Search functionality
+* API implementation
+* See Issues for more..
 
 
 ## Issues
@@ -23,11 +25,11 @@ We will use GitHub to track issues and feature requests. So please share your id
 Want to join us as a GitHub manager? Contact Jelle ten Brinke ([@doppie](https://github.com/doppie/))
 
 ## Contributing
-We would love to add your contributions to this app.
+How to contribute to this app:
 
 1. Fork the repo and create your branch from master.
 2. Add your own feature or bugfix.
-3. Share it with us :).
+3. Share a Pull request with us :)
 
 By contributing to Saxion Roosters, you agree that your contributions will be licensed under its BSD license.
 
