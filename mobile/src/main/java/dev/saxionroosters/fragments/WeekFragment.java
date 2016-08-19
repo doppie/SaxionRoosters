@@ -21,6 +21,7 @@ import org.androidannotations.annotations.ViewById;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import dev.saxionroosters.R;
@@ -95,6 +96,13 @@ public class WeekFragment extends Fragment implements ClickListener {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        Tools.log("onResume");
+        updateUI();
+    }
+
     /* When called this updates all UI items that contain data.  */
     private void updateUI() {
         //TODO: error handling plsss.
@@ -105,21 +113,43 @@ public class WeekFragment extends Fragment implements ClickListener {
         listAdapter.removeAll();
 
 
+
+        //get the current day
+        Calendar c = Calendar.getInstance();
+        int currentDay = c.get(Calendar.DAY_OF_WEEK)-1; //-1 because we compare to a list which starts at 0
+        int currentDayPosition = 0;
+
         //Add all colleges to the adapter
         final ArrayList<College> colleges = new ArrayList<>();
-        for (Day day : week.getDays()) {
+        for (int i = 0; i < week.getDays().size(); i++) {
+            Day day = week.getDays().get(i);
+
+            //if the currentDay is found we want to know the position
+            //of the date divider in the college list.
+            //we use this to scroll to the current day.
+            if(i == currentDay) currentDayPosition = colleges.size();
+
             //For every day add a "divider date" college object
             boolean showFreeDay = false;
             if(day.getColleges().isEmpty()) {
                 showFreeDay = true;
             }
+
             College dividerDate = new College(day.getDate(), showFreeDay);
             colleges.add(dividerDate);
 
             colleges.addAll(day.getColleges());
         }
         listAdapter.setData(colleges);
+
+
+        //make the list visible
         showList();
+
+        //after the list is shown we can scroll to the current day.
+        //subtract one item extra so we are sure the correct day is on the screen.
+        //fixes issue where the date divider is hidden under the toolbar.
+        list.getLayoutManager().scrollToPosition(currentDayPosition-1);
     }
 
     @Background
