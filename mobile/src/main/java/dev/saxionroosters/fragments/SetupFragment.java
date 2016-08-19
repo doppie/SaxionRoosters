@@ -145,7 +145,7 @@ public class SetupFragment extends DialogFragment implements ClickListener {
         //It animates the item nicely :)
         list.setItemAnimator(new DefaultItemAnimator());
 
-        if(viewType.equals(S.DIALOG))   getDialog().setTitle("Selecteer rooster");
+        if(viewType.equals(S.DIALOG))   getDialog().setTitle(getString(R.string.schedule_select));
 
     }
 

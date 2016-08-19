@@ -24,7 +24,12 @@
     <string name="time_and_location">Time &amp; Location</string>
     <string name="description">Description</string>
     <string name="settings">Settings</string>
+    <string name="schedule_select">Select schedule</string>
 
+
+    <string name="theme_visible_after_reset">The theme will be applied after you force reset the Application.</string>
+    <string name="theme_color">Theme color</string>
+    <string name="pick_theme">Pick a theme</string>
     <!-- Dialog texts -->
     <string name="error_title_no_internet">No internet connection</string>
     <string name="error_message_no_internet">Try again later. Please contact the developers if the problem persists.</string>
@@ -56,9 +61,9 @@
     <string name="intro_subtitle_1">Super easy, always your schedule with you. Created with \u2665 by students, for students &amp; teachers of Saxion University of Applied Sciences.</string>
     <string name="intro_title_2">Community</string>
     <string name="intro_subtitle_2">Designers, developers, creative thinkers and do-ers gather yourselves!  Community oriented &amp; opensource code, you decide the next step of this app!</string>
-    <string name="intro_title_3">Nooit meer te laat</string>
+    <string name="intro_title_3">Never too late</string>
     <string name="intro_subtitle_3">Notificaties helpen je bij het op tijd komen voor een college. Stel ze in per college en krijg vlak van te voren een reminder. Zo kom je nooit meer te laat (toch?!).</string>
-    <string name="intro_title_4">Selectief</string>
+    <string name="intro_title_4">Selective</string>
     <string name="intro_subtitle_4">Geen overvolle Google Calendar meer. Niet elk college is voor jou interessant. Daarom kan je colleges selectief importeren in Google Calendar.</string>
     <string name="getting_started">Getting started</string>
     <string name="setup_select_group_teacher">Select the schedule you want to see when you launch. Afterwards you can always change this through settings.</string>
@@ -78,6 +83,29 @@
     <string name="setting_startup_owner_title">Schedule after launch</string>
     <string name="setting_startup_owner_subtitle">No schedule selected.</string>
     <string name="title_activity_maps">Map</string>
+
+    <string-array name="theme_colors">
+        <item>Saxion Theme</item>
+        <item>Purple</item>
+        <item>Deep Purple</item>
+        <item>Red</item>
+        <item>Pink</item>
+        <item>Indigo</item>
+        <item>Blue</item>
+        <item>LightBlue</item>
+        <item>Cyan</item>
+        <item>Teal</item>
+        <item>Green</item>
+        <item>Light Green</item>
+        <item>Lime</item>
+        <item>Light Yellow</item>
+        <item>Yellow</item>
+        <item>Orange</item>
+        <item>Deep Orange</item>
+        <item>Grey</item>
+        <item>Blue Grey</item>
+        <item>Brown</item>
+    </string-array>
 
 
 </resources>

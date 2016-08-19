@@ -25,12 +25,14 @@
     <string name="description">Beschrijving</string>
     <string name="settings">Instellingen</string>
 
+    <string name="schedule_select">Selecteer rooster</string>
+
     <!-- Dialog texts -->
     <string name="error_title_no_internet">Geen internetverbinding</string>
     <string name="error_message_no_internet">Probeer het later opnieuw. Neem contact op met de ontwikkelaars als het probleem blijft bestaan</string>
 
     <string name="dialog_info_title">Over Saxion Roosters</string>
-    <string name="dialog_info_message">Saxion Roosters is een app ontwikkeld door studenten van Saxion Hogeschool. Saxion Hogeschool is niet betrokken geweest bij de ontwikkeling van deze app. \n\nDe source code van deze app is publiekelijk beschikbaar op GitHub onder de open source licentie BSD. Wil je bijdragen aan de app? Dat kan! Maak een issue aan op GitHub of neem even contact op per mail. \n\nCredits: \n\u25CF Jelle ten Brinke \n\u25CF Hugo Olthof</string>
+    <string name="dialog_info_message">Saxion Roosters is een app ontwikkeld door studenten van Saxion Hogeschool. Saxion Hogeschool is niet betrokken geweest bij de ontwikkeling van deze app. \n\nDe source code van deze app is publiekelijk beschikbaar op GitHub onder de open source licentie BSD. Help ook mee de app te verbeteren! Bekijk onze GitHub pagina of benader ons per mail. \n\nCredits: \n\u25CF Jelle ten Brinke \n\u25CF Hugo Olthof</string>
 
     <!-- Feedback dialog -->
     <string name="feedback">Feedback</string>
@@ -77,5 +79,9 @@
     <!-- Setting texts -->
     <string name="setting_startup_owner_title">Rooster na opstarten</string>
     <string name="setting_startup_owner_subtitle">Geen rooster geselecteerd.</string>
+    <string name="theme_color">Thema kleur</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="pick_theme">Kies een thema</string>
+    <string name="theme_visible_after_reset">Het thema wordt geactiveerd zodra je de app opnieuw hebt opgestart.</string>
 
 </resources>

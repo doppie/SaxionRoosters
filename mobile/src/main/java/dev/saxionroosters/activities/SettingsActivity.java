@@ -1,10 +1,12 @@
 package dev.saxionroosters.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,6 +26,7 @@ import java.util.ArrayList;
 
 import dev.saxionroosters.R;
 import dev.saxionroosters.extras.S;
+import dev.saxionroosters.extras.ThemeTools;
 import dev.saxionroosters.extras.Tools;
 import dev.saxionroosters.fragments.SetupFragment;
 import dev.saxionroosters.fragments.SetupFragment_;
@@ -43,6 +46,8 @@ public class SettingsActivity extends BaseActivity {
 
     @AfterViews
     protected void init() {
+        ThemeTools.onCreateSetTheme(this, (String) storage.getObject(S.SETTING_THEME_COLOR));
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -91,13 +96,27 @@ public class SettingsActivity extends BaseActivity {
     private void handleSettingsClick(String prefsId) {
         if(prefsId.equals(S.SETTING_STARTUP_OWNER)) {
             Intent i = new Intent(SettingsActivity.this, SearchActivity.class);
-//            startActivityForResult(i, S.SETTING_STARTUP_OWNER);
-
             SetupFragment dialog = new SetupFragment_();
             Bundle args = new Bundle();
             args.putString(S.VIEW_TYPE, S.DIALOG);
             dialog.setArguments(args);
             dialog.show(getSupportFragmentManager(), "dialog");
+
+        } else if(prefsId.equals(S.SETTING_THEME_COLOR)) {
+            final String[] themeColors = getResources().getStringArray(R.array.theme_colors);
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            builder.setTitle(getString(R.string.pick_theme));
+            builder.setItems(themeColors, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int item) {
+                    storage.saveObject(S.SETTING_THEME_COLOR, themeColors[item]);
+                    ThemeTools.activateTheme(SettingsActivity.this);
+                }
+            });
+            builder.show();
+
         }
     }
 
@@ -105,7 +124,7 @@ public class SettingsActivity extends BaseActivity {
     public ArrayList<Setting> getSettings() {
         ArrayList<Setting> settings = new ArrayList<>();
         settings.add(new Setting(getString(R.string.setting_startup_owner_title), (String) storage.getObject(S.SETTING_STARTUP_OWNER), false, S.SETTING_STARTUP_OWNER));
-
+        settings.add(new Setting(getString(R.string.theme_color), (String) storage.getObject(S.SETTING_THEME_COLOR), false, S.SETTING_THEME_COLOR));
         return settings;
     }
 

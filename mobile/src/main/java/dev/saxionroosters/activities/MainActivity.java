@@ -38,6 +38,7 @@ import dev.saxionroosters.dialogs.RateDialog;
 import dev.saxionroosters.extras.AnalyticsTrackers;
 import dev.saxionroosters.extras.HtmlRetriever;
 import dev.saxionroosters.extras.S;
+import dev.saxionroosters.extras.ThemeTools;
 import dev.saxionroosters.extras.Tools;
 import dev.saxionroosters.model.Owner;
 import dev.saxionroosters.model.Week;
@@ -69,10 +70,8 @@ public class MainActivity extends BaseActivity {
     private WeekPagerAdapter pagerAdapter;
     private SearchAdapter searchAdapter;
 
-
     @AfterViews
     protected void init() {
-
         AnalyticsTrackers.initialize(this);
         new FeedbackDialog().app_launched(this);
         new RateDialog().app_launched(this);
@@ -80,11 +79,9 @@ public class MainActivity extends BaseActivity {
         initStartupOwner();
     }
 
-
     /* Initializes the UI, called from @onCreate */
     private void initUI() {
         setSupportActionBar(toolbar);
-
 
         //Don't load all pages at once, only load one extra left and right of the current view.
         pager.setOffscreenPageLimit(1);

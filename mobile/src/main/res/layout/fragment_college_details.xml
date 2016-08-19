@@ -37,7 +37,7 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="16dp"
                         android:text="@string/description"
-                        android:textColor="@color/colorPrimaryDark" />
+                        android:textColor="?attr/colorPrimaryDark" />
 
                     <View
                         android:layout_width="match_parent"
@@ -83,7 +83,7 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="16dp"
                         android:text="@string/time_and_location"
-                        android:textColor="@color/colorPrimaryDark" />
+                        android:textColor="?attr/colorPrimaryDark" />
 
                     <View
                         android:layout_width="match_parent"
@@ -129,7 +129,7 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="16dp"
                         android:text="@string/teachers"
-                        android:textColor="@color/colorPrimaryDark" />
+                        android:textColor="?attr/colorPrimaryDark" />
 
                     <LinearLayout
                         android:id="@+id/docentLayout"

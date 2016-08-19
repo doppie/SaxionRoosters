@@ -67,7 +67,7 @@ public class Storage {
         return new Gson().fromJson(str, pojo);
     }
 
-    public Object getObject(String key) {
+    public String getObject(String key) {
         return getPreferences().getString(key, null);
     }
 
