@@ -49,5 +49,11 @@ public class S {
     public static final String SETTING_THEME_COLOR = "theme_color";
     public static final String INTRO_COMPLETE = "intro_complete";
 
+    //used for identifying college locations.
+    public static final String DEPARTMENT = "department";
+    public static final String FLOOR = "floor";
+    public static final String ROOM = "room";
+    public static final String COORDINATES = "coordinates";
+
 
 }

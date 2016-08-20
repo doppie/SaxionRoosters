@@ -83,5 +83,8 @@
     <string name="title_activity_maps">Map</string>
     <string name="pick_theme">Kies een thema</string>
     <string name="theme_visible_after_reset">Het thema wordt geactiveerd zodra je de app opnieuw hebt opgestart.</string>
+    <string name="floor">verdieping</string>
+    <string name="room">lokaal</string>
+    <string name="location_not_found">Locatie onbekend</string>
 
 </resources>

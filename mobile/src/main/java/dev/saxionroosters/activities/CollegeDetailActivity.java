@@ -31,8 +31,8 @@ public class CollegeDetailActivity extends BaseActivity {
     @ViewById(R.id.toolbar)
     protected Toolbar toolbar;
 
-    @ViewById(R.id.tabs)
-    protected TabLayout tabLayout;
+//    @ViewById(R.id.tabs)
+//    protected TabLayout tabLayout;
 
     @ViewById(R.id.container)
     protected ViewPager pager;
@@ -81,7 +81,7 @@ public class CollegeDetailActivity extends BaseActivity {
         pagerAdapter = new CollegeDetailsPagerAdapter(getSupportFragmentManager(), college);
         pager.setAdapter(pagerAdapter);
         //commented out for now till we have more tabs to show.
-        tabLayout.setupWithViewPager(pager);
+//        tabLayout.setupWithViewPager(pager);
     }
 
     @Override
