@@ -48,7 +48,7 @@
     <string name="contact">Contact</string>
     <string name="dislike">Dislike</string>
     <string name="support_request_message">We would like to hear from you!</string>
-    <string name="support_email">saxionroosters.dev@gmail.com</string>
+    <string name="support_email" translatable="false">saxionroosters.dev@gmail.com</string>
     <string name="support">Support</string>
 
     <!-- Rate dialog -->
@@ -70,6 +70,8 @@
     <string name="intro_subtitle_4">Geen overvolle Google Calendar meer. Niet elk college is voor jou interessant. Daarom kan je colleges selectief importeren in Google Calendar.</string>
     <string name="getting_started">Getting started</string>
     <string name="setup_select_group_teacher">Select the schedule you want to see when you launch. Afterwards you can always change this through settings.</string>
+    <string name="intro_title_5">Locations</string>
+    <string name="intro_subtitle_5">Lost? You can now also check your college location.</string>
 
     <string name="action_info">info</string>
     <string name="action_settings">settings</string>

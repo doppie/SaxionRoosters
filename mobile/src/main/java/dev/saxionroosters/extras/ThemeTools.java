@@ -26,7 +26,7 @@ public class ThemeTools {
 
     public static void onCreateSetTheme(Activity activity, String name) {
         Tools.log("[THEME] " + name);
-        name = name.replaceAll("\"", "");
+        if(name != null) name = name.replaceAll("\"", "");
 
         if (name == null || name.isEmpty() || name.equals("Saxion")) {
             activity.setTheme(R.style.AppTheme_Saxion_NoActionBar);

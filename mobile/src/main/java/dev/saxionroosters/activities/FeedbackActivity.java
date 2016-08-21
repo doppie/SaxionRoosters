@@ -18,10 +18,10 @@ public class FeedbackActivity extends IssueReporterActivity {
 
     // [Optional] Auth token to open issues if users don't have a GitHub account
     // You can register a bot account on GitHub and copy ist OAuth2 token here.
-    @Override
-    public String getGuestToken() {
-        return "ed03bd3fb8a48202e96fca4756cf35127f857dc7";
-    }
+//    @Override
+//    public String getGuestToken() {
+//        return "";
+//    }
 
     // [Optional] Include other relevant info in the bug report (like custom variables)
 //    @Override

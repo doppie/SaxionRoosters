@@ -38,15 +38,16 @@ public class IntroPagerAdapter extends FragmentPagerAdapter {
                 args.putString(S.IMAGE_NAME, "intro_home");
                 break;
             case 1:
+                args.putString(S.TITLE, a.getString(R.string.intro_title_5));
+                args.putString(S.SUBTITLE, a.getString(R.string.intro_subtitle_5));
+                args.putString(S.IMAGE_NAME, "intro_maps");
+                break;
+            case 2:
                 args.putString(S.TITLE, a.getString(R.string.intro_title_2));
                 args.putString(S.SUBTITLE, a.getString(R.string.intro_subtitle_2));
                 args.putString(S.IMAGE_NAME, "intro_github");
                 break;
-//            case 2:
-//                args.putString(S.TITLE, a.getString(R.string.intro_title_3));
-//                args.putString(S.SUBTITLE, a.getString(R.string.intro_subtitle_3));
-//                break;
-            case 2:
+            case 3:
                 fragment = new SetupFragment_();
                 args.putString(S.VIEW_TYPE, S.FRAGMENT);
                 break;
@@ -58,6 +59,6 @@ public class IntroPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 }

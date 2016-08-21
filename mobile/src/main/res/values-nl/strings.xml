@@ -42,7 +42,6 @@
     <string name="contact">Contact</string>
     <string name="dislike">Dislike</string>
     <string name="support_request_message">We horen het graag als je vragen, problemen of suggesties hebt!</string>
-    <string name="support_email">saxionroosters.dev@gmail.com</string>
     <string name="support">Support</string>
 
     <!-- Rate dialog -->
@@ -57,7 +56,7 @@
     <string name="intro_title_1">Altijd je rooster bij de hand</string>
     <string name="intro_subtitle_1">Super eenvoudig, altijd je rooster bij de hand. Gemaakt met \u2665 dóór studenten, vóór studenten &amp; docenten van het Saxion.</string>
     <string name="intro_title_2">Community</string>
-    <string name="intro_subtitle_2">Designers, ontwikkelaars, creatieve denkers en doeners schaart u! Community gericht &amp; opensource code, jij bepaalt de volgende stap van deze app!</string>
+    <string name="intro_subtitle_2"><![CDATA[Draag zelf je steentje bij! Community gericht & opensource code, jij bepaalt de volgende stap van de app!]]></string>
     <string name="intro_title_3">Nooit meer te laat</string>
     <string name="intro_subtitle_3">Notificaties helpen je bij het op tijd komen voor een college. Stel ze in per college en krijg vlak van te voren een reminder. Zo kom je nooit meer te laat (toch?!).</string>
     <string name="intro_title_4">Selectief</string>
@@ -87,5 +86,30 @@
     <string name="room">lokaal</string>
     <string name="location_not_found">Locatie onbekend</string>
     <string name="action_feedback">feedback</string>
+    <string name="intro_subtitle_5">De weg kwijt? Je kan nu ook je leslocatie bekijken.</string>
+    <string name="intro_title_5">Locaties</string>
+
+    <string-array name="theme_colors">
+        <item>Saxion Theme</item>
+        <item>Purple</item>
+        <item>Deep Purple</item>
+        <item>Red</item>
+        <item>Pink</item>
+        <item>Indigo</item>
+        <item>Blue</item>
+        <item>LightBlue</item>
+        <item>Cyan</item>
+        <item>Teal</item>
+        <item>Green</item>
+        <item>Light Green</item>
+        <item>Lime</item>
+        <item>Light Yellow</item>
+        <item>Yellow</item>
+        <item>Orange</item>
+        <item>Deep Orange</item>
+        <item>Grey</item>
+        <item>Blue Grey</item>
+        <item>Brown</item>
+    </string-array>
 
 </resources>

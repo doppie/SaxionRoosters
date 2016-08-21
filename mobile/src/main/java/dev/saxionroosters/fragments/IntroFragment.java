@@ -42,6 +42,8 @@ public class IntroFragment extends Fragment {
                 introImage.setImageDrawable(getResources().getDrawable(R.drawable.intro_home));
             } else if(imageName.equals("intro_github")) {
                 introImage.setImageDrawable(getResources().getDrawable(R.drawable.intro_github));
+            } else if(imageName.equals("intro_maps")) {
+                introImage.setImageDrawable(getResources().getDrawable(R.drawable.intro_maps));
             }
         }
 
