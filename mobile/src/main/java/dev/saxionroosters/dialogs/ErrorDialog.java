@@ -2,6 +2,7 @@ package dev.saxionroosters.dialogs;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import dev.saxionroosters.R;
+import dev.saxionroosters.activities.FeedbackActivity;
 import dev.saxionroosters.extras.S;
 
 /**
@@ -41,6 +43,13 @@ public class ErrorDialog extends DialogFragment{
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dismiss();
+            }
+        });
+        builder.setNeutralButton(getString(R.string.feedback), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent i = new Intent(getActivity(), FeedbackActivity.class);
+                startActivity(i);
             }
         });
 

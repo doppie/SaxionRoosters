@@ -226,6 +226,8 @@ public class MainActivity extends BaseActivity {
                 Intent i = new Intent(MainActivity.this, IntroActivity_.class);
                 startActivity(i);
                 return true;
+            case R.id.action_feedback:
+                startIssueReporter();
         }
 
         return super.onOptionsItemSelected(item);

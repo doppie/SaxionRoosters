@@ -6,6 +6,12 @@
 
     </style>
 
+    <style name="AppTheme.IssueReporter" parent="Theme.IssueReporter.Light.DarkActionBar">
+        <item name="colorPrimary">@color/color_saxion</item>
+        <item name="colorPrimaryDark">@color/color_saxion_dark</item>
+        <item name="colorAccent">@color/color_saxion_dark</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

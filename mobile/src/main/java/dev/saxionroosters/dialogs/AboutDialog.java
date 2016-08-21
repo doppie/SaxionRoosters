@@ -55,7 +55,6 @@ public class AboutDialog extends DialogFragment {
             e.printStackTrace();
         }
         builder.setTitle(title);
-        builder.setIcon(getResources().getDrawable(R.drawable.information_outline));
         builder.setView(view);
 
         return builder.create();

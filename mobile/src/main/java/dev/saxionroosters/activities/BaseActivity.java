@@ -42,6 +42,11 @@ public class BaseActivity extends AppCompatActivity {
         ThemeTools.onCreateSetTheme(this, (String) storage.getObject(S.SETTING_THEME_COLOR));
     }
 
+    public void startIssueReporter() {
+        Intent i = new Intent(this, FeedbackActivity.class);
+        startActivity(i);
+    }
+
 //    public void scheduleNotification(Notification notification, int delay) {
 //        Intent notificationIntent = new Intent(this, NotificationPublisher.class);
 //        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);

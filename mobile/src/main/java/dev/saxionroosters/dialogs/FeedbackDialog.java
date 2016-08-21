@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 
 import dev.saxionroosters.R;
 import dev.saxionroosters.activities.BaseActivity;
+import dev.saxionroosters.activities.FeedbackActivity;
 import dev.saxionroosters.activities.MainActivity;
 import dev.saxionroosters.extras.AnalyticsTrackers;
 
@@ -54,13 +55,9 @@ public class FeedbackDialog extends DialogFragment {
                     editor.commit();
                 }
 
-                //Start mail app for support
-                Intent i = new Intent(Intent.ACTION_SEND);
-                i.setType("*/mail");
-                i.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.support) + " " + getString(R.string.app_name));
-                i.putExtra(Intent.EXTRA_EMAIL, new String[]{getString(R.string.support_email)});
+                Intent i = new Intent(getActivity(), FeedbackActivity.class);
+                startActivity(i);
 
-                startActivity(Intent.createChooser(i, getString(R.string.feedback_dislike_message)));
                 AnalyticsTrackers.sendEvent("Feedback", "Contact");
                 dialog.dismiss();
             }
@@ -75,13 +72,9 @@ public class FeedbackDialog extends DialogFragment {
                     editor.commit();
                 }
 
-                //Start mail app for support
-                Intent i = new Intent(Intent.ACTION_SEND);
-                i.setType("*/mail");
-                i.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.support) + " " + getString(R.string.app_name));
-                i.putExtra(Intent.EXTRA_EMAIL, new String[]{getString(R.string.support_email)});
+                Intent i = new Intent(getActivity(), FeedbackActivity.class);
+                startActivity(i);
 
-                startActivity(Intent.createChooser(i, getString(R.string.support_request_message)));
                 AnalyticsTrackers.sendEvent("Feedback", "Dislike");
                 dialog.dismiss();
             }

@@ -65,10 +65,10 @@
     <string name="getting_started">Even instellen</string>
     <string name="setup_select_group_teacher">Selecteer het rooster dat je wilt zien bij het openen van de app. Handig hè? Je kant dit later altijd nog aanpassen.</string>
 
-    <string name="action_info">About/Contact</string>
-    <string name="action_settings">Instellingen</string>
-    <string name="action_search">Zoeken</string>
-    <string name="action_intro">Introductie</string>
+    <string name="action_info">info</string>
+    <string name="action_settings">instellingen</string>
+    <string name="action_search">zoeken</string>
+    <string name="action_intro">intro</string>
 
     <string name="activity_college_details_subtitle">College details</string>
 
@@ -86,5 +86,6 @@
     <string name="floor">verdieping</string>
     <string name="room">lokaal</string>
     <string name="location_not_found">Locatie onbekend</string>
+    <string name="action_feedback">feedback</string>
 
 </resources>

@@ -29,6 +29,7 @@
     <string name="floor">floor</string>
     <string name="location_not_found">Location unknown</string>
 
+
     <string name="theme_visible_after_reset">The theme will be applied after you force reset the Application.</string>
     <string name="theme_color">Theme color</string>
     <string name="pick_theme">Pick a theme</string>
@@ -70,10 +71,11 @@
     <string name="getting_started">Getting started</string>
     <string name="setup_select_group_teacher">Select the schedule you want to see when you launch. Afterwards you can always change this through settings.</string>
 
-    <string name="action_info">About/Contact</string>
-    <string name="action_settings">Settings</string>
-    <string name="action_search">Search</string>
-    <string name="action_intro">Introduction</string>
+    <string name="action_info">info</string>
+    <string name="action_settings">settings</string>
+    <string name="action_search">search</string>
+    <string name="action_intro">intro</string>
+    <string name="action_feedback">feedback</string>
 
     <string name="activity_college_details_subtitle">College details</string>
 
