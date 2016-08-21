@@ -57,7 +57,7 @@ dependencies {
     compile 'com.lapism:searchview:3.4.1'
     compile 'org.jsoup:jsoup:1.8.3'
     compile 'com.github.JakeWharton:ViewPagerIndicator:2.4.1@aar'
-
+    compile 'com.heinrichreimersoftware:android-issue-reporter:1.2.6'
 
 
 }
