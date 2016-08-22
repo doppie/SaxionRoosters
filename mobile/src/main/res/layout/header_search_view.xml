@@ -83,7 +83,7 @@
                     android:layout_width="@dimen/search_icon"
                     android:layout_height="@dimen/search_icon"
                     android:contentDescription="Content Description"
-                    android:src="@drawable/search_ic_clear_black_24dp"
+                    android:src="@drawable/ic_clear_black_24dp"
                     android:visibility="invisible" />
 
             </LinearLayout>
