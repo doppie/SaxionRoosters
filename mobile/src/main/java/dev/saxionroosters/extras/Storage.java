@@ -76,6 +76,9 @@ public class Storage {
         if (pojo != null)
             str = new Gson().toJson(pojo);
 
+        if(key == S.SETTING_STARTUP_OWNER) AnalyticsTrackers.getInstance().sendEvent(S.SETTING_STARTUP_OWNER, (String) pojo);
+        if(key == S.SETTING_THEME_COLOR) AnalyticsTrackers.getInstance().sendEvent(S.SETTING_THEME_COLOR, (String) pojo);
+
         getPreferences().edit().putString(key, str).apply();
     }
 

@@ -55,5 +55,8 @@ public class S {
     public static final String ROOM = "room";
     public static final String COORDINATES = "coordinates";
 
+    //analytics categories
+    public static final String SCHEDULE_LOADED = "schedule_loaded";
+
 
 }

@@ -114,6 +114,7 @@ public class MainActivity extends BaseActivity {
     private void initStartupOwner() {
         String startupOwnerName = (String) storage.getObject(S.SETTING_STARTUP_OWNER);
         if (startupOwnerName != null && !startupOwnerName.isEmpty()) {
+            AnalyticsTrackers.sendEvent(S.SCHEDULE_LOADED, startupOwnerName.replaceAll("\"", ""));
             getWeekPager(startupOwnerName);
         }
     }

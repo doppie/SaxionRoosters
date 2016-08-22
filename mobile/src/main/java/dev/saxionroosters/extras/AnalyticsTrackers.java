@@ -81,6 +81,7 @@ public final class AnalyticsTrackers {
             Tools.log("Hmm no analytics instance, can't send event");
             return;
         }
+        Tools.log("[Analytics] Event cat: " + cat + " action: " + action);
         sInstance.get(Target.APP).send(new HitBuilders.EventBuilder().setCategory(cat).setAction(action).build());
     }
 }
