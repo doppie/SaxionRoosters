@@ -91,10 +91,10 @@ public class MapsTools {
         }
 
         //get the floor
-        locationDetails.put(S.FLOOR, locationName.substring(locationName.indexOf(".") -1, locationName.indexOf(".")));
+        if(locationName.indexOf(".") < locationName.length()) locationDetails.put(S.FLOOR, locationName.substring(locationName.indexOf(".") -1, locationName.indexOf(".")));
 
         //get the room.
-        locationDetails.put(S.ROOM, locationName.substring(locationName.indexOf(".") +1));
+        if(locationName.indexOf(".")+1 < locationName.length()) locationDetails.put(S.ROOM, locationName.substring(locationName.indexOf(".") +1));
 
         Tools.log(locationDetails.toString());
 

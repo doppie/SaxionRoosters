@@ -49,7 +49,7 @@ public class College implements Serializable {
     }
 
     public String getVerticalLocation() {
-        return location.replaceAll("\\s+", "\n");
+        return (location != null ? location.replaceAll("\\s+", "\n") : "");
     }
 
     public String getName() {
