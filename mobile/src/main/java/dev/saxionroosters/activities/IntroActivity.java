@@ -18,6 +18,7 @@ import dev.saxionroosters.R;
 import dev.saxionroosters.adapters.CollegeDetailsPagerAdapter;
 import dev.saxionroosters.adapters.IntroPagerAdapter;
 import dev.saxionroosters.extras.S;
+import dev.saxionroosters.extras.ThemeTools;
 
 /**
  * Created by Doppie on 10-3-2016.
@@ -42,6 +43,12 @@ public class IntroActivity extends BaseActivity {
 
     @AfterViews
     protected void init() {
+        //always set the basic theme to Green from now on, much better.
+        if(storage.getObject(S.SETTING_THEME_COLOR) == null || storage.getObject(S.SETTING_THEME_COLOR).isEmpty()) {
+            storage.saveObject(S.SETTING_THEME_COLOR, "Green");
+            ThemeTools.activateTheme(this);
+        }
+
         initUI();
     }
 

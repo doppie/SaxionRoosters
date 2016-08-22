@@ -77,11 +77,9 @@ public class CollegeDetailsFragment extends Fragment {
                     + getString(R.string.room) + " " + locationDetails.get(S.ROOM));
 
 
-            if(MapsTools.getEnschedeLocations().contains(
-                    new Location((String) locationDetails.get(S.DEPARTMENT), (LatLng) locationDetails.get(S.COORDINATES)))) {
+            if(MapsTools.isEnschedeLocation(college.getLocation())) {
                 locationTitleText.setText(getString(R.string.location) + " " + "@Enschede");
-            } else if(MapsTools.getDeventerLocations().contains(
-                    new Location((String) locationDetails.get(S.DEPARTMENT), (LatLng) locationDetails.get(S.COORDINATES)))){
+            } else if(MapsTools.isDeventerLocation(college.getLocation())) {
                 locationTitleText.setText(getString(R.string.location) + " " + "@Deventer");
             }
 
