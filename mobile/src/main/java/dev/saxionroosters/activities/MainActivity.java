@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 
@@ -198,12 +199,6 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-
-        //Make sure the icon color is white. Even on older devices.
-        MenuItem settings = menu.findItem(R.id.action_settings);
-        Drawable settingsIcon = ContextCompat.getDrawable(this, R.drawable.ic_arrow_back_black_24dp);
-        settingsIcon.setColorFilter(ContextCompat.getColor(this, R.color.cpb_white), PorterDuff.Mode.SRC_ATOP);
-        settings.setIcon(settingsIcon);
 
         return true;
     }

@@ -38,7 +38,7 @@
         <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/github_circle"
+            app:srcCompat="@drawable/github_circle"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="8dp"
             app:backgroundTint="@color/material_blue_600"
@@ -47,7 +47,7 @@
         <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/email"
+            app:srcCompat="@drawable/email"
             android:layout_marginBottom="8dp"
             app:backgroundTint="@color/material_red_600"
             android:id="@+id/mailButton" />

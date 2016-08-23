@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
@@ -55,8 +56,7 @@ public class SettingsActivity extends BaseActivity {
         toolbar.setSubtitle(getString(R.string.settings));
 
         //ensure the backbutton is white on older devices aswell.
-        Drawable backButton = ContextCompat.getDrawable(this, R.drawable.ic_arrow_back_black_24dp);
-        backButton.setColorFilter(ContextCompat.getColor(this, R.color.cpb_white), PorterDuff.Mode.SRC_ATOP);
+        Drawable backButton = VectorDrawableCompat.create(getResources(), R.drawable.ic_arrow_back_black_24dp, null);
         getSupportActionBar().setHomeAsUpIndicator(backButton);
 
         fillSettingsLayout(getSettings());
