@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
@@ -20,7 +21,7 @@ import dev.saxionroosters.adapters.CollegeDetailsPagerAdapter;
 import dev.saxionroosters.extras.S;
 import dev.saxionroosters.extras.Tools;
 import dev.saxionroosters.model.College;
-import dev.saxionroosters.views.JelleTextView;
+
 
 /**
  * Created by Doppie on 10-3-2016.
@@ -39,13 +40,13 @@ public class CollegeDetailActivity extends BaseActivity {
     protected ViewPager pager;
 
     @ViewById(R.id.nameText)
-    protected JelleTextView nameText;
+    protected TextView nameText;
 
     @ViewById(R.id.timeText)
-    protected JelleTextView timeText;
+    protected TextView timeText;
 
     @ViewById(R.id.locationText)
-    protected JelleTextView locationText;
+    protected TextView locationText;
 
     //adapters
     private CollegeDetailsPagerAdapter pagerAdapter;

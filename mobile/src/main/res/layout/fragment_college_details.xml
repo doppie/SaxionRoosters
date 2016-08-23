@@ -30,7 +30,7 @@
                     android:background="@color/material_grey_50"
                     android:orientation="vertical">
 
-                    <dev.saxionroosters.views.JelleTextView
+                    <TextView
                         style="@style/TextViewAppearance.Body3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
                         android:layout_marginTop="8dp"
                         android:background="@color/material_grey_200" />
 
-                    <dev.saxionroosters.views.JelleTextView
+                    <TextView
                         android:id="@+id/descriptionText"
                         style="@style/TextViewAppearance.Body2"
                         android:layout_width="match_parent"
@@ -76,7 +76,7 @@
                     android:background="@color/material_grey_50"
                     android:orientation="vertical">
 
-                    <dev.saxionroosters.views.JelleTextView
+                    <TextView
                         style="@style/TextViewAppearance.Body3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -93,7 +93,7 @@
                         android:layout_marginTop="8dp"
                         android:background="@color/material_grey_200" />
 
-                    <dev.saxionroosters.views.JelleTextView
+                    <TextView
                         android:id="@+id/timeText"
                         style="@style/TextViewAppearance.Body2"
                         android:layout_width="match_parent"
@@ -121,7 +121,7 @@
                     android:background="@color/material_grey_50"
                     android:orientation="vertical">
 
-                    <dev.saxionroosters.views.JelleTextView
+                    <TextView
                         style="@style/TextViewAppearance.Body3"
                         android:id="@+id/locationTitleText"
                         android:layout_width="match_parent"
@@ -149,7 +149,7 @@
                             android:layout_height="200dp"
                             android:orientation="horizontal"></LinearLayout>
 
-                        <dev.saxionroosters.views.JelleTextView
+                        <TextView
                             android:id="@+id/locationText"
                             style="@style/TextViewAppearance.Body2"
                             android:background="#80000000"
@@ -180,7 +180,7 @@
                     android:background="@color/material_grey_50"
                     android:orientation="vertical">
 
-                    <dev.saxionroosters.views.JelleTextView
+                    <TextView
                         style="@style/TextViewAppearance.Body3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
