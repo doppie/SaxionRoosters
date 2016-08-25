@@ -26,7 +26,7 @@ import dev.saxionroosters.extras.Tools;
 import dev.saxionroosters.model.College;
 import dev.saxionroosters.model.Location;
 import dev.saxionroosters.model.Teacher;
-import dev.saxionroosters.views.JelleTextView;
+
 
 /**
  * Created by Doppie on 10-3-2016.

@@ -50,7 +50,7 @@
 
     </android.support.design.widget.CoordinatorLayout>
 
-    <dev.saxionroosters.views.JelleTextView
+    <TextView
         android:id="@+id/noResultsView"
         style="@style/TextViewAppearance.Body2"
         android:layout_width="match_parent"

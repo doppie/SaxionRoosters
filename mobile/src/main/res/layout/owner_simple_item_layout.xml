@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:background="?attr/selectableItemBackground">
 
-    <dev.saxionroosters.views.JelleTextView
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -16,7 +16,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginRight="16dp" />
 
-    <dev.saxionroosters.views.JelleTextView
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"

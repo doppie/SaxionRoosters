@@ -34,7 +34,7 @@
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 android:layout_alignParentTop="true" />
 
-            <dev.saxionroosters.views.JelleTextView
+            <TextView
                 android:id="@+id/titleText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
                 android:layout_above="@+id/subtitleText"
                 android:layout_centerHorizontal="true" />
 
-            <dev.saxionroosters.views.JelleTextView
+            <TextView
                 android:id="@+id/subtitleText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
