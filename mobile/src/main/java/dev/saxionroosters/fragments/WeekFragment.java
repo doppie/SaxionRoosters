@@ -106,7 +106,7 @@ public class WeekFragment extends Fragment implements ClickListener {
     /* When called this updates all UI items that contain data.  */
     private void updateUI() {
         //TODO: error handling plsss.
-        if (week.getDays().isEmpty()) {
+        if (week == null || week.getDays() == null || week.getDays().isEmpty()) {
             showRetry();
             return;
         }
