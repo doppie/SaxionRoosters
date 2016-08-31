@@ -68,11 +68,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent">
 
-                    <dev.saxionroosters.views.JelleTextView
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Paprika"
+                        android:text="Paprika is een kleurige groente, wist je dat?"
                         style="@style/TextViewAppearance.Body2"
                         android:textSize="16sp"
                         android:id="@+id/nameText" />

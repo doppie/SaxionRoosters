@@ -4,10 +4,12 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.widget.Button;
 
 import dev.saxionroosters.R;
 import dev.saxionroosters.activities.BaseActivity;
@@ -71,7 +73,24 @@ public class RateDialog extends DialogFragment {
             }
         });
 
-        return builder.create();
+        final AlertDialog dialog = builder.create();
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                Button negativebutton = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+                negativebutton.setTextColor(Color.BLACK);
+
+                Button positiveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                positiveButton.setTextColor(Color.BLACK);
+
+                Button neutralButton = dialog.getButton(DialogInterface.BUTTON_NEUTRAL);
+                neutralButton.setTextColor(Color.BLACK);
+            }
+        });
+
+
+
+        return dialog;
     }
 
     public void app_launched(BaseActivity a) {

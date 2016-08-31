@@ -62,6 +62,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -76,7 +77,7 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:text="Paprika"
+                        android:text="Paprika is een kleurige groente, wist je dat?"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textSize="16sp" />
 

@@ -32,7 +32,7 @@ public class MapsTools {
         locations.add(new Location("Epy Drost", "G", new LatLng(52.21971, 6.8895)));
         locations.add(new Location("ROC De Maere", "M", new LatLng(52.21949, 6.88890)));
         locations.add(new Location("Wolvecamp", "W", new LatLng(52.22126, 6.88596)));
-        locations.add(new Location("Haanstra", "H", new LatLng(52.21970, 6.88927)));
+        locations.add(new Location("Haanstra", "H", new LatLng(52.221022, 6.884651)));
         locations.add(new Location("Forum", "F", new LatLng(52.22038, 6.88621)));
         locations.add(new Location("Elderink", "E", new LatLng(52.22029, 6.88502)));
         locations.add(new Location("Randstad", "R",new LatLng(52.22122, 6.88947)));
