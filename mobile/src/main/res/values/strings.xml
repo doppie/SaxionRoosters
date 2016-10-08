@@ -1,4 +1,8 @@
 <resources>
+
+    <string name="banner_ad_unit_id">ca-app-pub-5255794757983274/6179521318</string>
+    <string name="interstitial_ad_unit_id">ca-app-pub-5255794757983274/9132987717</string>
+
     <string name="app_name">Saxion Roosters</string>
     <string name="app_name_short">Roosters</string>
 

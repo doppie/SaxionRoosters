@@ -19,6 +19,8 @@ import android.view.View;
 import android.widget.TextView;
 
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.lapism.searchview.SearchAdapter;
 import com.lapism.searchview.SearchItem;
 import com.lapism.searchview.SearchView;
@@ -58,6 +60,9 @@ public class MainActivity extends BaseActivity {
     @ViewById(R.id.container)
     protected ViewPager pager;
 
+    @ViewById(R.id.adView)
+    protected AdView adView;
+
     @ViewById(R.id.tabs)
     protected TabLayout tabLayout;
 
@@ -78,6 +83,7 @@ public class MainActivity extends BaseActivity {
         new RateDialog().app_launched(this);
         initUI();
         initStartupOwner();
+        initAds();
     }
 
     /* Initializes the UI, called from @onCreate */
@@ -120,10 +126,20 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    private void initAds() {
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+        adView.loadAd(adRequest);
+
+        initInterstitialAd();
+    }
+
     @Override
     public void onResume() {
         super.onResume();
 
+        showInterstitialAd();
 
         showIntro();
         updateUI();

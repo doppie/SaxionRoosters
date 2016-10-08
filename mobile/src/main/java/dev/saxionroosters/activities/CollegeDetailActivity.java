@@ -12,6 +12,9 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
@@ -32,6 +35,9 @@ public class CollegeDetailActivity extends BaseActivity {
 
     @ViewById(R.id.toolbar)
     protected Toolbar toolbar;
+
+    @ViewById(R.id.adView)
+    protected AdView adView;
 
 //    @ViewById(R.id.tabs)
 //    protected TabLayout tabLayout;
@@ -55,6 +61,7 @@ public class CollegeDetailActivity extends BaseActivity {
     @AfterViews
     protected void init() {
         initUI();
+        initAds();
     }
 
     private void initUI() {
@@ -82,6 +89,13 @@ public class CollegeDetailActivity extends BaseActivity {
         pager.setAdapter(pagerAdapter);
         //commented out for now till we have more tabs to show.
 //        tabLayout.setupWithViewPager(pager);
+    }
+
+    private void initAds() {
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+        adView.loadAd(adRequest);
     }
 
     @Override

@@ -11,6 +11,11 @@ import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
@@ -29,6 +34,7 @@ import dev.saxionroosters.extras.ThemeTools;
 public class BaseActivity extends AppCompatActivity {
 
     protected ProgressDialog dialog;
+    protected InterstitialAd interstitialAd;
 
     @Bean
     protected Storage storage;
@@ -41,11 +47,43 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         ThemeTools.onCreateSetTheme(this, (String) storage.getObject(S.SETTING_THEME_COLOR));
+
+        MobileAds.initialize(getApplicationContext(), getString(R.string.banner_ad_unit_id));
     }
 
     public void startIssueReporter() {
         Intent i = new Intent(this, FeedbackActivity.class);
         startActivity(i);
+    }
+
+    protected void initInterstitialAd() {
+        interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
+        interstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+                requestNewInterstitialAd();
+            }
+        });
+
+        requestNewInterstitialAd();
+    }
+
+    protected void requestNewInterstitialAd() {
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+        interstitialAd.loadAd(adRequest);
+    }
+
+    protected boolean showInterstitialAd() {
+        if(interstitialAd.isLoaded()) {
+            interstitialAd.show();
+            return true;
+        }
+
+        return false;
     }
 
 //    public void scheduleNotification(Notification notification, int delay) {
