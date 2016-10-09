@@ -37,6 +37,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:layout_margin="16dp"
+            android:id="@+id/text"
             android:text="@string/donate_beer"/>
 
         <View

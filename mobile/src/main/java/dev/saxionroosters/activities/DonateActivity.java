@@ -76,13 +76,14 @@ public class DonateActivity extends BaseActivity {
     @Override
     @UiThread
     public void updateUI() {
-        if(storage.getObject("premium") != null && Boolean.valueOf(storage.getObject("premium"))) {
+        if (Boolean.valueOf(storage.getObject("premium"))) {
             text.setText(getString(R.string.donate_thankyou));
             donateButton.setVisibility(View.GONE);
             denyButton.setText(getString(R.string.close));
         } else {
             denyButton.setText(getRandomText());
         }
+
     }
 
     private String getRandomText() {
@@ -99,13 +100,14 @@ public class DonateActivity extends BaseActivity {
     }
 
 
-
     public static final int LAUNCHES_UNTIL_PROMPT = 3;
     public static final int DAYS_UNTIL_PROMPT = 2;
 
     public static void app_launched(BaseActivity a) {
         SharedPreferences prefs = a.getSharedPreferences("donate_activity", 0);
-        if (prefs.getBoolean("dontshowagain", false)) { return ; }
+        if (prefs.getBoolean("dontshowagain", false)) {
+            return;
+        }
 
         SharedPreferences.Editor editor = prefs.edit();
 
@@ -120,7 +122,7 @@ public class DonateActivity extends BaseActivity {
             editor.putLong("date_firstlaunch", date_firstLaunch);
         }
 
-        if(launch_count >= (LAUNCHES_UNTIL_PROMPT-1)) {
+        if (launch_count >= (LAUNCHES_UNTIL_PROMPT - 1)) {
             editor.putBoolean("showads", true);
         } else {
             editor.putBoolean("showads", false);
