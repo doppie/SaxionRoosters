@@ -122,7 +122,7 @@ public class DonateActivity extends BaseActivity {
             editor.putLong("date_firstlaunch", date_firstLaunch);
         }
 
-        if (launch_count >= (LAUNCHES_UNTIL_PROMPT - 1)) {
+        if (launch_count >= (LAUNCHES_UNTIL_PROMPT)) {
             editor.putBoolean("showads", true);
         } else {
             editor.putBoolean("showads", false);
