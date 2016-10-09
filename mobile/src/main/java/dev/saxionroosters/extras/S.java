@@ -26,6 +26,7 @@ public class S {
     public static final String VIEW_TYPE = "view_type";
     public static final String FRAGMENT = "fragment";
     public static final String DIALOG = "dialog";
+    public static final String DONATE = "donate";
 
     //db columns & stuff
     public static final String NOTIFICATION_ID="row_id";

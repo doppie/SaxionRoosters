@@ -81,6 +81,7 @@ public class MainActivity extends BaseActivity {
         AnalyticsTrackers.initialize(this);
         new FeedbackDialog().app_launched(this);
         new RateDialog().app_launched(this);
+        DonateActivity.app_launched(this);
 
         initUI();
         initStartupOwner();
@@ -129,6 +130,7 @@ public class MainActivity extends BaseActivity {
 
     private void initAds() {
         if(Boolean.valueOf(storage.getObject("premium"))) return;
+        if(!DonateActivity.showAds(this)) return;
 
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
@@ -244,9 +246,12 @@ public class MainActivity extends BaseActivity {
                 return true;
             case R.id.action_feedback:
                 startIssueReporter();
+                return true;
             case R.id.action_donate:
+                AnalyticsTrackers.sendEvent(S.DONATE, "show_manual");
                 Intent i2 = new Intent(MainActivity.this, DonateActivity_.class);
                 startActivity(i2);
+                return true;
         }
 
         return super.onOptionsItemSelected(item);

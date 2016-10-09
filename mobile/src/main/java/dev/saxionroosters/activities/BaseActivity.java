@@ -71,6 +71,8 @@ public class BaseActivity extends AppCompatActivity implements BillingProcessor.
 
     protected void initInterstitialAd() {
         if(Boolean.valueOf(storage.getObject("premium"))) return;
+        if(!DonateActivity.showAds(this)) return;
+
         interstitialAd = new InterstitialAd(this);
         interstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
         interstitialAd.setAdListener(new AdListener() {
@@ -86,6 +88,8 @@ public class BaseActivity extends AppCompatActivity implements BillingProcessor.
 
     protected void requestNewInterstitialAd() {
         if(Boolean.valueOf(storage.getObject("premium"))) return;
+        if(!DonateActivity.showAds(this)) return;
+
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .addTestDevice("96CC90CB12D776D19FA21597DD1A2202")
@@ -95,6 +99,8 @@ public class BaseActivity extends AppCompatActivity implements BillingProcessor.
 
     protected boolean showInterstitialAd() {
         if(Boolean.valueOf(storage.getObject("premium"))) return false;
+        if(!DonateActivity.showAds(this)) return false;
+
         if(interstitialAd.isLoaded()) {
             interstitialAd.show();
             return true;
@@ -118,6 +124,7 @@ public class BaseActivity extends AppCompatActivity implements BillingProcessor.
          */
         Tools.log("Purchased: " + productId + " Details: " + details.toString());
         storage.saveObject("premium", true);
+        AnalyticsTrackers.sendEvent(S.DONATE, "purchase_completed");
         updateUI();
     }
 
