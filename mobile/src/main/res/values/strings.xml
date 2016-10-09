@@ -1,7 +1,20 @@
 <resources>
 
-    <string name="banner_ad_unit_id">ca-app-pub-5255794757983274/6179521318</string>
-    <string name="interstitial_ad_unit_id">ca-app-pub-5255794757983274/9132987717</string>
+    <string name="donate_beer" translatable="false">Buy us a beer\n\nGain eternal gratitude and a lifetime without ads!</string>
+    <string name="close">Close</string>
+    <string name="donate" translatable="false">Donate</string>
+    <string name="donate_thankyou" translatable="false">Cheers, next time beers on us! Eternal gratitude and a lifetime without ads will come to you my friend!</string>
+    <string name="donate_beer_button" translatable="false">Donate</string>
+    <string name="donate_cancel_1" translatable="false">My middle name is Scrooge</string>
+    <string name="donate_cancel_2" translatable="false">I represent the Dutch stereotype</string>
+    <string name="donate_cancel_3" translatable="false">I would rather date Trump</string>
+    <string name="donate_cancel_4" translatable="false">I politely decline this request</string>
+    <string name="donate_cancel_5" translatable="false">This must be a joke</string>
+    <string name="donate_cancel_6" translatable="false">I am too young to buy alcohol</string>
+
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-5255794757983274/6179521318</string>
+    <string name="interstitial_ad_unit_id" translatable="false">ca-app-pub-5255794757983274/9132987717</string>
+    <string name="iab_id" translatable="false">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhp4IDP4diqBkJu6XScKB9AEHbdFyc/JI1dBbJSFiFuKgjGBZyJWhUuxQpMkWuMpArg4q3JSSkdnfAd9yd9LhnOGVI8jsMvdhCVyWRwXdf2U8Do2Ml1YlKkaATvwQFTICMCFRe+p/SsJAL9BYZTesPRvCl9mlCZfT1s0/KrKPL/s6uwWwFlZd4IC7TO/8+CTRcQwV+w4CBKtAOmecdJoa9rxFlzk7YMuHXV3pzFFwu0WBV8MEEYDpN0IvBlEqFcko6q0EEKAoRYmHqZjO2Se21fDhK0/tZqe/8QFzPFHo4kI/wIW65kcUJkujpa7u4F4bhE8TVZ/w3vX1KpTAUDtknQIDAQAB</string>
 
     <string name="app_name">Saxion Roosters</string>
     <string name="app_name_short">Roosters</string>

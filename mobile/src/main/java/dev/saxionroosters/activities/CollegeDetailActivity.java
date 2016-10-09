@@ -94,6 +94,7 @@ public class CollegeDetailActivity extends BaseActivity {
     private void initAds() {
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("96CC90CB12D776D19FA21597DD1A2202")
                 .build();
         adView.loadAd(adRequest);
     }

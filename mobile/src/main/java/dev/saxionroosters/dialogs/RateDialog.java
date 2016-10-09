@@ -13,6 +13,7 @@ import android.widget.Button;
 
 import dev.saxionroosters.R;
 import dev.saxionroosters.activities.BaseActivity;
+import dev.saxionroosters.activities.DonateActivity_;
 import dev.saxionroosters.extras.AnalyticsTrackers;
 
 /**
@@ -119,5 +120,19 @@ public class RateDialog extends DialogFragment {
         }
 
         editor.commit();
+
+        if(prefs.getBoolean("dontshow_donate", false)) { return; }
+        //added this to show the DonateActivity
+        if (launch_count >= 2) {
+            if (System.currentTimeMillis() >= date_firstLaunch +
+                    (0 * 24 * 60 * 60 * 1000)) {
+                Intent i = new Intent(a, DonateActivity_.class);
+                a.startActivity(i);
+                editor.putBoolean("dontshow_donate", true);
+                editor.commit();
+            }
+        }
+
+
     }
 }

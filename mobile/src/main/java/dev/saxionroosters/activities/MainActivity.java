@@ -81,6 +81,7 @@ public class MainActivity extends BaseActivity {
         AnalyticsTrackers.initialize(this);
         new FeedbackDialog().app_launched(this);
         new RateDialog().app_launched(this);
+
         initUI();
         initStartupOwner();
         initAds();
@@ -127,8 +128,11 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initAds() {
+        if(Boolean.valueOf(storage.getObject("premium"))) return;
+
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("96CC90CB12D776D19FA21597DD1A2202")
                 .build();
         adView.loadAd(adRequest);
 
@@ -240,6 +244,9 @@ public class MainActivity extends BaseActivity {
                 return true;
             case R.id.action_feedback:
                 startIssueReporter();
+            case R.id.action_donate:
+                Intent i2 = new Intent(MainActivity.this, DonateActivity_.class);
+                startActivity(i2);
         }
 
         return super.onOptionsItemSelected(item);
@@ -293,5 +300,4 @@ public class MainActivity extends BaseActivity {
         this.dialog.setMessage(getString(R.string.loading));
         this.dialog.show();
     }
-
 }

@@ -8,8 +8,8 @@ android {
         applicationId "dev.saxionroosters"
         minSdkVersion 16
         targetSdkVersion 24
-        versionCode 11
-        versionName "1.1.8"
+        versionCode 13
+        versionName "1.2"
         vectorDrawables.useSupportLibrary = true
 
     }
@@ -61,6 +61,7 @@ dependencies {
     compile 'org.jsoup:jsoup:1.8.3'
     compile 'com.github.JakeWharton:ViewPagerIndicator:2.4.1@aar'
     compile 'com.heinrichreimersoftware:android-issue-reporter:1.2.6'
+    compile 'com.anjlab.android.iab.v3:library:1.0.+'
 
 
 }
