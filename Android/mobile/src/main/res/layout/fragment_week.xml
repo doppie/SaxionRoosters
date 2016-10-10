@@ -12,7 +12,7 @@
         android:id="@+id/list"
         android:scrollbars="vertical"
         android:paddingTop="16dp"
-        android:paddingBottom="48dp"
+        android:paddingBottom="64dp"
         android:clipToPadding="false"
         android:visibility="gone"
         android:layout_width="match_parent"

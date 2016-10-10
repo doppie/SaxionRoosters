@@ -13,6 +13,7 @@ import android.widget.Button;
 
 import dev.saxionroosters.R;
 import dev.saxionroosters.activities.BaseActivity;
+import dev.saxionroosters.activities.DonateActivity_;
 import dev.saxionroosters.extras.AnalyticsTrackers;
 
 /**

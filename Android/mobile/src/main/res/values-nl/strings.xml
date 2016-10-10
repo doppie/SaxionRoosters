@@ -111,5 +111,6 @@
         <item>Blue Grey</item>
         <item>Brown</item>
     </string-array>
+    <string name="close">Sluiten</string>
 
 </resources>
