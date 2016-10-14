@@ -147,6 +147,13 @@ public class DonateActivity extends BaseActivity {
 
     public static boolean showAds(BaseActivity a) {
         SharedPreferences prefs = a.getSharedPreferences("donate_activity", 0);
+        int adscounter = prefs.getInt("adscounter", 0);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("adscounter", adscounter+1);
+        editor.apply();
+        if(adscounter % 2 == 0) {
+            return false;
+        }
         return prefs.getBoolean("showads", false);
     }
 }

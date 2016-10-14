@@ -92,16 +92,20 @@ public class CollegeDetailActivity extends BaseActivity {
     }
 
     private void initAds() {
+        if(Boolean.valueOf(storage.getObject("premium"))) return;
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .addTestDevice("96CC90CB12D776D19FA21597DD1A2202")
                 .build();
         adView.loadAd(adRequest);
+
+        initInterstitialAd();
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        showInterstitialAd();
         if(Tools.isLollipop()) supportFinishAfterTransition();
         else finish();
     }

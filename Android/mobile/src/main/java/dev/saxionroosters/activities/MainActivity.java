@@ -60,8 +60,8 @@ public class MainActivity extends BaseActivity {
     @ViewById(R.id.container)
     protected ViewPager pager;
 
-    @ViewById(R.id.adView)
-    protected AdView adView;
+//    @ViewById(R.id.adView)
+//    protected AdView adView;
 
     @ViewById(R.id.tabs)
     protected TabLayout tabLayout;
@@ -85,7 +85,7 @@ public class MainActivity extends BaseActivity {
 
         initUI();
         initStartupOwner();
-        initAds();
+//        initAds();
     }
 
     /* Initializes the UI, called from @onCreate */
@@ -128,24 +128,21 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    private void initAds() {
-        if(Boolean.valueOf(storage.getObject("premium"))) return;
-        if(!DonateActivity.showAds(this)) return;
-
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice("96CC90CB12D776D19FA21597DD1A2202")
-                .build();
-        adView.loadAd(adRequest);
-
-        initInterstitialAd();
-    }
+//    private void initAds() {
+//        if(Boolean.valueOf(storage.getObject("premium"))) return;
+//        if(!DonateActivity.showAds(this)) return;
+//
+//        AdRequest adRequest = new AdRequest.Builder()
+//                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+//                .addTestDevice("96CC90CB12D776D19FA21597DD1A2202")
+//                .build();
+//        adView.loadAd(adRequest);
+//    }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        showInterstitialAd();
 
         showIntro();
         updateUI();
