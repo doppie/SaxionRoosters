@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <RelativeLayout
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/card_default_background">
+
+        <!--
+    <TextView
+        android:id="@+id/title"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_width="match_parent"
+        android:textColor="@color/card_text_color"
+        android:scaleX="0.8"
+        android:scaleY="0.8"
+        android:alpha="0.6"
+        android:textSize="18sp"
+        android:text="1.2: Architectuur &amp; Infrastructuur"
+        />
+
+    <TextView
+        android:id="@+id/room"
+        android:layout_below="@id/title"
+        android:layout_height="15dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_width="match_parent"
+        android:textColor="@color/grey"
+        android:scaleX="0.7"
+        android:scaleY="0.7"
+        android:alpha="0.6"
+        android:textSize="12sp"
+        android:text="W3.10"
+        />
+    <TextView
+        android:id="@+id/time"
+        android:layout_below="@id/room"
+        android:layout_height="15dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_width="match_parent"
+        android:textColor="@color/grey"
+        android:scaleX="0.7"
+        android:scaleY="0.7"
+        android:alpha="0.6"
+        android:textSize="12sp"
+        android:text="08:30 - 10:00"
+        /> -->
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_width="match_parent"
+            android:textColor="@color/card_text_color"
+            android:textSize="18sp"
+            android:text="1.2: Architectuur &amp; Infrastructuur"
+            />
+
+        <TextView
+            android:id="@+id/room"
+            android:layout_below="@id/title"
+            android:layout_height="15dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_width="match_parent"
+            android:textColor="@color/grey"
+            android:textSize="12sp"
+            android:text="W3.10"
+            />
+        <TextView
+            android:id="@+id/time"
+            android:layout_below="@id/room"
+            android:layout_height="15dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_width="match_parent"
+            android:textColor="@color/grey"
+            android:textSize="12sp"
+            android:text="08:30 - 10:00"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_below="@id/card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+    </LinearLayout>
+    </LinearLayout>
+</merge>

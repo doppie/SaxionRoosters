@@ -1,64 +1,68 @@
 package dev.saxionroosters;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.wearable.activity.WearableActivity;
-import android.support.wearable.view.BoxInsetLayout;
-import android.view.View;
-import android.widget.TextView;
+import android.support.wearable.view.WatchViewStub;
+import android.support.wearable.view.WearableListView;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import java.util.ArrayList;
+import java.util.List;
 
-public class MainActivity extends WearableActivity {
+import dev.saxionroosters.adapters.CollegeAdapter;
+import dev.saxionroosters.models.College;
 
-    private static final SimpleDateFormat AMBIENT_DATE_FORMAT =
-            new SimpleDateFormat("HH:mm", Locale.US);
+public class MainActivity extends Activity implements WearableListView.ClickListener {
 
-    private BoxInsetLayout mContainerView;
-    private TextView mTextView;
-    private TextView mClockView;
+    private WearableListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setAmbientEnabled();
+        final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
 
-        mContainerView = (BoxInsetLayout) findViewById(R.id.container);
-        mTextView = (TextView) findViewById(R.id.text);
-        mClockView = (TextView) findViewById(R.id.clock);
+
+
+        stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
+            @Override
+            public void onLayoutInflated(WatchViewStub stub) {
+                listView = (WearableListView) stub.findViewById(R.id.list_view);
+                loadAdapter();
+
+            }
+        });
+
+
     }
+
+    private void loadAdapter() {
+        List<College> items = new ArrayList<>();
+        items.add(new College("1.2: Architectuur & Infrastructuur", "W3.10", "08:30 - 10:00"));
+        items.add(new College("1.2: Architectuur & Infrastructuur", "W3.10", "10:15 - 11:45"));
+        items.add(new College("1.2: Architectuur & Infrastructuur", "H1.02", "12:30 - 14:45"));
+
+        CollegeAdapter mAdapter = new CollegeAdapter(this, items);
+
+        listView.setAdapter(mAdapter);
+
+        listView.setClickListener(this);
+    }
+
 
     @Override
-    public void onEnterAmbient(Bundle ambientDetails) {
-        super.onEnterAmbient(ambientDetails);
-        updateDisplay();
-    }
-
-    @Override
-    public void onUpdateAmbient() {
-        super.onUpdateAmbient();
-        updateDisplay();
-    }
-
-    @Override
-    public void onExitAmbient() {
-        updateDisplay();
-        super.onExitAmbient();
-    }
-
-    private void updateDisplay() {
-        if (isAmbient()) {
-            mContainerView.setBackgroundColor(getResources().getColor(android.R.color.black));
-            mTextView.setTextColor(getResources().getColor(android.R.color.white));
-            mClockView.setVisibility(View.VISIBLE);
-
-            mClockView.setText(AMBIENT_DATE_FORMAT.format(new Date()));
-        } else {
-            mContainerView.setBackground(null);
-            mTextView.setTextColor(getResources().getColor(android.R.color.black));
-            mClockView.setVisibility(View.GONE);
+    public void onClick(WearableListView.ViewHolder viewHolder) {
+        switch (viewHolder.getPosition()) {
+            case 0:
+                //Do something
+                break;
+            case 1:
+                //Do something else
+                break;
         }
+    }
+
+    @Override
+    public void onTopEmptyRegionClick() {
+        //Prevent NullPointerException
     }
 }
