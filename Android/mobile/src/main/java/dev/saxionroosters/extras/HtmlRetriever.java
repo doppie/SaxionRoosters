@@ -1,6 +1,7 @@
 package dev.saxionroosters.extras;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -39,6 +40,11 @@ public class HtmlRetriever {
 
     public HtmlRetriever(Activity context, Week week) {
         this.context = context;
+        storage = Storage.getInstance(context);
+        this.week = week;
+    }
+
+    public HtmlRetriever(Week week) {
         storage = Storage.getInstance(context);
         this.week = week;
     }

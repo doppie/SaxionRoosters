@@ -1,106 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <LinearLayout android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-    <RelativeLayout
-        android:id="@+id/card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
-        android:layout_marginBottom="10dp"
-        android:background="@color/card_default_background">
-
-        <!--
-    <TextView
-        android:id="@+id/title"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="3dp"
-        android:layout_marginRight="3dp"
-        android:layout_width="match_parent"
-        android:textColor="@color/card_text_color"
-        android:scaleX="0.8"
-        android:scaleY="0.8"
-        android:alpha="0.6"
-        android:textSize="18sp"
-        android:text="1.2: Architectuur &amp; Infrastructuur"
-        />
-
-    <TextView
-        android:id="@+id/room"
-        android:layout_below="@id/title"
-        android:layout_height="15dp"
-        android:layout_marginLeft="3dp"
-        android:layout_marginRight="3dp"
-        android:layout_width="match_parent"
-        android:textColor="@color/grey"
-        android:scaleX="0.7"
-        android:scaleY="0.7"
-        android:alpha="0.6"
-        android:textSize="12sp"
-        android:text="W3.10"
-        />
-    <TextView
-        android:id="@+id/time"
-        android:layout_below="@id/room"
-        android:layout_height="15dp"
-        android:layout_marginLeft="3dp"
-        android:layout_marginRight="3dp"
-        android:layout_width="match_parent"
-        android:textColor="@color/grey"
-        android:scaleX="0.7"
-        android:scaleY="0.7"
-        android:alpha="0.6"
-        android:textSize="12sp"
-        android:text="08:30 - 10:00"
-        /> -->
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
-            android:layout_marginRight="3dp"
-            android:layout_width="match_parent"
-            android:textColor="@color/card_text_color"
-            android:textSize="18sp"
-            android:text="1.2: Architectuur &amp; Infrastructuur"
-            />
-
-        <TextView
-            android:id="@+id/room"
-            android:layout_below="@id/title"
-            android:layout_height="15dp"
-            android:layout_marginLeft="3dp"
-            android:layout_marginRight="3dp"
-            android:layout_width="match_parent"
-            android:textColor="@color/grey"
-            android:textSize="12sp"
-            android:text="W3.10"
-            />
-        <TextView
-            android:id="@+id/time"
-            android:layout_below="@id/room"
-            android:layout_height="15dp"
-            android:layout_marginLeft="3dp"
-            android:layout_marginRight="3dp"
-            android:layout_width="match_parent"
-            android:textColor="@color/grey"
-            android:textSize="12sp"
-            android:text="08:30 - 10:00"
-            />
-
-    </RelativeLayout>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
-        android:layout_below="@id/card"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            style="@style/TextViewAppearance.Body3"
+            android:textColor="@color/white"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="12sp"
+            android:alpha="0.8"
+            android:text="Zaterdag 19 november 2016"
+            android:layout_alignParentTop="true"/>
+
         <View
+            android:id="@+id/line"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
-    </LinearLayout>
+            android:layout_marginBottom="4dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="@color/main_color_grey_300"
+            android:visibility="gone" />
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view"
+            android:layout_gravity="center"
+            android:layout_width="fill_parent"
+            android:layout_height="140dp"
+            android:layout_margin="5dp"
+            android:scaleX="0.95"
+            android:scaleY="0.95"
+            android:alpha="0.8"
+            card_view:cardCornerRadius="2dp"
+            card_view:contentPadding="10dp">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="140dp">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextViewAppearance.Body2"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textSize="14sp"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    android:alpha="0.8"
+                    android:text="1.2: Architectuur &amp; Infrastructuur"
+                    android:layout_alignParentTop="true"/>
+
+                <TextView
+                    android:id="@+id/time"
+                    style="@style/TextViewAppearance.Caption2"
+                    android:textSize="12sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_alignParentLeft="true"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    android:alpha="0.8"
+                    android:text="08:30 - 10:00"
+                    android:layout_below="@+id/title"/>
+
+                <TextView
+                    android:id="@+id/room"
+                    style="@style/TextViewAppearance.Body2"
+                    android:textSize="12sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    android:alpha="0.8"
+                    android:text="W3.10"
+                    android:layout_alignParentRight="true"
+                    android:gravity="right"
+                    android:layout_toEndOf="@+id/time"
+                    android:layout_below="@+id/title"/>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
     </LinearLayout>
 </merge>

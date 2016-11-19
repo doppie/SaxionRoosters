@@ -45,6 +45,7 @@ import dev.saxionroosters.extras.ThemeTools;
 import dev.saxionroosters.extras.Tools;
 import dev.saxionroosters.model.Owner;
 import dev.saxionroosters.model.Week;
+import dev.saxionroosters.services.WearService;
 
 
 /**
@@ -82,6 +83,8 @@ public class MainActivity extends BaseActivity {
         new FeedbackDialog().app_launched(this);
         new RateDialog().app_launched(this);
         DonateActivity.app_launched(this);
+
+        startService(new Intent(this, WearService.class));
 
         initUI();
         initStartupOwner();

@@ -1,8 +1,12 @@
 package dev.saxionroosters.adapters;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.wearable.view.WearableListView;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -12,7 +16,7 @@ import dev.saxionroosters.models.College;
 import dev.saxionroosters.views.CollegeView;
 
 /**
- * Created by Wessel on 17-11-2016.
+ * Created by Wessel on 18-11-2016.
  */
 
 public class CollegeAdapter extends WearableListView.Adapter {
@@ -44,6 +48,27 @@ public class CollegeAdapter extends WearableListView.Adapter {
         TextView textViewTime = (TextView) collegeView.findViewById(R.id.time);
         textViewTime.setText(item.time);
 
+        TextView textViewDate = (TextView) collegeView.findViewById(R.id.date);
+        textViewDate.setText(item.date);
+
+        //LinearLayout dateView = (LinearLayout) collegeView.findViewById(R.id.date_view);
+
+        if (item.dateheader) {
+            textViewDate.setVisibility(View.VISIBLE);
+            //dateView.setVisibility(View.VISIBLE);
+        } else {
+            textViewDate.setVisibility(View.GONE);
+            //dateView.setVisibility(View.GONE);
+        }
+
+    }
+
+    public void addItem(College college){
+        items.add(college);
+    }
+
+    public void removeItems(){
+        items.clear();
     }
 
     @Override

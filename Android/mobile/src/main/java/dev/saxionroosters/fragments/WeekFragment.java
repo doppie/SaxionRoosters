@@ -89,7 +89,7 @@ public class WeekFragment extends Fragment implements ClickListener {
         list.setAdapter(listAdapter);
 
         //Run the task if this is an empty week object, else just load the existing week.
-        if(week == null || week.getDays() == null || week.getDays().isEmpty()) {
+        if(week == null || week.getDays() == null || week.getDays().isEmpty() || week.getOwner() == null) {
             getWeekTask();
         } else {
             updateUI();

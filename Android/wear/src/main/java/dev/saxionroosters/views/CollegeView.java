@@ -1,6 +1,7 @@
 package dev.saxionroosters.views;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.wearable.view.WearableListView;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -9,7 +10,7 @@ import android.widget.TextView;
 import dev.saxionroosters.R;
 
 /**
- * Created by Wessel on 17-11-2016.
+ * Created by Wessel on 18-11-2016.
  */
 
 public class CollegeView extends FrameLayout implements WearableListView.OnCenterProximityListener {
@@ -17,6 +18,8 @@ public class CollegeView extends FrameLayout implements WearableListView.OnCente
     final TextView title;
     final TextView room;
     final TextView time;
+    final TextView date;
+    final CardView card;
 
     public CollegeView(Context context) {
         super(context);
@@ -24,26 +27,26 @@ public class CollegeView extends FrameLayout implements WearableListView.OnCente
         title = (TextView) findViewById(R.id.title);
         room = (TextView) findViewById(R.id.room);
         time = (TextView) findViewById(R.id.time);
+        date = (TextView) findViewById(R.id.date);
+        card = (CardView) findViewById(R.id.card_view);
     }
 
 
     @Override
     public void onCenterPosition(boolean b) {
-
-        //Animation example to be ran when the view becomes the centered one
-        //title.animate().scaleX(1f).scaleY(1f).alpha(1);
-        //room.animate().scaleX(1f).scaleY(1f).alpha(1);
-        //time.animate().scaleX(1f).scaleY(1f).alpha(1);
-
+        // Animation when the view becomes centered
+        title.animate().scaleX(1f).scaleY(1f).alpha(1);
+        room.animate().scaleX(1f).scaleY(1f).alpha(1);
+        time.animate().scaleX(1f).scaleY(1f).alpha(1);
+        card.animate().scaleX(1f).scaleY(1f).alpha(1);
     }
 
     @Override
     public void onNonCenterPosition(boolean b) {
-
-        //Animation example to be ran when the view is not the centered one anymore
-        //title.animate().scaleX(0.8f).scaleY(0.8f).alpha(0.6f);
-        //room.animate().scaleX(0.8f).scaleY(0.8f).alpha(0.6f);
-        //time.animate().scaleX(0.8f).scaleY(0.8f).alpha(0.6f);
-
+        // Animation when the view is not centered anymore
+        title.animate().scaleX(0.95f).scaleY(0.95f).alpha(0.8f);
+        room.animate().scaleX(0.95f).scaleY(0.95f).alpha(0.8f);
+        time.animate().scaleX(0.95f).scaleY(0.95f).alpha(0.8f);
+        card.animate().scaleX(0.95f).scaleY(0.95f).alpha(0.8f);
     }
 }
