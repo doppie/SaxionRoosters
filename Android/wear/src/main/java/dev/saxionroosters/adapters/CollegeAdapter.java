@@ -1,12 +1,9 @@
 package dev.saxionroosters.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
 import android.support.wearable.view.WearableListView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -51,14 +48,13 @@ public class CollegeAdapter extends WearableListView.Adapter {
         TextView textViewDate = (TextView) collegeView.findViewById(R.id.date);
         textViewDate.setText(item.date);
 
-        //LinearLayout dateView = (LinearLayout) collegeView.findViewById(R.id.date_view);
+        View dateColor = (View) collegeView.findViewById(R.id.date_color);
 
-        if (item.dateheader) {
+        if (item.color != 0) {
             textViewDate.setVisibility(View.VISIBLE);
-            //dateView.setVisibility(View.VISIBLE);
+            dateColor.setBackgroundColor(item.color);
         } else {
-            textViewDate.setVisibility(View.GONE);
-            //dateView.setVisibility(View.GONE);
+            textViewDate.setVisibility(View.INVISIBLE);
         }
 
     }

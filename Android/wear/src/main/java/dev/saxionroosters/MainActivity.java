@@ -2,12 +2,11 @@ package dev.saxionroosters;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.wearable.view.WatchViewStub;
 import android.support.wearable.view.WearableListView;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.DataApi;
@@ -19,6 +18,7 @@ import com.google.android.gms.wearable.PutDataMapRequest;
 import com.google.android.gms.wearable.PutDataRequest;
 import com.google.android.gms.wearable.Wearable;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -91,6 +91,19 @@ public class MainActivity extends Activity implements WearableListView.ClickList
         }
     }
 
+    private String formatDate(String inputDate) {
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE dd MMMM yyyy");
+        Date date = null;
+        try {
+            date = sdf.parse(inputDate);
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM");
+
+        return formatter.format(date);
+    }
+
 
     @Override
     public void onClick(WearableListView.ViewHolder viewHolder) {
@@ -118,7 +131,7 @@ public class MainActivity extends Activity implements WearableListView.ClickList
 
         PutDataRequest putDataReq = putDataMapReq.asPutDataRequest().setUrgent();
         Wearable.DataApi.putDataItem(googleClient, putDataReq);
-        Tools.log("Wear client | Refresh request naar host device gestuurd");
+        Tools.log("Wear client | Refresh request sent to host device");
     }
 
     @Override
@@ -163,24 +176,31 @@ public class MainActivity extends Activity implements WearableListView.ClickList
                                 }
                             });
 
+                            final int[] color = {0};
                             final String[] lastDate = {null};
                             for (int i = 0; i < titleArray.size(); i++) {
                                 final int finalI = i;
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        boolean dateheader;
+                                        int dateColor;
+                                        int[] dateColors = { ContextCompat.getColor(getApplicationContext(), R.color.material_red_400), ContextCompat.getColor(getApplicationContext(), R.color.material_yellow_400), ContextCompat.getColor(getApplicationContext(), R.color.material_green_400), ContextCompat.getColor(getApplicationContext(), R.color.material_blue_400), ContextCompat.getColor(getApplicationContext(), R.color.material_purple_400)};
+
                                         String date = dateArray.get(finalI);
-                                        if (dateArray.get(finalI).equals(lastDate[0])){
-                                            dateheader = false;
+                                        if (dateArray.get(finalI).equals(lastDate[0]) || finalI == 0){
+                                            dateColor = dateColors[color[0]];
                                         } else {
-                                            // Date has changed. Add a college with a date-header
-                                            dateheader = true;
+                                            // Date has changed, new color
+                                            color[0]++;
+                                            dateColor = dateColors[color[0]];
                                         }
                                         lastDate[0] = date;
 
+                                        // If there are multiple rooms, replace the linebreaks
+                                        String rooms = roomArray.get(finalI).replaceAll("\n", " - ");
+
                                         // Add the colleges to the adapter
-                                        mAdapter.addItem(new College(titleArray.get(finalI), roomArray.get(finalI), timeArray.get(finalI), dateArray.get(finalI), dateheader));
+                                        mAdapter.addItem(new College(titleArray.get(finalI), rooms, timeArray.get(finalI), formatDate(dateArray.get(finalI)), dateColor));
                                         mAdapter.notifyDataSetChanged();
                                     }
                                 });
@@ -195,21 +215,21 @@ public class MainActivity extends Activity implements WearableListView.ClickList
                                 public void run() {
                                     if (mAdapter != null) {
                                         mAdapter.removeItems();
-                                        mAdapter.addItem(new College("Fout bij het laden", "", "", "", false));
+                                        mAdapter.addItem(new College(getResources().getString(R.string.error_no_internet), "", "", "", 0));
                                         mAdapter.notifyDataSetChanged();
                                     }
                                     setProgressBarVisible(false);
                                 }
                             });
                             break;
-                        // Unexpected error... Give also a warning.
+                        // Unknown error... Give also a warning.
                         default:
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     if (mAdapter != null) {
                                         mAdapter.removeItems();
-                                        mAdapter.addItem(new College("Fout bij het laden", "", "", "", false));
+                                        mAdapter.addItem(new College(getResources().getString(R.string.error_unknown), "", "", "", 0));
                                         mAdapter.notifyDataSetChanged();
                                     }
                                     setProgressBarVisible(false);
