@@ -1,14 +1,10 @@
 package dev.saxionroosters.activities;
 
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.support.design.widget.TabLayout;
 import android.support.graphics.drawable.VectorDrawableCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -71,7 +67,7 @@ public class CollegeDetailActivity extends BaseActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         toolbar.setSubtitle(getString(R.string.activity_college_details_subtitle));
 
-        Drawable backButton = VectorDrawableCompat.create(getResources(), R.drawable.ic_arrow_back_black_24dp, null);
+        Drawable backButton = VectorDrawableCompat.create(getResources(), R.drawable.search_ic_arrow_back_black_24dp, null);
         getSupportActionBar().setHomeAsUpIndicator(backButton);
 
         Intent i = getIntent();

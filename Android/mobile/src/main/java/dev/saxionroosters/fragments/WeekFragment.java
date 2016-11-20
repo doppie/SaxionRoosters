@@ -37,6 +37,7 @@ import dev.saxionroosters.extras.Tools;
 import dev.saxionroosters.interfaces.ClickListener;
 import dev.saxionroosters.model.College;
 import dev.saxionroosters.model.Day;
+import dev.saxionroosters.model.Owner;
 import dev.saxionroosters.model.Week;
 
 /**

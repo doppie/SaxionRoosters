@@ -57,7 +57,7 @@ dependencies {
     /* 3th Party libs */
     apt "org.androidannotations:androidannotations:$AAVersion"
     compile "org.androidannotations:androidannotations-api:$AAVersion"
-    compile 'com.lapism:searchview:4.0'
+    compile 'com.lapism:searchview:3.6.3'
     compile 'org.jsoup:jsoup:1.8.3'
     compile 'com.github.JakeWharton:ViewPagerIndicator:2.4.1@aar'
     compile 'com.heinrichreimersoftware:android-issue-reporter:1.2.6'
