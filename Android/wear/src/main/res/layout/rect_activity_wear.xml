@@ -28,6 +28,36 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true" />
 
+        <ImageView
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:visibility="visible"
+            android:id="@+id/errorImage"
+            android:layout_below="@+id/progressBar"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextViewAppearance.Body2"
+            android:textColor="@color/white"
+            android:id="@+id/errorText"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/errorImage"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/retryButton"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/errorText"/>
+
     </RelativeLayout>
 
 </LinearLayout>
