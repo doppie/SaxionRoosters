@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Saxion Official colors -->
+   <color name="color_saxion">#a7cd3a</color>
+    <color name="color_saxion_dark">#008539</color>
+    <color name="color_saxion_accent">#fff</color>
+
+
+    <color name="main_color_500">@color/material_blue_500</color>
+    <color name="main_color_50">@color/material_blue_50</color>
+    <color name="main_color_100">@color/material_blue_100</color>
+    <color name="main_color_200">@color/material_blue_200</color>
+    <color name="main_color_300">@color/material_blue_300</color>
+    <color name="main_color_400">@color/material_blue_400</color>
+    <color name="main_color_600">@color/material_blue_600</color>
+    <color name="main_color_700">@color/material_blue_700</color>
+    <color name="main_color_800">@color/material_blue_800</color>
+    <color name="main_color_900">@color/material_blue_900</color>
+    <color name="main_color_A100">@color/material_deep_orange_A100</color>
+    <color name="main_color_A200">@color/material_deep_orange_A200</color>
+    <color name="main_color_A400">@color/material_deep_orange_A400</color>
+
+    <color name="main_color_grey_500">@color/material_grey_500</color>
+    <color name="main_color_grey_50">@color/material_grey_50</color>
+    <color name="main_color_grey_100">@color/material_grey_100</color>
+    <color name="main_color_grey_200">@color/material_grey_200</color>
+    <color name="main_color_grey_300">@color/material_grey_300</color>
+    <color name="main_color_grey_400">@color/material_grey_400</color>
+    <color name="main_color_grey_600">@color/material_grey_600</color>
+    <color name="main_color_grey_700">@color/material_grey_700</color>
+    <color name="main_color_grey_800">@color/material_grey_800</color>
+    <color name="main_color_grey_900">@color/material_grey_900</color>
+
+
+    <color name="cpb_grey">#ffdedede</color>
+    <color name="cpb_blue">#ff0099cc</color>
+    <color name="cpb_blue_dark">#ff00719b</color>
+    <color name="cpb_red">#ffff4444</color>
+    <color name="cpb_red_dark">#ffcd3a3a</color>
+    <color name="cpb_green">#ff99cc00</color>
+    <color name="cpb_green_dark">#ff6d9b00</color>
+    <color name="cpb_orange">#FF9800</color>
+    <color name="cpb_orange_dark">#F57C00</color>
+    <color name="cpb_purple">#9C27B0</color>
+    <color name="cpb_purple_dark">#7B1FA2</color>
+    <color name="cpb_white">@android:color/white</color>
+</resources>
