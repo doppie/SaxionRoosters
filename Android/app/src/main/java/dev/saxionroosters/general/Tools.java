@@ -6,8 +6,9 @@ import dev.saxionroosters.BuildConfig;
 
 /**
  * Created by jelle on 27/11/2016.
+ *
+ * General methods
  */
-
 public class Tools {
 
     public static void log(String message) {

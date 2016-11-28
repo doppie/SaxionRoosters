@@ -14,4 +14,12 @@ public class Day {
 
     @SerializedName("entries")
     private ArrayList<College> colleges;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public ArrayList<College> getColleges() {
+        return colleges;
+    }
 }
