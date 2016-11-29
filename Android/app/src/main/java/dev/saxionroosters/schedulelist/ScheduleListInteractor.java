@@ -2,7 +2,7 @@ package dev.saxionroosters.schedulelist;
 
 import org.greenrobot.eventbus.EventBus;
 
-import dev.saxionroosters.ScheduleService;
+import dev.saxionroosters.ScheduleRepository;
 import dev.saxionroosters.general.Tools;
 import dev.saxionroosters.eventbus.ScheduleEvent;
 import dev.saxionroosters.model.Schedule;
@@ -18,8 +18,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ScheduleListInteractor implements IScheduleListInteractor {
 
-    private ScheduleService service;
     private Retrofit retrofit;
+    private ScheduleRepository repository;
 
     public ScheduleListInteractor() {
 
@@ -29,12 +29,12 @@ public class ScheduleListInteractor implements IScheduleListInteractor {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        service = retrofit.create(ScheduleService.class);
+        repository = retrofit.create(ScheduleRepository.class);
     }
 
     @Override
     public void getScheduleForGroup(final String group, final int week) {
-        final Call<Schedule> schedule = service.getScheduleForGroup("EIB1a", 0);
+        final Call<Schedule> schedule = repository.getScheduleForGroup(group, week);
         schedule.enqueue(new Callback<Schedule>() {
             @Override
             public void onResponse(Call<Schedule> call, Response<Schedule> response) {

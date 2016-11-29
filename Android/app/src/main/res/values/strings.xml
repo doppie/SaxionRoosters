@@ -5,4 +5,9 @@
     <string name="free_day">Nothing planned today.</string>
     <string name="vacation">Vacation</string>
     <string name="holiday">Holiday</string>
+    <string name="week">Week</string>
+    <string name="week_current">This week</string>
+    <string name="search_hint">Search</string>
+
+    <string name="action_search">Search</string>
 </resources>

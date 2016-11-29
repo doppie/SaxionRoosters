@@ -14,7 +14,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:padding="0dp"
-        android:m="true"
+        android:singleLine="true"
         android:text="12 mei 2015"
         android:textColor="?attr/colorPrimaryDark"
         android:visibility="gone" />

@@ -46,7 +46,7 @@ public class ScheduleListFragment extends Fragment implements ScheduleListView, 
         //this class does not need to remember any data, this will all be done in the presenter
         //we receive the extras here, but push them to the presenter.
         int week = getArguments().getInt("week", 0); //default = 0
-        String group = getArguments().getString("group","EIB2a");
+        String group = getArguments().getString("group", ""); //default = ""
         presenter = new ScheduleListPresenter(this, group, week);
     }
 
@@ -56,6 +56,9 @@ public class ScheduleListFragment extends Fragment implements ScheduleListView, 
         unbinder = ButterKnife.bind(this, v);
 
         initUI();
+
+        //try to load the schedule.
+        presenter.getSchedule();
 
         return v;
     }
@@ -128,4 +131,5 @@ public class ScheduleListFragment extends Fragment implements ScheduleListView, 
     public void onClick(View v, int position, boolean isLongClick) {
         //TODO: show details activity
     }
+
 }
