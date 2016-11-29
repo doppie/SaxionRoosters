@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
 
+import dev.saxionroosters.Dataset;
 import dev.saxionroosters.ScheduleRepository;
 import dev.saxionroosters.eventbus.SearchResultEvent;
 import dev.saxionroosters.general.Tools;
@@ -22,6 +23,7 @@ public class MainInteractor implements IMainInteractor {
 
     private Retrofit retrofit;
     private ScheduleRepository repository;
+    private Dataset dataset;
     private Gson gson;
 
     public MainInteractor() {
@@ -34,10 +36,20 @@ public class MainInteractor implements IMainInteractor {
 
 
         repository = retrofit.create(ScheduleRepository.class);
+
+        dataset = Dataset.getInstance();
     }
 
     @Override
     public void search(String query) {
+        //check if we already have results for this query.
+        SearchResult searchResult = dataset.getSearchResult(query);
+        if(searchResult != null) {
+            EventBus.getDefault().post(new SearchResultEvent(searchResult));
+            return;
+        }
+
+        //else we try to request the results.
         final Call<SearchResult> result = repository.getSearchResultForQuery(query);
         result.enqueue(new Callback<SearchResult>() {
             @Override

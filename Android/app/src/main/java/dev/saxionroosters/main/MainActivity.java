@@ -93,8 +93,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
             public void onItemClick(View view, int position) {
                 SearchItem item = searchAdapter.getSuggestionsList().get(position);
                 showSchedulePager(item.get_text().toString());
-
-                Tools.log(TAG, "SearchView Item clicked: " + item.get_text().toString());
+                searchView.close(true);
             }
         });
         searchView.setAdapter(searchAdapter);
@@ -106,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
         //reset the adapter with the new group.
         pager.setAdapter(null);
+        pagerAdapter = null;
         pagerAdapter = new SchedulePagerAdapter(this, getSupportFragmentManager(), group);
         pager.setAdapter(pagerAdapter);
     }

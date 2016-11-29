@@ -57,9 +57,6 @@ public class ScheduleListFragment extends Fragment implements ScheduleListView, 
 
         initUI();
 
-        //try to load the schedule.
-        presenter.getSchedule();
-
         return v;
     }
 
@@ -73,6 +70,8 @@ public class ScheduleListFragment extends Fragment implements ScheduleListView, 
     public void onResume() {
         super.onResume();
         presenter.resume();
+        //try to load the schedule.
+        presenter.getSchedule();
     }
 
     @Override
@@ -99,7 +98,7 @@ public class ScheduleListFragment extends Fragment implements ScheduleListView, 
     @Override
     public void showSchedule(Schedule schedule) {
         listAdapter.updateData(schedule);
-        showMessage("Received schedule for: " + schedule.getSubject().getGroup().getName());
+        list.setVisibility(View.VISIBLE);
     }
 
     @Override

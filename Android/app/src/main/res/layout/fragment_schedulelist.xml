@@ -26,15 +26,16 @@
             layout="@layout/loading_layout"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:visibility="gone"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:visibility="visible" />
 
         <include
             android:id="@+id/retryLayout"
             layout="@layout/retry_layout"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:visibility="gone"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"/>
     </RelativeLayout>

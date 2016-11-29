@@ -2,6 +2,7 @@ package dev.saxionroosters.schedulelist;
 
 import org.greenrobot.eventbus.EventBus;
 
+import dev.saxionroosters.Dataset;
 import dev.saxionroosters.ScheduleRepository;
 import dev.saxionroosters.general.Tools;
 import dev.saxionroosters.eventbus.ScheduleEvent;
@@ -20,6 +21,7 @@ public class ScheduleListInteractor implements IScheduleListInteractor {
 
     private Retrofit retrofit;
     private ScheduleRepository repository;
+    private Dataset dataset;
 
     public ScheduleListInteractor() {
 
@@ -30,15 +32,29 @@ public class ScheduleListInteractor implements IScheduleListInteractor {
                 .build();
 
         repository = retrofit.create(ScheduleRepository.class);
+
+        dataset = Dataset.getInstance();
     }
 
     @Override
     public void getScheduleForGroup(final String group, final int week) {
-        final Call<Schedule> schedule = repository.getScheduleForGroup(group, week);
-        schedule.enqueue(new Callback<Schedule>() {
+
+        //first check if we already have the schedule.
+        Schedule schedule = dataset.getSchedule(group, week + "");
+        if(schedule != null) {
+            EventBus.getDefault().post(new ScheduleEvent(group, week, schedule));
+            return;
+        }
+
+        //else we make a call to the api
+        final Call<Schedule> result = repository.getScheduleForGroup(group, week);
+        result.enqueue(new Callback<Schedule>() {
             @Override
             public void onResponse(Call<Schedule> call, Response<Schedule> response) {
                 Tools.log("Received schedule!");
+
+                //save it in our dataset for reuse.
+                dataset.addSchedule(response.body());
 
                 //notify the presenter with the data
                 EventBus.getDefault().post(new ScheduleEvent(group, week, response.body()));

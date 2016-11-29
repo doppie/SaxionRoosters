@@ -15,7 +15,12 @@ public class SearchResult {
     //teachers
     //academies
 
+    private String query;
     private ArrayList<Group> groups;
+
+    public String getQuery() {
+        return query;
+    }
 
     public ArrayList<Group> getGroups() {
         return groups;

@@ -58,6 +58,6 @@ public class SchedulePagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public int getItemPosition(Object obj) {
         //we dont use this function, as we do not have objects connected to the fragments.
-        return -1;
+        return POSITION_NONE;
     }
 }

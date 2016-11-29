@@ -8,6 +8,8 @@
         style="?android:attr/progressBarStyleSmall"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:indeterminateTint="@color/material_orange_600"
+        android:progressTint="@color/material_orange_600"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_gravity="center" />
