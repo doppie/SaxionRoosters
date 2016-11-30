@@ -4,14 +4,14 @@ import org.greenrobot.eventbus.EventBus;
 
 import dev.saxionroosters.Dataset;
 import dev.saxionroosters.ScheduleRepository;
-import dev.saxionroosters.general.Tools;
+import dev.saxionroosters.eventbus.ErrorEvent;
+import dev.saxionroosters.general.ErrorUtils;
+import dev.saxionroosters.general.ServiceGenerator;
 import dev.saxionroosters.eventbus.ScheduleEvent;
 import dev.saxionroosters.model.Schedule;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by jelle on 27/11/2016.
@@ -19,20 +19,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ScheduleListInteractor implements IScheduleListInteractor {
 
-    private Retrofit retrofit;
     private ScheduleRepository repository;
     private Dataset dataset;
 
     public ScheduleListInteractor() {
-
-        //init retrofit
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://api.roosters.saxion.nl/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        repository = retrofit.create(ScheduleRepository.class);
-
+        repository = ServiceGenerator.createService(ScheduleRepository.class);
         dataset = Dataset.getInstance();
     }
 
@@ -51,18 +42,21 @@ public class ScheduleListInteractor implements IScheduleListInteractor {
         result.enqueue(new Callback<Schedule>() {
             @Override
             public void onResponse(Call<Schedule> call, Response<Schedule> response) {
-                Tools.log("Received schedule!");
+                if(response.isSuccessful()) {
+                    //save it in our dataset for reuse.
+                    dataset.addSchedule(response.body());
 
-                //save it in our dataset for reuse.
-                dataset.addSchedule(response.body());
-
-                //notify the presenter with the data
-                EventBus.getDefault().post(new ScheduleEvent(group, week, response.body()));
+                    //notify the presenter with the data
+                    EventBus.getDefault().post(new ScheduleEvent(group, week, response.body()));
+                } else {
+                    ErrorEvent errorEvent = ErrorUtils.parseError(response);
+                    EventBus.getDefault().post(errorEvent);
+                }
             }
 
             @Override
             public void onFailure(Call<Schedule> call, Throwable t) {
-                Tools.log("Failure: " + t.toString());
+                EventBus.getDefault().post(new ErrorEvent(-1, t.getMessage()));
             }
         });
     }

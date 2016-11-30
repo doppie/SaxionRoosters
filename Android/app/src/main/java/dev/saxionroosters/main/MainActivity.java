@@ -1,6 +1,7 @@
 package dev.saxionroosters.main;
 
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -123,6 +124,11 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @Override
     public void showBannerAd() {
 
+    }
+
+    @Override
+    public void showMessage(String message) {
+        Snackbar.make(mainLayout, message, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override

@@ -6,6 +6,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import dev.saxionroosters.eventbus.ErrorEvent;
 import dev.saxionroosters.eventbus.ScheduleEvent;
+import dev.saxionroosters.general.Tools;
 
 /**
  * Created by jelle on 27/11/2016.
@@ -57,9 +58,10 @@ public class ScheduleListPresenter implements IScheduleListPresenter {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onErrorReceived(ErrorEvent event) {
+        Tools.log("[Error] " + event.getMessage());
         view.dismissLoadingLayout();
         view.showRetryLayout();
-        view.showMessage(event.getError().toString());
+        view.showMessage(event.getMessage());
     }
 
 }

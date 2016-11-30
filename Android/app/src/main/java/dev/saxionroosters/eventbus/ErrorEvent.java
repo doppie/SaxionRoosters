@@ -7,13 +7,24 @@ package dev.saxionroosters.eventbus;
  */
 public class ErrorEvent {
 
-    private Error error;
+    private int statusCode = -1;                    //default = -1 = unknown
+    private String message = "unknown error";       //default = "unknown error"
 
-    public ErrorEvent(Error error) {
-        this.error = error;
+
+    public ErrorEvent(int statusCode, String message) {
+        this.statusCode = statusCode;
+        this.message = message;
     }
 
-    public Error getError() {
-        return error;
+    public ErrorEvent() {
+
+    }
+
+    public int getStatus() {
+        return statusCode;
+    }
+
+    public String getMessage() {
+        return message;
     }
 }

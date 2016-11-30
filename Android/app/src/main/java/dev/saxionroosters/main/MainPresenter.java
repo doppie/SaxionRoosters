@@ -4,10 +4,13 @@ import com.lapism.searchview.SearchItem;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
+import dev.saxionroosters.eventbus.ErrorEvent;
 import dev.saxionroosters.eventbus.SearchResultEvent;
+import dev.saxionroosters.general.Tools;
 import dev.saxionroosters.model.Group;
 
 /**
@@ -52,4 +55,11 @@ public class MainPresenter implements IMainPresenter {
 
         view.showSearchResults(items);
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onErrorReceived(ErrorEvent event) {
+        Tools.log("[Error] " + event.getMessage());
+        view.showMessage(event.getMessage());
+    }
+
 }

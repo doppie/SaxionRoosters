@@ -21,4 +21,10 @@ public interface MainView extends IView {
     void showInterstitialAd();
 
     void showBannerAd();
+
+    /**
+     * Show a snackbar message to the user.
+     * @param message
+     */
+    void showMessage(String message);
 }
