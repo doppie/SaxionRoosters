@@ -1,15 +1,24 @@
 package dev.saxionroosters.introduction;
 
+import android.content.Intent;
+
+import dev.saxionroosters.R;
+import dev.saxionroosters.general.PreferenceManager;
+import dev.saxionroosters.general.Prefs;
+import dev.saxionroosters.main.MainActivity;
+
 /**
  * Created by jelle on 30/11/2016.
  */
 
 public class IntroductionPresenter implements IIntroductionPresenter {
 
-    IntroductionView view;
+    private IntroductionView view;
+    private PreferenceManager prefsManager;
 
     public IntroductionPresenter(IntroductionView view) {
         this.view = view;
+        this.prefsManager = PreferenceManager.getInstance(view.getContext());
     }
 
     @Override
@@ -20,5 +29,16 @@ public class IntroductionPresenter implements IIntroductionPresenter {
     @Override
     public void pause() {
 
+    }
+
+    @Override
+    public void skipIntroduction() {
+        if(prefsManager.read(Prefs.DEFAULT_GROUP).isEmpty()) {
+            view.showMessage(view.getContext().getString(R.string.error_no_default_group));
+        } else {
+            Intent i = new Intent(view.getContext(), MainActivity.class);
+            view.getContext().startActivity(i);
+            view.finish();
+        }
     }
 }

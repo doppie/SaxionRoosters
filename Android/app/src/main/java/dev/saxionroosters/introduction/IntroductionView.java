@@ -18,6 +18,8 @@ public interface IntroductionView extends IView {
     void moveToFragment(Fragment fragment);
 
 
+    void showMessage(String message);
 
+    void finish();
 
 }

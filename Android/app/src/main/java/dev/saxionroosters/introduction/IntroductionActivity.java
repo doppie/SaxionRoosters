@@ -4,9 +4,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 
 import com.viewpagerindicator.CirclePageIndicator;
@@ -81,6 +83,13 @@ public class IntroductionActivity extends AppCompatActivity implements Introduct
         //load all screens divide by 2 because 1 limit = left + right screen.
         pager.setOffscreenPageLimit(pagerAdapter.getCount() / 2);
         pagerIndicator.setViewPager(pager);
+
+        skipButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.skipIntroduction();
+            }
+        });
     }
 
     @Override
@@ -92,6 +101,11 @@ public class IntroductionActivity extends AppCompatActivity implements Introduct
     public void moveToFragment(Fragment fragment) {
         int position = pagerAdapter.getPosition(fragment);
         pager.setCurrentItem(position, true); //animations are nice :)
+    }
+
+    @Override
+    public void showMessage(String message) {
+        Snackbar.make(mainLayout, message, Snackbar.LENGTH_SHORT).show();
     }
 
 }

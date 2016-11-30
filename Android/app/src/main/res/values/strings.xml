@@ -21,4 +21,6 @@
     <string name="subtitle_intro_social_coding">Designers, developers, creative thinkers and do-ers gather yourselves!  Community oriented &amp; opensource code, you decide the next step of this app!</string>
     <string name="title_intro_maps">Locations</string>
     <string name="subtitle_intro_maps">Lost? You can now also check your college location.</string>
+
+    <string name="error_no_default_group">Please select a default group to finish the introduction.</string>
 </resources>

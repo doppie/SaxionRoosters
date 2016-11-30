@@ -8,6 +8,6 @@ import dev.saxionroosters.general.IPresenter;
 
 public interface IIntroductionPresenter extends IPresenter {
 
-
+    void skipIntroduction();
 
 }
