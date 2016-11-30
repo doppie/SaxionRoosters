@@ -27,4 +27,6 @@ public interface MainView extends IView {
      * @param message
      */
     void showMessage(String message);
+
+    void finish();
 }

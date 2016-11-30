@@ -10,4 +10,8 @@
     <string name="search_hint">Search</string>
 
     <string name="action_search">Search</string>
+    <string name="skip">Skip</string>
+
+    <string name="getting_started">Getting started</string>
+    <string name="select_group">Select group</string>
 </resources>

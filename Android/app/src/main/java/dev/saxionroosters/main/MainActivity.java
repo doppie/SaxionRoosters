@@ -1,5 +1,7 @@
 package dev.saxionroosters.main;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dev.saxionroosters.R;
+import dev.saxionroosters.introduction.IntroductionActivity;
 
 public class MainActivity extends AppCompatActivity implements MainView {
 
@@ -46,9 +49,9 @@ public class MainActivity extends AppCompatActivity implements MainView {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        presenter = new MainPresenter(this);
-
         initUI();
+
+        presenter = new MainPresenter(this);
     }
 
     @Override
@@ -101,6 +104,11 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     @Override
+    public Context getContext() {
+        return this;
+    }
+
+    @Override
     public void showSchedulePager(String group) {
 
         //reset the adapter with the new group.
@@ -108,6 +116,9 @@ public class MainActivity extends AppCompatActivity implements MainView {
         pagerAdapter = null;
         pagerAdapter = new SchedulePagerAdapter(this, getSupportFragmentManager(), group);
         pager.setAdapter(pagerAdapter);
+
+        //set our header subtitle
+        getSupportActionBar().setSubtitle(group);
     }
 
     @Override

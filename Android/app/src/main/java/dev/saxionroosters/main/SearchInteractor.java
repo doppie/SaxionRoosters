@@ -17,13 +17,13 @@ import retrofit2.Response;
  * Created by jelle on 29/11/2016.
  */
 
-public class MainInteractor implements IMainInteractor {
+public class SearchInteractor implements ISearchInteractor {
 
 
     private ScheduleRepository repository;
     private Dataset dataset;
 
-    public MainInteractor() {
+    public SearchInteractor() {
         repository = ServiceGenerator.createService(ScheduleRepository.class);
         dataset = Dataset.getInstance();
     }

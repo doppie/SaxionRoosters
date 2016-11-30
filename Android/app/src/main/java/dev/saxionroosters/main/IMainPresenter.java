@@ -9,4 +9,6 @@ import dev.saxionroosters.general.IPresenter;
 public interface IMainPresenter extends IPresenter {
 
     void search(String query);
+
+    void startIntroduction();
 }

@@ -1,4 +1,4 @@
-package dev.saxionroosters.main;
+package dev.saxionroosters.searchdialog;
 
 import android.content.Intent;
 
@@ -10,35 +10,30 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
-import dev.saxionroosters.Dataset;
 import dev.saxionroosters.eventbus.ErrorEvent;
 import dev.saxionroosters.eventbus.SearchResultEvent;
 import dev.saxionroosters.general.PreferenceManager;
 import dev.saxionroosters.general.Prefs;
 import dev.saxionroosters.general.Tools;
 import dev.saxionroosters.introduction.IntroductionActivity;
+import dev.saxionroosters.main.MainActivity;
+import dev.saxionroosters.main.SearchInteractor;
 import dev.saxionroosters.model.Group;
 
 /**
- * Created by jelle on 29/11/2016.
+ * Created by jelle on 30/11/2016.
  */
 
-public class MainPresenter implements IMainPresenter {
+public class SearchDialogPresenter implements ISearchDialogPresenter {
 
-    private MainView view;
+    private SearchDialogView view;
     private SearchInteractor interactor;
     private PreferenceManager prefsManager;
 
-    public MainPresenter(MainView view) {
+    public SearchDialogPresenter(SearchDialogView view) {
         this.view = view;
         this.interactor = new SearchInteractor();
         this.prefsManager = PreferenceManager.getInstance(view.getContext());
-
-        if(prefsManager.read(Prefs.DEFAULT_GROUP).isEmpty()) {
-            startIntroduction();
-        } else {
-            view.showSchedulePager(prefsManager.read(Prefs.DEFAULT_GROUP));
-        }
     }
 
     @Override
@@ -53,16 +48,19 @@ public class MainPresenter implements IMainPresenter {
 
     @Override
     public void search(String query) {
+        view.showLoadingLayout();
         interactor.search(query);
-
-        //TODO: indicate that we are loading search results.
     }
 
     @Override
-    public void startIntroduction() {
-        Intent i = new Intent(view.getContext(), IntroductionActivity.class);
+    public void finishSelection(SearchItem item) {
+
+        //save this as our default schedule to our preferences.
+        prefsManager.write(Prefs.DEFAULT_GROUP, item.get_text().toString());
+
+        Intent i = new Intent(view.getActivity(), MainActivity.class);
         view.getContext().startActivity(i);
-        view.finish();
+        view.getActivity().finish();
     }
 
     @Subscribe
@@ -71,13 +69,19 @@ public class MainPresenter implements IMainPresenter {
         //create a list of results
         ArrayList<SearchItem> items = new ArrayList<>();
 
-        for(Group group : event.getResult().getGroups()) {
+        for (Group group : event.getResult().getGroups()) {
             items.add(new SearchItem(group.getName()));
         }
 
-        view.showSearchResults(items);
+        view.showSearchResults(items, event.getResult().getQuery());
 
-        //TODO: stop indicating that we are loading search results.
+        if (items.size() > 0) {
+            view.dismissEmptyMessage();
+        } else {
+            view.showEmptyMessage();
+        }
+
+        view.dismissLoadingLayout();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
