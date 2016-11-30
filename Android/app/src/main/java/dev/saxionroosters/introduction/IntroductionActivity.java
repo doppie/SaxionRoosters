@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dev.saxionroosters.R;
+import dev.saxionroosters.introduction.pages.IntroPageFragment;
+import dev.saxionroosters.introduction.pages.Pages;
 import dev.saxionroosters.searchdialog.SearchDialogFragment;
 
 /**
@@ -50,8 +52,30 @@ public class IntroductionActivity extends AppCompatActivity implements Introduct
 
     @Override
     public void initUI() {
+
         ArrayList<Fragment> fragments = new ArrayList<>();
+
+        IntroPageFragment homeFragment = new IntroPageFragment();
+        Bundle homeArgs = new Bundle();
+        homeArgs.putString("page", Pages.HOME.toString());
+        homeFragment.setArguments(homeArgs);
+
+        IntroPageFragment mapsFragment = new IntroPageFragment();
+        Bundle mapsArgs = new Bundle();
+        mapsArgs.putString("page", Pages.MAPS.toString());
+        mapsFragment.setArguments(mapsArgs);
+
+        IntroPageFragment gitFragment = new IntroPageFragment();
+        Bundle gitArgs = new Bundle();
+        gitArgs.putString("page", Pages.SOCIAL_CODING.toString());
+        gitFragment.setArguments(gitArgs);
+
+        //the final list of our pager content
+        fragments.add(homeFragment);
+        fragments.add(gitFragment);
+        fragments.add(mapsFragment);
         fragments.add(new SearchDialogFragment());
+
         pagerAdapter = new IntroductionPagerAdapter(fragments, getSupportFragmentManager(), this);
         pager.setAdapter(pagerAdapter);
         //load all screens divide by 2 because 1 limit = left + right screen.

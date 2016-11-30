@@ -18,7 +18,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".introduction.IntroductionActivity"></activity>
+        <activity android:name=".introduction.IntroductionActivity"
+            android:windowSoftInputMode="stateVisible|adjustPan|stateAlwaysHidden"/>
+
+
     </application>
 
 </manifest>

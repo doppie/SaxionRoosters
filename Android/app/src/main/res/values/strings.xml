@@ -14,4 +14,11 @@
 
     <string name="getting_started">Getting started</string>
     <string name="select_group">Select group</string>
+
+    <string name="title_intro_home">Your schedule at hand</string>
+    <string name="subtitle_intro_home">Super easy, always your schedule with you. Created with \u2665 by students, for students &amp; teachers of Saxion University of Applied Sciences.</string>
+    <string name="title_intro_social_coding">Community</string>
+    <string name="subtitle_intro_social_coding">Designers, developers, creative thinkers and do-ers gather yourselves!  Community oriented &amp; opensource code, you decide the next step of this app!</string>
+    <string name="title_intro_maps">Locations</string>
+    <string name="subtitle_intro_maps">Lost? You can now also check your college location.</string>
 </resources>
