@@ -187,7 +187,6 @@ public class SearchDialogFragment extends DialogFragment implements SearchDialog
     @Override
     public void showMessage(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-        //TODO: either show a toast or a snackbar here.
     }
 
     @Override
