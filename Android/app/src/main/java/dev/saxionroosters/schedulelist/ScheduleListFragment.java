@@ -70,8 +70,8 @@ public class ScheduleListFragment extends Fragment implements ScheduleListView, 
     public void onResume() {
         super.onResume();
         presenter.resume();
-        //try to load the schedule.
-        presenter.getSchedule();
+
+        presenter.getSchedule(); //try to load the schedule.
     }
 
     @Override

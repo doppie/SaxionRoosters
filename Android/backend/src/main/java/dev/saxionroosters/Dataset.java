@@ -48,7 +48,7 @@ public class Dataset {
      */
     public Schedule getSchedule(String group, String offset) {
         for(Schedule schedule : schedules) {
-            if(schedule.getSubject().getGroup().getName().equals(group)
+            if(schedule.getSubject().getGroup().getName().equalsIgnoreCase(group)
                     && schedule.getWeek().getOffset().equals(offset)) {
                 return schedule;
             }
@@ -69,7 +69,7 @@ public class Dataset {
      */
     public SearchResult getSearchResult(String query) {
         for(SearchResult result : results) {
-            if(result.getQuery().equals(query)) {
+            if(result.getQuery().equalsIgnoreCase(query)) {
                 return result;
             }
         }

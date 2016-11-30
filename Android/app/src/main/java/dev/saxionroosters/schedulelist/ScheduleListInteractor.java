@@ -8,6 +8,7 @@ import dev.saxionroosters.eventbus.ErrorEvent;
 import dev.saxionroosters.general.ErrorUtils;
 import dev.saxionroosters.general.ServiceGenerator;
 import dev.saxionroosters.eventbus.ScheduleEvent;
+import dev.saxionroosters.general.Tools;
 import dev.saxionroosters.model.Schedule;
 import retrofit2.Call;
 import retrofit2.Callback;

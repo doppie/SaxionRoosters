@@ -24,15 +24,14 @@ public class ScheduleListPresenter implements IScheduleListPresenter {
         this.view = view;
         this.group = group;
         this.week = week;
-
         interactor = new ScheduleListInteractor();
     }
 
     @Override
     public void getSchedule() {
-        interactor.getScheduleForGroup(group, week);
-        view.dismissRetryLayout();
         view.showLoadingLayout();
+        view.dismissRetryLayout();
+        interactor.getScheduleForGroup(group, week);
     }
 
     @Override
@@ -50,9 +49,9 @@ public class ScheduleListPresenter implements IScheduleListPresenter {
 
         //we might receive an event from another fragment
         //so we make sure the event is for us by checking the week and group.
-        if(event.getGroup().equals(group) && event.getWeek() == week) {
-            view.showSchedule(event.getSchedule());
+        if(event.getGroup().equalsIgnoreCase(group) && event.getWeek() == week) {
             view.dismissLoadingLayout();
+            view.showSchedule(event.getSchedule());
         }
     }
 
