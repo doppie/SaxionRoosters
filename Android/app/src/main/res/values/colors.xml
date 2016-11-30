@@ -3,7 +3,7 @@
     <!-- Saxion Official colors -->
    <color name="color_saxion">#a7cd3a</color>
     <color name="color_saxion_dark">#008539</color>
-    <color name="color_saxion_accent">#fff</color>
+    <color name="color_saxion_accent">@color/main_color_grey_200</color>
 
 
     <color name="main_color_500">@color/material_blue_500</color>
