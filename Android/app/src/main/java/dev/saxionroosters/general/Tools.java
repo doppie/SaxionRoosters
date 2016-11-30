@@ -6,7 +6,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import dev.saxionroosters.BuildConfig;
+import dev.saxionroosters.ScheduleDeserializer;
 import dev.saxionroosters.SearchResultDeserializer;
+import dev.saxionroosters.model.Schedule;
 import dev.saxionroosters.model.SearchResult;
 
 /**
@@ -35,6 +37,7 @@ public class Tools {
         Gson gson = new GsonBuilder()
                 .excludeFieldsWithoutExposeAnnotation()
                 .registerTypeAdapter(SearchResult.class, new SearchResultDeserializer())
+                .registerTypeAdapter(Schedule.class, new ScheduleDeserializer())
                 .create();
         return gson;
     }

@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dev.saxionroosters.R;
-import dev.saxionroosters.general.Tools;
 
 public class MainActivity extends AppCompatActivity implements MainView {
 
