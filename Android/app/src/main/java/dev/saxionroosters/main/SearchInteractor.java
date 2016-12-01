@@ -5,9 +5,9 @@ import org.greenrobot.eventbus.EventBus;
 import dev.saxionroosters.Dataset;
 import dev.saxionroosters.ScheduleRepository;
 import dev.saxionroosters.eventbus.ErrorEvent;
-import dev.saxionroosters.general.ErrorUtils;
 import dev.saxionroosters.eventbus.SearchResultEvent;
 import dev.saxionroosters.general.ServiceGenerator;
+import dev.saxionroosters.general.Utils;
 import dev.saxionroosters.model.SearchResult;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -50,7 +50,7 @@ public class SearchInteractor implements ISearchInteractor {
                     //notify the presenter with the search results
                     EventBus.getDefault().post(new SearchResultEvent(response.body()));
                 } else { //error handling
-                    ErrorEvent errorEvent = ErrorUtils.parseError(response);
+                    ErrorEvent errorEvent = Utils.parseError(response);
                     EventBus.getDefault().post(errorEvent);
                 }
             }

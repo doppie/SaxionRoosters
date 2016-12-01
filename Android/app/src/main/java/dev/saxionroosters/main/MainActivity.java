@@ -119,6 +119,14 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
         //set our header subtitle
         getSupportActionBar().setSubtitle(group);
+
+        pager.setCurrentItem(4); //current week, as we want to be able to look back 5 weeks.
+    }
+
+    @Override
+    public void updateTabTitle(int pos, String title) {
+        TabLayout.Tab tab = tabs.getTabAt(pos);
+        tab.setText(title);
     }
 
     @Override

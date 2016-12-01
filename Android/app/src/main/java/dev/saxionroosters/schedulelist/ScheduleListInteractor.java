@@ -5,10 +5,9 @@ import org.greenrobot.eventbus.EventBus;
 import dev.saxionroosters.Dataset;
 import dev.saxionroosters.ScheduleRepository;
 import dev.saxionroosters.eventbus.ErrorEvent;
-import dev.saxionroosters.general.ErrorUtils;
 import dev.saxionroosters.general.ServiceGenerator;
 import dev.saxionroosters.eventbus.ScheduleEvent;
-import dev.saxionroosters.general.Tools;
+import dev.saxionroosters.general.Utils;
 import dev.saxionroosters.model.Schedule;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,17 +28,17 @@ public class ScheduleListInteractor implements IScheduleListInteractor {
     }
 
     @Override
-    public void getScheduleForGroup(final String group, final int week) {
+    public void getScheduleForGroup(final String group, final int offset) {
 
         //first check if we already have the schedule.
-        Schedule schedule = dataset.getSchedule(group, week + "");
+        Schedule schedule = dataset.getSchedule(group, offset + "");
         if(schedule != null) {
-            EventBus.getDefault().post(new ScheduleEvent(group, week, schedule));
+            EventBus.getDefault().post(new ScheduleEvent(group, offset, schedule));
             return;
         }
 
         //else we make a call to the api
-        final Call<Schedule> result = repository.getScheduleForGroup(group, week);
+        final Call<Schedule> result = repository.getScheduleForGroup(group, offset);
         result.enqueue(new Callback<Schedule>() {
             @Override
             public void onResponse(Call<Schedule> call, Response<Schedule> response) {
@@ -48,9 +47,9 @@ public class ScheduleListInteractor implements IScheduleListInteractor {
                     dataset.addSchedule(response.body());
 
                     //notify the presenter with the data
-                    EventBus.getDefault().post(new ScheduleEvent(group, week, response.body()));
+                    EventBus.getDefault().post(new ScheduleEvent(group, offset, response.body()));
                 } else {
-                    ErrorEvent errorEvent = ErrorUtils.parseError(response);
+                    ErrorEvent errorEvent = Utils.parseError(response);
                     EventBus.getDefault().post(errorEvent);
                 }
             }

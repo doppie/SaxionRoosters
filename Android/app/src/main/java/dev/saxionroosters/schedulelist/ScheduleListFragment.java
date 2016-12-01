@@ -1,6 +1,5 @@
 package dev.saxionroosters.schedulelist;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -11,14 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
-import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import dev.saxionroosters.R;
 import dev.saxionroosters.general.ClickListener;
-import dev.saxionroosters.general.Tools;
 import dev.saxionroosters.model.Schedule;
 
 /**
@@ -45,9 +41,9 @@ public class ScheduleListFragment extends Fragment implements ScheduleListView, 
 
         //this class does not need to remember any data, this will all be done in the presenter
         //we receive the extras here, but push them to the presenter.
-        int week = getArguments().getInt("week", 0); //default = 0
+        int offset = getArguments().getInt("offset", 0); //default = 0
         String group = getArguments().getString("group", ""); //default = ""
-        presenter = new ScheduleListPresenter(this, group, week);
+        presenter = new ScheduleListPresenter(this, group, offset);
     }
 
     @Override

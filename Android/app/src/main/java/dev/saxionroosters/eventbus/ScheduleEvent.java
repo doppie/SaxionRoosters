@@ -10,12 +10,12 @@ import dev.saxionroosters.model.Schedule;
 public class ScheduleEvent {
 
     private String group;
-    private int week;
+    private int offset;
     private Schedule schedule;
 
-    public ScheduleEvent(String group, int week, Schedule schedule) {
+    public ScheduleEvent(String group, int offset, Schedule schedule) {
         this.group = group;
-        this.week = week;
+        this.offset = offset;
         this.schedule = schedule;
     }
 
@@ -23,8 +23,8 @@ public class ScheduleEvent {
         return group;
     }
 
-    public int getWeek() {
-        return week;
+    public int getOffset() {
+        return offset;
     }
 
     public Schedule getSchedule() {

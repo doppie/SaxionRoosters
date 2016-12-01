@@ -6,7 +6,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import dev.saxionroosters.eventbus.ErrorEvent;
 import dev.saxionroosters.eventbus.ScheduleEvent;
-import dev.saxionroosters.general.Tools;
+import dev.saxionroosters.general.Utils;
 
 /**
  * Created by jelle on 27/11/2016.
@@ -18,12 +18,13 @@ public class ScheduleListPresenter implements IScheduleListPresenter {
     private ScheduleListView view;
 
     private String group;
-    private int week;
+    private int offset;
 
-    public ScheduleListPresenter(ScheduleListView view, String group, int week) {
+    public ScheduleListPresenter(ScheduleListView view, String group, int offset) {
         this.view = view;
         this.group = group;
-        this.week = week;
+        this.offset = offset;
+        Utils.log("Offset: " + offset);
         interactor = new ScheduleListInteractor();
     }
 
@@ -31,7 +32,7 @@ public class ScheduleListPresenter implements IScheduleListPresenter {
     public void getSchedule() {
         view.showLoadingLayout();
         view.dismissRetryLayout();
-        interactor.getScheduleForGroup(group, week);
+        interactor.getScheduleForGroup(group, offset);
     }
 
     @Override
@@ -48,8 +49,8 @@ public class ScheduleListPresenter implements IScheduleListPresenter {
     public void onScheduleReceived(ScheduleEvent event) {
 
         //we might receive an event from another fragment
-        //so we make sure the event is for us by checking the week and group.
-        if(event.getGroup().equalsIgnoreCase(group) && event.getWeek() == week) {
+        //so we make sure the event is for us by checking the offset and group.
+        if(event.getGroup().equalsIgnoreCase(group) && event.getOffset() == offset) {
             view.dismissLoadingLayout();
             view.showSchedule(event.getSchedule());
         }
@@ -57,7 +58,7 @@ public class ScheduleListPresenter implements IScheduleListPresenter {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onErrorReceived(ErrorEvent event) {
-        Tools.log("[Error] " + event.getMessage());
+        Utils.log("[Error] " + event.getMessage());
         view.dismissLoadingLayout();
         view.showRetryLayout();
         view.showMessage(event.getMessage());

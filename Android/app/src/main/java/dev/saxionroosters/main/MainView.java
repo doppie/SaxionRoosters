@@ -16,6 +16,12 @@ public interface MainView extends IView {
 
     void showSchedulePager(String group);
 
+    void updateTabTitle(int pos, String title);
+
+    /**
+     * Update the dropdownlist connected to the SearchView with the testresults.
+     * @param results
+     */
     void showSearchResults(ArrayList<SearchItem> results);
 
     void showInterstitialAd();

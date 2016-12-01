@@ -9,7 +9,9 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.ArrayList;
 
+import dev.saxionroosters.Dataset;
 import dev.saxionroosters.R;
+import dev.saxionroosters.model.Schedule;
 import dev.saxionroosters.model.Week;
 import dev.saxionroosters.schedulelist.ScheduleListFragment;
 
@@ -19,13 +21,15 @@ import dev.saxionroosters.schedulelist.ScheduleListFragment;
 
 public class SchedulePagerAdapter extends FragmentStatePagerAdapter {
 
-    private Context context;
+    private Dataset dataset;
     private String group;
+    private Context context;
 
     public SchedulePagerAdapter(Context context, FragmentManager fm, String group) {
         super(fm);
         this.context = context;
         this.group = group;
+        this.dataset = Dataset.getInstance();
     }
 
     @Override
@@ -33,7 +37,7 @@ public class SchedulePagerAdapter extends FragmentStatePagerAdapter {
         ScheduleListFragment fragment = new ScheduleListFragment();
         Bundle args = new Bundle();
         args.putString("group", group);
-        args.putInt("week", position);
+        args.putInt("offset", Schedule.getOffsetForPos(position));
         fragment.setArguments(args);
 
         return fragment;
@@ -41,23 +45,20 @@ public class SchedulePagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 10;
+        return 26; //26 weeks = half year
     }
 
     @Override
     public String getPageTitle(int pos) {
 
-        //if this is the current week show current week.
-        if(pos == 0) {
-            return context.getString(R.string.week_current);
-        } else {
-            return context.getString(R.string.week) + pos;
-        }
-    }
+        Schedule schedule = dataset.getSchedule(group, Schedule.getOffsetForPos(pos) + "");
 
-    @Override
-    public int getItemPosition(Object obj) {
-        //we dont use this function, as we do not have objects connected to the fragments.
-        return POSITION_NONE;
+        if(pos == 4) {
+            return context.getString(R.string.week_current);
+        } else if(schedule != null) {
+            return schedule.getWeek().getQuartile_week();
+        } else {
+            return "..";
+        }
     }
 }

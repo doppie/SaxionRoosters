@@ -10,14 +10,16 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
-import dev.saxionroosters.Dataset;
+import dev.saxionroosters.R;
 import dev.saxionroosters.eventbus.ErrorEvent;
+import dev.saxionroosters.eventbus.ScheduleEvent;
 import dev.saxionroosters.eventbus.SearchResultEvent;
 import dev.saxionroosters.general.PreferenceManager;
 import dev.saxionroosters.general.Prefs;
-import dev.saxionroosters.general.Tools;
+import dev.saxionroosters.general.Utils;
 import dev.saxionroosters.introduction.IntroductionActivity;
 import dev.saxionroosters.model.Group;
+import dev.saxionroosters.model.Schedule;
 
 /**
  * Created by jelle on 29/11/2016.
@@ -81,8 +83,20 @@ public class MainPresenter implements IMainPresenter {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onNewScheduleLoaded(ScheduleEvent event) {
+        int pos = Schedule.getPosForOffset(event.getOffset());
+        String title = "..";
+        if(pos == 4) {
+            title = view.getContext().getString(R.string.week_current);
+        } else if(event.getSchedule() != null){
+            title = event.getSchedule().getWeek().getQuartile_week();
+        }
+        view.updateTabTitle(pos, title);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onErrorReceived(ErrorEvent event) {
-        Tools.log("[Error] " + event.getMessage());
+        Utils.log("[Error] " + event.getMessage());
         view.showMessage(event.getMessage());
     }
 

@@ -56,8 +56,7 @@ public class Dataset {
 
         return null;
     }
-
-
+    
     public void addSearchResult(SearchResult result) {
         results.add(result);
     }

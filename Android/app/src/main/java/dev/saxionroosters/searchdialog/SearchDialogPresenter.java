@@ -14,8 +14,7 @@ import dev.saxionroosters.eventbus.ErrorEvent;
 import dev.saxionroosters.eventbus.SearchResultEvent;
 import dev.saxionroosters.general.PreferenceManager;
 import dev.saxionroosters.general.Prefs;
-import dev.saxionroosters.general.Tools;
-import dev.saxionroosters.introduction.IntroductionActivity;
+import dev.saxionroosters.general.Utils;
 import dev.saxionroosters.main.MainActivity;
 import dev.saxionroosters.main.SearchInteractor;
 import dev.saxionroosters.model.Group;
@@ -86,7 +85,7 @@ public class SearchDialogPresenter implements ISearchDialogPresenter {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onErrorReceived(ErrorEvent event) {
-        Tools.log("[Error] " + event.getMessage());
+        Utils.log("[Error] " + event.getMessage());
         view.showMessage(event.getMessage());
     }
 

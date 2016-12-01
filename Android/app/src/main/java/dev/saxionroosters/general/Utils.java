@@ -5,18 +5,25 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.IOException;
+import java.lang.annotation.Annotation;
+
 import dev.saxionroosters.BuildConfig;
 import dev.saxionroosters.ScheduleDeserializer;
 import dev.saxionroosters.SearchResultDeserializer;
+import dev.saxionroosters.eventbus.ErrorEvent;
 import dev.saxionroosters.model.Schedule;
 import dev.saxionroosters.model.SearchResult;
+import okhttp3.ResponseBody;
+import retrofit2.Converter;
+import retrofit2.Response;
 
 /**
  * Created by jelle on 27/11/2016.
  *
  * General methods
  */
-public class Tools {
+public class Utils {
 
     public static void log(String message) {
         if(BuildConfig.DEBUG) {
@@ -40,6 +47,23 @@ public class Tools {
                 .registerTypeAdapter(Schedule.class, new ScheduleDeserializer())
                 .create();
         return gson;
+    }
+
+
+    /**
+     * Parses an errorBody from the response of a RetroFit call
+     * @param response
+     * @return the parsed Error in an ErrorEvent object.
+     */
+    public static ErrorEvent parseError(Response<?> response) {
+        try {
+            Converter<ResponseBody, ErrorEvent> converter =
+                    ServiceGenerator.getRetrofit().responseBodyConverter(ErrorEvent.class, new Annotation[0]);
+
+            return converter.convert(response.errorBody());
+        } catch (IOException e) {
+            return new ErrorEvent();
+        }
     }
 
 }
