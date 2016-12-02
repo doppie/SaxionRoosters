@@ -17,4 +17,14 @@ public interface SettingsView extends IView {
     void showSelectDefaultGroupDialog();
 
     void showSelectColorThemeDialog();
+
+    void showUpgradeView();
+
+    void showFeedbackView();
+
+    void showLicensesView();
+
+    void showGithubView();
+
+    void showAboutView();
 }

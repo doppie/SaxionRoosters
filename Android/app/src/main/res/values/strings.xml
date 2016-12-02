@@ -27,6 +27,8 @@
     <string name="subtitle_option_upgrade">Removes ads. Nothing is free.</string>
     <string name="title_option_feedback">Feedback</string>
     <string name="subtitle_option_feedback">Share your thoughts.</string>
+    <string name="title_option_github">Source Code</string>
+    <string name="subtitle_option_github">Contribute your ideas.</string>
     <string name="title_option_licenses">Licenses</string>
     <string name="subtitle_option_licenses">Open Source Libraries we love.</string>
     <string name="title_option_about">About</string>

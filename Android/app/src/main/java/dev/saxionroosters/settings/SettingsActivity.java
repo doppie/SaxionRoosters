@@ -178,6 +178,32 @@ public class SettingsActivity extends AppCompatActivity implements SettingsView 
     }
 
     @Override
+    public void showUpgradeView() {
+
+    }
+
+    @Override
+    public void showFeedbackView() {
+
+    }
+
+    @Override
+    public void showLicensesView() {
+
+    }
+
+
+    @Override
+    public void showGithubView() {
+
+    }
+
+    @Override
+    public void showAboutView() {
+
+    }
+
+    @Override
     public Context getContext() {
         return this;
     }

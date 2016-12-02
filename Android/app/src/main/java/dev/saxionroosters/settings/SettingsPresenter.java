@@ -66,6 +66,11 @@ public class SettingsPresenter implements ISettingsPresenter {
                 context.getString(R.string.title_option_licenses),
                 context.getString(R.string.subtitle_option_licenses),
                 VectorDrawableCompat.create(context.getResources(), R.drawable.ic_book_open_black_24dp, null)));
+        options.add(new Option(Options.GITHUB,
+                context.getString(R.string.title_option_github),
+                context.getString(R.string.subtitle_option_github),
+                VectorDrawableCompat.create(context.getResources(), R.drawable.github_circle, null)));
+
         try {
             options.add(new Option(Options.ABOUT,
                     context.getString(R.string.title_option_about),
@@ -93,7 +98,23 @@ public class SettingsPresenter implements ISettingsPresenter {
 
     @Override
     public void handleOptionsClick(Option option) {
-
+        switch (option.getOption()) {
+            case UPGRADE:
+                view.showUpgradeView();
+                break;
+            case FEEDBACK:
+                view.showFeedbackView();
+                break;
+            case LICENSES:
+                view.showLicensesView();
+                break;
+            case GITHUB:
+                view.showGithubView();
+                break;
+            case ABOUT:
+                view.showAboutView();
+                break;
+        }
     }
 
     @Subscribe
