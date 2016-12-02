@@ -8,12 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dev.saxionroosters.R;
 import dev.saxionroosters.general.ClickListener;
+import dev.saxionroosters.general.Utils;
 import dev.saxionroosters.model.College;
 import dev.saxionroosters.model.Day;
 import dev.saxionroosters.model.Schedule;
@@ -88,7 +92,16 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
             holder.line.setVisibility(View.VISIBLE);
             holder.dateText.setVisibility(View.VISIBLE);
 
-            holder.dateText.setText(day.getDate().getDate());
+
+            try {
+                Date date = Utils.getDateFormatter().parse(day.getDate().getDate());
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(date);
+                holder.dateText.setText(Utils.getFullDateFormatter().format(cal.getTime()));
+            } catch (ParseException e) {
+                holder.dateText.setText("Error - unparseable date");
+            }
+
         } else if (object instanceof College) {
             College college = (College) object;
 

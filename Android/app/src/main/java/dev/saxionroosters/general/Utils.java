@@ -7,6 +7,7 @@ import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.text.SimpleDateFormat;
 
 import dev.saxionroosters.BuildConfig;
 import dev.saxionroosters.ScheduleDeserializer;
@@ -64,6 +65,22 @@ public class Utils {
         } catch (IOException e) {
             return new ErrorEvent();
         }
+    }
+
+    /**
+     * Used to parse the received date to a calendar (example: 2016-12-01)
+     * @return SimpleDateFormat that parses a string.
+     */
+    public static SimpleDateFormat getDateFormatter() {
+        return new SimpleDateFormat("yyyy-MM-dd");
+    }
+
+    /**
+     * Used to parse the received date to a calendar (example: Friday 1 December 2016)
+     * @return SimpleDateFormat that parses a string.
+     */
+    public static SimpleDateFormat getFullDateFormatter() {
+        return new SimpleDateFormat("EEEE dd MMMM yyyy");
     }
 
 }
