@@ -1,5 +1,7 @@
 package dev.saxionroosters.extras;
 
+import dev.saxionroosters.model.Owner;
+
 /**
  * Created by Doppie on 22-2-2016.
  */
@@ -47,6 +49,7 @@ public class S {
 
     //used for preferences
     public static final String SETTING_STARTUP_OWNER = "startup_owner";
+    public static final String SETTING_STARTUP_OWNER_TYPE = "startup_owner_type";
     public static final String SETTING_THEME_COLOR = "theme_color";
     public static final String INTRO_COMPLETE = "intro_complete";
 

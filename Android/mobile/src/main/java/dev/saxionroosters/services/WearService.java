@@ -103,14 +103,37 @@ public class WearService extends Service implements GoogleApiClient.ConnectionCa
 
             // get startup owner
             String startupOwnerName = (String) storage.getObject(S.SETTING_STARTUP_OWNER);
-            if (startupOwnerName != null && !startupOwnerName.isEmpty()) {
+            String startupOwnerType = (String) storage.getObject(S.SETTING_STARTUP_OWNER_TYPE);
+
+            if (startupOwnerName != null && !startupOwnerName.isEmpty() && startupOwnerType != null && !startupOwnerType.isEmpty()) {
                 startupOwnerName = startupOwnerName.replaceAll("\"", "");
 
+                startupOwnerType = (String) startupOwnerType.replaceAll("\"", "");
+                Tools.log("DEBUG: startupOwnerType: " + startupOwnerType);
+
+                Owner.OwnerType ownerType = null;
+                if (startupOwnerType.equals("GROUP")) {
+                    ownerType = Owner.OwnerType.GROUP;
+                } else if (startupOwnerType.equals("TEACHER")) {
+                    ownerType = Owner.OwnerType.TEACHER;
+                } else if (startupOwnerType.equals("COURSE")) {
+                    ownerType = Owner.OwnerType.COURSE;
+                } else if (startupOwnerType.equals("ACADEMY")) {
+                    ownerType = Owner.OwnerType.ACADEMY;
+                } else {
+                    Tools.log("ERROR: ownerType = " + ownerType);
+                }
+                Tools.log("DEBUG: " + ownerType);
+
                 // create new week (one week only, the current one)
-                week = new Week(new Owner(startupOwnerName, Owner.OwnerType.GROUP), "week", "0");
+                week = new Week(new Owner(startupOwnerName, ownerType), "week", "0");
+
+                startupOwnerName = Tools.getOwnerIdName(week.getOwner());
+                Tools.log("DEBUG: ownerIdName = " + Tools.getOwnerIdName(week.getOwner()));
+                Tools.log("DEBUG: ownerRepresentativeName = " + Tools.getOwnerRepresentativeName(week.getOwner()));
 
                 HtmlRetriever retriever = new HtmlRetriever(week);
-                String url = S.URL + S.SCHEDULE + "/" + week.getOwner().getTypeName() + ":" + startupOwnerName + "/" + S.WEEK_ID + ":" + week.getId();
+                String url = S.URL + S.SCHEDULE + "/" + ownerType.toString().toLowerCase() + ":" + startupOwnerName + "/" + S.WEEK_ID + ":" + week.getId();
                 Object object = retriever.retrieveHtml(url, S.PARSE_WEEK);
                 Week week = retriever.onWeekScheduleRetrieveCompleted(object);
                 if(week != null) {
@@ -118,22 +141,23 @@ public class WearService extends Service implements GoogleApiClient.ConnectionCa
                 } else {
                     Tools.log("Wear host | Error whilst loading colleges :(");
                 }
-            }
 
-            for (int i = 0; i < week.getDays().size(); i++) {
-                Day day = week.getDays().get(i);
+                for (int i = 0; i < week.getDays().size(); i++) {
+                    Day day = week.getDays().get(i);
 
-                for (int j = 0; j < day.getColleges().size(); j++) {
-                    College college = day.getColleges().get(j);
-                    String title = college.getName();
-                    String room = college.getLocation();
-                    String time = college.getTime();
-                    String date = college.getDate();
+                    for (int j = 0; j < day.getColleges().size(); j++) {
+                        College college = day.getColleges().get(j);
+                        String title = college.getName();
+                        Tools.log("Wear host | College name: " + title);
+                        String room = college.getLocation();
+                        String time = college.getTime();
+                        String date = college.getDate();
 
-                    titleArray.add(title);
-                    roomArray.add(room);
-                    timeArray.add(time);
-                    dateArray.add(date);
+                        titleArray.add(title);
+                        roomArray.add(room);
+                        timeArray.add(time);
+                        dateArray.add(date);
+                    }
                 }
             }
 
@@ -147,25 +171,37 @@ public class WearService extends Service implements GoogleApiClient.ConnectionCa
             UIHandler.post(new Runnable() {
                 public void run() {
 
-                    if (titleArray.get(0) != null) {
-                        // Week succesfully loaded, send it to the watch
-                        PutDataMapRequest putDataMapReq = PutDataMapRequest.create("/data-" + new Date().getTime()).setUrgent();
-                        DataMap map = putDataMapReq.getDataMap();
-                        map.putLong("time", new Date().getTime());
-                        map.putString("status", "success");
-                        map.putStringArrayList("title", titleArray);
-                        map.putStringArrayList("room", roomArray);
-                        map.putStringArrayList("time", timeArray);
-                        map.putStringArrayList("date", dateArray);
+                    try {
+                        if (titleArray.get(0) != null) {
+                            Tools.log(String.valueOf(titleArray));
+                            // Week succesfully loaded, send it to the watch
+                            PutDataMapRequest putDataMapReq = PutDataMapRequest.create("/data-" + new Date().getTime()).setUrgent();
+                            DataMap map = putDataMapReq.getDataMap();
+                            map.putLong("time", new Date().getTime());
+                            map.putString("status", "success");
+                            map.putStringArrayList("title", titleArray);
+                            map.putStringArrayList("room", roomArray);
+                            map.putStringArrayList("time", timeArray);
+                            map.putStringArrayList("date", dateArray);
 
-                        PutDataRequest putDataReq = putDataMapReq.asPutDataRequest().setUrgent();
-                        Wearable.DataApi.putDataItem(googleClient, putDataReq);
-                    } else {
-                        // error whilst loading, send unknown error to watch
+                            PutDataRequest putDataReq = putDataMapReq.asPutDataRequest().setUrgent();
+                            Wearable.DataApi.putDataItem(googleClient, putDataReq);
+                        } else {
+                            // error whilst loading, send unknown error to watch
+                            PutDataMapRequest putDataMapReq = PutDataMapRequest.create("/data-" + new Date().getTime()).setUrgent();
+                            DataMap map = putDataMapReq.getDataMap();
+                            map.putLong("time", new Date().getTime());
+                            map.putString("status", "unknownError");
+
+                            PutDataRequest putDataReq = putDataMapReq.asPutDataRequest().setUrgent();
+                            Wearable.DataApi.putDataItem(googleClient, putDataReq);
+                        }
+                    }catch (Exception ex) {
+                        // No colleges found this week: throw a 'no colleges this week'-error
                         PutDataMapRequest putDataMapReq = PutDataMapRequest.create("/data-" + new Date().getTime()).setUrgent();
                         DataMap map = putDataMapReq.getDataMap();
                         map.putLong("time", new Date().getTime());
-                        map.putString("status", "unknownError");
+                        map.putString("status", "noCollegesThisWeek");
 
                         PutDataRequest putDataReq = putDataMapReq.asPutDataRequest().setUrgent();
                         Wearable.DataApi.putDataItem(googleClient, putDataReq);

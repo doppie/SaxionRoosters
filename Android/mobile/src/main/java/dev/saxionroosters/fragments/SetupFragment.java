@@ -240,10 +240,12 @@ public class SetupFragment extends DialogFragment implements ClickListener {
         Owner item = simpleOwnerAdapter.getData().get(position);
         if(!isLongClick) {
             String name = Tools.parseQueryFromName(item.getName());
+            String type = Tools.parseQueryFromName(String.valueOf(item.getType()));
             if(viewType.equals(S.FRAGMENT)) {
                 getWeekPager(name);
             } else if(viewType.equals(S.DIALOG)) {
                 storage.saveObject(S.SETTING_STARTUP_OWNER, name);
+                storage.saveObject(S.SETTING_STARTUP_OWNER_TYPE, type);
                 dismiss();
             }
         }

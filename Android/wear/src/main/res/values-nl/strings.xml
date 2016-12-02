@@ -2,6 +2,7 @@
     <string name="app_name">Saxion Roosters</string>
 
     <string name="error_no_internet">Geen internetverbinding</string>
+    <string name="error_no_colleges_this_week">Geen colleges deze week</string>
     <string name="error_unknown">Onbekende fout bij het laden</string>
 
     <string name="btn_retry">Opnieuw laden</string>

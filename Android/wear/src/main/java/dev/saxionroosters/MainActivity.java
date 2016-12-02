@@ -107,27 +107,31 @@ public class MainActivity extends Activity implements WearableListView.ClickList
         }
     }
 
-    private void setErrorView(String errorText) {
+    private void setErrorView(int image, String errorText, boolean retry) {
         // Hide progressbar
         setProgressBarVisible(false);
 
         // Show imageview
         errorImageView.setVisibility(View.VISIBLE);
-        errorImageView.setImageResource(R.mipmap.ic_error);
+        errorImageView.setImageResource(image);
 
         // Show error text
         errorTextView.setVisibility(View.VISIBLE);
         errorTextView.setText(errorText);
 
-        // Show retry button
-        errorRetryButton.setVisibility(View.VISIBLE);
-        errorRetryButton.setText(getResources().getString(R.string.btn_retry));
-        errorRetryButton.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendDataRequest();
-            }
-        });
+        if (retry) {
+            // Show retry button
+            errorRetryButton.setVisibility(View.VISIBLE);
+            errorRetryButton.setText(getResources().getString(R.string.btn_retry));
+            errorRetryButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    sendDataRequest();
+                }
+            });
+        } else {
+            errorRetryButton.setVisibility(View.GONE);
+        }
     }
 
     private String formatDate(String inputDate) {
@@ -140,7 +144,14 @@ public class MainActivity extends Activity implements WearableListView.ClickList
         }
         SimpleDateFormat formatter = new SimpleDateFormat("dd MMM");
 
-        return formatter.format(date);
+        String formatteddate = null;
+        try {
+            formatteddate = formatter.format(date);
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+
+        return formatteddate;
     }
 
     private void sendDataRequest() {
@@ -228,7 +239,7 @@ public class MainActivity extends Activity implements WearableListView.ClickList
                                     @Override
                                     public void run() {
                                         int dateColor;
-                                        int[] dateColors = { ContextCompat.getColor(getApplicationContext(), R.color.material_red_400), ContextCompat.getColor(getApplicationContext(), R.color.material_yellow_400), ContextCompat.getColor(getApplicationContext(), R.color.material_green_400), ContextCompat.getColor(getApplicationContext(), R.color.material_blue_400), ContextCompat.getColor(getApplicationContext(), R.color.material_purple_400)};
+                                        int[] dateColors = { ContextCompat.getColor(getApplicationContext(), R.color.material_red_400), ContextCompat.getColor(getApplicationContext(), R.color.material_yellow_400), ContextCompat.getColor(getApplicationContext(), R.color.material_green_400), ContextCompat.getColor(getApplicationContext(), R.color.material_blue_400), ContextCompat.getColor(getApplicationContext(), R.color.material_purple_400) , ContextCompat.getColor(getApplicationContext(), R.color.material_indigo_400), ContextCompat.getColor(getApplicationContext(), R.color.material_brown_400), ContextCompat.getColor(getApplicationContext(), R.color.material_deep_orange_400), ContextCompat.getColor(getApplicationContext(), R.color.material_deep_purple_400)};
 
                                         String date = dateArray.get(finalI);
                                         if (dateArray.get(finalI).equals(lastDate[0]) || finalI == 0){
@@ -252,12 +263,21 @@ public class MainActivity extends Activity implements WearableListView.ClickList
                             setProgressBarVisible(false);
                             mAdapter.notifyDataSetChanged();
                             break;
+                        // No colleges this week
+                        case "noCollegesThisWeek":
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    setErrorView(R.mipmap.ic_info, getResources().getString(R.string.error_no_colleges_this_week), false);
+                                }
+                            });
+                            break;
                         // No internet... Give the user a warning.
                         case "failedNoInternet":
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    setErrorView(getResources().getString(R.string.error_no_internet));
+                                    setErrorView(R.mipmap.ic_error, getResources().getString(R.string.error_no_internet), true);
                                 }
                             });
                             break;
@@ -266,7 +286,7 @@ public class MainActivity extends Activity implements WearableListView.ClickList
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    setErrorView(getResources().getString(R.string.error_unknown));
+                                    setErrorView(R.mipmap.ic_error, getResources().getString(R.string.error_unknown), true);
                                 }
                             });
                             break;
