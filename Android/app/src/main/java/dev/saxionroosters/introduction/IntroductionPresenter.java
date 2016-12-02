@@ -4,7 +4,7 @@ import android.content.Intent;
 
 import dev.saxionroosters.R;
 import dev.saxionroosters.general.PreferenceManager;
-import dev.saxionroosters.general.Prefs;
+import dev.saxionroosters.settings.Settings;
 import dev.saxionroosters.main.MainActivity;
 
 /**
@@ -33,7 +33,7 @@ public class IntroductionPresenter implements IIntroductionPresenter {
 
     @Override
     public void skipIntroduction() {
-        if(prefsManager.read(Prefs.DEFAULT_GROUP).isEmpty()) {
+        if(prefsManager.read(Settings.DEFAULT_GROUP).isEmpty()) {
             view.showMessage(view.getContext().getString(R.string.error_no_default_group));
         } else {
             Intent i = new Intent(view.getContext(), MainActivity.class);

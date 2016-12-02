@@ -1,4 +1,4 @@
-package dev.saxionroosters.extras;
+package dev.saxionroosters.general;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,26 +6,25 @@ import android.os.Build;
 import android.widget.Toast;
 
 import dev.saxionroosters.R;
-import dev.saxionroosters.activities.MainActivity;
-import dev.saxionroosters.activities.MainActivity_;
+import dev.saxionroosters.main.MainActivity;
 
 /**
  * Created by Jelle on 19-8-2016.
  */
-public class ThemeTools {
+public class ThemeUtils {
 
     public static void activateTheme(Activity activity) {
         Intent i = new Intent(activity, MainActivity.class);
         //finish Affinity is only available > version 16
 
-        if(android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) activity.finishAffinity();
-        else Toast.makeText(activity, activity.getString(R.string.theme_visible_after_reset), Toast.LENGTH_LONG).show();
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) activity.finishAffinity();
+        else Toast.makeText(activity, activity.getString(R.string.message_theme_visible_after_reset), Toast.LENGTH_LONG).show();
 
         activity.startActivity(i);
     }
 
     public static void onCreateSetTheme(Activity activity, String name) {
-        Tools.log("[THEME] " + name);
+        Utils.log("[THEME] " + name);
         if(name != null) name = name.replaceAll("\"", "");
 
         if (name == null || name.isEmpty() || name.equalsIgnoreCase("Saxion")) {
@@ -69,7 +68,7 @@ public class ThemeTools {
         } else if (name.equalsIgnoreCase("Brown")) {
             activity.setTheme(R.style.AppTheme_Brown_NoActionBar);
         } else {
-            Tools.log("[THEME] Unknown theme: " + name);
+            Utils.log("[THEME] Unknown theme: " + name);
         }
     }
 }

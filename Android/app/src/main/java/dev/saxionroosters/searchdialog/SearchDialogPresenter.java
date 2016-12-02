@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import dev.saxionroosters.eventbus.ErrorEvent;
 import dev.saxionroosters.eventbus.SearchResultEvent;
 import dev.saxionroosters.general.PreferenceManager;
-import dev.saxionroosters.general.Prefs;
+import dev.saxionroosters.settings.Settings;
 import dev.saxionroosters.general.Utils;
 import dev.saxionroosters.main.MainActivity;
 import dev.saxionroosters.main.SearchInteractor;
@@ -55,7 +55,7 @@ public class SearchDialogPresenter implements ISearchDialogPresenter {
     public void finishSelection(SearchItem item) {
 
         //save this as our default schedule to our preferences.
-        prefsManager.write(Prefs.DEFAULT_GROUP, item.get_text().toString());
+        prefsManager.write(Settings.DEFAULT_GROUP, item.get_text().toString());
 
         Intent i = new Intent(view.getActivity(), MainActivity.class);
         view.getContext().startActivity(i);

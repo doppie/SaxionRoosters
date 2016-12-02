@@ -11,4 +11,6 @@ public interface IMainPresenter extends IPresenter {
     void search(String query);
 
     void startIntroduction();
+
+    void showSettings();
 }

@@ -22,7 +22,10 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dev.saxionroosters.R;
+import dev.saxionroosters.general.PreferenceManager;
+import dev.saxionroosters.general.ThemeUtils;
 import dev.saxionroosters.introduction.IntroductionActivity;
+import dev.saxionroosters.settings.Settings;
 
 public class MainActivity extends AppCompatActivity implements MainView {
 
@@ -46,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ThemeUtils.onCreateSetTheme(this, PreferenceManager.getInstance(this).read(Settings.THEME));
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
@@ -162,6 +166,9 @@ public class MainActivity extends AppCompatActivity implements MainView {
         switch (id) {
             case R.id.action_search:
                 searchView.open(true);
+                return true;
+            case R.id.action_settings:
+                presenter.showSettings();
                 return true;
         }
 

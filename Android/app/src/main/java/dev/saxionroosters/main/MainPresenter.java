@@ -15,11 +15,12 @@ import dev.saxionroosters.eventbus.ErrorEvent;
 import dev.saxionroosters.eventbus.ScheduleEvent;
 import dev.saxionroosters.eventbus.SearchResultEvent;
 import dev.saxionroosters.general.PreferenceManager;
-import dev.saxionroosters.general.Prefs;
+import dev.saxionroosters.settings.Settings;
 import dev.saxionroosters.general.Utils;
 import dev.saxionroosters.introduction.IntroductionActivity;
 import dev.saxionroosters.model.Group;
 import dev.saxionroosters.model.Schedule;
+import dev.saxionroosters.settings.SettingsActivity;
 
 /**
  * Created by jelle on 29/11/2016.
@@ -36,10 +37,10 @@ public class MainPresenter implements IMainPresenter {
         this.interactor = new SearchInteractor();
         this.prefsManager = PreferenceManager.getInstance(view.getContext());
 
-        if(prefsManager.read(Prefs.DEFAULT_GROUP).isEmpty()) {
+        if(prefsManager.read(Settings.DEFAULT_GROUP).isEmpty()) {
             startIntroduction();
         } else {
-            view.showSchedulePager(prefsManager.read(Prefs.DEFAULT_GROUP));
+            view.showSchedulePager(prefsManager.read(Settings.DEFAULT_GROUP));
         }
     }
 
@@ -65,6 +66,12 @@ public class MainPresenter implements IMainPresenter {
         Intent i = new Intent(view.getContext(), IntroductionActivity.class);
         view.getContext().startActivity(i);
         view.finish();
+    }
+
+    @Override
+    public void showSettings() {
+        Intent i = new Intent(view.getContext(), SettingsActivity.class);
+        view.getContext().startActivity(i);
     }
 
     @Subscribe

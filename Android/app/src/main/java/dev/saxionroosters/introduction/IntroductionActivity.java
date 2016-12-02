@@ -18,9 +18,12 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dev.saxionroosters.R;
+import dev.saxionroosters.general.PreferenceManager;
+import dev.saxionroosters.general.ThemeUtils;
 import dev.saxionroosters.introduction.pages.IntroPageFragment;
 import dev.saxionroosters.introduction.pages.Pages;
 import dev.saxionroosters.searchdialog.SearchDialogFragment;
+import dev.saxionroosters.settings.Settings;
 
 /**
  * Created by jelle on 30/11/2016.
@@ -43,6 +46,7 @@ public class IntroductionActivity extends AppCompatActivity implements Introduct
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ThemeUtils.onCreateSetTheme(this, PreferenceManager.getInstance(this).read(Settings.THEME));
         setContentView(R.layout.activity_introduction);
         ButterKnife.bind(this);
 

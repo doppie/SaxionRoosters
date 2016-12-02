@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import dev.saxionroosters.settings.Settings;
+
 /**
  * Created by jelle on 30/11/2016.
  */
@@ -25,6 +27,10 @@ public class PreferenceManager {
     private PreferenceManager(Context context) {
         prefs = context.getSharedPreferences("roosters", Activity.MODE_PRIVATE);
         prefsEditor = prefs.edit();
+
+        if(read(Settings.THEME).isEmpty()) {
+            write(Settings.THEME, "Green");
+        }
     }
 
     /**
@@ -32,7 +38,7 @@ public class PreferenceManager {
      * @param key
      * @param value
      */
-    public void write(Prefs key, String value) {
+    public void write(Settings key, String value) {
         prefsEditor.putString(key.toString(), value);
         prefsEditor.apply();
     }
@@ -42,7 +48,7 @@ public class PreferenceManager {
      * @param key
      * @return
      */
-    public String read(Prefs key) {
+    public String read(Settings key) {
         return prefs.getString(key.toString(), "");
     }
 }

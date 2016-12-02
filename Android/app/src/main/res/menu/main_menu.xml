@@ -4,5 +4,6 @@
     tools:context="dev.saxionroosters.activities.MainActivity">
 
     <item android:id="@+id/action_search" android:title="@string/action_search" android:icon="@drawable/magnify" android:orderInCategory="100" app:showAsAction="ifRoom"/>
+    <item android:id="@+id/action_settings" android:title="@string/action_settings" android:icon="@drawable/ic_settings_white_24dp" android:orderInCategory="100" app:showAsAction="ifRoom"/>
 
 </menu>
