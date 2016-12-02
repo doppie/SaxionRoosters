@@ -31,5 +31,7 @@ public interface SearchDialogView extends IView {
 
     void showLoadingLayout();
 
+    void dismiss();
+
     Activity getActivity();
 }

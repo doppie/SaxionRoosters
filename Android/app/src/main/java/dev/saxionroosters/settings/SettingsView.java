@@ -14,4 +14,7 @@ public interface SettingsView extends IView {
 
     void showOptions(ArrayList<Option> options);
 
+    void showSelectDefaultGroupDialog();
+
+    void showSelectColorThemeDialog();
 }

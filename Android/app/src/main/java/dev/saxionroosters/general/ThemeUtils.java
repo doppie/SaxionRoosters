@@ -24,7 +24,7 @@ public class ThemeUtils {
     }
 
     public static void onCreateSetTheme(Activity activity, String name) {
-        Utils.log("[THEME] " + name);
+        Utils.log("[THEME_COLOR] " + name);
         if(name != null) name = name.replaceAll("\"", "");
 
         if (name == null || name.isEmpty() || name.equalsIgnoreCase("Saxion")) {
@@ -68,7 +68,7 @@ public class ThemeUtils {
         } else if (name.equalsIgnoreCase("Brown")) {
             activity.setTheme(R.style.AppTheme_Brown_NoActionBar);
         } else {
-            Utils.log("[THEME] Unknown theme: " + name);
+            Utils.log("[THEME_COLOR] Unknown theme: " + name);
         }
     }
 }

@@ -7,6 +7,6 @@ package dev.saxionroosters.settings;
 public enum Settings {
 
     DEFAULT_GROUP,
-    THEME
+    THEME_COLOR
 
 }

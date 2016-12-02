@@ -1,7 +1,6 @@
 package dev.saxionroosters.main;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -24,7 +23,6 @@ import butterknife.ButterKnife;
 import dev.saxionroosters.R;
 import dev.saxionroosters.general.PreferenceManager;
 import dev.saxionroosters.general.ThemeUtils;
-import dev.saxionroosters.introduction.IntroductionActivity;
 import dev.saxionroosters.settings.Settings;
 
 public class MainActivity extends AppCompatActivity implements MainView {
@@ -49,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ThemeUtils.onCreateSetTheme(this, PreferenceManager.getInstance(this).read(Settings.THEME));
+        ThemeUtils.onCreateSetTheme(this, PreferenceManager.getInstance(this).read(Settings.THEME_COLOR));
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
@@ -83,7 +81,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                presenter.search(query);
+//                presenter.search(query);
+                showSchedulePager(query);
                 searchView.close(true);
                 return false;
             }

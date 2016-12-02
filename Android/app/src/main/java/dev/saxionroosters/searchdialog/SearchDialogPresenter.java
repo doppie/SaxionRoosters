@@ -11,6 +11,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 
 import dev.saxionroosters.eventbus.ErrorEvent;
+import dev.saxionroosters.eventbus.RefreshEvent;
 import dev.saxionroosters.eventbus.SearchResultEvent;
 import dev.saxionroosters.general.PreferenceManager;
 import dev.saxionroosters.settings.Settings;
@@ -28,10 +29,12 @@ public class SearchDialogPresenter implements ISearchDialogPresenter {
     private SearchDialogView view;
     private SearchInteractor interactor;
     private PreferenceManager prefsManager;
+    private boolean isDialog;
 
-    public SearchDialogPresenter(SearchDialogView view) {
+    public SearchDialogPresenter(SearchDialogView view, boolean isDialog) {
         this.view = view;
         this.interactor = new SearchInteractor();
+        this.isDialog = isDialog;
         this.prefsManager = PreferenceManager.getInstance(view.getContext());
     }
 
@@ -56,10 +59,14 @@ public class SearchDialogPresenter implements ISearchDialogPresenter {
 
         //save this as our default schedule to our preferences.
         prefsManager.write(Settings.DEFAULT_GROUP, item.get_text().toString());
-
-        Intent i = new Intent(view.getActivity(), MainActivity.class);
-        view.getContext().startActivity(i);
-        view.getActivity().finish();
+        if(!isDialog) {
+            Intent i = new Intent(view.getActivity(), MainActivity.class);
+            view.getContext().startActivity(i);
+            view.getActivity().finish();
+        } else {
+            view.dismiss();
+            EventBus.getDefault().post(new RefreshEvent());
+        }
     }
 
     @Subscribe

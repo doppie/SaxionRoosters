@@ -2,7 +2,6 @@ package dev.saxionroosters.introduction;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -46,7 +45,7 @@ public class IntroductionActivity extends AppCompatActivity implements Introduct
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ThemeUtils.onCreateSetTheme(this, PreferenceManager.getInstance(this).read(Settings.THEME));
+        ThemeUtils.onCreateSetTheme(this, PreferenceManager.getInstance(this).read(Settings.THEME_COLOR));
         setContentView(R.layout.activity_introduction);
         ButterKnife.bind(this);
 
@@ -76,11 +75,16 @@ public class IntroductionActivity extends AppCompatActivity implements Introduct
         gitArgs.putString("page", Pages.SOCIAL_CODING.toString());
         gitFragment.setArguments(gitArgs);
 
+        SearchDialogFragment searchFragment = new SearchDialogFragment();
+        Bundle searchArgs = new Bundle();
+        searchArgs.putBoolean("dialog", false);
+        searchFragment.setArguments(searchArgs);
+
         //the final list of our pager content
         fragments.add(homeFragment);
         fragments.add(gitFragment);
         fragments.add(mapsFragment);
-        fragments.add(new SearchDialogFragment());
+        fragments.add(searchFragment);
 
         pagerAdapter = new IntroductionPagerAdapter(fragments, getSupportFragmentManager(), this);
         pager.setAdapter(pagerAdapter);

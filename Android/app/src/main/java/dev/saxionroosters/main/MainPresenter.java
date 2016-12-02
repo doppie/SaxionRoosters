@@ -103,7 +103,7 @@ public class MainPresenter implements IMainPresenter {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onErrorReceived(ErrorEvent event) {
-        Utils.log("[Error] " + event.getMessage());
+        Utils.log("[Error] " + event.getMessage() + " code: " + event.getStatus());
         view.showMessage(event.getMessage());
     }
 

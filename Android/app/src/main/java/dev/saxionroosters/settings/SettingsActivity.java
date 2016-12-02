@@ -1,11 +1,14 @@
 package dev.saxionroosters.settings;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.graphics.drawable.VectorDrawableCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,6 +22,7 @@ import butterknife.ButterKnife;
 import dev.saxionroosters.R;
 import dev.saxionroosters.general.PreferenceManager;
 import dev.saxionroosters.general.ThemeUtils;
+import dev.saxionroosters.searchdialog.SearchDialogFragment;
 
 /**
  * Created by jelle on 01/12/2016.
@@ -38,7 +42,7 @@ public class SettingsActivity extends AppCompatActivity implements SettingsView 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ThemeUtils.onCreateSetTheme(this, PreferenceManager.getInstance(this).read(Settings.THEME));
+        ThemeUtils.onCreateSetTheme(this, PreferenceManager.getInstance(this).read(Settings.THEME_COLOR));
         setContentView(R.layout.activity_settings);
         ButterKnife.bind(this);
 
@@ -71,6 +75,15 @@ public class SettingsActivity extends AppCompatActivity implements SettingsView 
         Drawable backButton = VectorDrawableCompat.create(getResources(), R.drawable.ic_arrow_back_white_24dp, null);
         getSupportActionBar().setHomeAsUpIndicator(backButton);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        if (menuItem.getItemId() == android.R.id.home) {
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(menuItem);
+    }
+
 
     @Override
     public void showSettings(ArrayList<Setting> settings) {
@@ -136,6 +149,32 @@ public class SettingsActivity extends AppCompatActivity implements SettingsView 
             //add it to the layout.
             optionsLayout.addView(optionsView);
         }
+    }
+
+    @Override
+    public void showSelectDefaultGroupDialog() {
+        SearchDialogFragment fragment = new SearchDialogFragment();
+        Bundle args = new Bundle();
+        args.putBoolean("dialog", true);
+        fragment.setArguments(args);
+        fragment.show(getSupportFragmentManager(), "dialog");
+    }
+
+    @Override
+    public void showSelectColorThemeDialog() {
+        final String[] colorThemes = getResources().getStringArray(R.array.colorThemes);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle(getString(R.string.title_select_color_theme));
+        builder.setItems(colorThemes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int pos) {
+                PreferenceManager.getInstance(getContext()).write(Settings.THEME_COLOR, colorThemes[pos]);
+                ThemeUtils.activateTheme(SettingsActivity.this);
+            }
+        });
+        builder.show();
     }
 
     @Override

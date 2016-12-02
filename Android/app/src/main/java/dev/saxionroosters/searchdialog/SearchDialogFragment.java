@@ -53,6 +53,7 @@ public class SearchDialogFragment extends DialogFragment implements SearchDialog
     private Unbinder unbinder;
     private SearchDialogPresenter presenter;
     private SearchAdapter searchAdapter;
+    private boolean isDialog = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -60,7 +61,9 @@ public class SearchDialogFragment extends DialogFragment implements SearchDialog
         View v = inflater.inflate(R.layout.fragment_searchdialog, container, false);
         unbinder = ButterKnife.bind(this, v);
 
-        this.presenter = new SearchDialogPresenter(this);
+        isDialog = getArguments().getBoolean("dialog", false);
+
+        this.presenter = new SearchDialogPresenter(this, isDialog);
         initUI();
 
         return v;
@@ -86,6 +89,12 @@ public class SearchDialogFragment extends DialogFragment implements SearchDialog
 
     @Override
     public void initUI() {
+
+        if(isDialog) {
+            getDialog().setTitle(getString(R.string.title_select_default_group));
+            titleText.setVisibility(View.GONE);
+        }
+
         searchAdapter = new SearchAdapter(getContext(), new ArrayList<SearchItem>());
         searchAdapter.setOnItemClickListener(new SearchAdapter.OnItemClickListener() {
             @Override

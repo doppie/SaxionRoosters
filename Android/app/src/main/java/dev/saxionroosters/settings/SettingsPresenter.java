@@ -1,12 +1,18 @@
 package dev.saxionroosters.settings;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.support.graphics.drawable.VectorDrawableCompat;
+import android.support.v7.app.AlertDialog;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
 import dev.saxionroosters.R;
+import dev.saxionroosters.eventbus.RefreshEvent;
 import dev.saxionroosters.general.PreferenceManager;
 
 /**
@@ -27,20 +33,21 @@ public class SettingsPresenter implements ISettingsPresenter {
 
     @Override
     public void resume() {
+        EventBus.getDefault().register(this);
         loadSettings();
         loadOptions();
     }
 
     @Override
     public void pause() {
-
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
     public void loadSettings() {
         ArrayList<Setting> settings = new ArrayList<>();
         settings.add(new Setting(Settings.DEFAULT_GROUP, context.getString(R.string.title_setting_group_default), prefsManager.read(Settings.DEFAULT_GROUP), false));
-        settings.add(new Setting(Settings.THEME, context.getString(R.string.title_setting_theme), prefsManager.read(Settings.THEME), false));
+        settings.add(new Setting(Settings.THEME_COLOR, context.getString(R.string.title_setting_theme), prefsManager.read(Settings.THEME_COLOR), false));
         view.showSettings(settings);
     }
 
@@ -73,11 +80,25 @@ public class SettingsPresenter implements ISettingsPresenter {
 
     @Override
     public void handleSettingsClick(Setting setting) {
+        switch(setting.getSettingId()) {
+            case DEFAULT_GROUP:
+                view.showSelectDefaultGroupDialog();
+                break;
+            case THEME_COLOR:
+                view.showSelectColorThemeDialog();
+                break;
 
+        }
     }
 
     @Override
     public void handleOptionsClick(Option option) {
 
+    }
+
+    @Subscribe
+    public void onRefreshEvent(RefreshEvent event) {
+        loadSettings();
+        loadOptions();
     }
 }

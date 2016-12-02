@@ -28,8 +28,8 @@ public class PreferenceManager {
         prefs = context.getSharedPreferences("roosters", Activity.MODE_PRIVATE);
         prefsEditor = prefs.edit();
 
-        if(read(Settings.THEME).isEmpty()) {
-            write(Settings.THEME, "Green");
+        if(read(Settings.THEME_COLOR).isEmpty()) {
+            write(Settings.THEME_COLOR, "Green");
         }
     }
 
