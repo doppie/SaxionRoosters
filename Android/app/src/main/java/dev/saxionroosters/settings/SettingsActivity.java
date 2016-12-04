@@ -187,7 +187,11 @@ public class SettingsActivity extends AppCompatActivity implements SettingsView 
 
     @Override
     public void showFeedbackView() {
-
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("*/mail");
+        i.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.title_option_feedback) + " " + getString(R.string.app_name));
+        i.putExtra(Intent.EXTRA_EMAIL, new String[]{getString(R.string.email_roosters)});
+        startActivity(Intent.createChooser(i, getString(R.string.message_feedback)));
     }
 
     @Override
