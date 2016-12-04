@@ -110,6 +110,7 @@ public class SettingsPresenter implements ISettingsPresenter {
                 break;
             case GITHUB:
                 view.showGithubView();
+                view.showMessage(context.getString(R.string.message_redirect_github));
                 break;
             case ABOUT:
                 view.showAboutView();

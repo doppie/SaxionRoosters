@@ -27,4 +27,6 @@ public interface SettingsView extends IView {
     void showGithubView();
 
     void showAboutView();
+
+    void showMessage(String message);
 }

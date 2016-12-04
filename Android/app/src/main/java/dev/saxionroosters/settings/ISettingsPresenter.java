@@ -15,5 +15,4 @@ public interface ISettingsPresenter extends IPresenter {
     void loadSettings();
 
     void loadOptions();
-
 }

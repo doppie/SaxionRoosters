@@ -2,8 +2,11 @@ package dev.saxionroosters.settings;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -195,12 +198,21 @@ public class SettingsActivity extends AppCompatActivity implements SettingsView 
 
     @Override
     public void showGithubView() {
+        String url = "https://github.com/doppie/SaxionRoosters";
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
 
     }
 
     @Override
     public void showAboutView() {
 
+    }
+
+    @Override
+    public void showMessage(String message) {
+        Snackbar.make(settingsLayout, message, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
