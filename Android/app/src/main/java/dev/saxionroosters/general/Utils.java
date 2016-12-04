@@ -72,7 +72,7 @@ public class Utils {
      * @return SimpleDateFormat that parses a string.
      */
     public static SimpleDateFormat getDateFormatter() {
-        return new SimpleDateFormat("yyyy-MM-dd");
+        return new SimpleDateFormat("yyyy-M-dd");
     }
 
     /**
