@@ -1,10 +1,12 @@
 package dev.saxionroosters.settings;
 
 import android.content.Context;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.graphics.drawable.VectorDrawableCompat;
-import android.support.v7.app.AlertDialog;
+
+import com.anjlab.android.iab.v3.BillingProcessor;
+import com.anjlab.android.iab.v3.TransactionDetails;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -19,11 +21,12 @@ import dev.saxionroosters.general.PreferenceManager;
  * Created by jelle on 01/12/2016.
  */
 
-public class SettingsPresenter implements ISettingsPresenter {
+public class SettingsPresenter implements ISettingsPresenter, BillingProcessor.IBillingHandler {
 
     private SettingsView view;
     private Context context;
     private PreferenceManager prefsManager;
+    private BillingProcessor billingProcessor;
 
     public SettingsPresenter(SettingsView view) {
         this.view = view;
@@ -33,6 +36,7 @@ public class SettingsPresenter implements ISettingsPresenter {
 
     @Override
     public void resume() {
+        initBillingProcessor();
         EventBus.getDefault().register(this);
         loadSettings();
         loadOptions();
@@ -40,6 +44,7 @@ public class SettingsPresenter implements ISettingsPresenter {
 
     @Override
     public void pause() {
+        if(billingProcessor != null) billingProcessor.release();
         EventBus.getDefault().unregister(this);
     }
 
@@ -82,6 +87,22 @@ public class SettingsPresenter implements ISettingsPresenter {
         view.showOptions(options);
     }
 
+    @Override
+    public void initBillingProcessor() {
+        boolean isAvailable = BillingProcessor.isIabServiceAvailable(view.getContext());
+        if(isAvailable) billingProcessor = new BillingProcessor(view.getContext(), view.getContext().getString(R.string.iab_id), this);
+    }
+
+    @Override
+    public boolean handleActivityResult(int requestCode, int resultCode, Intent intent) {
+        if(billingProcessor == null || billingProcessor.handleActivityResult(requestCode, resultCode, intent)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
 
     @Override
     public void handleSettingsClick(Setting setting) {
@@ -100,7 +121,7 @@ public class SettingsPresenter implements ISettingsPresenter {
     public void handleOptionsClick(Option option) {
         switch (option.getOption()) {
             case UPGRADE:
-                view.showUpgradeView();
+                billingProcessor.purchase(view.getActivity(), "premium");
                 break;
             case FEEDBACK:
                 view.showFeedbackView();
@@ -122,5 +143,24 @@ public class SettingsPresenter implements ISettingsPresenter {
     public void onRefreshEvent(RefreshEvent event) {
         loadSettings();
         loadOptions();
+    }
+
+    @Override
+    public void onProductPurchased(String productId, TransactionDetails details) {
+        prefsManager.write(Settings.UPGRADED, true + "");
+    }
+
+    @Override
+    public void onPurchaseHistoryRestored() {
+        prefsManager.write(Settings.UPGRADED, billingProcessor.isPurchased("premium") + "");
+    }
+
+    @Override
+    public void onBillingError(int errorCode, Throwable error) {
+    }
+
+    @Override
+    public void onBillingInitialized() {
+        billingProcessor.loadOwnedPurchasesFromGoogle();
     }
 }

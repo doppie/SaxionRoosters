@@ -1,6 +1,7 @@
 package dev.saxionroosters.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -172,5 +173,12 @@ public class MainActivity extends AppCompatActivity implements MainView {
         }
 
         return false;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(!presenter.handleActivityResult(requestCode, resultCode, data)) {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }

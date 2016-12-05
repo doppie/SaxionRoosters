@@ -1,5 +1,7 @@
 package dev.saxionroosters.main;
 
+import android.content.Intent;
+
 import dev.saxionroosters.general.IPresenter;
 
 /**
@@ -13,4 +15,8 @@ public interface IMainPresenter extends IPresenter {
     void startIntroduction();
 
     void showSettings();
+
+    void initBillingProcessor();
+
+    boolean handleActivityResult(int requestCode, int resultCode, Intent intent);
 }

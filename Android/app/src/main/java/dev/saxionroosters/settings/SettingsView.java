@@ -1,5 +1,8 @@
 package dev.saxionroosters.settings;
 
+import android.app.Activity;
+import android.content.Context;
+
 import java.util.ArrayList;
 
 import dev.saxionroosters.general.IView;
@@ -18,8 +21,6 @@ public interface SettingsView extends IView {
 
     void showSelectColorThemeDialog();
 
-    void showUpgradeView();
-
     void showFeedbackView();
 
     void showLicensesView();
@@ -29,4 +30,6 @@ public interface SettingsView extends IView {
     void showAboutView();
 
     void showMessage(String message);
+
+    Activity getActivity();
 }

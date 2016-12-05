@@ -1,5 +1,7 @@
 package dev.saxionroosters.settings;
 
+import android.content.Intent;
+
 import dev.saxionroosters.general.IPresenter;
 
 /**
@@ -15,4 +17,8 @@ public interface ISettingsPresenter extends IPresenter {
     void loadSettings();
 
     void loadOptions();
+
+    void initBillingProcessor();
+
+    boolean handleActivityResult(int requestCode, int resultCode, Intent intent);
 }

@@ -2,6 +2,8 @@ package dev.saxionroosters.main;
 
 import android.content.Intent;
 
+import com.anjlab.android.iab.v3.BillingProcessor;
+import com.anjlab.android.iab.v3.TransactionDetails;
 import com.lapism.searchview.SearchItem;
 
 import org.greenrobot.eventbus.EventBus;
@@ -26,11 +28,12 @@ import dev.saxionroosters.settings.SettingsActivity;
  * Created by jelle on 29/11/2016.
  */
 
-public class MainPresenter implements IMainPresenter {
+public class MainPresenter implements IMainPresenter, BillingProcessor.IBillingHandler {
 
     private MainView view;
     private SearchInteractor interactor;
     private PreferenceManager prefsManager;
+    private BillingProcessor billingProcessor;
 
     public MainPresenter(MainView view) {
         this.view = view;
@@ -47,11 +50,13 @@ public class MainPresenter implements IMainPresenter {
     @Override
     public void resume() {
         EventBus.getDefault().register(this);
+        initBillingProcessor();
     }
 
     @Override
     public void pause() {
         EventBus.getDefault().unregister(this);
+        if (billingProcessor != null) billingProcessor.release();
     }
 
     @Override
@@ -72,6 +77,21 @@ public class MainPresenter implements IMainPresenter {
     public void showSettings() {
         Intent i = new Intent(view.getContext(), SettingsActivity.class);
         view.getContext().startActivity(i);
+    }
+
+    @Override
+    public void initBillingProcessor() {
+        boolean isAvailable = BillingProcessor.isIabServiceAvailable(view.getContext());
+        if(isAvailable) billingProcessor = new BillingProcessor(view.getContext(), view.getContext().getString(R.string.iab_id), this);
+    }
+
+    @Override
+    public boolean handleActivityResult(int requestCode, int resultCode, Intent intent) {
+        if(billingProcessor == null || billingProcessor.handleActivityResult(requestCode, resultCode, intent)) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     @Subscribe
@@ -106,5 +126,23 @@ public class MainPresenter implements IMainPresenter {
         Utils.log("[Error] " + event.getMessage() + " code: " + event.getStatus());
         view.showMessage(event.getMessage());
     }
+    @Override
+    public void onProductPurchased(String productId, TransactionDetails details) {
+        prefsManager.write(Settings.UPGRADED, true + "");
+        view.showMessage(view.getContext().getString(R.string.message_purchase_success));
+    }
 
+    @Override
+    public void onPurchaseHistoryRestored() {
+        prefsManager.write(Settings.UPGRADED, billingProcessor.isPurchased("premium") + "");
+    }
+
+    @Override
+    public void onBillingError(int errorCode, Throwable error) {
+    }
+
+    @Override
+    public void onBillingInitialized() {
+        billingProcessor.loadOwnedPurchasesFromGoogle();
+    }
 }

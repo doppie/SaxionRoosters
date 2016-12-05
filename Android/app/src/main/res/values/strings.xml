@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Saxion Roosters</string>
 
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-5255794757983274/6179521318</string>
+    <string name="interstitial_ad_unit_id" translatable="false">ca-app-pub-5255794757983274/9132987717</string>
+    <string name="iab_id" translatable="false">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhp4IDP4diqBkJu6XScKB9AEHbdFyc/JI1dBbJSFiFuKgjGBZyJWhUuxQpMkWuMpArg4q3JSSkdnfAd9yd9LhnOGVI8jsMvdhCVyWRwXdf2U8Do2Ml1YlKkaATvwQFTICMCFRe+p/SsJAL9BYZTesPRvCl9mlCZfT1s0/KrKPL/s6uwWwFlZd4IC7TO/8+CTRcQwV+w4CBKtAOmecdJoa9rxFlzk7YMuHXV3pzFFwu0WBV8MEEYDpN0IvBlEqFcko6q0EEKAoRYmHqZjO2Se21fDhK0/tZqe/8QFzPFHo4kI/wIW65kcUJkujpa7u4F4bhE8TVZ/w3vX1KpTAUDtknQIDAQAB</string>
+
+
 
     <string name="loading">Loading</string>
     <string name="free_day">Nothing planned today.</string>
@@ -49,8 +54,8 @@
     <string name="message_theme_visible_after_reset">The theme will be applied after you force reset the Application.</string>
     <string name="message_select_default_group">Select the schedule you want to load when the App is launched.</string>
     <string name="message_redirect_github">You will be redirected to our GitHub page.</string>
-    <string name="message_feedback">Share your thoughts with us. Looking forward to hear from you!</string>
-
+    <string name="message_feedback">We are looking forward to hear from you!</string>
+    <string name="message_purchase_success">You have successfully upgraded to premium! Thank you for your support.</string>
 
     <string-array name="colorThemes">
         <item>Saxion Theme</item>

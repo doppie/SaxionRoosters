@@ -39,6 +39,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     compile 'com.github.JakeWharton:ViewPagerIndicator:2.4.1@aar'
     compile 'com.lapism:searchview:4.0'
+    compile 'com.anjlab.android.iab.v3:library:1.0.+'
 
     /* Module Dependencies */
     compile project(':backend')

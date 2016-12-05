@@ -1,5 +1,6 @@
 package dev.saxionroosters.settings;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -181,11 +182,6 @@ public class SettingsActivity extends AppCompatActivity implements SettingsView 
     }
 
     @Override
-    public void showUpgradeView() {
-
-    }
-
-    @Override
     public void showFeedbackView() {
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("*/mail");
@@ -217,6 +213,11 @@ public class SettingsActivity extends AppCompatActivity implements SettingsView 
     @Override
     public void showMessage(String message) {
         Snackbar.make(settingsLayout, message, Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public Activity getActivity() {
+        return this;
     }
 
     @Override
