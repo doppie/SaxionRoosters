@@ -35,6 +35,7 @@ public class IntroductionPresenter implements IIntroductionPresenter {
     public void skipIntroduction() {
         if(prefsManager.read(Settings.DEFAULT_GROUP).isEmpty()) {
             view.showMessage(view.getContext().getString(R.string.error_no_default_group));
+            view.moveToLastFragment();
         } else {
             Intent i = new Intent(view.getContext(), MainActivity.class);
             view.getContext().startActivity(i);

@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dev.saxionroosters.AboutActivity;
 import dev.saxionroosters.R;
 import dev.saxionroosters.general.PreferenceManager;
 import dev.saxionroosters.general.ThemeUtils;
@@ -207,7 +208,8 @@ public class SettingsActivity extends AppCompatActivity implements SettingsView 
 
     @Override
     public void showAboutView() {
-
+        Intent i = new Intent(SettingsActivity.this, AboutActivity.class);
+        startActivity(i);
     }
 
     @Override

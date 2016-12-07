@@ -43,4 +43,5 @@ dependencies {
 
     /* Module Dependencies */
     compile project(':backend')
+    compile 'com.android.support:support-v4:25.0.1'
 }

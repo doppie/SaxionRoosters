@@ -106,9 +106,8 @@ public class IntroductionActivity extends AppCompatActivity implements Introduct
     }
 
     @Override
-    public void moveToFragment(Fragment fragment) {
-        int position = pagerAdapter.getPosition(fragment);
-        pager.setCurrentItem(position, true); //animations are nice :)
+    public void moveToLastFragment() {
+        pager.setCurrentItem(pagerAdapter.getCount(), true);
     }
 
     @Override

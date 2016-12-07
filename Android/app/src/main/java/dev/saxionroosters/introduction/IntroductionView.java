@@ -12,10 +12,9 @@ public interface IntroductionView extends IView {
 
 
     /**
-     * Scrolls to the fragment.
-     * @param fragment
+     * Scrolls to the last fragment in the pager adapter.
      */
-    void moveToFragment(Fragment fragment);
+    void moveToLastFragment();
 
 
     void showMessage(String message);
