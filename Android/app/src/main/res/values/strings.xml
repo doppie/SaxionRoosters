@@ -18,6 +18,8 @@
     <string name="skip">Skip</string>
     <string name="getting_started">Getting started</string>
     <string name="email_roosters">saxionroosters.dev@gmail.com</string>
+    <string name="facts">Facts</string>
+    <string name="contributors">Contributors</string>
 
     <!-- titles -->
     <string name="title_select_color_theme">Select Color Theme</string>
@@ -55,6 +57,12 @@
     <string name="message_redirect_github">You will be redirected to our GitHub page.</string>
     <string name="message_feedback">We are looking forward to hear from you!</string>
     <string name="message_purchase_success">You have successfully upgraded to premium! Thank you for your support.</string>
+    <string name="message_about">This App is an experimental initiative by Saxion students Jelle ten Brinke &amp; Hugo Olthof.</string>
+    <string name="message_goal_1">\u2022 Deliver the best Schedule app to our users.</string>
+    <string name="message_goal_2">\u2022 Learn and innovate by sharing knowledge.</string>
+    <string name="message_goal_3">\u2022 Encourage Open Source development</string>
+    <string name="message_fact_1">\u2022 2500+ downloads in the first week after launch.</string>
+    <string name="message_fact_2">\u2022 We serve an average of 1500 unique users per day with several sessions.</string>
 
     <string-array name="colorThemes">
         <item>Saxion Theme</item>
