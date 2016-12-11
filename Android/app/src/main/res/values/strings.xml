@@ -50,6 +50,7 @@
 
     <!-- Errors -->
     <string name="error_no_default_group">Please select a default group to finish the introduction.</string>
+    <string name="error_no_iab_available">Your device currently doesn\'t support In-App Billing. Try to update Google Play Services.</string>
 
     <!-- Messages -->
     <string name="message_theme_visible_after_reset">The theme will be applied after you force reset the Application.</string>

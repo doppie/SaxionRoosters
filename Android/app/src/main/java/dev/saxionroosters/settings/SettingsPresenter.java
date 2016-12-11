@@ -121,7 +121,11 @@ public class SettingsPresenter implements ISettingsPresenter, BillingProcessor.I
     public void handleOptionsClick(Option option) {
         switch (option.getOption()) {
             case UPGRADE:
-                billingProcessor.purchase(view.getActivity(), "premium");
+                if(billingProcessor != null) {
+                    billingProcessor.purchase(view.getActivity(), "premium");
+                } else {
+                    view.showMessage(context.getString(R.string.error_no_iab_available));
+                }
                 break;
             case FEEDBACK:
                 view.showFeedbackView();
