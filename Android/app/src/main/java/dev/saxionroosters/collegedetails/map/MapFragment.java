@@ -2,6 +2,9 @@ package dev.saxionroosters.collegedetails.map;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -35,9 +38,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private Marker locationMarker;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_map, container, false);
         if (getArguments() != null) {
             locationCoordinates = getArguments().getParcelable(S.COORDINATES);
             locationTitle = getArguments().getString(S.DEPARTMENT);
@@ -45,6 +47,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        return v;
     }
 
     @Override

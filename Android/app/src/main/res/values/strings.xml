@@ -24,6 +24,8 @@
     <string name="teachers">Professor(s)</string>
     <string name="time">Time</string>
     <string name="description">Description</string>
+    <string name="floor">Floor</string>
+    <string name="room">Room</string>
 
     <!-- titles -->
     <string name="title_college_details">College details</string>
@@ -56,6 +58,7 @@
     <!-- Errors -->
     <string name="error_no_default_group">Please select a default group to finish the introduction.</string>
     <string name="error_no_iab_available">Your device currently doesn\'t support In-App Billing. Try to update Google Play Services.</string>
+    <string name="error_no_location">Location unknown</string>
 
     <!-- Messages -->
     <string name="message_theme_visible_after_reset">The theme will be applied after you force reset the Application.</string>

@@ -8,10 +8,16 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.model.LatLng;
+
+import java.util.HashMap;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import dev.saxionroosters.R;
+import dev.saxionroosters.collegedetails.map.MapFragment;
+import dev.saxionroosters.collegedetails.map.MapTools;
 import dev.saxionroosters.general.S;
 import dev.saxionroosters.model.College;
 
@@ -57,13 +63,28 @@ public class CollegeDetailsFragment extends Fragment {
         if(college == null) return;
         descriptionText.setText(college.getName() + "\n" + college.getNote());
         timeText.setText(college.getDate() + "\n" + college.getStart() + " - " + college.getEnd());
-//        professorLayout
+
+        if(college.getRoom() != null && !college.getRoom().isEmpty()) {
+            HashMap<String, Object> locationDetails = MapTools.getLocationDetails(getContext(), college.getRoom());
+            locationText.setText(locationDetails.get(S.DEPARTMENT) + ", "
+                    + getString(R.string.floor) + " " + locationDetails.get(S.FLOOR) + ", "
+                    + getString(R.string.room) + " " + locationDetails.get(S.ROOM));
+
+            showMap(locationDetails);
+        } else {
+            locationText.setText(getString(R.string.error_no_location));
+            mapLayout.setVisibility(View.GONE);
+        }
     }
 
-    private void showMap() {
-        if(college.getLocation() != null && !college.getLocation().isEmpty()) {
+    private void showMap(HashMap<String, Object> locationDetails) {
+        MapFragment mapFragment = new MapFragment();
+        Bundle args = new Bundle();
+        args.putParcelable(S.COORDINATES, (LatLng) locationDetails.get(S.COORDINATES));
+        args.putString(S.DEPARTMENT, (String) locationDetails.get(S.DEPARTMENT));
+        mapFragment.setArguments(args);
 
-        }
+        getChildFragmentManager().beginTransaction().add(R.id.mapLayout, mapFragment).commit();
     }
 
     @Override
