@@ -1,6 +1,8 @@
 package dev.saxionroosters.collegedetails;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.graphics.drawable.VectorDrawableCompat;
@@ -60,6 +62,7 @@ public class CollegeDetailsActivity extends AppCompatActivity {
         toolbar.setSubtitle(getString(R.string.title_college_details));
 
         Drawable backButton = VectorDrawableCompat.create(getResources(), R.drawable.ic_arrow_back_black_24dp, null);
+        backButton.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
         getSupportActionBar().setHomeAsUpIndicator(backButton);
     }
 
