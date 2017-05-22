@@ -3,6 +3,7 @@ package dev.saxionroosters.schedulelist;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,8 +19,10 @@ import dev.saxionroosters.R;
 import dev.saxionroosters.collegedetails.CollegeDetailsActivity;
 import dev.saxionroosters.general.ClickListener;
 import dev.saxionroosters.general.S;
+import dev.saxionroosters.general.Utils;
 import dev.saxionroosters.model.College;
 import dev.saxionroosters.model.Schedule;
+import okhttp3.internal.Util;
 
 /**
  * Created by jelle on 27/11/2016.
@@ -131,7 +134,13 @@ public class ScheduleListFragment extends Fragment implements ScheduleListView, 
         Intent i = new Intent(getContext(), CollegeDetailsActivity.class);
         i.putExtra(S.COLLEGE, (College) listAdapter.getContents().get(position));
 
-        startActivity(i);
+        //Add a nice transition animation on newer devices ( > lollipop)
+        if(Utils.isLollipop()) {
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), v, "collegeCardView");
+            startActivity(i, options.toBundle());
+        } else {
+            startActivity(i);
+        }
     }
 
 }
