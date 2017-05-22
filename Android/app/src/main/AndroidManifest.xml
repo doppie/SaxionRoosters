@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="dev.saxionroosters">
+          package="dev.saxionroosters">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -12,25 +12,29 @@
         android:theme="@style/AppTheme.Green.NoActionBar">
         <activity android:name=".main.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <activity
             android:name=".introduction.IntroductionActivity"
-            android:windowSoftInputMode="stateVisible|adjustPan|stateAlwaysHidden" />
-        <activity android:name=".settings.SettingsActivity" />
+            android:windowSoftInputMode="stateVisible|adjustPan|stateAlwaysHidden"/>
+
+        <activity android:name=".settings.SettingsActivity"/>
+
+        <activity
+            android:name=".collegedetails.CollegeDetailsActivity"/>
 
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+            android:value="@integer/google_play_services_version"/>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="@string/google_maps_key"/>
 
     </application>
-
 
 
 </manifest>

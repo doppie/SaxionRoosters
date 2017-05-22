@@ -1,5 +1,6 @@
 package dev.saxionroosters.schedulelist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -14,7 +15,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import dev.saxionroosters.R;
+import dev.saxionroosters.collegedetails.CollegeDetailsActivity;
 import dev.saxionroosters.general.ClickListener;
+import dev.saxionroosters.general.S;
+import dev.saxionroosters.model.College;
 import dev.saxionroosters.model.Schedule;
 
 /**
@@ -124,7 +128,10 @@ public class ScheduleListFragment extends Fragment implements ScheduleListView, 
 
     @Override
     public void onClick(View v, int position, boolean isLongClick) {
-        //TODO: show details activity
+        Intent i = new Intent(getContext(), CollegeDetailsActivity.class);
+        i.putExtra(S.COLLEGE, (College) listAdapter.getContents().get(position));
+
+        startActivity(i);
     }
 
 }

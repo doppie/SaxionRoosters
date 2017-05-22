@@ -1,10 +1,12 @@
 package dev.saxionroosters.model;
 
+import java.io.Serializable;
+
 /**
  * Created by jelle on 27/11/2016.
  */
 
-public class College {
+public class College implements Serializable {
 
     private String date;
     private String note;

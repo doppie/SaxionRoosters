@@ -20,8 +20,13 @@
     <string name="email_roosters">saxionroosters.dev@gmail.com</string>
     <string name="facts">Facts</string>
     <string name="contributors">Contributors</string>
+    <string name="location">Location</string>
+    <string name="teachers">Professor(s)</string>
+    <string name="time">Time</string>
+    <string name="description">Description</string>
 
     <!-- titles -->
+    <string name="title_college_details">College details</string>
     <string name="title_select_color_theme">Select Color Theme</string>
     <string name="title_select_default_group">Select Default Group</string>
     <string name="title_settings">Settings</string>
