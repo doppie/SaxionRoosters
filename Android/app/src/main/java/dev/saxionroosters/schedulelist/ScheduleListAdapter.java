@@ -66,8 +66,6 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
     public void onBindViewHolder(ViewHolder holder, int position) {
         Object object = contents.get(position);
 
-
-        //If it is a mealheader we want to show the header instead of meal item
         if (object instanceof Day) {
             Day day = (Day) object;
 

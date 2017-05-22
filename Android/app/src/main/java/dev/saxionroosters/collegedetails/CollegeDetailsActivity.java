@@ -93,7 +93,7 @@ public class CollegeDetailsActivity extends AppCompatActivity {
         if (college != null) {
             nameText.setText(college.getName());
             timeText.setText(college.getStart() + " - " + college.getEnd());
-            locationText.setText(college.getLocation());
+            locationText.setText(college.getRoom());
         }
     }
 
