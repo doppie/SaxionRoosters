@@ -1,5 +1,6 @@
 package dev.saxionroosters.general;
 
+import android.os.Build;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -36,6 +37,13 @@ public class Utils {
         if(BuildConfig.DEBUG) {
             Log.e(tag, message);
         }
+    }
+
+    public static boolean isLollipop() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            return true;
+        }
+        return false;
     }
 
     /**

@@ -9,6 +9,7 @@ import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -16,6 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import dev.saxionroosters.R;
 import dev.saxionroosters.general.S;
+import dev.saxionroosters.general.Utils;
 import dev.saxionroosters.model.College;
 
 /**
@@ -95,6 +97,22 @@ public class CollegeDetailsActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        //Nice transition animation on newer devices ( > lollipop)
+        if(Utils.isLollipop()) supportFinishAfterTransition();
+        else finish();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        if (menuItem.getItemId() == android.R.id.home) {
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(menuItem);
+    }
 
     @Override
     public void onDestroy() {
