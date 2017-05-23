@@ -100,11 +100,11 @@ public class MainPresenter implements IMainPresenter, BillingProcessor.IBillingH
         //create a list of results
         ArrayList<SearchItem> items = new ArrayList<>();
 
-        for(Group group : event.getResult().getGroups()) {
+        for (Group group : event.getResult().getGroups()) {
             items.add(new SearchItem(group.getName()));
         }
 
-        view.showSearchResults(items);
+        view.showSearchResults(items, event.getResult().getQuery());
 
         //TODO: stop indicating that we are loading search results.
     }

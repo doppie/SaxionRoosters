@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-//                presenter.search(query);
                 showSchedulePager(query);
                 searchView.close(true);
                 return false;
@@ -134,8 +133,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     @Override
-    public void showSearchResults(ArrayList<SearchItem> results) {
+    public void showSearchResults(ArrayList<SearchItem> results, String query) {
         searchAdapter.setSuggestionsList(results);
+        searchAdapter.getFilter().filter(query);
+        searchAdapter.notifyDataSetChanged();
     }
 
     @Override

@@ -22,7 +22,7 @@ public interface MainView extends IView {
      * Update the dropdownlist connected to the SearchView with the testresults.
      * @param results
      */
-    void showSearchResults(ArrayList<SearchItem> results);
+    void showSearchResults(ArrayList<SearchItem> results, String query);
 
     void showInterstitialAd();
 
