@@ -48,7 +48,8 @@ public class Dataset {
      */
     public Schedule getSchedule(String group, String offset) {
         for(Schedule schedule : schedules) {
-            if(schedule.getSubject().getGroup().getName().equalsIgnoreCase(group)
+            if(schedule != null && schedule.getWeek() != null
+                    && schedule.getSubject().getGroup().getName().equalsIgnoreCase(group)
                     && schedule.getWeek().getOffset().equals(offset)) {
                 return schedule;
             }
