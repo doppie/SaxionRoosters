@@ -189,11 +189,17 @@
                         android:text="@string/teachers"
                         android:textColor="?attr/colorPrimaryDark" />
 
-                    <LinearLayout
-                        android:id="@+id/professorLayout"
+                    <TextView
+                        android:id="@+id/professorText"
+                        style="@style/TextViewAppearance.Body2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"></LinearLayout>
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginTop="16dp"
+                        android:textColor="@color/material_grey_600" />
+
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>

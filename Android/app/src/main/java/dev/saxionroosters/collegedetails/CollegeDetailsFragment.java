@@ -35,8 +35,8 @@ public class CollegeDetailsFragment extends Fragment {
     TextView locationText;
     @BindView(R.id.locationTitleText)
     TextView locationTitleText;
-    @BindView(R.id.professorLayout)
-    LinearLayout professorLayout;
+    @BindView(R.id.professorText)
+    TextView professorText;
     @BindView(R.id.mapLayout)
     LinearLayout mapLayout;
     private Unbinder unbinder;
@@ -63,6 +63,7 @@ public class CollegeDetailsFragment extends Fragment {
         if(college == null) return;
         descriptionText.setText(college.getName() + "\n" + college.getNote());
         timeText.setText(college.getDate() + "\n" + college.getStart() + " - " + college.getEnd());
+        professorText.setText(college.getTeachername());
 
         if(college.getRoom() != null && !college.getRoom().isEmpty()) {
             HashMap<String, Object> locationDetails = MapTools.getLocationDetails(getContext(), college.getRoom());

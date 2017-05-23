@@ -1,7 +1,6 @@
 package dev.saxionroosters.collegedetails.map;
 
 import android.content.Context;
-import android.location.Location;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -34,7 +33,7 @@ public class MapTools {
         locations.add(new SaxionLocation("Haanstra", "H", new LatLng(52.221022, 6.884651)));
         locations.add(new SaxionLocation("Forum", "F", new LatLng(52.22038, 6.88621)));
         locations.add(new SaxionLocation("Elderink", "E", new LatLng(52.22029, 6.88502)));
-        locations.add(new SaxionLocation("Randstad", "R",new LatLng(52.22122, 6.88947)));
+        locations.add(new SaxionLocation("Randstad", "R", new LatLng(52.22122, 6.88947)));
         locations.add(new SaxionLocation("ITC", "I", new LatLng(52.22368, 6.88574)));
         locations.add(new SaxionLocation("Stork", "O", new LatLng(52.21995, 6.88826)));
         locations.add(new SaxionLocation("Hazemeyer", "Q", new LatLng(52.22035, 6.88908)));
@@ -46,15 +45,15 @@ public class MapTools {
     }
 
     public static boolean isEnschedeLocation(String name) {
-        for(SaxionLocation l : getEnschedeLocations()) {
-            if(l.getAbbr().equals(name.substring(0,1))) return true;
+        for (SaxionLocation l : getEnschedeLocations()) {
+            if (l.getAbbr().equals(name.substring(0, 1))) return true;
         }
         return false;
     }
 
     public static boolean isDeventerLocation(String name) {
-        for(SaxionLocation l : getDeventerLocations()) {
-            if(l.getAbbr().equals(name.substring(0,1))) return true;
+        for (SaxionLocation l : getDeventerLocations()) {
+            if (l.getAbbr().equals(name.substring(0, 1))) return true;
         }
         return false;
     }
@@ -75,24 +74,26 @@ public class MapTools {
     public static HashMap<String, Object> getLocationDetails(Context context, String locationName) {
         HashMap<String, Object> locationDetails = new HashMap<>();
 
-        if(locationName == null || locationName.isEmpty()) {
+        if (locationName == null || locationName.isEmpty()) {
             return locationDetails;
         }
 
         //get the department & its coordinates
-        for(SaxionLocation location : getLocations()) {
+        for (SaxionLocation location : getLocations()) {
 
-            if(location.getAbbr().equals(locationName.substring(0, 1))) {
+            if (location.getAbbr().equals(locationName.substring(0, 1))) {
                 locationDetails.put(S.DEPARTMENT, location.getName());
                 locationDetails.put(S.COORDINATES, location.getCoordinates());
             }
         }
 
         //get the floor
-        if(locationName.indexOf(".") < locationName.length()) locationDetails.put(S.FLOOR, locationName.substring(locationName.indexOf(".") -1, locationName.indexOf(".")));
+        if (locationName.indexOf(".") < locationName.length())
+            locationDetails.put(S.FLOOR, locationName.substring(locationName.indexOf(".") - 1, locationName.indexOf(".")));
 
         //get the room.
-        if(locationName.indexOf(".")+1 < locationName.length()) locationDetails.put(S.ROOM, locationName.substring(locationName.indexOf(".") +1));
+        if (locationName.indexOf(".") + 1 < locationName.length())
+            locationDetails.put(S.ROOM, locationName.substring(locationName.indexOf(".") + 1));
 
         return locationDetails;
     }
