@@ -16,9 +16,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import dev.saxionroosters.R;
+import dev.saxionroosters.general.PreferenceManager;
 import dev.saxionroosters.general.S;
+import dev.saxionroosters.general.ThemeUtils;
 import dev.saxionroosters.general.Utils;
 import dev.saxionroosters.model.College;
+import dev.saxionroosters.settings.Settings;
 
 /**
  * Created by Jelle on 22/05/2017.
@@ -46,6 +49,7 @@ public class CollegeDetailsActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ThemeUtils.onCreateSetTheme(this, PreferenceManager.getInstance(this).read(Settings.THEME_COLOR));
         setContentView(R.layout.activity_details_college);
         unbinder = ButterKnife.bind(this);
 
