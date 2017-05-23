@@ -91,7 +91,7 @@ public class SearchDialogFragment extends DialogFragment implements SearchDialog
     public void initUI() {
 
         if(isDialog) {
-            getDialog().setTitle(getString(R.string.title_select_default_group));
+            getDialog().setTitle(getString(R.string.title_select_default_schedule));
             titleText.setVisibility(View.GONE);
         }
 

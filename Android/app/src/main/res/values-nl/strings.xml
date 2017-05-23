@@ -27,10 +27,10 @@
     <!-- titles -->
     <string name="title_college_details">College details</string>
     <string name="title_select_color_theme">Selecteer Kleuren Thema</string>
-    <string name="title_select_default_group">Selecteer Standaard Rooster</string>
+    <string name="title_select_default_schedule">Selecteer Standaard Rooster</string>
     <string name="title_settings">Instellingen</string>
     <string name="title_settings_header">Personaliseren</string>w
-    <string name="title_setting_group_default">Standaard Rooster</string>
+    <string name="title_setting_schedule_default">Standaard Rooster</string>
     <string name="title_setting_theme">Kleuren Thema</string>
 
     <string name="title_options_header">Overig</string>
@@ -53,13 +53,13 @@
     <string name="subtitle_intro_maps">Verdwaald? Je kan nu ook de les locaties bekijken.</string>
 
     <!-- Errors -->
-    <string name="error_no_default_group">Selecteer een standaard rooster om door te gaan.</string>
+    <string name="error_no_default_schedule">Selecteer een standaard rooster om door te gaan.</string>
     <string name="error_no_iab_available">Je apparaat ondersteund geen In-App Billing. Probeer Google Play Services te updaten.</string>
     <string name="error_no_location">Locatie onbekend</string>
 
     <!-- Messages -->
     <string name="message_theme_visible_after_reset">Het kleuren thema wordt toegepast als je de app opnieuw hebt opgestart.</string>
-    <string name="message_select_default_group">Selecteer het rooster dat je wil laden bij het opstarten.</string>
+    <string name="message_select_default_schedule">Selecteer het rooster dat je wil laden bij het opstarten.</string>
     <string name="message_redirect_github">Je wordt doorgestuurd naar onze GitHub pagina.</string>
     <string name="message_feedback">We kijken er naar uit om van je te horen!</string>
     <string name="message_purchase_success">De upgrade naar premium is voltooid! Dankjewel voor je bijdrage.</string>

@@ -51,7 +51,7 @@ public class SettingsPresenter implements ISettingsPresenter, BillingProcessor.I
     @Override
     public void loadSettings() {
         ArrayList<Setting> settings = new ArrayList<>();
-        settings.add(new Setting(Settings.DEFAULT_GROUP, context.getString(R.string.title_setting_group_default), prefsManager.read(Settings.DEFAULT_GROUP), false));
+        settings.add(new Setting(Settings.DEFAULT_GROUP, context.getString(R.string.title_setting_schedule_default), prefsManager.read(Settings.DEFAULT_GROUP), false));
         settings.add(new Setting(Settings.THEME_COLOR, context.getString(R.string.title_setting_theme), prefsManager.read(Settings.THEME_COLOR), false));
         view.showSettings(settings);
     }
