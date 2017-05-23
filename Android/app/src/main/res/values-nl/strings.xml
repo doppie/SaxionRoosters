@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Saxion Roosters</string>
+
+    <string name="loading">Laden</string>
+    <string name="free_day">Niets gepland vandaag.</string>
+    <string name="vacation">Vakantie</string>
+    <string name="holiday">Vrije dag</string>
+    <string name="week">Week</string>
+    <string name="week_current">Deze week</string>
+    <string name="search_hint">Search</string>
+    <string name="action_search">Zoeken</string>
+    <string name="action_settings">Instellingen</string>
+    <string name="skip">Overslaan</string>
+    <string name="getting_started">Bijna klaar</string>
+    <string name="email_roosters">saxionroosters.dev@gmail.com</string>
+    <string name="facts">Feiten</string>
+    <string name="contributors">Bijdragers</string>
+    <string name="location">Locatie</string>
+    <string name="teachers">Docenten</string>
+    <string name="time">Tijd</string>
+    <string name="description">Beschrijving</string>
+    <string name="floor">Verdieping</string>
+    <string name="room">Lokaal</string>
+
+    <!-- titles -->
+    <string name="title_college_details">College details</string>
+    <string name="title_select_color_theme">Selecteer Kleuren Thema</string>
+    <string name="title_select_default_group">Selecteer Standaard Rooster</string>
+    <string name="title_settings">Instellingen</string>
+    <string name="title_settings_header">Personaliseren</string>w
+    <string name="title_setting_group_default">Standaard Rooster</string>
+    <string name="title_setting_theme">Kleuren Thema</string>
+
+    <string name="title_options_header">Overig</string>
+    <string name="title_option_upgrade">Upgrade</string>
+    <string name="subtitle_option_upgrade">Verwijderd ads. Ondersteun de ontwikkeling.</string>
+    <string name="title_option_feedback">Feedback</string>
+    <string name="subtitle_option_feedback">Deel je mening.</string>
+    <string name="title_option_github">Source Code</string>
+    <string name="subtitle_option_github">Laten we samen werken! Draag je steentje bij.</string>
+    <string name="title_option_licenses">Licenties</string>
+    <string name="subtitle_option_licenses">Open Source Libraries we \u2665.</string>
+    <string name="title_option_about">Over</string>
+    <string name="subtitle_option_about">App Version</string>
+
+    <string name="title_intro_home">Rooster bij de hand</string>
+    <string name="subtitle_intro_home">Super makkelijk, altijd je rooster bij de hand. Gemaakt met \u2665 door studenten, voor studenten &amp; docenten van Saxion University of Applied Sciences.</string>
+    <string name="title_intro_social_coding">Community</string>
+    <string name="subtitle_intro_social_coding">Designers, developers, creative thinkers and do-ers gather yourselves!  Community geörienteerd &amp; Open Source code, jij bepaald de volgende stap van deze app!</string>
+    <string name="title_intro_maps">Locaties</string>
+    <string name="subtitle_intro_maps">Verdwaald? Je kan nu ook de les locaties bekijken.</string>
+
+    <!-- Errors -->
+    <string name="error_no_default_group">Selecteer een standaard rooster om door te gaan.</string>
+    <string name="error_no_iab_available">Je apparaat ondersteund geen In-App Billing. Probeer Google Play Services te updaten.</string>
+    <string name="error_no_location">Locatie onbekend</string>
+
+    <!-- Messages -->
+    <string name="message_theme_visible_after_reset">Het kleuren thema wordt toegepast als je de app opnieuw hebt opgestart.</string>
+    <string name="message_select_default_group">Selecteer het rooster dat je wil laden bij het opstarten.</string>
+    <string name="message_redirect_github">Je wordt doorgestuurd naar onze GitHub pagina.</string>
+    <string name="message_feedback">We kijken er naar uit om van je te horen!</string>
+    <string name="message_purchase_success">De upgrade naar premium is voltooid! Dankjewel voor je bijdrage.</string>
+    <string name="message_about">Deze app is een experimenteel initiatief door (oud) Saxion studenten Jelle ten Brinke &amp; Hugo Olthof.</string>
+    <string name="message_goal_1">\u2022 De beste rooster app maken voor de gebruikers.</string>
+    <string name="message_goal_2">\u2022 Leren en innoveren door het delen van kennis.</string>
+    <string name="message_goal_3">\u2022 Het aanmoedigen van Open Source software</string>
+    <string name="message_fact_1">\u2022 2500+ downloads in de eerste week na lancering.</string>
+    <string name="message_fact_2">\u2022 Per dag gebruiken gemiddeld 1500 gebruikers de app met meerdere sessies per gebruiker.</string>
+</resources>
