@@ -134,9 +134,13 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void showSearchResults(ArrayList<SearchItem> results, String query) {
+        //Workaround: removing the adapter from the list before changing it prevents a
+        //library related bug from occuring.
+        searchView.setAdapter(null);
         searchAdapter.setSuggestionsList(results);
         searchAdapter.getFilter().filter(query);
         searchAdapter.notifyDataSetChanged();
+        searchView.setAdapter(searchAdapter);
     }
 
     @Override
