@@ -4,7 +4,7 @@
     <string name="app_name">Saxion Roosters</string>
 
     <string name="loading">Laden</string>
-    <string name="free_day">Niets gepland vandaag.</string>
+    <string name="free_day">Niets gepland.</string>
     <string name="vacation">Vakantie</string>
     <string name="holiday">Vrije dag</string>
     <string name="week">Week</string>
@@ -37,7 +37,7 @@
     <string name="title_option_upgrade">Upgrade</string>
     <string name="subtitle_option_upgrade">Verwijderd ads. Ondersteun de ontwikkeling.</string>
     <string name="title_option_feedback">Feedback</string>
-    <string name="subtitle_option_feedback">Deel je mening.</string>
+    <string name="subtitle_option_feedback">We kijken uit naar je mail!</string>
     <string name="title_option_github">Source Code</string>
     <string name="subtitle_option_github">Laten we samen werken! Draag je steentje bij.</string>
     <string name="title_option_licenses">Licenties</string>
@@ -50,7 +50,7 @@
     <string name="title_intro_social_coding">Community</string>
     <string name="subtitle_intro_social_coding">Designers, developers, creative thinkers and do-ers gather yourselves!  Community geörienteerd &amp; Open Source code, jij bepaald de volgende stap van deze app!</string>
     <string name="title_intro_maps">Locaties</string>
-    <string name="subtitle_intro_maps">Verdwaald? Je kan nu ook de les locaties bekijken.</string>
+    <string name="subtitle_intro_maps">Verdwaald? Je kan nu ook de college locaties bekijken.</string>
 
     <!-- Errors -->
     <string name="error_no_default_schedule">Selecteer een standaard rooster om door te gaan.</string>
