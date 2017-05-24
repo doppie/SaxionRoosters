@@ -27,7 +27,7 @@ public class ThemeUtils {
         Utils.log("[THEME_COLOR] " + name);
         if(name != null) name = name.replaceAll("\"", "");
 
-        if (name == null || name.isEmpty() || name.equalsIgnoreCase("Saxion")) {
+        if (name == null || name.isEmpty() || name.equalsIgnoreCase("Saxion Theme")) {
             activity.setTheme(R.style.AppTheme_Saxion_NoActionBar);
         } else if (name.equalsIgnoreCase("Purple")) {
             activity.setTheme(R.style.AppTheme_Purple_NoActionBar);
