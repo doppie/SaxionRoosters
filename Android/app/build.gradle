@@ -45,5 +45,5 @@ dependencies {
     compile 'com.anjlab.android.iab.v3:library:1.0.+'
 
     /* Module Dependencies */
-    compile project(':backend')
+    compile project(':business')
 }
