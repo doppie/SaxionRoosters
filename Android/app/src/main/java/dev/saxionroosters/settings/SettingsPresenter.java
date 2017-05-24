@@ -67,10 +67,10 @@ public class SettingsPresenter implements ISettingsPresenter, BillingProcessor.I
                 context.getString(R.string.title_option_feedback),
                 context.getString(R.string.subtitle_option_feedback),
                 VectorDrawableCompat.create(context.getResources(), R.drawable.ic_mail_black_24dp, null)));
-        options.add(new Option(Options.LICENSES,
-                context.getString(R.string.title_option_licenses),
-                context.getString(R.string.subtitle_option_licenses),
-                VectorDrawableCompat.create(context.getResources(), R.drawable.ic_book_open_black_24dp, null)));
+//        options.add(new Option(Options.LICENSES,
+//                context.getString(R.string.title_option_licenses),
+//                context.getString(R.string.subtitle_option_licenses),
+//                VectorDrawableCompat.create(context.getResources(), R.drawable.ic_book_open_black_24dp, null)));
         options.add(new Option(Options.GITHUB,
                 context.getString(R.string.title_option_github),
                 context.getString(R.string.subtitle_option_github),
