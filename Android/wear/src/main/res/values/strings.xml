@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Saxion Roosters</string>
+
+    <string name="error_no_internet">No internet connection</string>
+    <string name="error_no_colleges_this_week">No colleges this week</string>
+    <string name="error_unknown">Unknown error</string>
+
+    <string name="btn_retry">Try again</string>
+</resources>
