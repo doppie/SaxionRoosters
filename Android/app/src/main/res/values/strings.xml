@@ -73,7 +73,7 @@
     <string name="message_fact_1">\u2022 2500+ downloads in the first week after launch.</string>
     <string name="message_fact_2">\u2022 We serve an average of 1500 unique users for ~6000 sessions per day.</string>
 
-    <string-array name="colorThemes">
+    <string-array name="colorThemes" translatable="false">
         <item>Saxion Theme</item>
         <item>Purple</item>
         <item>Deep Purple</item>
