@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "650924442986",
+    "firebase_url": "https://roosters-99bd4.firebaseio.com",
+    "project_id": "roosters-99bd4",
+    "storage_bucket": "roosters-99bd4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:650924442986:android:dcea74590f49bcd3",
+        "android_client_info": {
+          "package_name": "dev.saxionroosters"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "650924442986-dfr885qs0ojh6dvhsne49u5jfh0a34da.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dev.saxionroosters",
+            "certificate_hash": "e49c154290fabd49f3e58c9b6715f4ee90ee258a"
+          }
+        },
+        {
+          "client_id": "650924442986-dk1mn6psp6mumvtrfuhe1surpsdbfnd0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgd5CPfTNwQwNxv52Rh5rydoAD1Z5itOo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "650924442986-dk1mn6psp6mumvtrfuhe1surpsdbfnd0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
