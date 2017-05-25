@@ -113,7 +113,7 @@ public class MainPresenter implements IMainPresenter, BillingProcessor.IBillingH
     public void onNewScheduleLoaded(ScheduleEvent event) {
         int pos = Schedule.getPosForOffset(event.getOffset());
         String title = "..";
-        if(pos == 4) {
+        if(pos == 5) {
             title = view.getContext().getString(R.string.week_current);
         } else if(event.getSchedule() != null){
             title = event.getSchedule().getWeek().getQuartile_week();

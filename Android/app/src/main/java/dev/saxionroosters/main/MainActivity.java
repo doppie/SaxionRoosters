@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
         //set our header subtitle
         getSupportActionBar().setSubtitle(group);
 
-        pager.setCurrentItem(4); //current week, as we want to be able to look back 5 weeks.
+        pager.setCurrentItem(5); //current week, as we want to be able to look back 5 weeks.
     }
 
     @Override

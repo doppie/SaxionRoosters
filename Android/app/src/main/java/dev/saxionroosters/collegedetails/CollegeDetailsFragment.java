@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.text.ParseException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 import butterknife.BindView;
@@ -19,6 +22,7 @@ import dev.saxionroosters.R;
 import dev.saxionroosters.collegedetails.map.MapFragment;
 import dev.saxionroosters.collegedetails.map.MapTools;
 import dev.saxionroosters.general.S;
+import dev.saxionroosters.general.Utils;
 import dev.saxionroosters.model.College;
 
 /**
@@ -62,7 +66,17 @@ public class CollegeDetailsFragment extends Fragment {
     private void showCollege() {
         if(college == null) return;
         descriptionText.setText(college.getName() + "\n" + college.getNote());
-        timeText.setText(college.getDate() + "\n" + college.getStart() + " - " + college.getEnd());
+
+        Date date = new Date();
+        try {
+            date = Utils.getDateFormatter().parse(college.getDate());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+
+        timeText.setText(Utils.getFullDateFormatter().format(cal.getTime()) + "\n" + college.getStart() + " - " + college.getEnd());
         professorText.setText(college.getTeachername());
 
         if(college.getRoom() != null && !college.getRoom().isEmpty()) {
