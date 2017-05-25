@@ -67,8 +67,7 @@ public class CollegeDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         toolbar.setSubtitle(getString(R.string.title_college_details));
 
-        Drawable backButton = VectorDrawableCompat.create(getResources(), R.drawable.ic_arrow_back_black_24dp, null);
-        backButton.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+        Drawable backButton = VectorDrawableCompat.create(getResources(), R.drawable.ic_arrow_back_white_24dp, null);
         getSupportActionBar().setHomeAsUpIndicator(backButton);
     }
 
