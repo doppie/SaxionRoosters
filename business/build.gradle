@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'net.ltgt.apt'
 apply plugin: 'idea'
+apply plugin: 'me.tatarka.retrolambda'
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])

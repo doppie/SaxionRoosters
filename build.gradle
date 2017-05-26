@@ -13,6 +13,8 @@ buildscript {
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+        classpath "com.newrelic.agent.android:agent-gradle-plugin:5.6.1"
+        classpath 'me.tatarka:gradle-retrolambda:3.5.0'
         classpath 'com.google.gms:google-services:3.1.0'
         classpath 'net.ltgt.gradle:gradle-apt-plugin:0.6'
     }
